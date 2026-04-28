@@ -1,9 +1,7 @@
 FROM nginx:alpine
 
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY *.html /usr/share/nginx/html/
-
-RUN sed -i 's/listen\s*80;/listen 8080;/g; s/listen\s*\[::\]:80;/listen [::]:8080;/g' \
-    /etc/nginx/conf.d/default.conf
 
 EXPOSE 8080
 
