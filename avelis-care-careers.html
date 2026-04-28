@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers — Avelis Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F0EBE1;
+    --parchment: #DDD5C8;
+    --taupe: #A89880;
+    --warm-gray: #5C5248;
+    --charcoal: #1E1A16;
+    --deep: #0F0D0A;
+    --gold: #A07C3A;
+    --gold-light: #C49A52;
+    --white: #FAF7F2;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 60px;
+    background: rgba(240,235,225,0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--parchment);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-back {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--charcoal); }
+  .nav-back svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
+  .nav-cta {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-cta:hover { color: var(--charcoal); border-color: var(--charcoal); }
+
+  /* HERO */
+  #hero {
+    min-height: 72vh;
+    display: flex; align-items: flex-end;
+    padding-top: 100px;
+    position: relative; overflow: hidden;
+    background: var(--deep);
+  }
+  .hero-ring {
+    position: absolute; border-radius: 50%;
+  }
+  .hero-ring-1 { width: 600px; height: 600px; border: 1px solid rgba(160,124,58,0.1); left: -120px; top: -120px; }
+  .hero-ring-2 { width: 420px; height: 420px; border: 1px solid rgba(160,124,58,0.07); right: -60px; bottom: -100px; }
+  .hero-inner {
+    position: relative;
+    max-width: 1200px; margin: 0 auto;
+    padding: 60px 60px 100px;
+    display: grid; grid-template-columns: 7fr 5fr; gap: 80px; align-items: end;
+  }
+  .hero-eyebrow {
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 4vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.16;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 26px;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 0.97rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.85;
+    max-width: 500px;
+  }
+  .hero-stats { padding-bottom: 8px; display: flex; flex-direction: column; }
+  .hero-stat-row {
+    padding: 22px 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .hero-stat-row:first-child { border-top: none; }
+  .stat-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  /* SHARED */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  section { padding: 100px 0; }
+  .section-label {
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+  .section-heading {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--deep);
+    letter-spacing: -0.01em;
+  }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .divider { width: 44px; height: 1px; background: var(--gold); margin: 32px 0; }
+  .body-text { font-size: 0.97rem; font-weight: 400; line-height: 1.85; color: var(--warm-gray); }
+
+  /* ABOUT ROLE */
+  #about { background: var(--white); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .qualities { list-style: none; margin-top: 36px; }
+  .qualities li {
+    display: flex; align-items: flex-start; gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--parchment);
+    font-size: 0.92rem;
+    color: var(--warm-gray);
+    line-height: 1.75;
+  }
+  .qualities li:first-child { padding-top: 0; }
+  .qualities li::before {
+    content: '—'; color: var(--gold);
+    font-family: var(--serif); font-size: 1rem;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .diff-blocks { display: flex; flex-direction: column; gap: 2px; margin-top: 44px; }
+  .diff-block {
+    padding: 26px 30px;
+    background: var(--cream);
+    border-left: 2px solid transparent;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .diff-block:hover { border-left-color: var(--gold); background: var(--parchment); }
+  .diff-block-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    margin-bottom: 7px;
+  }
+  .diff-block-body { font-size: 0.9rem; color: var(--warm-gray); line-height: 1.75; }
+
+  /* COMPENSATION */
+  #compensation { background: var(--cream); }
+  .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .comp-table {
+    background: var(--white);
+    border: 1px solid var(--parchment);
+    padding: 44px;
+    margin-top: 40px;
+  }
+  .comp-table-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .comp-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--parchment);
+  }
+  .comp-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .comp-label { font-size: 0.88rem; color: var(--warm-gray); }
+  .comp-value { font-family: var(--serif); font-size: 1.12rem; font-weight: 500; color: var(--charcoal); }
+  .comp-row.hl .comp-value { color: var(--gold); }
+  .promises { display: flex; flex-direction: column; gap: 20px; }
+  .promise {
+    padding: 28px 32px;
+    border: 1px solid var(--parchment);
+    background: var(--white);
+    position: relative; overflow: hidden;
+  }
+  .promise::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 2px; height: 100%;
+    background: var(--gold); opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .promise:hover::before { opacity: 1; }
+  .promise-num { font-family: var(--serif); font-size: 0.78rem; font-style: italic; color: var(--taupe); margin-bottom: 8px; }
+  .promise-title { font-size: 0.7rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 7px; }
+  .promise-body { font-size: 0.88rem; color: var(--warm-gray); line-height: 1.75; }
+
+  /* APPLY */
+  #apply { background: var(--white); }
+  .apply-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; margin-bottom: 68px; align-items: end; }
+  .apply-note {
+    padding: 26px 30px;
+    background: var(--cream);
+    border-left: 2px solid var(--gold);
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--warm-gray);
+    line-height: 1.65;
+  }
+
+  /* Form base */
+  .form-section-title {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--parchment);
+    margin-bottom: 28px;
+    margin-top: 52px;
+  }
+  .form-section-title:first-of-type { margin-top: 0; }
+  .form-group { margin-bottom: 26px; }
+  .form-group label {
+    display: block;
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--taupe);
+    padding: 13px 0;
+    font-family: var(--sans);
+    font-size: 0.93rem;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .form-group select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235C5248' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 22px;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--gold); }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--taupe); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
+
+  /* Question cards */
+  .q-block {
+    margin-bottom: 32px;
+    padding: 36px 40px;
+    background: var(--cream);
+    border: 1px solid var(--parchment);
+    position: relative;
+  }
+  .q-num {
+    font-family: var(--serif);
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: var(--parchment);
+    position: absolute;
+    top: 18px; right: 26px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .q-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 9px;
+  }
+  .q-text {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--deep);
+    line-height: 1.45;
+    margin-bottom: 18px;
+    max-width: 680px;
+  }
+  .q-block textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--taupe);
+    padding: 13px 0;
+    font-family: var(--sans);
+    font-size: 0.93rem;
+    color: var(--charcoal);
+    outline: none;
+    resize: vertical;
+    min-height: 100px;
+    transition: border-color 0.2s;
+  }
+  .q-block textarea:focus { border-color: var(--gold); }
+  .q-block textarea::placeholder { color: var(--taupe); font-style: italic; font-size: 0.85rem; }
+
+  /* Upload */
+  .upload-zone {
+    border: 1px dashed var(--taupe);
+    padding: 44px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s;
+    position: relative;
+    background: var(--cream);
+  }
+  .upload-zone:hover, .upload-zone.over { border-color: var(--gold); background: rgba(160,124,58,0.03); }
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0; cursor: pointer;
+    border: none; padding: 0;
+  }
+  .upload-icon {
+    width: 38px; height: 38px;
+    margin: 0 auto 14px;
+    border: 1px solid var(--taupe);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .upload-icon svg { width: 15px; height: 15px; stroke: var(--gold); fill: none; }
+  .upload-title {
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    margin-bottom: 7px;
+  }
+  .upload-hint { font-size: 0.8rem; color: var(--warm-gray); line-height: 1.55; }
+  .upload-filename { margin-top: 12px; font-size: 0.8rem; color: var(--gold); display: none; }
+
+  /* Submit */
+  .btn-primary {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--charcoal);
+    text-decoration: none;
+    padding: 18px 40px;
+    transition: background 0.3s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--gold); }
+
+  /* Success */
+  .success-msg { display: none; text-align: center; padding: 80px 40px; }
+  .success-msg.show { display: block; }
+  .success-icon {
+    width: 60px; height: 60px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+  }
+  .success-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; }
+  .success-headline {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--deep);
+    margin-bottom: 14px;
+  }
+  .success-headline em { font-style: italic; color: var(--gold); }
+  .success-body { font-size: 0.93rem; color: var(--warm-gray); line-height: 1.85; max-width: 440px; margin: 0 auto 40px; }
+
+  /* FOOTER */
+  footer { background: var(--deep); padding: 60px 0 36px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-brand { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--white); letter-spacing: 0.04em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-links-row { display: flex; gap: 36px; flex-wrap: wrap; }
+  .footer-links-row a { font-size: 0.8rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links-row a:hover { color: var(--white); }
+  .footer-bottom { padding-top: 26px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.18); }
+  .footer-sig { font-family: var(--serif); font-style: italic; font-size: 0.8rem; color: rgba(255,255,255,0.18); }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 18px 28px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 48px 28px 80px; }
+    .hero-stats { display: none; }
+    .container { padding: 0 28px; }
+    section { padding: 72px 0; }
+    .two-col, .comp-grid, .apply-intro { grid-template-columns: 1fr; gap: 48px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .footer-inner { padding: 0 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="avelis-care.html" class="nav-logo">Avelis<span>.</span></a>
+  <a href="avelis-care.html" class="nav-back">
+    <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Main Site
+  </a>
+  <a href="avelis-care.html#contact" class="nav-cta">Family Inquiries</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-ring hero-ring-1"></div>
+  <div class="hero-ring hero-ring-2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow fade-up">Careers · St. Petersburg, Florida</div>
+      <h1 class="fade-up d1">
+        Work that holds<br>people <em>together</em>.
+      </h1>
+      <p class="hero-sub fade-up d2">
+        We are not looking to fill shifts. We are looking for caregivers who understand that showing up fully — with patience, steadiness, and genuine attention — is not a supplement to this work. It is the work.
+      </p>
+    </div>
+    <div class="hero-stats fade-up d2">
+      <div class="hero-stat-row">
+        <div class="stat-label">Base Rate</div>
+        <div class="stat-value">$20–$24 / hr</div>
+      </div>
+      <div class="hero-stat-row">
+        <div class="stat-label">Dementia-Experienced</div>
+        <div class="stat-value">Up to $26 / hr</div>
+      </div>
+      <div class="hero-stat-row">
+        <div class="stat-label">Assignment Model</div>
+        <div class="stat-value">Consistent, matched</div>
+      </div>
+      <div class="hero-stat-row">
+        <div class="stat-label">Location</div>
+        <div class="stat-value">St. Petersburg, FL</div>
+      </div>
+      <div style="margin-top:28px;">
+        <a href="#apply" class="btn-primary" style="display:block;text-align:center;">Apply Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT THE ROLE -->
+<section id="about">
+  <div class="container">
+    <div class="two-col">
+      <div class="fade-up">
+        <div class="section-label">Who We're Looking For</div>
+        <h2 class="section-heading">Character first.<br><em>Always</em>.</h2>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:18px;">
+          The quality of care someone receives in their home is shaped almost entirely by the person providing it. Skills matter. Certification matters. But temperament — composure, patience, the willingness to be truly present — matters most.
+        </p>
+        <p class="body-text">
+          We are selective because our families are trusting us with something irreplaceable.
+        </p>
+        <ul class="qualities">
+          <li>Experience supporting individuals living with dementia or Alzheimer's disease</li>
+          <li>The ability to remain calm in difficult moments — your steadiness is contagious</li>
+          <li>Genuine communication skills and the maturity to navigate sensitive family dynamics</li>
+          <li>A real commitment to consistency — the same face, the same warmth, every time</li>
+          <li>HHA or CNA preferred; candidates with substantial experience will be considered</li>
+          <li>Reliable transportation within the greater St. Petersburg area</li>
+        </ul>
+      </div>
+      <div class="fade-up d1">
+        <div class="section-label">What Makes Avelis Different</div>
+        <h2 class="section-heading" style="font-size:clamp(1.6rem,2.4vw,2rem);">You are not<br>a roster entry.<br>You are <em>known</em>.</h2>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:40px;">
+          We are a small, deliberate team. Every person on it is matched thoughtfully, supported directly, and treated with the same standard we ask them to hold.
+        </p>
+        <div class="diff-blocks">
+          <div class="diff-block">
+            <div class="diff-block-title">Placement With Purpose</div>
+            <div class="diff-block-body">You are placed with clients whose needs and personality align with how you work. Not scattered across unfamiliar situations — introduced and established with care.</div>
+          </div>
+          <div class="diff-block">
+            <div class="diff-block-title">Consistency Protected</div>
+            <div class="diff-block-body">Wherever possible, you return to the same client. This protects the people in your care — and protects your sense of purpose in the work.</div>
+          </div>
+          <div class="diff-block">
+            <div class="diff-block-title">You Are Not Left to Figure It Out</div>
+            <div class="diff-block-body">When a client's needs shift or a family dynamic changes, you are not alone in it. We remain reachable, communicative, and genuinely invested in how things are going.</div>
+          </div>
+          <div class="diff-block">
+            <div class="diff-block-title">Pay That Reflects the Work</div>
+            <div class="diff-block-body">Dementia care is specialized. If you have the skill — truly have it — you are compensated accordingly and placed where it makes a real difference.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPENSATION -->
+<section id="compensation">
+  <div class="container">
+    <div class="comp-grid">
+      <div class="fade-up">
+        <div class="section-label">Compensation</div>
+        <h2 class="section-heading">Transparent pay.<br>No <em>surprises</em>.</h2>
+        <div class="divider"></div>
+        <p class="body-text">Caregivers who are paid fairly and supported well deliver care that is extraordinary. We structure pay to reflect experience honestly — no negotiation required for what you've earned.</p>
+        <div class="comp-table">
+          <div class="comp-table-label">Pay Structure</div>
+          <div class="comp-row">
+            <span class="comp-label">Entry-Level</span>
+            <span class="comp-value">$20 / hr</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-label">Experienced (2+ years)</span>
+            <span class="comp-value">$22–$24 / hr</span>
+          </div>
+          <div class="comp-row hl">
+            <span class="comp-label">Dementia-Experienced</span>
+            <span class="comp-value">Up to $26 / hr</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-label">Overnight Shifts</span>
+            <span class="comp-value">Discussed individually</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-label">Setting</span>
+            <span class="comp-value">Private homes · 1:1</span>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up d1">
+        <div class="section-label" style="margin-bottom:20px;">Our Commitments to You</div>
+        <div class="promises">
+          <div class="promise">
+            <div class="promise-num">i.</div>
+            <div class="promise-title">You Will Not Be Overextended</div>
+            <div class="promise-body">We do not stack clients without regard for quality or wellbeing. Your capacity matters because it matters to the people you serve.</div>
+          </div>
+          <div class="promise">
+            <div class="promise-num">ii.</div>
+            <div class="promise-title">Your Expertise Is Recognized</div>
+            <div class="promise-body">Dementia care is a skill few truly possess. If you have it, you are paid for it — and placed where it genuinely matters.</div>
+          </div>
+          <div class="promise">
+            <div class="promise-num">iii.</div>
+            <div class="promise-title">We Communicate With You</div>
+            <div class="promise-body">Schedules, updates, family feedback — you are not the last to know. Informed caregivers are effective caregivers.</div>
+          </div>
+          <div class="promise">
+            <div class="promise-num">iv.</div>
+            <div class="promise-title">Your Work Matters</div>
+            <div class="promise-body">The families we serve are in one of the hardest chapters of their lives. The relief you provide is real. We will not let you forget that.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION -->
+<section id="apply">
+  <div class="container">
+    <div class="apply-intro">
+      <div class="fade-up">
+        <div class="section-label">Apply</div>
+        <h2 class="section-heading">Every application<br>read <em>personally</em>.</h2>
+        <div class="divider"></div>
+        <p class="body-text">This is not automated. A real person reads every submission — because the stakes of who joins this team are too high to leave to an algorithm.</p>
+        <p class="body-text" style="margin-top:16px;">Take your time with the questions below. We are not evaluating polish — we are trying to understand how you think about this work.</p>
+      </div>
+      <div class="fade-up d1">
+        <div class="apply-note">
+          "We are not looking for the most polished application. We are looking for the most honest one."
+        </div>
+      </div>
+    </div>
+
+    <div id="appForm" class="fade-up">
+
+      <!-- Personal Info -->
+      <div class="form-section-title">Personal Information</div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Your first name">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Your last name">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="(727) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group">
+          <label>Certification</label>
+          <select>
+            <option value="" disabled selected>Select one</option>
+            <option>HHA</option>
+            <option>CNA</option>
+            <option>Both HHA &amp; CNA</option>
+            <option>No formal certification</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Years of Experience</label>
+          <select>
+            <option value="" disabled selected>Select range</option>
+            <option>Less than 1 year</option>
+            <option>1–2 years</option>
+            <option>3–5 years</option>
+            <option>6–10 years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Dementia Experience</label>
+          <select>
+            <option value="" disabled selected>Select one</option>
+            <option>Extensive — primary focus</option>
+            <option>Significant — multiple clients</option>
+            <option>Some experience</option>
+            <option>Limited or none</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Availability</label>
+          <select>
+            <option value="" disabled selected>Select one</option>
+            <option>Days only</option>
+            <option>Evenings / overnights</option>
+            <option>Open availability</option>
+            <option>Weekends preferred</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>City / Neighborhood</label>
+          <input type="text" placeholder="e.g. St. Petersburg, Clearwater">
+        </div>
+      </div>
+
+      <!-- Resume -->
+      <div class="form-section-title">Resume or Summary</div>
+      <div class="upload-zone" id="dropZone">
+        <input type="file" id="resumeFile" accept=".pdf,.doc,.docx" onchange="onFileSelect(event)">
+        <div class="upload-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div class="upload-title">Attach Your Resume</div>
+        <div class="upload-hint">Drag and drop or click to browse · PDF, DOC, DOCX · Max 5MB</div>
+        <div class="upload-filename" id="fileName"></div>
+      </div>
+      <p style="margin-top:11px;font-size:0.76rem;color:var(--taupe);line-height:1.6;">No formal resume? A brief written summary of your experience is perfectly acceptable.</p>
+
+      <!-- Five Questions -->
+      <div class="form-section-title">Five Questions</div>
+      <p style="font-size:0.88rem;color:var(--warm-gray);line-height:1.8;margin-bottom:36px;max-width:620px;">
+        No trick questions. No expected answers. An opportunity to show us how you think — and why you do this work.
+      </p>
+
+      <div class="q-block">
+        <div class="q-num">01</div>
+        <div class="q-label">Question One</div>
+        <div class="q-text">Tell us about a moment in your caregiving work that stayed with you. What happened — and why does it still matter?</div>
+        <textarea placeholder="It doesn't need to be dramatic. The quietest moments are often the most telling."></textarea>
+      </div>
+
+      <div class="q-block">
+        <div class="q-num">02</div>
+        <div class="q-label">Question Two</div>
+        <div class="q-text">Dementia shifts unpredictably — confusion, distress, repetition. How do you find your footing in those moments? What keeps you regulated?</div>
+        <textarea placeholder="We want your actual approach, not a textbook answer."></textarea>
+      </div>
+
+      <div class="q-block">
+        <div class="q-num">03</div>
+        <div class="q-label">Question Three</div>
+        <div class="q-text">Consistency is our highest value. What does that word mean to you in caregiving — not philosophically, but in practice, day to day?</div>
+        <textarea placeholder="What does consistency actually ask of you?"></textarea>
+      </div>
+
+      <div class="q-block">
+        <div class="q-num">04</div>
+        <div class="q-label">Question Four</div>
+        <div class="q-text">Describe a time when something shifted — a client's condition, a family dynamic, the situation. How did you respond, and what did it teach you?</div>
+        <textarea placeholder="We're less interested in what went perfectly than in how you show up when things don't."></textarea>
+      </div>
+
+      <div class="q-block">
+        <div class="q-num">05</div>
+        <div class="q-label">Question Five</div>
+        <div class="q-text">Why Avelis — and why now? What are you looking for that you haven't found elsewhere?</div>
+        <textarea placeholder="There is no answer we're hoping to hear. We just want to know if this might genuinely be it for you."></textarea>
+      </div>
+
+      <!-- Submit -->
+      <div style="margin-top:52px;max-width:440px;">
+        <button type="button" class="btn-primary" onclick="onSubmit()" style="width:100%;text-align:center;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;">
+          Submit My Application
+        </button>
+        <p style="margin-top:14px;font-size:0.72rem;color:var(--taupe);line-height:1.6;text-align:center;">We acknowledge every application and aim to respond within three business days.</p>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="success-headline">Thank you for <em>applying</em>.</div>
+      <p class="success-body">We've received your application and will read it personally. You'll hear from us within three business days.</p>
+      <a href="avelis-care.html" class="btn-primary" style="display:inline-block;text-align:center;">Return to Avelis Care</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">Avelis<span>.</span></div>
+      <div class="footer-links-row">
+        <a href="mailto:careers@aveliscare.com">careers@aveliscare.com</a>
+        <a href="tel:7270000000">(727) 000-0000</a>
+        <a href="avelis-care.html">Main Site</a>
+        <a href="avelis-care.html#contact">Family Inquiries</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Avelis Care LLC · St. Petersburg, Florida</div>
+      <div class="footer-sig">Consistency. Dignity. Presence.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  setTimeout(() => document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible')), 80);
+
+  // File upload
+  function onFileSelect(e) {
+    const f = e.target.files[0];
+    if (!f) return;
+    const el = document.getElementById('fileName');
+    el.textContent = '✓ ' + f.name;
+    el.style.display = 'block';
+    document.getElementById('dropZone').style.borderColor = 'var(--gold)';
+  }
+  const zone = document.getElementById('dropZone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('over');
+    const f = e.dataTransfer.files[0];
+    if (f) {
+      const el = document.getElementById('fileName');
+      el.textContent = '✓ ' + f.name;
+      el.style.display = 'block';
+      zone.style.borderColor = 'var(--gold)';
+    }
+  });
+
+  // Submit
+  function onSubmit() {
+    document.getElementById('appForm').style.display = 'none';
+    const s = document.getElementById('successMsg');
+    s.classList.add('show');
+    window.scrollTo({ top: document.getElementById('apply').offsetTop - 100, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

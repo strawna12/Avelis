@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overnight Dementia Support — Avelis Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F0EBE1; --parchment: #DDD5C8; --taupe: #A89880;
+    --warm-gray: #5C5248; --charcoal: #1E1A16; --deep: #0F0D0A;
+    --gold: #A07C3A; --gold-light: #C49A52; --white: #FAF7F2;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--charcoal); font-family: var(--sans); font-weight: 400; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 24px 60px; background: rgba(240,235,225,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--parchment); }
+  .nav-logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; letter-spacing: 0.06em; color: var(--charcoal); text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-back { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--warm-gray); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .nav-back:hover { color: var(--charcoal); }
+  .nav-back svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
+  .nav-cta { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .nav-cta:hover { color: var(--charcoal); border-color: var(--charcoal); }
+  #hero { min-height: 60vh; display: flex; align-items: flex-end; background: var(--deep); position: relative; overflow: hidden; padding-top: 90px; }
+  .hero-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(160,124,58,0.1); }
+  .hero-ring-1 { width: 500px; height: 500px; top: -100px; right: -100px; }
+  .hero-ring-2 { width: 340px; height: 340px; top: -40px; right: -20px; border-color: rgba(160,124,58,0.06); }
+  .hero-inner { position: relative; max-width: 1200px; margin: 0 auto; padding: 60px 60px 90px; width: 100%; display: grid; grid-template-columns: 7fr 5fr; gap: 80px; align-items: end; }
+  .service-eyebrow { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 14px; }
+  .service-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+  .service-number { font-family: var(--serif); font-size: 5rem; font-weight: 300; color: rgba(255,255,255,0.06); line-height: 1; margin-bottom: 16px; letter-spacing: -0.02em; }
+  h1 { font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 300; line-height: 1.16; color: var(--white); letter-spacing: -0.01em; margin-bottom: 24px; }
+  h1 em { font-style: italic; color: var(--gold); }
+  .hero-tag { display: inline-block; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(160,124,58,0.4); padding: 7px 14px; }
+  .hero-right-text { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; font-style: italic; color: rgba(255,255,255,0.45); line-height: 1.65; padding-bottom: 8px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  section { padding: 100px 0; }
+  .section-label { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+  .section-heading { font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 300; line-height: 1.2; color: var(--deep); letter-spacing: -0.01em; }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .divider { width: 44px; height: 1px; background: var(--gold); margin: 32px 0; }
+  .body-text { font-size: 0.97rem; font-weight: 400; line-height: 1.85; color: var(--warm-gray); }
+  #intro { background: var(--white); }
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .intro-lead { font-family: var(--serif); font-size: 1.5rem; font-weight: 300; line-height: 1.55; color: var(--charcoal); margin-bottom: 28px; }
+  .intro-lead em { font-style: italic; color: var(--gold); }
+  #expect { background: var(--cream); }
+  .expect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 60px; }
+  .expect-item { padding: 36px; background: var(--white); border-top: 2px solid var(--gold); }
+  .expect-num { font-family: var(--serif); font-size: 0.72rem; font-style: italic; color: var(--taupe); margin-bottom: 14px; }
+  .expect-title { font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 10px; }
+  .expect-body { font-size: 0.91rem; color: var(--warm-gray); line-height: 1.78; }
+  #who { background: var(--white); }
+  .who-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 100px; align-items: start; }
+  .who-list { list-style: none; margin-top: 8px; }
+  .who-list li { display: flex; align-items: flex-start; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--parchment); font-size: 0.93rem; color: var(--warm-gray); line-height: 1.75; }
+  .who-list li:first-child { padding-top: 0; }
+  .who-list li::before { content: '—'; color: var(--gold); font-family: var(--serif); flex-shrink: 0; margin-top: 2px; }
+  #cta { background: var(--deep); padding: 100px 0; }
+  .cta-inner { max-width: 640px; }
+  .cta-heading { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--white); line-height: 1.2; margin-bottom: 20px; }
+  .cta-heading em { font-style: italic; color: var(--gold); }
+  .cta-body { font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.85; margin-bottom: 40px; }
+  .btn-primary { display: inline-block; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--gold); text-decoration: none; padding: 18px 40px; transition: background 0.3s; }
+  .btn-primary:hover { background: var(--charcoal); }
+  .btn-ghost { display: inline-block; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .btn-ghost:hover { color: var(--white); border-color: var(--white); }
+  /* PRICING */
+  #pricing { background: var(--parchment); }
+  .pricing-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 100px; align-items: start; }
+  .pricing-block { background: var(--white); border: 1px solid var(--parchment); padding: 44px; }
+  .pricing-block-label { font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+  .pricing-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--parchment); }
+  .pricing-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .pricing-label { font-size: 0.88rem; color: var(--warm-gray); }
+  .pricing-value { font-family: var(--serif); font-size: 1.12rem; font-weight: 500; color: var(--charcoal); }
+  .pricing-note { margin-top: 20px; padding: 20px 24px; background: var(--cream); border-left: 2px solid var(--gold); font-size: 0.88rem; color: var(--warm-gray); line-height: 1.75; }
+  .pricing-cta-block { padding-top: 12px; }
+  .pricing-cta-heading { font-family: var(--serif); font-size: 1.9rem; font-weight: 300; color: var(--deep); line-height: 1.25; margin-bottom: 16px; }
+  .pricing-cta-heading em { font-style: italic; color: var(--gold); }
+  .pricing-cta-body { font-size: 0.95rem; color: var(--warm-gray); line-height: 1.85; margin-bottom: 32px; }
+  .btn-dark { display: inline-block; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--charcoal); text-decoration: none; padding: 18px 40px; transition: background 0.3s; }
+  .btn-dark:hover { background: var(--gold); }
+
+  #service-nav { background: var(--parchment); padding: 60px 0; }
+  .service-nav-label { font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); margin-bottom: 28px; }
+  .service-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .service-nav-item { background: var(--white); padding: 28px; text-decoration: none; display: block; border-top: 2px solid transparent; transition: border-color 0.25s, background 0.25s; }
+  .service-nav-item:hover { border-top-color: var(--gold); }
+  .service-nav-item.active { border-top-color: var(--gold); background: var(--cream); }
+  .sn-num { font-family: var(--serif); font-size: 0.72rem; font-style: italic; color: var(--taupe); margin-bottom: 8px; }
+  .sn-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--deep); line-height: 1.3; }
+  footer { background: var(--deep); padding: 60px 0 36px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  .footer-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,0.07); flex-wrap: wrap; gap: 20px; }
+  .footer-brand { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--white); letter-spacing: 0.04em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-links-row { display: flex; gap: 32px; flex-wrap: wrap; }
+  .footer-links-row a { font-size: 0.8rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links-row a:hover { color: var(--white); }
+  .footer-bottom { padding-top: 26px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.18); }
+  .footer-sig { font-family: var(--serif); font-style: italic; font-size: 0.8rem; color: rgba(255,255,255,0.18); }
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+  @media (max-width: 900px) {
+    nav { padding: 18px 28px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 28px 72px; }
+    .container { padding: 0 28px; }
+    section { padding: 72px 0; }
+    .intro-grid, .who-grid { grid-template-columns: 1fr; gap: 48px; }
+    .expect-grid { grid-template-columns: 1fr; gap: 16px; }
+    .service-nav-grid { grid-template-columns: 1fr 1fr; }
+    .footer-inner { padding: 0 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Avelis<span>.</span></a>
+  <a href="index.html#services" class="nav-back">
+    <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+    All Services
+  </a>
+  <a href="index.html#contact" class="nav-cta">Request a Consultation</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-ring hero-ring-1"></div>
+  <div class="hero-ring hero-ring-2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="service-eyebrow">Overnight · Continuous Care</div>
+      <div class="service-number">02</div>
+      <h1>Overnight<br><em>Dementia Support</em></h1>
+      <div class="hero-tag">St. Petersburg, Florida</div>
+    </div>
+    <div class="hero-right-text fade-up d1">
+      "Night hours carry their own weight. We are there — steady when things shift, so both of you can rest."
+    </div>
+  </div>
+</section>
+
+<section id="intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="fade-up">
+        <div class="section-label">The Service</div>
+        <p class="intro-lead">For many families, the nights are the <em>hardest part</em> — restlessness, confusion, waking, wandering. And the toll of broken sleep compounds everything else.</p>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:20px;">Avelis overnight caregivers are not simply present — they are selected for this specific challenge. Nighttime dementia care asks for a different kind of composure: the ability to respond to disorientation without alarm, to redirect without escalating, and to hold a calm environment when the world feels uncertain to the person in their care.</p>
+        <p class="body-text">We provide that. And we do it consistently, with the same caregiver wherever possible, so that a familiar voice and familiar manner are there in the dark hours when they matter most.</p>
+      </div>
+      <div class="fade-up d1">
+        <div class="section-label">Why Overnight Care Is Different</div>
+        <p class="body-text" style="margin-bottom:20px;">Nighttime dementia behaviors — sundowning, sleep disruption, confusion upon waking — are among the most physically and emotionally exhausting realities of this condition. They are also among the least visible to those who aren't living with them.</p>
+        <p class="body-text" style="margin-bottom:20px;">An overnight caregiver from Avelis is briefed on your loved one's specific patterns. They know what tends to help, what tends to escalate, and how to move through difficult moments without waking the whole household.</p>
+        <p class="body-text">Their purpose is simple: everyone in this home should be able to rest tonight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="expect">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">What to Expect</div>
+      <h2 class="section-heading">A night that<br>holds <em>everyone</em>.</h2>
+    </div>
+    <div class="expect-grid">
+      <div class="expect-item fade-up d1">
+        <div class="expect-num">i.</div>
+        <div class="expect-title">Caregiver Selected for Night Work</div>
+        <div class="expect-body">Not every caregiver is suited for overnight care. We place people who bring the specific temperament this shift demands — unhurried, alert, and genuinely calm in uncertain moments.</div>
+      </div>
+      <div class="expect-item fade-up d2">
+        <div class="expect-num">ii.</div>
+        <div class="expect-title">Briefed on Your Loved One's Patterns</div>
+        <div class="expect-body">Before arrival, your caregiver is told what to expect: typical sleep patterns, common night behaviors, what soothes, what doesn't. They arrive informed, not guessing.</div>
+      </div>
+      <div class="expect-item fade-up d1">
+        <div class="expect-num">iii.</div>
+        <div class="expect-title">Safety and Comfort Maintained</div>
+        <div class="expect-body">Wandering, falls, and confusion are managed with quiet vigilance — not restraint, not alarm. The goal is always to restore ease, not to control.</div>
+      </div>
+      <div class="expect-item fade-up d2">
+        <div class="expect-num">iv.</div>
+        <div class="expect-title">Morning Handoff</div>
+        <div class="expect-body">You wake to a brief, honest summary of how the night went — and a caregiver who has kept watch so you could genuinely rest.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="container">
+    <div class="who-grid">
+      <div class="fade-up">
+        <div class="section-label">Who This Serves</div>
+        <h2 class="section-heading">Sleep is not<br>a <em>luxury</em>.<br>It is a necessity.</h2>
+        <div class="divider"></div>
+        <p class="body-text">If you are losing sleep to care for someone else — night after night — you are not sustainable. Overnight care is not an indulgence. It is what makes the rest of the caregiving possible.</p>
+      </div>
+      <div class="fade-up d1">
+        <ul class="who-list">
+          <li>Family caregivers experiencing chronic sleep deprivation due to nighttime supervision</li>
+          <li>Households where sundowning, wandering, or night waking is a consistent challenge</li>
+          <li>Families managing a temporary acute period — illness, transition, behavioral change</li>
+          <li>Spouses who can no longer safely monitor overnight needs alone</li>
+          <li>Families who need reliable overnight coverage several nights per week</li>
+          <li>Anyone who needs to know that tonight, someone capable is watching</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-grid">
+      <div class="fade-up">
+        <div class="section-label">Pricing</div>
+        <h2 class="section-heading">Straightforward.<br><em>No surprises.</em></h2>
+        <div class="divider"></div>
+        <p class="body-text">Overnight care is priced as a flat shift rate, typically covering an 8–10 hour window. Rates reflect the specialized nature of nighttime dementia support and the experience of your matched caregiver.</p>
+        <div class="pricing-block" style="margin-top:36px;">
+          <div class="pricing-block-label">Estimated Rate Range</div>
+          <div class="pricing-row">
+            <span class="pricing-label">Overnight Shift (8–10 hrs)</span>
+            <span class="pricing-value">$250–$340</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Dementia-Experienced Caregiver</span>
+            <span class="pricing-value">Upper range</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Multi-night Arrangements</span>
+            <span class="pricing-value">Discussed individually</span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label">Insurance Billing</span>
+            <span class="pricing-value">Not accepted</span>
+          </div>
+        </div>
+        <div class="pricing-note">
+          We are a private-pay service and do not currently bill insurance. Many families use long-term care insurance reimbursement, HSA/FSA funds, or private funds. We are happy to provide documentation to support any reimbursement claims.
+        </div>
+      </div>
+      <div class="pricing-cta-block fade-up d1">
+        <div class="section-label">Ready to Begin?</div>
+        <div class="pricing-cta-heading">A conversation<br>costs <em>nothing</em>.</div>
+        <p class="pricing-cta-body">Reach out and tell us what your family needs. There is no obligation, no pressure — only a genuine willingness to listen and help you find the right path forward.</p>
+        <a href="index.html#contact" class="btn-dark">Begin a Conversation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="service-nav">
+  <div class="container">
+    <div class="service-nav-label">Other Services</div>
+    <div class="service-nav-grid">
+      <a href="avelis-care-respite.html" class="service-nav-item">
+        <div class="sn-num">01</div>
+        <div class="sn-name">Private In-Home Respite Care</div>
+      </a>
+      <a href="avelis-care-overnight.html" class="service-nav-item active">
+        <div class="sn-num">02</div>
+        <div class="sn-name">Overnight Dementia Support</div>
+      </a>
+      <a href="avelis-care-companion.html" class="service-nav-item">
+        <div class="sn-num">03</div>
+        <div class="sn-name">Dementia Companion Care</div>
+      </a>
+      <a href="avelis-care-recovery.html" class="service-nav-item">
+        <div class="sn-num">04</div>
+        <div class="sn-name">Post-Hospital Recovery Support</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner fade-up">
+      <div class="section-label" style="color:var(--gold);">Begin Here</div>
+      <h2 class="cta-heading">Let's talk about<br>what the <em>nights</em> look like.</h2>
+      <p class="cta-body">We understand how much this matters. A private consultation is the first step — no pressure, no obligation. Just a conversation about what your family needs.</p>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
+        <a href="index.html#contact" class="btn-primary">Request a Private Consultation</a>
+        <a href="index.html" class="btn-ghost">Return to Avelis Care</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">Avelis<span>.</span></div>
+      <div class="footer-links-row">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">Philosophy</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="avelis-care-careers.html">Careers</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Avelis Care LLC · St. Petersburg, Florida</div>
+      <div class="footer-sig">Consistency. Dignity. Presence.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  setTimeout(() => document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible')), 80);
+</script>
+</body>
+</html>

@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avelis Care — Private In-Home Dementia Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F0EBE1;
+    --parchment: #DDD5C8;
+    --taupe: #A89880;
+    --warm-gray: #5C5248;
+    --charcoal: #1E1A16;
+    --deep: #0F0D0A;
+    --gold: #A07C3A;
+    --gold-light: #C49A52;
+    --white: #FAF7F2;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 60px;
+    transition: background 0.4s, padding 0.4s, border-color 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+  nav.scrolled {
+    background: rgba(240,235,225,0.96);
+    backdrop-filter: blur(16px);
+    padding: 18px 60px;
+    border-bottom-color: var(--parchment);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 44px; list-style: none; }
+  .nav-links a {
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--charcoal); }
+  .nav-cta {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-cta:hover { color: var(--charcoal); border-color: var(--charcoal); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    background: var(--white);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--white) 0%, var(--cream) 55%, var(--parchment) 100%);
+  }
+  .hero-ring {
+    position: absolute; border-radius: 50%;
+    right: -60px; top: 50%; transform: translateY(-50%);
+  }
+  .hero-ring-1 { width: 540px; height: 540px; border: 1px solid var(--taupe); opacity: 0.25; }
+  .hero-ring-2 { width: 390px; height: 390px; border: 1px solid var(--gold); opacity: 0.12; right: 30px; }
+  .hero-inner {
+    position: relative;
+    max-width: 1200px; margin: 0 auto;
+    padding: 140px 60px 100px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .hero-eyebrow {
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hero-eyebrow::before { content: ''; width: 34px; height: 1px; background: var(--gold); }
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 4.6vw, 4.4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--deep);
+    margin-bottom: 28px;
+    letter-spacing: -0.015em;
+  }
+  .hero-headline em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 0.97rem;
+    font-weight: 400;
+    color: var(--warm-gray);
+    line-height: 1.85;
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
+  .btn-primary {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--charcoal);
+    text-decoration: none;
+    padding: 18px 40px;
+    transition: background 0.3s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--gold); }
+  .btn-outline {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    padding: 17px 36px;
+    border: 1px solid var(--taupe);
+    transition: border-color 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--charcoal); }
+  .hero-right { display: flex; flex-direction: column; gap: 0; padding-top: 20px; }
+  .hero-stat {
+    padding: 28px 36px;
+    background: var(--white);
+    border-left: 2px solid var(--gold);
+    border-bottom: 1px solid var(--parchment);
+  }
+  .hero-stat-number {
+    font-family: var(--serif);
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  .hero-stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+  }
+  .hero-tagline {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--warm-gray);
+    line-height: 1.65;
+    padding: 28px 36px;
+    border-left: 2px solid var(--parchment);
+    background: var(--cream);
+  }
+
+  /* SHARED */
+  section { padding: 120px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  .section-label {
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+  .section-heading {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.2vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--deep);
+    letter-spacing: -0.01em;
+  }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .section-body { font-size: 0.97rem; font-weight: 400; line-height: 1.85; color: var(--warm-gray); }
+  .divider { width: 44px; height: 1px; background: var(--gold); margin: 32px 0; }
+
+  /* ABOUT */
+  #about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .about-left { padding-top: 12px; }
+  .about-right { padding-top: 60px; }
+  .about-principle {
+    margin-top: 52px;
+    padding: 36px 40px;
+    background: var(--cream);
+    border: 1px solid var(--parchment);
+    position: relative;
+  }
+  .about-principle::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 6rem;
+    color: var(--gold);
+    opacity: 0.18;
+    position: absolute;
+    top: 10px; left: 24px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .about-principle-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .about-principle-text {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--charcoal);
+  }
+  .pillars { display: flex; flex-direction: column; gap: 32px; }
+  .pillar { display: flex; gap: 22px; align-items: flex-start; }
+  .pillar-mark {
+    width: 34px; height: 34px; min-width: 34px;
+    border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 3px;
+  }
+  .pillar-mark svg { width: 13px; height: 13px; stroke: var(--gold); fill: none; }
+  .pillar-title {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    margin-bottom: 7px;
+  }
+  .pillar-body { font-size: 0.91rem; color: var(--warm-gray); line-height: 1.75; }
+
+  /* SERVICES */
+  #services { background: var(--cream); }
+  .services-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    margin-bottom: 72px; align-items: end;
+  }
+  .services-intro { font-size: 0.95rem; color: var(--warm-gray); line-height: 1.85; }
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .service-card, a.service-card {
+    background: var(--white);
+    padding: 52px 46px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card:hover, a.service-card:hover { background: var(--charcoal); }
+  .service-num {
+    font-family: var(--serif);
+    font-size: 3.6rem;
+    font-weight: 300;
+    color: var(--parchment);
+    line-height: 1;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-num { color: rgba(255,255,255,0.07); }
+  .service-name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 14px;
+    line-height: 1.28;
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-name { color: var(--white); }
+  .service-desc {
+    font-size: 0.9rem;
+    color: var(--warm-gray);
+    line-height: 1.82;
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-desc { color: rgba(255,255,255,0.55); }
+  .service-tag {
+    display: inline-block;
+    margin-top: 22px;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .service-card:hover .service-tag { color: var(--gold-light); border-color: var(--gold-light); }
+
+  /* PROCESS */
+  #process { background: var(--deep); }
+  #process .section-label { color: var(--gold); }
+  #process .section-label::before { background: var(--gold); }
+  .process-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    margin-top: 68px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .process-step {
+    padding: 56px 46px;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    position: relative;
+  }
+  .process-step:last-child { border-right: none; }
+  .process-arrow {
+    position: absolute; top: 56px; right: -11px;
+    font-size: 0.75rem; color: var(--gold); opacity: 0.4;
+  }
+  .process-step:last-child .process-arrow { display: none; }
+  .step-num {
+    font-family: var(--serif);
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .step-line { width: 28px; height: 1px; background: var(--gold); margin-bottom: 22px; opacity: 0.45; }
+  .step-title {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 18px;
+  }
+  .step-body { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.82; }
+
+  /* WHY */
+  #why { background: var(--parchment); }
+  .why-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 100px; align-items: start; }
+  .why-left { position: sticky; top: 120px; }
+  .why-right { display: flex; flex-direction: column; }
+  .why-item {
+    padding: 38px 0;
+    border-bottom: 1px solid var(--taupe);
+    display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start;
+  }
+  .why-item:first-child { padding-top: 0; }
+  .why-num {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--gold);
+    font-style: italic;
+    padding-top: 4px;
+  }
+  .why-title {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .why-body { font-size: 0.91rem; color: var(--warm-gray); line-height: 1.8; }
+
+  /* CONTACT */
+  #contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .contact-left { padding-top: 12px; }
+  .contact-note {
+    margin-top: 40px;
+    padding: 26px 30px;
+    background: var(--cream);
+    border-left: 2px solid var(--gold);
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--warm-gray);
+    line-height: 1.65;
+  }
+  .form-group { margin-bottom: 24px; }
+  .form-group label {
+    display: block;
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--taupe);
+    padding: 13px 0;
+    font-family: var(--sans);
+    font-size: 0.93rem;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--gold); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--taupe); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .form-submit { margin-top: 36px; }
+
+  /* CAREERS TEASER */
+  #team { background: var(--deep); padding: 100px 0; }
+  .team-teaser-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+  .value-tiles { display: flex; flex-direction: column; gap: 2px; }
+  .value-tile {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 28px 34px;
+  }
+  .value-tile.accent {
+    background: rgba(160,124,58,0.08);
+    border-color: rgba(160,124,58,0.22);
+  }
+  .value-tile-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .value-tile-text {
+    font-family: var(--serif);
+    font-size: 1.18rem;
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  /* FOOTER */
+  footer { background: var(--deep); padding: 80px 0 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px; padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-brand-name {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+  .footer-brand-name span { color: var(--gold); }
+  .footer-tagline-text {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.7;
+    max-width: 250px;
+  }
+  .footer-col-title {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .footer-links a {
+    font-size: 0.83rem;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-contact-item {
+    display: flex; gap: 11px; align-items: flex-start; margin-bottom: 12px;
+  }
+  .footer-contact-item svg { width: 13px; height: 13px; stroke: var(--gold); fill: none; flex-shrink: 0; margin-top: 3px; }
+  .footer-contact-item span { font-size: 0.83rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+  .footer-bottom { padding-top: 30px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.18); }
+  .footer-sig { font-family: var(--serif); font-style: italic; font-size: 0.82rem; color: rgba(255,255,255,0.18); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(26px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+  .d3 { transition-delay: 0.3s; }
+  .d4 { transition-delay: 0.4s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 22px 28px; }
+    nav.scrolled { padding: 16px 28px; }
+    .nav-links { display: none; }
+    .hero-inner, .about-grid, .services-header, .why-grid,
+    .contact-grid, .team-teaser-grid { grid-template-columns: 1fr; gap: 48px; }
+    .container { padding: 0 28px; }
+    section { padding: 80px 0; }
+    .services-grid, .process-grid { grid-template-columns: 1fr; }
+    .process-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .hero-right { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .why-left { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="#" class="nav-logo">Avelis<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Philosophy</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#team">Careers</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Begin a Conversation</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ring hero-ring-1"></div>
+  <div class="hero-ring hero-ring-2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow fade-up">Private Dementia Care · St. Petersburg, FL</div>
+      <h1 class="hero-headline fade-up d1">
+        A quieter kind<br>of <em>relief</em> is<br>waiting for you.
+      </h1>
+      <p class="hero-sub fade-up d2">
+        Avelis Care provides private, non-medical in-home support for families living with dementia. Discreet. Consistent. Held to a standard most agencies don't attempt.
+      </p>
+      <div class="fade-up d3" style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
+        <a href="#contact" class="btn-primary">Request a Private Consultation</a>
+        <a href="#about" class="btn-outline">Our Approach</a>
+      </div>
+    </div>
+    <div class="hero-right fade-up d2">
+      <div class="hero-stat">
+        <div class="hero-stat-number">1:1</div>
+        <div class="hero-stat-label">Dedicated caregiver. Every visit.</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">100%</div>
+        <div class="hero-stat-label">Private, non-medical care</div>
+      </div>
+      <div class="hero-tagline">
+        "The right person, in the right home, at the right time."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left fade-up">
+        <div class="section-label">Our Philosophy</div>
+        <h2 class="section-heading">Built around the<br>person, not the <em>diagnosis</em>.</h2>
+        <div class="divider"></div>
+        <p class="section-body" style="margin-bottom:22px;">
+          Avelis Care is not a staffing service. We are a curated practice — selecting caregivers for temperament as much as skill, and matching them with intention rather than availability.
+        </p>
+        <p class="section-body">
+          Every person living with dementia deserves to feel known and at ease in their own home. Every family deserves someone they can trust without reservation. We exist to make both possible.
+        </p>
+        <div class="about-principle">
+          <div class="about-principle-label">The Avelis Standard</div>
+          <div class="about-principle-text">
+            Consistency over convenience. Presence over procedure. Showing up — reliably, calmly, without fail.
+          </div>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="pillars">
+          <div class="pillar fade-up d1">
+            <div class="pillar-mark">
+              <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+            <div>
+              <div class="pillar-title">Intentional Matching</div>
+              <div class="pillar-body">We study your loved one's history, rhythms, and personality before a single introduction is made. Compatibility is not incidental — it is the work.</div>
+            </div>
+          </div>
+          <div class="pillar fade-up d2">
+            <div class="pillar-mark">
+              <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <div>
+              <div class="pillar-title">Dementia-Informed Presence</div>
+              <div class="pillar-body">Our caregivers are trained in communication, not just tasks — meeting people where they are, without correction, urgency, or distress.</div>
+            </div>
+          </div>
+          <div class="pillar fade-up d3">
+            <div class="pillar-mark">
+              <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="pillar-title">Protected Consistency</div>
+              <div class="pillar-body">The same face, the same calm, every time. For someone living with dementia, this is not a preference — it is a clinical and emotional necessity.</div>
+            </div>
+          </div>
+          <div class="pillar fade-up d4">
+            <div class="pillar-mark">
+              <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <div class="pillar-title">Dignity Without Exception</div>
+              <div class="pillar-body">Not a corporate principle — a daily practice. Every caregiver we place understands this, and is held to it.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="fade-up">
+        <div class="section-label">What We Offer</div>
+        <h2 class="section-heading">Four forms<br>of <em>relief</em>.</h2>
+      </div>
+      <p class="services-intro fade-up d1">
+        Each offering begins with the same question: what does this family actually need? Care shaped around the answer — not a service menu.
+      </p>
+    </div>
+    <div class="services-grid">
+      <a href="avelis-care-respite.html" class="service-card fade-up" style="text-decoration:none;">
+        <div class="service-num">01</div>
+        <div class="service-name">Private In-Home Respite Care</div>
+        <p class="service-desc">For the caregiver who needs to breathe. We arrive with calm, capable presence so you can step away without guilt — and return without worry.</p>
+        <div class="service-tag">Respite · Daytime</div>
+      </a>
+      <a href="avelis-care-overnight.html" class="service-card fade-up d1" style="text-decoration:none;">
+        <div class="service-num">02</div>
+        <div class="service-name">Overnight Dementia Support</div>
+        <p class="service-desc">Night hours carry their own weight. Our overnight caregivers are chosen for composure under pressure — steady when things shift, so both of you can rest.</p>
+        <div class="service-tag">Overnight · Continuous</div>
+      </a>
+      <a href="avelis-care-companion.html" class="service-card fade-up d2" style="text-decoration:none;">
+        <div class="service-num">03</div>
+        <div class="service-name">Dementia Companion Care</div>
+        <p class="service-desc">Not supervision — genuine presence. Unhurried conversation, familiar routine, and a steadiness that keeps your loved one grounded throughout the day.</p>
+        <div class="service-tag">Companionship · Engagement</div>
+      </a>
+      <a href="avelis-care-recovery.html" class="service-card fade-up d3" style="text-decoration:none;">
+        <div class="service-num">04</div>
+        <div class="service-name">Post-Hospital Recovery Support</div>
+        <p class="service-desc">Homecoming after hospitalization is disorienting for anyone — more so with cognitive change. We bridge that gap with attentive support from day one.</p>
+        <div class="service-tag">Recovery · Transition</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">How We Begin</div>
+      <h2 class="section-heading" style="color:var(--white);">Three steps.<br>No <em>paperwork</em> required.</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-step fade-up">
+        <div class="process-arrow">→</div>
+        <div class="step-num">Step One</div>
+        <div class="step-line"></div>
+        <div class="step-title">A Private Conversation</div>
+        <p class="step-body">No intake forms. No obligation. We listen — to your situation, your concerns, what's been hard. Trust is built in this first hour.</p>
+      </div>
+      <div class="process-step fade-up d1">
+        <div class="process-arrow">→</div>
+        <div class="step-num">Step Two</div>
+        <div class="step-line"></div>
+        <div class="step-title">Considered Matching</div>
+        <p class="step-body">We identify caregivers whose experience, temperament, and character fit your loved one. You meet them before care begins — always.</p>
+      </div>
+      <div class="process-step fade-up d2">
+        <div class="step-num">Step Three</div>
+        <div class="step-line"></div>
+        <div class="step-title">Care That Evolves</div>
+        <p class="step-body">Needs change. We move with them — adjusting quietly, communicating closely, holding the standard regardless of what changes around it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY AVELIS -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-left fade-up">
+        <div class="section-label">Why Avelis</div>
+        <h2 class="section-heading">For families who<br>refuse to <em>settle</em>.</h2>
+        <div class="divider"></div>
+        <p class="section-body">Home care options are plentiful. What is rare is care that is truly attentive — that sees your family as people, not a placement.</p>
+        <p class="section-body" style="margin-top:18px;">Avelis exists for families who know the difference.</p>
+      </div>
+      <div class="why-right">
+        <div class="why-item fade-up">
+          <div class="why-num">i.</div>
+          <div>
+            <div class="why-title">Matching by Character, Not Calendar</div>
+            <p class="why-body">We do not assign based on availability. We match based on who is right — and we take the time that requires, because getting it wrong costs far more.</p>
+          </div>
+        </div>
+        <div class="why-item fade-up d1">
+          <div class="why-num">ii.</div>
+          <div>
+            <div class="why-title">Dementia Is Not One Thing</div>
+            <p class="why-body">It shifts. It surprises. It asks for patience that cannot be taught in an afternoon. Every Avelis caregiver has been vetted for understanding — not just compliance.</p>
+          </div>
+        </div>
+        <div class="why-item fade-up d2">
+          <div class="why-num">iii.</div>
+          <div>
+            <div class="why-title">Consistency as Standard, Not Bonus</div>
+            <p class="why-body">Familiarity is therapeutic. We protect the same-caregiver relationship with discipline — because for someone living with dementia, disruption is not inconvenient. It is a setback.</p>
+          </div>
+        </div>
+        <div class="why-item fade-up d3">
+          <div class="why-num">iv.</div>
+          <div>
+            <div class="why-title">You Reach a Person</div>
+            <p class="why-body">No call centers. No intake queues. When you contact Avelis, someone answers — and that someone knows your family's name.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left fade-up">
+        <div class="section-label">Begin Here</div>
+        <h2 class="section-heading">The first step<br>is simply <em>asking</em>.</h2>
+        <div class="divider"></div>
+        <p class="section-body">There is no obligation in reaching out — only a willingness on our end to listen. Tell us what's happening, and we'll respond within one business day.</p>
+        <div class="contact-note">
+          "Every family we've served began with a single conversation. We hope yours will too."
+        </div>
+      </div>
+      <div class="contact-right fade-up d1">
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" placeholder="First &amp; Last">
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" placeholder="(727) 000-0000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label>Tell us about your situation</label>
+            <textarea placeholder="Care needs, current challenges, or simply where things stand. There is no wrong place to begin."></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn-primary" style="width:100%;text-align:center;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;">
+              Request a Private Consultation
+            </button>
+          </div>
+          <p style="margin-top:14px;font-size:0.72rem;color:var(--taupe);text-align:center;line-height:1.6;">Your information is held in strict confidence.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS TEASER -->
+<section id="team">
+  <div class="container">
+    <div class="team-teaser-grid">
+      <div class="fade-up">
+        <div class="section-label" style="color:var(--gold);">
+          <span style="display:inline-block;width:28px;height:1px;background:var(--gold);"></span>
+          Careers
+        </div>
+        <h2 class="section-heading" style="color:var(--white);margin-top:20px;">
+          We hire slowly.<br>We match <em>carefully</em>.<br>We invest in people<br>who take this seriously.
+        </h2>
+        <div style="width:44px;height:1px;background:var(--gold);margin:32px 0;"></div>
+        <p style="font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.85;margin-bottom:16px;">
+          Avelis is not for every caregiver — and we mean that respectfully. We are looking for people who understand that consistency, patience, and presence are not soft skills. They are the job.
+        </p>
+        <p style="font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.85;">
+          Compensation: <span style="color:var(--gold-light);">$20–$26/hr</span>, with premium rates for dementia experience and consistently matched assignments.
+        </p>
+        <div style="margin-top:44px;display:flex;gap:18px;flex-wrap:wrap;">
+          <a href="avelis-care-careers.html" class="btn-primary">View Careers &amp; Apply</a>
+          <a href="avelis-care-careers.html" style="display:inline-flex;align-items:center;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.12);padding-bottom:2px;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='white';this.style.borderColor='white';" onmouseout="this.style.color='rgba(255,255,255,0.3)';this.style.borderColor='rgba(255,255,255,0.12)';">What Sets Us Apart →</a>
+        </div>
+      </div>
+      <div class="value-tiles fade-up d2">
+        <div class="value-tile">
+          <div class="value-tile-label">We value</div>
+          <div class="value-tile-text">Patience over efficiency.</div>
+        </div>
+        <div class="value-tile">
+          <div class="value-tile-label">We protect</div>
+          <div class="value-tile-text">Your time and your purpose.</div>
+        </div>
+        <div class="value-tile">
+          <div class="value-tile-label">We offer</div>
+          <div class="value-tile-text">Consistency. Not chaos.</div>
+        </div>
+        <div class="value-tile accent">
+          <div class="value-tile-label">HHA · CNA · Dementia Experience</div>
+          <div class="value-tile-text">$20–$26 / hr · St. Petersburg, FL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Avelis<span>.</span></div>
+        <p class="footer-tagline-text">Private, non-medical in-home dementia care. St. Petersburg, Florida.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="#about">Philosophy</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#why">Why Avelis</a></li>
+          <li><a href="avelis-care-careers.html">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">Respite Care</a></li>
+          <li><a href="#services">Overnight Support</a></li>
+          <li><a href="#services">Companion Care</a></li>
+          <li><a href="#services">Recovery Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>hello@aveliscare.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.38 2 2 0 0 1 3.55 1H6.5a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.85-.85a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.5 16c0 .31.01.62-.58.92z"/></svg>
+          <span>(727) 000-0000</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>St. Petersburg, Florida</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Avelis Care LLC. All rights reserved.</div>
+      <div class="footer-sig">Consistency. Dignity. Presence.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  setTimeout(() => document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible')), 80);
+</script>
+</body>
+</html>
