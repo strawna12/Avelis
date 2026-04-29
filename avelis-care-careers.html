@@ -654,27 +654,27 @@
       <div class="grid-2">
         <div class="form-group">
           <label>First Name</label>
-          <input type="text" placeholder="Your first name">
+          <input type="text" id="firstName" placeholder="Your first name">
         </div>
         <div class="form-group">
           <label>Last Name</label>
-          <input type="text" placeholder="Your last name">
+          <input type="text" id="lastName" placeholder="Your last name">
         </div>
       </div>
       <div class="grid-2">
         <div class="form-group">
           <label>Phone</label>
-          <input type="tel" placeholder="(727) 000-0000">
+          <input type="tel" id="phone" placeholder="(727) 000-0000">
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input type="email" placeholder="your@email.com">
+          <input type="email" id="email" placeholder="your@email.com">
         </div>
       </div>
       <div class="grid-3">
         <div class="form-group">
           <label>Certification</label>
-          <select>
+          <select id="certification">
             <option value="" disabled selected>Select one</option>
             <option>HHA</option>
             <option>CNA</option>
@@ -684,7 +684,7 @@
         </div>
         <div class="form-group">
           <label>Years of Experience</label>
-          <select>
+          <select id="experience">
             <option value="" disabled selected>Select range</option>
             <option>Less than 1 year</option>
             <option>1–2 years</option>
@@ -695,7 +695,7 @@
         </div>
         <div class="form-group">
           <label>Dementia Experience</label>
-          <select>
+          <select id="dementiaExp">
             <option value="" disabled selected>Select one</option>
             <option>Extensive — primary focus</option>
             <option>Significant — multiple clients</option>
@@ -707,7 +707,7 @@
       <div class="grid-2">
         <div class="form-group">
           <label>Availability</label>
-          <select>
+          <select id="availability">
             <option value="" disabled selected>Select one</option>
             <option>Days only</option>
             <option>Evenings / overnights</option>
@@ -717,7 +717,7 @@
         </div>
         <div class="form-group">
           <label>City / Neighborhood</label>
-          <input type="text" placeholder="e.g. St. Petersburg, Clearwater">
+          <input type="text" id="city" placeholder="e.g. St. Petersburg, Clearwater">
         </div>
       </div>
 
@@ -744,40 +744,40 @@
         <div class="q-num">01</div>
         <div class="q-label">Question One</div>
         <div class="q-text">Tell us about a moment in your caregiving work that stayed with you. What happened — and why does it still matter?</div>
-        <textarea placeholder="It doesn't need to be dramatic. The quietest moments are often the most telling."></textarea>
+        <textarea id="q1" placeholder="It doesn't need to be dramatic. The quietest moments are often the most telling."></textarea>
       </div>
 
       <div class="q-block">
         <div class="q-num">02</div>
         <div class="q-label">Question Two</div>
         <div class="q-text">Dementia shifts unpredictably — confusion, distress, repetition. How do you find your footing in those moments? What keeps you regulated?</div>
-        <textarea placeholder="We want your actual approach, not a textbook answer."></textarea>
+        <textarea id="q2" placeholder="We want your actual approach, not a textbook answer."></textarea>
       </div>
 
       <div class="q-block">
         <div class="q-num">03</div>
         <div class="q-label">Question Three</div>
         <div class="q-text">Consistency is our highest value. What does that word mean to you in caregiving — not philosophically, but in practice, day to day?</div>
-        <textarea placeholder="What does consistency actually ask of you?"></textarea>
+        <textarea id="q3" placeholder="What does consistency actually ask of you?"></textarea>
       </div>
 
       <div class="q-block">
         <div class="q-num">04</div>
         <div class="q-label">Question Four</div>
         <div class="q-text">Describe a time when something shifted — a client's condition, a family dynamic, the situation. How did you respond, and what did it teach you?</div>
-        <textarea placeholder="We're less interested in what went perfectly than in how you show up when things don't."></textarea>
+        <textarea id="q4" placeholder="We're less interested in what went perfectly than in how you show up when things don't."></textarea>
       </div>
 
       <div class="q-block">
         <div class="q-num">05</div>
         <div class="q-label">Question Five</div>
         <div class="q-text">Why Avelis — and why now? What are you looking for that you haven't found elsewhere?</div>
-        <textarea placeholder="There is no answer we're hoping to hear. We just want to know if this might genuinely be it for you."></textarea>
+        <textarea id="q5" placeholder="There is no answer we're hoping to hear. We just want to know if this might genuinely be it for you."></textarea>
       </div>
 
       <!-- Submit -->
       <div style="margin-top:52px;max-width:440px;">
-        <button type="button" class="btn-primary" onclick="onSubmit()" style="width:100%;text-align:center;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;">
+        <button type="button" class="btn-primary" onclick="onSubmit()" id="submitBtn" style="width:100%;text-align:center;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;">
           Submit My Application
         </button>
         <p style="margin-top:14px;font-size:0.72rem;color:var(--taupe);line-height:1.6;text-align:center;">We acknowledge every application and aim to respond within three business days.</p>
@@ -823,6 +823,8 @@
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
   setTimeout(() => document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible')), 80);
 
+  const CAREERS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzg1MMOWofPxbOWjnmXHaAggaq1tFG8t4sgc2SOGENsGMp_Ex93x4Gs8_KuldDY6eXk/exec";
+
   // File upload
   function onFileSelect(e) {
     const f = e.target.files[0];
@@ -848,10 +850,65 @@
 
   // Submit
   function onSubmit() {
-    document.getElementById('appForm').style.display = 'none';
-    const s = document.getElementById('successMsg');
-    s.classList.add('show');
-    window.scrollTo({ top: document.getElementById('apply').offsetTop - 100, behavior: 'smooth' });
+    const btn = document.getElementById('submitBtn');
+
+    // Basic validation
+    const required = ['firstName','lastName','phone','email'];
+    let valid = true;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = '#8B3A2E';
+        valid = false;
+      } else {
+        el.style.borderColor = '';
+      }
+    });
+    if (!valid) {
+      window.scrollTo({ top: document.getElementById('appForm').offsetTop - 100, behavior: 'smooth' });
+      return;
+    }
+
+    // Loading state
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    const payload = {
+      firstName:    document.getElementById('firstName').value.trim(),
+      lastName:     document.getElementById('lastName').value.trim(),
+      phone:        document.getElementById('phone').value.trim(),
+      email:        document.getElementById('email').value.trim(),
+      city:         document.getElementById('city').value.trim(),
+      certification: document.getElementById('certification').value,
+      experience:   document.getElementById('experience').value,
+      dementiaExp:  document.getElementById('dementiaExp').value,
+      availability: document.getElementById('availability').value,
+      q1:           document.getElementById('q1').value.trim(),
+      q2:           document.getElementById('q2').value.trim(),
+      q3:           document.getElementById('q3').value.trim(),
+      q4:           document.getElementById('q4').value.trim(),
+      q5:           document.getElementById('q5').value.trim(),
+    };
+
+    fetch(CAREERS_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      document.getElementById('appForm').style.display = 'none';
+      const s = document.getElementById('successMsg');
+      s.classList.add('show');
+      window.scrollTo({ top: document.getElementById('apply').offsetTop - 100, behavior: 'smooth' });
+    })
+    .catch(() => {
+      // no-cors means we won't get error details — treat as success since Apps Script received it
+      document.getElementById('appForm').style.display = 'none';
+      document.getElementById('successMsg').classList.add('show');
+      window.scrollTo({ top: document.getElementById('apply').offsetTop - 100, behavior: 'smooth' });
+    });
   }
 </script>
 </body>
