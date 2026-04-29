@@ -759,31 +759,37 @@
         <p class="section-body" style="margin-top:28px;font-size:0.88rem;color:var(--taupe);line-height:1.8;font-style:italic;">During our call, we'll ask about your loved one's daily routine, current care needs, and what relief would mean most to your family. There's no preparation required — just come as you are.</p>
       </div>
       <div class="contact-right fade-up d1">
-        <form>
+        <form id="contactForm">
           <div class="form-row">
             <div class="form-group">
-              <label>Your Name</label>
-              <input type="text" placeholder="First &amp; Last">
+              <label for="cf-name">Your Name</label>
+              <input id="cf-name" name="name" type="text" placeholder="First &amp; Last" required>
             </div>
             <div class="form-group">
-              <label>Phone</label>
-              <input type="tel" placeholder="(727) 000-0000">
+              <label for="cf-phone">Phone</label>
+              <input id="cf-phone" name="phone" type="tel" placeholder="(727) 000-0000">
             </div>
           </div>
           <div class="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="your@email.com">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" placeholder="your@email.com" required>
           </div>
           <div class="form-group">
-            <label>Tell us about your situation</label>
-            <textarea placeholder="Care needs, current challenges, or simply where things stand. There is no wrong place to begin."></textarea>
+            <label for="cf-message">Tell us about your situation</label>
+            <textarea id="cf-message" name="message" placeholder="Care needs, current challenges, or simply where things stand. There is no wrong place to begin." required></textarea>
           </div>
           <div class="form-submit">
-            <button type="submit" class="btn-primary" style="width:100%;text-align:center;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;">
+            <button id="cf-submit" type="submit" class="btn-primary" style="width:100%;text-align:center;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;">
               Request a Private Consultation
             </button>
           </div>
           <p style="margin-top:14px;font-size:0.72rem;color:var(--taupe);text-align:center;line-height:1.6;">Your information is held in strict confidence.</p>
+          <div id="cf-success" style="display:none;margin-top:20px;padding:18px 22px;background:#f4f9f4;border-left:3px solid #6a9e6a;font-size:0.85rem;color:#3a6b3a;line-height:1.65;">
+            Thank you — your message has been received. We'll be in touch within one business day.
+          </div>
+          <div id="cf-error" style="display:none;margin-top:20px;padding:18px 22px;background:#fdf4f4;border-left:3px solid #c97070;font-size:0.85rem;color:#7a3a3a;line-height:1.65;">
+            Something went wrong sending your message. Please try again, or reach us directly at hello@aveliscare.com.
+          </div>
         </form>
       </div>
     </div>
@@ -849,6 +855,50 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
   setTimeout(() => document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible')), 80);
+
+  // Contact form submission
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('cf-submit');
+    const successEl = document.getElementById('cf-success');
+    const errorEl = document.getElementById('cf-error');
+
+    // Reset state
+    successEl.style.display = 'none';
+    errorEl.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const payload = {
+      name: document.getElementById('cf-name').value.trim(),
+      email: document.getElementById('cf-email').value.trim(),
+      phone: document.getElementById('cf-phone').value.trim(),
+      message: document.getElementById('cf-message').value.trim(),
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        successEl.style.display = 'block';
+        this.reset();
+      } else {
+        errorEl.textContent = data.error || 'Something went wrong. Please try again.';
+        errorEl.style.display = 'block';
+      }
+    } catch {
+      errorEl.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Request a Private Consultation';
+    }
+  });
 </script>
 </body>
 </html>

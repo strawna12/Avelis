@@ -4,5 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.js"
+  },
+  "dependencies": {
+    "resend": "^4.0.0"
   }
 }
