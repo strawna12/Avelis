@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Intake Form — Avelis Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F0EBE1;
+    --parchment: #DDD5C8;
+    --taupe: #A89880;
+    --warm-gray: #5C5248;
+    --charcoal: #1E1A16;
+    --deep: #0F0D0A;
+    --gold: #A07C3A;
+    --gold-light: #C49A52;
+    --white: #FAF7F2;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+    --error: #8B3A2E;
+    --success: #4A6741;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--deep);
+    padding: 28px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .logo span { color: var(--gold); }
+  .header-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+  .header-back {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(160,124,58,0.4);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .header-back:hover { color: var(--white); border-color: var(--white); }
+
+  /* ── HERO ── */
+  .form-hero {
+    background: var(--deep);
+    padding: 72px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .form-hero::after {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 400px; height: 400px;
+    border: 1px solid rgba(160,124,58,0.1);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .form-hero::before {
+    content: '';
+    position: absolute;
+    right: 20px; top: 20px;
+    width: 260px; height: 260px;
+    border: 1px solid rgba(160,124,58,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 900px;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 0.64rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+  .hero-heading {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 300;
+    line-height: 1.18;
+    color: var(--white);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .hero-heading em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.85;
+    max-width: 560px;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap {
+    background: var(--charcoal);
+    padding: 0 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .progress-steps {
+    display: flex;
+    max-width: 900px;
+  }
+  .progress-step {
+    flex: 1;
+    padding: 18px 0 16px;
+    border-bottom: 2px solid transparent;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .progress-step.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .progress-step.done { color: rgba(255,255,255,0.45); border-bottom-color: rgba(255,255,255,0.15); }
+  .step-dot {
+    width: 18px; height: 18px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.55rem;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .progress-step.active .step-dot { background: var(--gold); border-color: var(--gold); color: var(--white); }
+  .progress-step.done .step-dot { background: rgba(255,255,255,0.15); }
+
+  /* ── FORM BODY ── */
+  .form-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 60px 100px;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .form-section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  .form-section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  .section-header {
+    margin-bottom: 44px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--parchment);
+  }
+  .section-num {
+    font-family: var(--serif);
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--taupe);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+    font-weight: 300;
+    color: var(--deep);
+    line-height: 1.22;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-desc {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: var(--warm-gray);
+    line-height: 1.75;
+  }
+
+  /* ── FIELD GROUPS ── */
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; }
+  .field-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px 32px; }
+  .field-full { grid-column: 1 / -1; }
+  .field-group { margin-bottom: 28px; }
+  .field-group.no-mb { margin-bottom: 0; }
+
+  label {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 8px;
+  }
+  label .req { color: var(--gold); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--taupe);
+    padding: 12px 0;
+    font-family: var(--sans);
+    font-size: 0.93rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+  input::placeholder, textarea::placeholder { color: var(--taupe); font-style: italic; }
+  textarea { resize: vertical; min-height: 100px; }
+
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%235C5248' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    padding-right: 24px;
+  }
+
+  /* FIELD ERROR */
+  .field-error {
+    font-size: 0.72rem;
+    color: var(--error);
+    margin-top: 5px;
+    display: none;
+  }
+  .field-group.has-error input,
+  .field-group.has-error select,
+  .field-group.has-error textarea { border-color: var(--error); }
+  .field-group.has-error .field-error { display: block; }
+
+  /* CHECKBOXES & RADIOS */
+  .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .check-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .check-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--parchment);
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.5;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-item input[type="checkbox"],
+  .check-item input[type="radio"] {
+    width: 16px; height: 16px; min-width: 16px;
+    border: 1px solid var(--taupe);
+    border-bottom: 1px solid var(--taupe);
+    background: transparent;
+    padding: 0;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: var(--gold);
+    transition: border-color 0.2s;
+  }
+  .check-item input:checked { border-color: var(--gold); }
+  .check-item:hover input { border-color: var(--gold); }
+
+  /* SCALE / RATING */
+  .scale-wrap {
+    display: flex;
+    gap: 0;
+    margin-top: 6px;
+    border: 1px solid var(--parchment);
+  }
+  .scale-item {
+    flex: 1;
+    text-align: center;
+    padding: 10px 4px;
+    border-right: 1px solid var(--parchment);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .scale-item:last-child { border-right: none; }
+  .scale-item input[type="radio"] { display: none; }
+  .scale-item label {
+    font-size: 0.82rem;
+    color: var(--warm-gray);
+    margin: 0;
+    cursor: pointer;
+    letter-spacing: 0;
+    text-transform: none;
+    display: block;
+  }
+  .scale-item:has(input:checked) { background: var(--charcoal); }
+  .scale-item:has(input:checked) label { color: var(--white); }
+  .scale-item:hover { background: var(--parchment); }
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 0.68rem;
+    color: var(--taupe);
+    letter-spacing: 0.08em;
+  }
+
+  /* DIVIDER */
+  .field-divider {
+    width: 40px; height: 1px;
+    background: var(--gold);
+    margin: 36px 0;
+    opacity: 0.6;
+  }
+
+  /* CALLOUT BOX */
+  .callout {
+    padding: 20px 24px;
+    background: var(--white);
+    border-left: 2px solid var(--gold);
+    margin-bottom: 32px;
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.75;
+  }
+  .callout strong { color: var(--charcoal); font-weight: 500; }
+
+  /* NAV BUTTONS */
+  .form-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 52px;
+    padding-top: 32px;
+    border-top: 1px solid var(--parchment);
+  }
+  .btn-next {
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--charcoal);
+    border: none;
+    padding: 17px 40px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-family: var(--sans);
+  }
+  .btn-next:hover { background: var(--gold); }
+  .btn-prev {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+    padding: 0;
+  }
+  .btn-prev:hover { color: var(--charcoal); }
+  .btn-prev svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
+  .btn-submit {
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--gold);
+    border: none;
+    padding: 17px 44px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-family: var(--sans);
+  }
+  .btn-submit:hover { background: var(--charcoal); }
+
+  /* SUCCESS */
+  #successView {
+    display: none;
+    text-align: center;
+    padding: 80px 40px;
+    animation: fadeIn 0.5s ease;
+  }
+  #successView.show { display: block; }
+  .success-ring {
+    width: 72px; height: 72px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+  }
+  .success-ring svg { width: 26px; height: 26px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .success-heading {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--deep);
+    margin-bottom: 14px;
+  }
+  .success-heading em { font-style: italic; color: var(--gold); }
+  .success-body {
+    font-size: 0.93rem;
+    color: var(--warm-gray);
+    line-height: 1.85;
+    max-width: 480px;
+    margin: 0 auto 40px;
+  }
+  .btn-return {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--charcoal);
+    text-decoration: none;
+    padding: 17px 40px;
+    transition: background 0.3s;
+  }
+  .btn-return:hover { background: var(--gold); }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    header, .progress-bar-wrap, .form-nav { display: none !important; }
+    .form-section { display: block !important; page-break-inside: avoid; }
+    .form-hero { padding: 32px 40px; }
+    .form-body { padding: 32px 40px; }
+    body { background: white; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    header { padding: 20px 24px; }
+    .form-hero { padding: 48px 24px 60px; }
+    .progress-bar-wrap { padding: 0 24px; }
+    .progress-step span { display: none; }
+    .form-body { padding: 40px 24px 80px; }
+    .field-grid, .field-grid-3 { grid-template-columns: 1fr; }
+    .check-grid, .check-grid-3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Avelis<span>.</span></a>
+  <div class="header-label">Client Intake Form — Confidential</div>
+  <a href="index.html" class="header-back">Return to Site</a>
+</header>
+
+<div class="form-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Private & Confidential</div>
+    <h1 class="hero-heading">Before your consultation,<br>help us <em>understand</em> your situation.</h1>
+    <p class="hero-sub">This form helps us arrive at our first conversation fully prepared — so we can focus on your family rather than logistics. Take your time. There are no wrong answers.</p>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-steps" id="progressSteps">
+    <div class="progress-step active" data-step="0">
+      <div class="step-dot">1</div>
+      <span>Your Family</span>
+    </div>
+    <div class="progress-step" data-step="1">
+      <div class="step-dot">2</div>
+      <span>The Person in Care</span>
+    </div>
+    <div class="progress-step" data-step="2">
+      <div class="step-dot">3</div>
+      <span>Daily Life & Routine</span>
+    </div>
+    <div class="progress-step" data-step="3">
+      <div class="step-dot">4</div>
+      <span>Care Needs</span>
+    </div>
+    <div class="progress-step" data-step="4">
+      <div class="step-dot">5</div>
+      <span>Caregiver Wellbeing</span>
+    </div>
+    <div class="progress-step" data-step="5">
+      <div class="step-dot">6</div>
+      <span>Getting Started</span>
+    </div>
+  </div>
+</div>
+
+<div class="form-body">
+  <div id="formView">
+
+    <!-- ── SECTION 1: YOUR FAMILY ── -->
+    <div class="form-section active" id="section-0">
+      <div class="section-header">
+        <div class="section-num">Section One of Six</div>
+        <h2 class="section-title">Your <em>family</em> — who we're speaking with.</h2>
+        <p class="section-desc">We'd like to know who the primary contact will be and how best to reach you.</p>
+      </div>
+
+      <div class="field-grid">
+        <div class="field-group">
+          <label>Your First Name <span class="req">*</span></label>
+          <input type="text" id="contactFirst" placeholder="First name">
+          <div class="field-error">Please enter your first name.</div>
+        </div>
+        <div class="field-group">
+          <label>Your Last Name <span class="req">*</span></label>
+          <input type="text" id="contactLast" placeholder="Last name">
+          <div class="field-error">Please enter your last name.</div>
+        </div>
+        <div class="field-group">
+          <label>Your Phone Number <span class="req">*</span></label>
+          <input type="tel" id="contactPhone" placeholder="(727) 000-0000">
+          <div class="field-error">Please enter a phone number.</div>
+        </div>
+        <div class="field-group">
+          <label>Your Email Address <span class="req">*</span></label>
+          <input type="email" id="contactEmail" placeholder="your@email.com">
+          <div class="field-error">Please enter a valid email.</div>
+        </div>
+        <div class="field-group">
+          <label>Best Time to Reach You</label>
+          <select>
+            <option value="" disabled selected>Select a preference</option>
+            <option>Morning (8am–12pm)</option>
+            <option>Afternoon (12pm–5pm)</option>
+            <option>Evening (5pm–8pm)</option>
+            <option>Any time</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Your Relationship to the Person in Care <span class="req">*</span></label>
+          <select id="relationship">
+            <option value="" disabled selected>Select one</option>
+            <option>Spouse / Partner</option>
+            <option>Adult Child</option>
+            <option>Sibling</option>
+            <option>Other Family Member</option>
+            <option>Legal Guardian / POA</option>
+            <option>Friend / Neighbor</option>
+            <option>Other</option>
+          </select>
+          <div class="field-error">Please select your relationship.</div>
+        </div>
+        <div class="field-group field-full">
+          <label>Are there other family members involved in care decisions?</label>
+          <input type="text" placeholder="Names and roles, if applicable — e.g. 'My sister Lisa shares caregiving responsibilities'">
+        </div>
+        <div class="field-group field-full">
+          <label>City / Neighborhood where care would take place <span class="req">*</span></label>
+          <input type="text" id="location" placeholder="e.g. St. Petersburg, Clearwater, Largo">
+          <div class="field-error">Please enter a location.</div>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <div></div>
+        <button class="btn-next" onclick="nextSection(0)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── SECTION 2: THE PERSON IN CARE ── -->
+    <div class="form-section" id="section-1">
+      <div class="section-header">
+        <div class="section-num">Section Two of Six</div>
+        <h2 class="section-title">The person <em>we'll be caring for</em>.</h2>
+        <p class="section-desc">Help us understand who they are — not just medically, but as a person.</p>
+      </div>
+
+      <div class="field-grid">
+        <div class="field-group">
+          <label>Their First Name <span class="req">*</span></label>
+          <input type="text" id="clientFirst" placeholder="First name (or preferred name)">
+          <div class="field-error">Please enter their name.</div>
+        </div>
+        <div class="field-group">
+          <label>Date of Birth</label>
+          <input type="date" id="clientDOB">
+        </div>
+        <div class="field-group">
+          <label>Gender</label>
+          <select>
+            <option value="" disabled selected>Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Prefer not to say</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Primary Language</label>
+          <input type="text" placeholder="e.g. English, Spanish">
+        </div>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-group">
+        <label>Diagnosis / Primary Condition <span class="req">*</span></label>
+        <div class="check-grid" id="diagnosisCheck">
+          <label class="check-item"><input type="checkbox" value="alzheimers"> Alzheimer's Disease</label>
+          <label class="check-item"><input type="checkbox" value="vascular"> Vascular Dementia</label>
+          <label class="check-item"><input type="checkbox" value="lewy"> Lewy Body Dementia</label>
+          <label class="check-item"><input type="checkbox" value="frontotemporal"> Frontotemporal Dementia</label>
+          <label class="check-item"><input type="checkbox" value="mixed"> Mixed Dementia</label>
+          <label class="check-item"><input type="checkbox" value="mild"> Mild Cognitive Impairment (MCI)</label>
+          <label class="check-item"><input type="checkbox" value="parkinson"> Parkinson's with Dementia</label>
+          <label class="check-item"><input type="checkbox" value="undiagnosed"> Not yet diagnosed / unsure</label>
+          <label class="check-item field-full"><input type="checkbox" value="other"> Other / Multiple</label>
+        </div>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-group">
+        <label>Stage of Dementia (if known)</label>
+        <div class="check-grid-3">
+          <label class="check-item"><input type="radio" name="stage" value="early"> Early / Mild</label>
+          <label class="check-item"><input type="radio" name="stage" value="middle"> Middle / Moderate</label>
+          <label class="check-item"><input type="radio" name="stage" value="late"> Late / Severe</label>
+        </div>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-group">
+        <label>Other Medical Conditions (check all that apply)</label>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox"> Diabetes</label>
+          <label class="check-item"><input type="checkbox"> Heart Disease / CHF</label>
+          <label class="check-item"><input type="checkbox"> COPD / Respiratory</label>
+          <label class="check-item"><input type="checkbox"> Stroke History</label>
+          <label class="check-item"><input type="checkbox"> Parkinson's Disease</label>
+          <label class="check-item"><input type="checkbox"> Arthritis / Mobility Issues</label>
+          <label class="check-item"><input type="checkbox"> Incontinence</label>
+          <label class="check-item"><input type="checkbox"> Fall History</label>
+          <label class="check-item"><input type="checkbox"> Depression / Anxiety</label>
+          <label class="check-item"><input type="checkbox"> Cancer (current or recent)</label>
+        </div>
+      </div>
+
+      <div class="field-grid" style="margin-top: 28px;">
+        <div class="field-group">
+          <label>Current Medications</label>
+          <textarea placeholder="List key medications, or note 'list available on request'"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Known Allergies</label>
+          <textarea placeholder="Medications, foods, environmental — anything a caregiver should know"></textarea>
+        </div>
+        <div class="field-group field-full">
+          <label>Is there a physician or specialist overseeing their care?</label>
+          <input type="text" placeholder="Name and specialty, if applicable">
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-prev" onclick="prevSection(1)">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <button class="btn-next" onclick="nextSection(1)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── SECTION 3: DAILY LIFE & ROUTINE ── -->
+    <div class="form-section" id="section-2">
+      <div class="section-header">
+        <div class="section-num">Section Three of Six</div>
+        <h2 class="section-title">Daily life &amp; <em>what matters to them</em>.</h2>
+        <p class="section-desc">This is the section that shapes who we match with your loved one. Tell us who they are.</p>
+      </div>
+
+      <div class="callout">
+        <strong>Why we ask this:</strong> A caregiver who knows that someone spent 40 years as a gardener, prefers classical music, and has coffee at exactly 7am will provide meaningfully better care than one who knows only the diagnosis. Please share as much as you're comfortable with.
+      </div>
+
+      <div class="field-group">
+        <label>Tell us about them as a person</label>
+        <textarea style="min-height:130px;" placeholder="Occupation, hobbies, interests, personality, what they're proud of, what brings them joy — anything that helps us understand who they are beyond the medical picture."></textarea>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-grid">
+        <div class="field-group">
+          <label>Typical Wake Time</label>
+          <input type="text" placeholder="e.g. 7:00am">
+        </div>
+        <div class="field-group">
+          <label>Typical Bedtime</label>
+          <input type="text" placeholder="e.g. 9:00pm">
+        </div>
+        <div class="field-group">
+          <label>Nap Habits</label>
+          <select>
+            <option value="" disabled selected>Select</option>
+            <option>No naps</option>
+            <option>Occasional nap</option>
+            <option>Daily nap (short)</option>
+            <option>Daily nap (long)</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Appetite / Eating</label>
+          <select>
+            <option value="" disabled selected>Select</option>
+            <option>Good appetite — eats well</option>
+            <option>Variable appetite</option>
+            <option>Poor appetite / needs encouragement</option>
+            <option>Dietary restrictions present</option>
+            <option>Swallowing difficulties (dysphagia)</option>
+          </select>
+        </div>
+        <div class="field-group field-full">
+          <label>Dietary Restrictions or Preferences</label>
+          <input type="text" placeholder="e.g. diabetic diet, no pork, soft foods, favorite foods they always enjoy">
+        </div>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-group">
+        <label>What activities or topics bring them comfort or engagement?</label>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox"> Music (listening)</label>
+          <label class="check-item"><input type="checkbox"> Music (singing / playing)</label>
+          <label class="check-item"><input type="checkbox"> Television / Movies</label>
+          <label class="check-item"><input type="checkbox"> Reading or being read to</label>
+          <label class="check-item"><input type="checkbox"> Conversation / Storytelling</label>
+          <label class="check-item"><input type="checkbox"> Religious / Spiritual practice</label>
+          <label class="check-item"><input type="checkbox"> Gardening / Being outdoors</label>
+          <label class="check-item"><input type="checkbox"> Cooking / Baking (participation)</label>
+          <label class="check-item"><input type="checkbox"> Crafts / Art / Puzzles</label>
+          <label class="check-item"><input type="checkbox"> Looking at photos / reminiscing</label>
+          <label class="check-item"><input type="checkbox"> Animals / Pets</label>
+          <label class="check-item"><input type="checkbox"> Gentle walks or movement</label>
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-top: 28px;">
+        <label>What topics, situations, or approaches tend to cause distress or agitation?</label>
+        <textarea placeholder="e.g. loud noises, being corrected, certain news topics, being rushed, strangers in the home, talk of moving — anything that helps a caregiver avoid unnecessary difficulty."></textarea>
+      </div>
+
+      <div class="field-group">
+        <label>Is there a particular music, radio station, or TV show that consistently soothes or engages them?</label>
+        <input type="text" placeholder="e.g. Big Band era music, old westerns, local news, the rosary">
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-prev" onclick="prevSection(2)">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <button class="btn-next" onclick="nextSection(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── SECTION 4: CARE NEEDS ── -->
+    <div class="form-section" id="section-3">
+      <div class="section-header">
+        <div class="section-num">Section Four of Six</div>
+        <h2 class="section-title">Current care needs &amp; <em>daily challenges</em>.</h2>
+        <p class="section-desc">Help us understand what support looks like day-to-day and where the difficult moments tend to occur.</p>
+      </div>
+
+      <div class="field-group">
+        <label>Mobility — How does your loved one get around?</label>
+        <div class="check-grid">
+          <label class="check-item"><input type="radio" name="mobility"> Fully independent / walks unassisted</label>
+          <label class="check-item"><input type="radio" name="mobility"> Uses cane or walker</label>
+          <label class="check-item"><input type="radio" name="mobility"> Needs steadying / standby assist</label>
+          <label class="check-item"><input type="radio" name="mobility"> Wheelchair user — can transfer</label>
+          <label class="check-item"><input type="radio" name="mobility"> Wheelchair user — needs full transfer assist</label>
+          <label class="check-item"><input type="radio" name="mobility"> Primarily bedbound</label>
+        </div>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-group">
+        <label>Activities of Daily Living — Where is assistance needed?</label>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox"> Bathing / Showering</label>
+          <label class="check-item"><input type="checkbox"> Dressing / Grooming</label>
+          <label class="check-item"><input type="checkbox"> Toileting assistance</label>
+          <label class="check-item"><input type="checkbox"> Incontinence care</label>
+          <label class="check-item"><input type="checkbox"> Medication reminders</label>
+          <label class="check-item"><input type="checkbox"> Meal preparation</label>
+          <label class="check-item"><input type="checkbox"> Feeding assistance</label>
+          <label class="check-item"><input type="checkbox"> Light housekeeping</label>
+          <label class="check-item"><input type="checkbox"> Laundry</label>
+          <label class="check-item"><input type="checkbox"> Transportation / Errands</label>
+        </div>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-group">
+        <label>Behavioral Symptoms — Which of these occur, even occasionally?</label>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox"> Sundowning (increased confusion in the evening)</label>
+          <label class="check-item"><input type="checkbox"> Nighttime waking / sleep disruption</label>
+          <label class="check-item"><input type="checkbox"> Wandering or exit-seeking</label>
+          <label class="check-item"><input type="checkbox"> Verbal agitation or repetitive questions</label>
+          <label class="check-item"><input type="checkbox"> Physical agitation or resistance to care</label>
+          <label class="check-item"><input type="checkbox"> Hallucinations or delusions</label>
+          <label class="check-item"><input type="checkbox"> Mood changes / emotional lability</label>
+          <label class="check-item"><input type="checkbox"> Depression or withdrawal</label>
+          <label class="check-item"><input type="checkbox"> Paranoia or suspicion</label>
+          <label class="check-item"><input type="checkbox"> Refusal to accept care</label>
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-top: 28px;">
+        <label>What does a difficult moment look like — and what has helped in the past?</label>
+        <textarea style="min-height:120px;" placeholder="Describe what tends to trigger difficult moments and what approaches, words, or actions have de-escalated the situation. What works for your loved one specifically?"></textarea>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-group">
+        <label>Is there a current care plan, nursing assessment, or physician's care notes we should be aware of?</label>
+        <div class="check-grid-3">
+          <label class="check-item"><input type="radio" name="carePlan"> Yes — I can share it</label>
+          <label class="check-item"><input type="radio" name="carePlan"> Yes — in progress</label>
+          <label class="check-item"><input type="radio" name="carePlan"> No / not applicable</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Has your loved one received professional care before?</label>
+        <div class="check-grid">
+          <label class="check-item"><input type="radio" name="priorCare"> No — this would be the first time</label>
+          <label class="check-item"><input type="radio" name="priorCare"> Yes — in-home care previously</label>
+          <label class="check-item"><input type="radio" name="priorCare"> Yes — memory care facility</label>
+          <label class="check-item"><input type="radio" name="priorCare"> Yes — assisted living</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>If they've received care before — how did they respond to having a caregiver?</label>
+        <textarea placeholder="e.g. accepted it well, initially resistant but adapted, strongly resists all outside help — and any context that would help us approach the introduction thoughtfully."></textarea>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-prev" onclick="prevSection(3)">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <button class="btn-next" onclick="nextSection(3)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── SECTION 5: CAREGIVER WELLBEING ── -->
+    <div class="form-section" id="section-4">
+      <div class="section-header">
+        <div class="section-num">Section Five of Six</div>
+        <h2 class="section-title">How are <em>you</em> doing?</h2>
+        <p class="section-desc">The wellbeing of the family caregiver matters as much as everything else on this form. Please be honest — this section helps us understand what relief actually looks like for your family.</p>
+      </div>
+
+      <div class="callout">
+        <strong>This section is for you.</strong> Your answers here help us understand the full picture — not just what your loved one needs, but what you need in order to sustain the care you're providing.
+      </div>
+
+      <div class="field-group">
+        <label>How long have you been the primary caregiver?</label>
+        <select>
+          <option value="" disabled selected>Select a range</option>
+          <option>Less than 6 months</option>
+          <option>6 months to 1 year</option>
+          <option>1–2 years</option>
+          <option>3–5 years</option>
+          <option>More than 5 years</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label>On a scale of 1–10, how would you rate your current level of caregiver burnout or exhaustion?</label>
+        <div class="scale-wrap">
+          <div class="scale-item"><input type="radio" name="burnout" value="1" id="b1"><label for="b1">1</label></div>
+          <div class="scale-item"><input type="radio" name="burnout" value="2" id="b2"><label for="b2">2</label></div>
+          <div class="scale-item"><input type="radio" name="burnout" value="3" id="b3"><label for="b3">3</label></div>
+          <div class="scale-item"><input type="radio" name="burnout" value="4" id="b4"><label for="b4">4</label></div>
+          <div class="scale-item"><input type="radio" name="burnout" value="5" id="b5"><label for="b5">5</label></div>
+          <div class="scale-item"><input type="radio" name="burnout" value="6" id="b6"><label for="b6">6</label></div>
+          <div class="scale-item"><input type="radio" name="burnout" value="7" id="b7"><label for="b7">7</label></div>
+          <div class="scale-item"><input type="radio" name="burnout" value="8" id="b8"><label for="b8">8</label></div>
+          <div class="scale-item"><input type="radio" name="burnout" value="9" id="b9"><label for="b9">9</label></div>
+          <div class="scale-item"><input type="radio" name="burnout" value="10" id="b10"><label for="b10">10</label></div>
+        </div>
+        <div class="scale-labels"><span>Managing well</span><span>Deeply exhausted</span></div>
+      </div>
+
+      <div class="field-group" style="margin-top: 28px;">
+        <label>What does rest mean to you right now — what would you do with a few reliable hours?</label>
+        <textarea placeholder="Sleep, work, attend to your own health, spend time with your own family, simply exist without responsibility — there is no wrong answer here."></textarea>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-group">
+        <label>What are the biggest challenges you're currently facing as a caregiver?</label>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox"> Sleep deprivation</label>
+          <label class="check-item"><input type="checkbox"> No time for myself</label>
+          <label class="check-item"><input type="checkbox"> Managing behavioral symptoms alone</label>
+          <label class="check-item"><input type="checkbox"> Emotional weight / grief</label>
+          <label class="check-item"><input type="checkbox"> Balancing work and caregiving</label>
+          <label class="check-item"><input type="checkbox"> Managing other family members</label>
+          <label class="check-item"><input type="checkbox"> Financial stress of care costs</label>
+          <label class="check-item"><input type="checkbox"> Physical demands of caregiving</label>
+          <label class="check-item"><input type="checkbox"> Isolation / lack of support</label>
+          <label class="check-item"><input type="checkbox"> Not knowing what comes next</label>
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-top: 28px;">
+        <label>Is there anything specific you are worried about — that we should understand before our conversation?</label>
+        <textarea style="min-height:110px;" placeholder="This might be about your loved one, your own situation, something you've tried that hasn't worked, a concern about introducing a caregiver, or anything else on your mind."></textarea>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-prev" onclick="prevSection(4)">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <button class="btn-next" onclick="nextSection(4)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── SECTION 6: GETTING STARTED ── -->
+    <div class="form-section" id="section-5">
+      <div class="section-header">
+        <div class="section-num">Section Six of Six</div>
+        <h2 class="section-title">Scheduling &amp; <em>next steps</em>.</h2>
+        <p class="section-desc">A few final questions to help us prepare for your consultation and understand what you need most.</p>
+      </div>
+
+      <div class="field-group">
+        <label>Which service(s) are you most interested in? <span class="req">*</span></label>
+        <div class="check-grid" id="servicesCheck">
+          <label class="check-item"><input type="checkbox" value="respite"> Private In-Home Respite Care</label>
+          <label class="check-item"><input type="checkbox" value="overnight"> Overnight Dementia Support</label>
+          <label class="check-item"><input type="checkbox" value="companion"> Dementia Companion Care</label>
+          <label class="check-item"><input type="checkbox" value="recovery"> Post-Hospital Recovery Support</label>
+        </div>
+        <div class="field-error" id="servicesError" style="display:none;">Please select at least one service.</div>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-grid">
+        <div class="field-group">
+          <label>How soon are you hoping to begin? <span class="req">*</span></label>
+          <select id="urgency">
+            <option value="" disabled selected>Select a timeframe</option>
+            <option>Immediately / within the week</option>
+            <option>Within 2–4 weeks</option>
+            <option>Within 1–2 months</option>
+            <option>Just exploring for now</option>
+          </select>
+          <div class="field-error">Please select a timeframe.</div>
+        </div>
+        <div class="field-group">
+          <label>Approximate hours of care needed per week</label>
+          <select>
+            <option value="" disabled selected>Select a range</option>
+            <option>A few hours (under 10/week)</option>
+            <option>Part-time (10–20 hrs/week)</option>
+            <option>Full-time (20–40 hrs/week)</option>
+            <option>Overnight shifts only</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Preferred days</label>
+          <select>
+            <option value="" disabled selected>Select</option>
+            <option>Weekdays only</option>
+            <option>Weekends only</option>
+            <option>Flexible / any days</option>
+            <option>Specific days — I'll explain</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Budget comfort (approximate hourly)</label>
+          <select>
+            <option value="" disabled selected>Select a range</option>
+            <option>$25–$30/hr</option>
+            <option>$30–$36/hr</option>
+            <option>$36–$45/hr</option>
+            <option>Not sure — need guidance</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Is there anything else you'd like us to know before we speak?</label>
+        <textarea style="min-height:120px;" placeholder="Anything that didn't fit elsewhere — other caregivers involved, a recent hospitalization, a difficult week, something you want to make sure we understand going into the call."></textarea>
+      </div>
+
+      <div class="field-divider"></div>
+
+      <div class="field-group">
+        <label>How did you hear about Avelis Care?</label>
+        <select>
+          <option value="" disabled selected>Select one</option>
+          <option>Google / online search</option>
+          <option>Referred by a friend or family member</option>
+          <option>Referred by a doctor or healthcare provider</option>
+          <option>Social media</option>
+          <option>Local organization or support group</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div style="margin-top: 8px; padding: 20px 24px; background: var(--white); border: 1px solid var(--parchment);">
+        <p style="font-size: 0.82rem; color: var(--warm-gray); line-height: 1.75;">By submitting this form, you confirm that the information provided is accurate to the best of your knowledge and consent to Avelis Care using it to prepare for and conduct your private consultation. This information is held in strict confidence and will never be shared with third parties.</p>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-prev" onclick="prevSection(5)">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <button class="btn-submit" onclick="submitForm()">Submit Intake Form</button>
+      </div>
+    </div>
+
+  </div><!-- /formView -->
+
+  <!-- SUCCESS -->
+  <div id="successView">
+    <div class="success-ring">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 class="success-heading">Thank you for <em>sharing</em>.</h2>
+    <p class="success-body">We've received your intake form and will review it carefully before we speak. You can expect a call from us within one business day to schedule your private consultation. Until then — you've taken an important step.</p>
+    <a href="index.html" class="btn-return">Return to Avelis Care</a>
+  </div>
+
+</div><!-- /form-body -->
+
+<script>
+  let currentSection = 0;
+  const totalSections = 6;
+
+  function updateProgress(idx) {
+    document.querySelectorAll('.progress-step').forEach((step, i) => {
+      step.classList.remove('active', 'done');
+      if (i === idx) step.classList.add('active');
+      else if (i < idx) step.classList.add('done');
+      // Update dot text for done steps
+      step.querySelector('.step-dot').textContent = i < idx ? '✓' : (i + 1);
+    });
+  }
+
+  function showSection(idx) {
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('section-' + idx).classList.add('active');
+    updateProgress(idx);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    currentSection = idx;
+  }
+
+  function validateSection(idx) {
+    let valid = true;
+    if (idx === 0) {
+      ['contactFirst','contactLast','contactPhone','contactEmail','relationship','location'].forEach(id => {
+        const el = document.getElementById(id);
+        const group = el?.closest('.field-group');
+        if (!el?.value.trim()) {
+          group?.classList.add('has-error');
+          valid = false;
+        } else {
+          group?.classList.remove('has-error');
+        }
+      });
+      // Email format
+      const email = document.getElementById('contactEmail');
+      if (email && email.value && !email.value.includes('@')) {
+        email.closest('.field-group')?.classList.add('has-error');
+        valid = false;
+      }
+    }
+    if (idx === 1) {
+      const name = document.getElementById('clientFirst');
+      const group = name?.closest('.field-group');
+      if (!name?.value.trim()) { group?.classList.add('has-error'); valid = false; }
+      else group?.classList.remove('has-error');
+    }
+    if (idx === 5) {
+      // At least one service selected
+      const checked = document.querySelectorAll('#servicesCheck input:checked');
+      const errEl = document.getElementById('servicesError');
+      if (checked.length === 0) {
+        errEl.style.display = 'block';
+        valid = false;
+      } else {
+        errEl.style.display = 'none';
+      }
+      // Urgency
+      const urgency = document.getElementById('urgency');
+      const uGroup = urgency?.closest('.field-group');
+      if (!urgency?.value) { uGroup?.classList.add('has-error'); valid = false; }
+      else uGroup?.classList.remove('has-error');
+    }
+    return valid;
+  }
+
+  function nextSection(current) {
+    if (!validateSection(current)) return;
+    if (current < totalSections - 1) showSection(current + 1);
+  }
+
+  function prevSection(current) {
+    if (current > 0) showSection(current - 1);
+  }
+
+  const INTAKE_ENDPOINT = "https://script.google.com/macros/s/AKfycbyeLw-CHl0qQO_7v1gdEqm_eTdRWmzq5fDqlbGmGP6KcsqCW1k6F-wkIWLGdnE8ZTFA/exec";
+
+  function submitForm() {
+    if (!validateSection(5)) return;
+
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    // Collect all checked checkboxes by section
+    const getChecked = (name) => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(el => el.value).join(', ');
+    const getCheckedByGroup = (groupSelector) => [...document.querySelectorAll(`${groupSelector} input[type="checkbox"]:checked`)].map(el => el.closest('.check-item')?.textContent.trim()).join(', ');
+    const getRadioVal = (name) => document.querySelector(`input[name="${name}"]:checked`)?.value || '';
+    const getRadioText = (name) => document.querySelector(`input[name="${name}"]:checked`)?.closest('.check-item')?.textContent.trim() || '';
+    const val = (id) => document.getElementById(id)?.value?.trim() || '';
+
+    const payload = {
+      // Section 1 — Contact
+      contactName:    val('contactFirst') + ' ' + val('contactLast'),
+      phone:          val('contactPhone'),
+      email:          val('contactEmail'),
+      relationship:   val('relationship'),
+      location:       val('location'),
+
+      // Section 2 — Person in care
+      clientName:     val('clientFirst'),
+      diagnosis:      getCheckedByGroup('#diagnosisCheck'),
+      stage:          getRadioText('stage'),
+
+      // Section 5 — Burnout
+      burnout:        getRadioVal('burnout'),
+
+      // Section 6 — Services & logistics
+      services:       getCheckedByGroup('#servicesCheck'),
+      urgency:        val('urgency'),
+
+      // Full textarea notes — grab all paragraph answers
+      notes: [...document.querySelectorAll('textarea')]
+               .map(t => t.value.trim())
+               .filter(Boolean)
+               .join('\n\n---\n\n'),
+    };
+
+    fetch(INTAKE_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => showSuccess())
+    .catch(() => showSuccess()); // no-cors won't return readable response — treat completion as success
+
+    function showSuccess() {
+      document.getElementById('formView').style.display = 'none';
+      document.getElementById('successView').classList.add('show');
+      document.querySelectorAll('.progress-step').forEach(step => {
+        step.classList.remove('active', 'done');
+        step.classList.add('done');
+        step.querySelector('.step-dot').textContent = '✓';
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // Clear error on input
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('input', () => el.closest('.field-group')?.classList.remove('has-error'));
+    el.addEventListener('change', () => el.closest('.field-group')?.classList.remove('has-error'));
+  });
+</script>
+</body>
+</html>
