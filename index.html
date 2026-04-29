@@ -779,10 +779,11 @@
             <textarea id="contactMessage" placeholder="Care needs, current challenges, or simply where things stand. There is no wrong place to begin."></textarea>
           </div>
           <div class="form-submit">
-            <button type="button" id="contactBtn" onclick="submitContact()" class="btn-primary" style="width:100%;text-align:center;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;">
+            <button type="button" id="contactBtn" class="btn-primary" style="width:100%;text-align:center;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;">
               Request a Private Consultation
             </button>
           </div>
+          <p id="contactError" style="display:none;margin-top:10px;font-size:0.75rem;color:#8B3A2E;text-align:center;">Please enter your name and email before submitting.</p>
           <p style="margin-top:14px;font-size:0.72rem;color:var(--taupe);text-align:center;line-height:1.6;">Your information is held in strict confidence.</p>
         </form>
         <div id="contactSuccess" style="display:none;padding:40px 0;text-align:center;">
@@ -792,6 +793,45 @@
           <div style="font-family:var(--serif);font-size:1.6rem;font-weight:300;color:var(--deep);margin-bottom:10px;">Thank you for <em style="font-style:italic;color:var(--gold);">reaching out</em>.</div>
           <p style="font-size:0.88rem;color:var(--warm-gray);line-height:1.8;max-width:340px;margin:0 auto;">We've received your message and will be in touch within one business day.</p>
         </div>
+
+        <script>
+          document.getElementById('contactBtn').addEventListener('click', function() {
+            var name    = document.getElementById('contactName').value.trim();
+            var phone   = document.getElementById('contactPhone').value.trim();
+            var email   = document.getElementById('contactEmail').value.trim();
+            var message = document.getElementById('contactMessage').value.trim();
+            var btn     = document.getElementById('contactBtn');
+            var errEl   = document.getElementById('contactError');
+
+            if (!name || !email) {
+              errEl.style.display = 'block';
+              return;
+            }
+            errEl.style.display = 'none';
+
+            btn.textContent = 'Sending…';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+
+            var payload = JSON.stringify({ name: name, phone: phone, email: email, message: message });
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://script.google.com/macros/s/AKfycbz9fertVdWO0pQ5ivxow8LxAYsDlXabGLvwuU8t03JSFrU9brh2_43Gb4hEMTHlksnM/exec');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === 4) {
+                document.getElementById('contactForm').style.display = 'none';
+                document.getElementById('contactSuccess').style.display = 'block';
+              }
+            };
+            xhr.onerror = function() {
+              // no-cors mode — treat completion as success
+              document.getElementById('contactForm').style.display = 'none';
+              document.getElementById('contactSuccess').style.display = 'block';
+            };
+            xhr.send(payload);
+          });
+        </script>
       </div>
     </div>
   </div>
@@ -849,53 +889,6 @@
 </footer>
 
 <script>
-  const CONTACT_ENDPOINT = "https://script.google.com/macros/s/AKfycbz9fertVdWO0pQ5ivxow8LxAYsDlXabGLvwuU8t03JSFrU9brh2_43Gb4hEMTHlksnM/exec";
-
-  function submitContact() {
-    const name    = document.getElementById('contactName');
-    const phone   = document.getElementById('contactPhone');
-    const email   = document.getElementById('contactEmail');
-    const message = document.getElementById('contactMessage');
-    const btn     = document.getElementById('contactBtn');
-
-    // Basic validation — name and either phone or email required
-    let valid = true;
-    [name, email].forEach(el => {
-      if (!el.value.trim()) {
-        el.style.borderColor = '#8B3A2E';
-        valid = false;
-      } else {
-        el.style.borderColor = '';
-      }
-    });
-    if (!valid) return;
-
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-    btn.style.opacity = '0.7';
-
-    const payload = {
-      name:    name.value.trim(),
-      phone:   phone.value.trim(),
-      email:   email.value.trim(),
-      message: message.value.trim(),
-    };
-
-    fetch(CONTACT_ENDPOINT, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-    .then(() => showContactSuccess())
-    .catch(() => showContactSuccess());
-
-    function showContactSuccess() {
-      document.getElementById('contactForm').style.display = 'none';
-      document.getElementById('contactSuccess').style.display = 'block';
-    }
-  }
-
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
   const obs = new IntersectionObserver(entries => {
