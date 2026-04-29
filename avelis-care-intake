@@ -449,7 +449,262 @@
   }
   .btn-return:hover { background: var(--gold); }
 
-  /* ── PRINT STYLES ── */
+  /* ── LANDING PAGE ── */
+  #landing {
+    display: block;
+  }
+  #landing.hidden { display: none; }
+
+  .landing-hero {
+    min-height: 100vh;
+    background: var(--deep);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding-top: 90px;
+  }
+  .landing-ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(160,124,58,0.1);
+  }
+  .landing-ring-1 { width: 700px; height: 700px; right: -180px; top: -180px; }
+  .landing-ring-2 { width: 480px; height: 480px; right: -60px; top: -60px; border-color: rgba(160,124,58,0.06); }
+  .landing-ring-3 { width: 260px; height: 260px; right: 80px; top: 80px; border-color: rgba(160,124,58,0.08); }
+  .landing-ring-4 { width: 600px; height: 600px; left: -200px; bottom: -200px; border-color: rgba(160,124,58,0.04); }
+
+  .landing-hero-inner {
+    position: relative;
+    max-width: 1200px; margin: 0 auto;
+    padding: 80px 60px 100px;
+    display: grid; grid-template-columns: 6fr 4fr; gap: 80px; align-items: center;
+  }
+  .landing-eyebrow {
+    font-size: 0.64rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .landing-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+  .landing-heading {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+    font-weight: 300;
+    line-height: 1.14;
+    color: var(--white);
+    margin-bottom: 28px;
+    letter-spacing: -0.015em;
+  }
+  .landing-heading em { font-style: italic; color: var(--gold); }
+  .landing-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.52);
+    line-height: 1.85;
+    max-width: 500px;
+    margin-bottom: 48px;
+  }
+  .btn-begin {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--gold);
+    text-decoration: none;
+    padding: 18px 44px;
+    border: none; cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-begin:hover { background: var(--charcoal); }
+  .btn-begin-ghost {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+    background: none; border-top: none; border-left: none; border-right: none;
+    cursor: pointer;
+  }
+  .btn-begin-ghost:hover { color: var(--white); border-bottom-color: var(--white); }
+
+  .landing-right-panel {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .landing-stat {
+    padding: 24px 30px;
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid var(--gold);
+  }
+  .landing-stat-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .landing-stat-value {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  /* ABOUT THIS FORM */
+  .landing-about {
+    background: var(--white);
+    padding: 100px 0;
+  }
+  .landing-about-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start;
+  }
+  .landing-about-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .landing-about-label::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+  .landing-about-heading {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+    font-weight: 300;
+    line-height: 1.22;
+    color: var(--deep);
+    margin-bottom: 28px;
+  }
+  .landing-about-heading em { font-style: italic; color: var(--gold); }
+  .landing-about-divider { width: 44px; height: 1px; background: var(--gold); margin-bottom: 28px; }
+  .landing-about-body {
+    font-size: 0.97rem;
+    color: var(--warm-gray);
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+  .landing-sections-list { list-style: none; margin-top: 8px; }
+  .landing-sections-list li {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--parchment);
+    font-size: 0.92rem;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+  .landing-sections-list li:first-child { padding-top: 0; }
+  .landing-section-num {
+    font-family: var(--serif);
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--gold);
+    min-width: 28px;
+    padding-top: 2px;
+  }
+  .landing-section-name {
+    font-weight: 400;
+    color: var(--charcoal);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* REASSURANCE STRIP */
+  .landing-reassurance {
+    background: var(--cream);
+    padding: 80px 0;
+    border-top: 1px solid var(--parchment);
+  }
+  .landing-reassurance-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 60px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .reassurance-item {
+    padding: 40px 36px;
+    background: var(--white);
+    border-top: 2px solid transparent;
+    transition: border-color 0.25s;
+  }
+  .reassurance-item:hover { border-top-color: var(--gold); }
+  .reassurance-icon {
+    width: 32px; height: 32px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .reassurance-icon svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; }
+  .reassurance-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+  }
+  .reassurance-body {
+    font-size: 0.9rem;
+    color: var(--warm-gray);
+    line-height: 1.78;
+  }
+
+  /* CTA INTO FORM */
+  .landing-cta {
+    background: var(--parchment);
+    padding: 100px 0;
+  }
+  .landing-cta-inner {
+    max-width: 900px; margin: 0 auto; padding: 0 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .landing-cta-heading {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
+    font-weight: 300;
+    color: var(--deep);
+    line-height: 1.22;
+    margin-bottom: 16px;
+  }
+  .landing-cta-heading em { font-style: italic; color: var(--gold); }
+  .landing-cta-body {
+    font-size: 0.95rem;
+    color: var(--warm-gray);
+    line-height: 1.85;
+  }
+  .landing-cta-right {
+    display: flex; flex-direction: column; gap: 16px; align-items: flex-start;
+  }
+  .landing-time-note {
+    font-size: 0.8rem;
+    color: var(--taupe);
+    line-height: 1.6;
+    padding: 14px 18px;
+    background: var(--white);
+    border-left: 2px solid var(--gold);
+  }
+
+  /* FORM WRAPPER — hidden until begin */
+  #formWrapper {
+    display: none;
+  }
+  #formWrapper.visible { display: block; }
+
+  @media (max-width: 800px) {
+    .landing-hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 60px 28px 80px; }
+    .landing-right-panel { display: none; }
+    .landing-about-inner { grid-template-columns: 1fr; gap: 48px; padding: 0 28px; }
+    .landing-about { padding: 72px 0; }
+    .landing-reassurance-inner { grid-template-columns: 1fr; gap: 2px; padding: 0 28px; }
+    .landing-reassurance { padding: 60px 0; }
+    .landing-cta-inner { grid-template-columns: 1fr; gap: 40px; padding: 0 28px; }
+    .landing-cta { padding: 72px 0; }
+  }
   @media print {
     header, .progress-bar-wrap, .form-nav { display: none !important; }
     .form-section { display: block !important; page-break-inside: avoid; }
@@ -474,17 +729,177 @@
 
 <header>
   <a href="index.html" class="logo">Avelis<span>.</span></a>
-  <div class="header-label">Client Intake Form — Confidential</div>
+  <div class="header-label">Client Intake — Confidential</div>
   <a href="index.html" class="header-back">Return to Site</a>
 </header>
 
-<div class="form-hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Private & Confidential</div>
-    <h1 class="hero-heading">Before your consultation,<br>help us <em>understand</em> your situation.</h1>
-    <p class="hero-sub">This form helps us arrive at our first conversation fully prepared — so we can focus on your family rather than logistics. Take your time. There are no wrong answers.</p>
+<!-- ── LANDING PAGE ── -->
+<div id="landing">
+
+  <!-- HERO -->
+  <div class="landing-hero">
+    <div class="landing-ring landing-ring-1"></div>
+    <div class="landing-ring landing-ring-2"></div>
+    <div class="landing-ring landing-ring-3"></div>
+    <div class="landing-ring landing-ring-4"></div>
+    <div class="landing-hero-inner">
+      <div>
+        <div class="landing-eyebrow">Private &amp; Confidential · Avelis Care</div>
+        <h1 class="landing-heading">
+          Before we meet,<br>help us <em>know</em><br>your family.
+        </h1>
+        <p class="landing-sub">
+          This form is shared privately after your first conversation with us. It takes about 15 minutes and gives our team everything we need to arrive at your consultation fully prepared — focused on you, not logistics.
+        </p>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
+          <button class="btn-begin" onclick="beginForm()">Begin the Intake Form</button>
+          <button class="btn-begin-ghost" onclick="scrollToAbout()">What to expect →</button>
+        </div>
+      </div>
+      <div class="landing-right-panel">
+        <div class="landing-stat">
+          <div class="landing-stat-label">Time to complete</div>
+          <div class="landing-stat-value">About 15 minutes</div>
+        </div>
+        <div class="landing-stat">
+          <div class="landing-stat-label">Sections</div>
+          <div class="landing-stat-value">Six — save and return any time</div>
+        </div>
+        <div class="landing-stat">
+          <div class="landing-stat-label">Confidentiality</div>
+          <div class="landing-stat-value">Strictly private — never shared</div>
+        </div>
+        <div class="landing-stat">
+          <div class="landing-stat-label">Required fields</div>
+          <div class="landing-stat-value">Only the essentials — answer what you can</div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+
+  <!-- ABOUT THIS FORM -->
+  <div class="landing-about" id="aboutSection">
+    <div class="landing-about-inner">
+      <div>
+        <div class="landing-about-label">Why This Form Exists</div>
+        <h2 class="landing-about-heading">
+          Care that fits requires<br>understanding that goes<br><em>beyond the diagnosis</em>.
+        </h2>
+        <div class="landing-about-divider"></div>
+        <p class="landing-about-body">
+          Every family navigating dementia has a different story. The person in your care has a history, a personality, preferences, and a particular way of experiencing the world — and none of that appears in a medical record.
+        </p>
+        <p class="landing-about-body">
+          This form is how we learn who they are. It shapes who we match with your family, how we prepare your caregiver, and how we approach the first visit. The more you share, the more precisely we can care.
+        </p>
+        <p class="landing-about-body" style="color:var(--charcoal);font-style:italic;">
+          Take your time. There are no wrong answers — only honest ones.
+        </p>
+      </div>
+      <div>
+        <div class="landing-about-label" style="margin-bottom:24px;">What the Form Covers</div>
+        <ul class="landing-sections-list">
+          <li>
+            <span class="landing-section-num">01</span>
+            <div>
+              <span class="landing-section-name">Your Family</span>
+              Contact details, your relationship to the person in care, and who else is involved in decisions.
+            </div>
+          </li>
+          <li>
+            <span class="landing-section-num">02</span>
+            <div>
+              <span class="landing-section-name">The Person in Care</span>
+              Their name, diagnosis, stage, medical history, and current medications.
+            </div>
+          </li>
+          <li>
+            <span class="landing-section-num">03</span>
+            <div>
+              <span class="landing-section-name">Daily Life &amp; Routine</span>
+              Who they are as a person — their history, interests, comforts, and what a good day looks like.
+            </div>
+          </li>
+          <li>
+            <span class="landing-section-num">04</span>
+            <div>
+              <span class="landing-section-name">Care Needs</span>
+              Mobility, daily assistance required, behavioral patterns, and what has worked — or hasn't.
+            </div>
+          </li>
+          <li>
+            <span class="landing-section-num">05</span>
+            <div>
+              <span class="landing-section-name">Caregiver Wellbeing</span>
+              How you are doing — honestly. Your experience of caregiving matters as much as everything else.
+            </div>
+          </li>
+          <li>
+            <span class="landing-section-num">06</span>
+            <div>
+              <span class="landing-section-name">Getting Started</span>
+              Which services, urgency, schedule, and anything else we should know before we speak.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- REASSURANCE -->
+  <div class="landing-reassurance">
+    <div class="landing-reassurance-inner">
+      <div class="reassurance-item">
+        <div class="reassurance-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="reassurance-title">Strictly Confidential</div>
+        <div class="reassurance-body">Your responses are held privately within Avelis Care and will never be shared with third parties under any circumstances.</div>
+      </div>
+      <div class="reassurance-item">
+        <div class="reassurance-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="reassurance-title">Answer What You Can</div>
+        <div class="reassurance-body">Only essential fields are required. If you don't know something or aren't ready to answer a question, simply leave it — we can fill in the gaps together.</div>
+      </div>
+      <div class="reassurance-item">
+        <div class="reassurance-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="reassurance-title">This Is for Your Family</div>
+        <div class="reassurance-body">Every answer you give makes the care we provide more personal, more fitting, and more genuinely useful. This is not paperwork — it is preparation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="landing-cta">
+    <div class="landing-cta-inner">
+      <div>
+        <h2 class="landing-cta-heading">
+          Ready to begin<br>when you <em>are</em>.
+        </h2>
+        <p class="landing-cta-body">
+          There is no rush. Complete the form at your own pace — in one sitting or across a few days. When you're ready, we'll be here.
+        </p>
+      </div>
+      <div class="landing-cta-right">
+        <div class="landing-time-note">
+          Most families complete this form in 10–20 minutes. The sections that take the longest are the ones that matter most — and we read every word.
+        </div>
+        <button class="btn-begin" onclick="beginForm()" style="font-family:var(--sans);">Begin the Intake Form →</button>
+        <a href="index.html" style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--taupe);text-decoration:none;border-bottom:1px solid var(--parchment);padding-bottom:2px;">Return to Avelis Care</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /landing -->
+
+<!-- ── FORM WRAPPER ── -->
+<div id="formWrapper">
+
+<div class="form-hero" style="display:none;"></div>
 
 <div class="progress-bar-wrap">
   <div class="progress-steps" id="progressSteps">
@@ -498,7 +913,7 @@
     </div>
     <div class="progress-step" data-step="2">
       <div class="step-dot">3</div>
-      <span>Daily Life & Routine</span>
+      <span>Daily Life &amp; Routine</span>
     </div>
     <div class="progress-step" data-step="3">
       <div class="step-dot">4</div>
@@ -1072,8 +1487,19 @@
   </div>
 
 </div><!-- /form-body -->
+</div><!-- /formWrapper -->
 
 <script>
+  // ── LANDING ──
+  function beginForm() {
+    document.getElementById('landing').classList.add('hidden');
+    document.getElementById('formWrapper').classList.add('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function scrollToAbout() {
+    document.getElementById('aboutSection').scrollIntoView({ behavior: 'smooth' });
+  }
   let currentSection = 0;
   const totalSections = 6;
 
