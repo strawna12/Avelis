@@ -1146,25 +1146,79 @@
         <div class="completion-ring completion-ring-1"></div>
         <div class="completion-ring completion-ring-2"></div>
         <div class="completion-content">
-          <div class="completion-seal">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+
+          <!-- PRE-SUBMIT: collect info -->
+          <div id="completionForm">
+            <div class="completion-seal">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2 class="completion-heading">
+              Training <em>complete</em>.<br>One last step.
+            </h2>
+            <p class="completion-body">
+              Please confirm your details below so we can log your completion and ensure your training pay is included in your first check.
+            </p>
+            <div class="completion-divider"></div>
+
+            <!-- Form fields -->
+            <div style="text-align:left; margin-bottom:32px;">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px 28px; margin-bottom:20px;">
+                <div>
+                  <label style="display:block; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--taupe); margin-bottom:8px;">First Name <span style="color:var(--gold);">*</span></label>
+                  <input type="text" id="ob-first" placeholder="Your first name" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(255,255,255,0.15); padding:11px 0; font-family:var(--sans); font-size:0.92rem; color:var(--white); outline:none; transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+                </div>
+                <div>
+                  <label style="display:block; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--taupe); margin-bottom:8px;">Last Name <span style="color:var(--gold);">*</span></label>
+                  <input type="text" id="ob-last" placeholder="Your last name" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(255,255,255,0.15); padding:11px 0; font-family:var(--sans); font-size:0.92rem; color:var(--white); outline:none; transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+                </div>
+                <div>
+                  <label style="display:block; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--taupe); margin-bottom:8px;">Email Address <span style="color:var(--gold);">*</span></label>
+                  <input type="email" id="ob-email" placeholder="your@email.com" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(255,255,255,0.15); padding:11px 0; font-family:var(--sans); font-size:0.92rem; color:var(--white); outline:none; transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+                </div>
+                <div>
+                  <label style="display:block; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--taupe); margin-bottom:8px;">Phone Number</label>
+                  <input type="tel" id="ob-phone" placeholder="(727) 000-0000" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(255,255,255,0.15); padding:11px 0; font-family:var(--sans); font-size:0.92rem; color:var(--white); outline:none; transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+                </div>
+              </div>
+
+              <!-- Acknowledgment checkbox -->
+              <div style="display:flex; align-items:flex-start; gap:14px; padding:20px; background:rgba(160,124,58,0.08); border:1px solid rgba(160,124,58,0.2); margin-bottom:8px;">
+                <input type="checkbox" id="ob-ack" style="width:16px; height:16px; min-width:16px; margin-top:3px; accent-color:var(--gold); cursor:pointer;">
+                <label for="ob-ack" style="font-size:0.84rem; color:rgba(255,255,255,0.5); line-height:1.7; cursor:pointer; text-transform:none; letter-spacing:0; display:block; margin:0;">
+                  I confirm that I have completed the Avelis Care caregiver onboarding training in full. I understand and agree to uphold the Avelis Standard in every shift I accept.
+                </label>
+              </div>
+              <p id="ob-error" style="display:none; font-size:0.74rem; color:#C47A5A; margin-top:8px; text-align:left;">Please fill in your name and email, and check the acknowledgment box.</p>
+            </div>
+
+            <button onclick="submitOnboarding()" id="ob-btn" class="btn-complete" style="border:none; cursor:pointer; font-family:var(--sans);">
+              Submit &amp; Complete Onboarding
+            </button>
           </div>
-          <h2 class="completion-heading">
-            Onboarding <em>complete</em>.<br>Welcome to Avelis.
-          </h2>
-          <p class="completion-body">
-            You have completed the Avelis caregiver onboarding. You now carry the foundation of what it means to work at this standard — and we are honored to have you on this team.
-          </p>
-          <div class="completion-divider"></div>
-          <div class="completion-note">
-            <strong>Regarding Your Training Pay</strong>
-            Compensation for completing this onboarding will be included in your first paycheck following the completion of your first assigned shift. No additional action is required on your part — we have your record of completion.
+
+          <!-- POST-SUBMIT: success -->
+          <div id="completionSuccess" style="display:none;">
+            <div class="completion-seal">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2 class="completion-heading">
+              Onboarding <em>complete</em>.<br>Welcome to Avelis.
+            </h2>
+            <p class="completion-body">
+              Your completion has been recorded. You are now ready for your first placement — and we are glad to have you on this team.
+            </p>
+            <div class="completion-divider"></div>
+            <div class="completion-note">
+              <strong>Regarding Your Training Pay</strong>
+              Compensation for completing this onboarding will be included in your first paycheck following the completion of your first assigned shift. No additional action is required.
+            </div>
+            <div class="completion-note">
+              <strong>Your Next Steps</strong>
+              Avelis will be in touch to discuss your first placement. If you have any questions in the meantime — reach out directly. You are not on your own here.
+            </div>
+            <a href="index.html" class="btn-complete">Return to Avelis Care</a>
           </div>
-          <div class="completion-note">
-            <strong>Your Next Steps</strong>
-            Avelis will be in touch to discuss your first placement. In the meantime, if you have questions about your assignment, compensation, or anything else — reach out directly. You are not on your own here.
-          </div>
-          <a href="index.html" class="btn-complete">Return to Avelis Care</a>
+
         </div>
       </div>
     </div>
@@ -1173,6 +1227,43 @@
 </div>
 
 <script>
+  const ONBOARDING_ENDPOINT = "https://script.google.com/macros/s/AKfycbxruEyKn0ny7swv3C8Sp2rgCxlxss4YwTe25dd6f852kkQPsMjAhdkkew7jZv5kWQuS/exec";
+
+  function submitOnboarding() {
+    const firstName = document.getElementById('ob-first').value.trim();
+    const lastName  = document.getElementById('ob-last').value.trim();
+    const email     = document.getElementById('ob-email').value.trim();
+    const phone     = document.getElementById('ob-phone').value.trim();
+    const ack       = document.getElementById('ob-ack').checked;
+    const errEl     = document.getElementById('ob-error');
+    const btn       = document.getElementById('ob-btn');
+
+    if (!firstName || !lastName || !email || !ack) {
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', ONBOARDING_ENDPOINT);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) { showSuccess(); }
+    };
+    xhr.onerror = function() { showSuccess(); };
+    xhr.send(JSON.stringify({ firstName: firstName, lastName: lastName, email: email, phone: phone }));
+
+    function showSuccess() {
+      document.getElementById('completionForm').style.display = 'none';
+      document.getElementById('completionSuccess').style.display = 'block';
+      completed.add('done');
+      updateProgress();
+    }
+  }
   // Track state
   const completed = new Set();
   const quizAnswers = {};
