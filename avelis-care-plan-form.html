@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Care Plan — Avelis Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F0EBE1; --parchment: #DDD5C8; --taupe: #A89880;
+    --warm-gray: #5C5248; --charcoal: #1E1A16; --deep: #0F0D0A;
+    --gold: #A07C3A; --gold-light: #C49A52; --white: #FAF7F2;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--charcoal); font-family: var(--sans); font-weight: 400; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 22px 60px; background: rgba(240,235,225,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid var(--parchment); }
+  .nav-logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; letter-spacing: 0.06em; color: var(--charcoal); text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); }
+  .nav-back { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(160,124,58,0.4); padding-bottom: 2px; transition: color 0.2s; }
+  .nav-back:hover { color: var(--charcoal); }
+
+  /* HERO */
+  .form-hero { background: var(--deep); padding: 110px 60px 80px; position: relative; overflow: hidden; }
+  .hero-ring { position: absolute; border-radius: 50%; }
+  .hero-ring-1 { width: 500px; height: 500px; right: -100px; top: -100px; border: 1px solid rgba(160,124,58,0.08); }
+  .hero-ring-2 { width: 320px; height: 320px; right: 20px; top: 20px; border: 1px solid rgba(160,124,58,0.05); }
+  .hero-inner { position: relative; max-width: 900px; }
+  .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+  .hero-eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+  .hero-heading { font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.16; color: var(--white); margin-bottom: 16px; letter-spacing: -0.01em; }
+  .hero-heading em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-size: 0.95rem; color: rgba(255,255,255,0.45); line-height: 1.85; max-width: 580px; }
+
+  /* PROGRESS */
+  .progress-wrap { background: var(--charcoal); padding: 0 60px; border-bottom: 1px solid rgba(255,255,255,0.06); position: sticky; top: 66px; z-index: 90; }
+  .progress-steps { display: flex; max-width: 900px; overflow-x: auto; }
+  .progress-step { flex-shrink: 0; padding: 16px 0 14px; margin-right: 28px; border-bottom: 2px solid transparent; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.22); cursor: pointer; transition: color 0.2s, border-color 0.2s; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .progress-step:hover { color: rgba(255,255,255,0.5); }
+  .progress-step.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .progress-step.done { color: rgba(255,255,255,0.38); border-bottom-color: rgba(255,255,255,0.12); }
+  .step-dot { width: 16px; height: 16px; border: 1px solid currentColor; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.5rem; flex-shrink: 0; }
+  .progress-step.active .step-dot { background: var(--gold); border-color: var(--gold); color: var(--white); }
+
+  /* FORM BODY */
+  .form-body { padding: 56px 60px 100px; }
+  .form-section { display: none; animation: fadeIn 0.35s ease; }
+  .form-section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* SECTION HEADER */
+  .sec-header { margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--parchment); }
+  .sec-num { font-family: var(--serif); font-size: 0.7rem; font-style: italic; color: var(--taupe); margin-bottom: 6px; }
+  .sec-title { font-family: var(--serif); font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 300; color: var(--deep); line-height: 1.2; }
+  .sec-title em { font-style: italic; color: var(--gold); }
+  .sec-desc { margin-top: 8px; font-size: 0.88rem; color: var(--warm-gray); line-height: 1.75; }
+
+  /* FIELDS */
+  .field-group { margin-bottom: 26px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 40px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px 32px; }
+  .field-full { grid-column: 1 / -1; }
+  label.field-label { display: block; font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--warm-gray); margin-bottom: 7px; }
+  input[type="text"], input[type="date"], input[type="tel"], input[type="email"], select, textarea {
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--taupe);
+    padding: 11px 0; font-family: var(--sans); font-size: 0.92rem; color: var(--charcoal);
+    outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+  input::placeholder, textarea::placeholder { color: var(--taupe); font-style: italic; }
+  textarea { resize: vertical; min-height: 100px; }
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%235C5248' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 6px center; padding-right: 24px;
+  }
+
+  /* CHECKBOXES */
+  .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .check-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .check-item { display: flex; align-items: flex-start; gap: 11px; padding: 11px 0; border-bottom: 1px solid var(--parchment); cursor: pointer; font-size: 0.88rem; color: var(--warm-gray); line-height: 1.5; }
+  .check-item:last-child { border-bottom: none; }
+  .check-item input[type="checkbox"], .check-item input[type="radio"] {
+    width: 15px; height: 15px; min-width: 15px; border: 1px solid var(--taupe); border-bottom-width: 1px;
+    background: transparent; padding: 0; margin-top: 2px; cursor: pointer; accent-color: var(--gold);
+  }
+  .check-item:hover input { border-color: var(--gold); }
+
+  /* CALLOUT */
+  .callout { padding: 20px 24px; background: var(--white); border-left: 2px solid var(--gold); margin: 24px 0 32px; font-size: 0.88rem; color: var(--warm-gray); line-height: 1.78; }
+  .callout strong { color: var(--charcoal); }
+
+  /* DIVIDER */
+  .field-divider { width: 40px; height: 1px; background: var(--gold); margin: 32px 0; opacity: 0.5; }
+
+  /* LAYOUT */
+  .page-layout { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 66px); margin-top: 66px; }
+
+  /* SIDEBAR NAV */
+  .sidebar-nav {
+    position: sticky;
+    top: 66px;
+    height: calc(100vh - 66px);
+    overflow-y: auto;
+    background: var(--charcoal);
+    border-right: 1px solid rgba(255,255,255,0.06);
+    padding: 28px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    padding: 0 24px 12px;
+  }
+  .sidebar-progress-wrap {
+    padding: 0 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 16px;
+  }
+  .sidebar-progress-bar {
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 1px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+  .sidebar-progress-fill {
+    height: 100%;
+    background: var(--gold);
+    width: 0%;
+    transition: width 0.4s ease;
+    border-radius: 1px;
+  }
+  .sidebar-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+  .nav-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 24px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav-step:hover { background: rgba(255,255,255,0.04); }
+  .nav-step.active { background: rgba(160,124,58,0.1); border-left-color: var(--gold); }
+  .nav-step.done { opacity: 0.55; }
+  .nav-step.done:hover { opacity: 1; }
+  .nav-dot {
+    width: 18px; height: 18px; min-width: 18px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.5rem;
+    color: rgba(255,255,255,0.3);
+    transition: all 0.25s;
+    flex-shrink: 0;
+  }
+  .nav-step.active .nav-dot { background: var(--gold); border-color: var(--gold); color: var(--white); }
+  .nav-step.done .nav-dot { background: rgba(74,103,65,0.5); border-color: #4A6741; color: var(--white); }
+  .nav-step-text {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.3;
+    transition: color 0.2s;
+  }
+  .nav-step.active .nav-step-text { color: var(--white); }
+  .nav-step-sub {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.2);
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* NAV BUTTONS */
+  .form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 52px; padding-top: 28px; border-top: 1px solid var(--parchment); }
+  .btn-next { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--charcoal); border: none; padding: 16px 40px; cursor: pointer; transition: background 0.3s; }
+  .btn-next:hover { background: var(--gold); }
+  .btn-prev { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--warm-gray); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: color 0.2s; padding: 0; }
+  .btn-prev:hover { color: var(--charcoal); }
+  .btn-prev svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
+  .btn-submit { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--gold); border: none; padding: 16px 44px; cursor: pointer; transition: background 0.3s; }
+  .btn-submit:hover { background: var(--charcoal); }
+
+  /* SUCCESS */
+  #successView { display: none; text-align: center; padding: 80px 40px; animation: fadeIn 0.5s ease; }
+  #successView.show { display: block; }
+  .success-ring { width: 64px; height: 64px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+  .success-ring svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .success-heading { font-family: var(--serif); font-size: 2.2rem; font-weight: 300; color: var(--deep); margin-bottom: 12px; }
+  .success-heading em { font-style: italic; color: var(--gold); }
+  .success-body { font-size: 0.92rem; color: var(--warm-gray); line-height: 1.85; max-width: 460px; margin: 0 auto 36px; }
+  .btn-return { display: inline-block; font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--charcoal); text-decoration: none; padding: 16px 40px; transition: background 0.3s; }
+  .btn-return:hover { background: var(--gold); }
+
+  /* ERROR */
+  .field-error-msg { font-size: 0.7rem; color: #8B3A2E; margin-top: 5px; display: none; }
+  .has-error input, .has-error select, .has-error textarea { border-color: #8B3A2E; }
+  .has-error .field-error-msg { display: block; }
+
+  @media (max-width: 800px) {
+    nav { padding: 16px 24px; }
+    .form-hero { padding: 90px 24px 60px; }
+    .page-layout { grid-template-columns: 1fr; }
+    .sidebar-nav { position: static; height: auto; flex-direction: row; flex-wrap: wrap; padding: 12px 16px; gap: 4px; }
+    .sidebar-progress-wrap { display: none; }
+    .sidebar-label { display: none; }
+    .nav-step { padding: 8px 12px; border-left: none; border-bottom: 2px solid transparent; }
+    .nav-step.active { border-left: none; border-bottom-color: var(--gold); }
+    .nav-step-sub { display: none; }
+    .form-body { padding: 40px 24px 80px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .check-grid, .check-grid-3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Avelis<span>.</span></a>
+  <div class="nav-label">Client Care Plan · Clinician Use Only</div>
+  <a href="index.html" class="nav-back">← Return to Site</a>
+</nav>
+
+<div class="form-hero">
+  <div class="hero-ring hero-ring-1"></div>
+  <div class="hero-ring hero-ring-2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Clinician Use Only · Private & Confidential</div>
+    <h1 class="hero-heading">Client Care Plan —<br><em>complete after assessment</em>.</h1>
+    <p class="hero-sub">Complete this form following your in-home assessment and family consultation. It will be stored securely and shared with the assigned caregiver before their first visit.</p>
+  </div>
+</div>
+
+<div class="page-layout">
+
+<!-- STACKED SIDEBAR NAV -->
+<aside class="sidebar-nav" id="sidebarNav">
+  <div class="sidebar-progress-wrap">
+    <div class="sidebar-progress-label">
+      <span>Progress</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="sidebar-progress-bar">
+      <div class="sidebar-progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div class="nav-step active" data-step="0" onclick="showSec(0)">
+    <div class="nav-dot" id="dot-0">1</div>
+    <div><div class="nav-step-text">Client ID</div><span class="nav-step-sub">Name, contacts, physicians</span></div>
+  </div>
+  <div class="nav-step" data-step="1" onclick="showSec(1)">
+    <div class="nav-dot" id="dot-1">2</div>
+    <div><div class="nav-step-text">Diagnosis</div><span class="nav-step-sub">Condition, stage, medications</span></div>
+  </div>
+  <div class="nav-step" data-step="2" onclick="showSec(2)">
+    <div class="nav-dot" id="dot-2">3</div>
+    <div><div class="nav-step-text">Who They Are</div><span class="nav-step-sub">History, personality, joys</span></div>
+  </div>
+  <div class="nav-step" data-step="3" onclick="showSec(3)">
+    <div class="nav-dot" id="dot-3">4</div>
+    <div><div class="nav-step-text">Daily Routine</div><span class="nav-step-sub">Schedule, diet, meals</span></div>
+  </div>
+  <div class="nav-step" data-step="4" onclick="showSec(4)">
+    <div class="nav-dot" id="dot-4">5</div>
+    <div><div class="nav-step-text">Mobility & Care</div><span class="nav-step-sub">ADLs, safety, equipment</span></div>
+  </div>
+  <div class="nav-step" data-step="5" onclick="showSec(5)">
+    <div class="nav-dot" id="dot-5">6</div>
+    <div><div class="nav-step-text">Behavioral Profile</div><span class="nav-step-sub">Triggers, de-escalation</span></div>
+  </div>
+  <div class="nav-step" data-step="6" onclick="showSec(6)">
+    <div class="nav-dot" id="dot-6">7</div>
+    <div><div class="nav-step-text">Emergency</div><span class="nav-step-sub">Contacts, protocols</span></div>
+  </div>
+  <div class="nav-step" data-step="7" onclick="showSec(7)">
+    <div class="nav-dot" id="dot-7">8</div>
+    <div><div class="nav-step-text">Caregiver Notes</div><span class="nav-step-sub">Instructions, household</span></div>
+  </div>
+  <div class="nav-step" data-step="8" onclick="showSec(8)">
+    <div class="nav-dot" id="dot-8">9</div>
+    <div><div class="nav-step-text">Authorization</div><span class="nav-step-sub">Sign-off & submit</span></div>
+  </div>
+</aside>
+
+<!-- FORM CONTENT -->
+<div class="form-content">
+<div class="form-body">
+<div id="formView">
+
+<!-- ── SECTION 1: CLIENT IDENTIFICATION ── -->
+<div class="form-section active" id="sec-0">
+  <div class="sec-header">
+    <div class="sec-num">Section 01 of 09</div>
+    <h2 class="sec-title">Client <em>Identification</em>.</h2>
+    <p class="sec-desc">Basic identifying information for the person receiving care, and the primary family contacts.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Client Full Name <span style="color:var(--gold)">*</span></label>
+      <input type="text" id="clientName" placeholder="Legal name">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Preferred Name / Goes By</label>
+      <input type="text" id="preferredName" placeholder="What they like to be called">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Date of Birth <span style="color:var(--gold)">*</span></label>
+      <input type="date" id="dob">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Gender</label>
+      <select id="gender">
+        <option value="" disabled selected>Select</option>
+        <option>Male</option><option>Female</option>
+        <option>Prefer not to say</option><option>Other</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Primary Language</label>
+      <input type="text" id="language" placeholder="e.g. English, Spanish">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Secondary Language / Dialect</label>
+      <input type="text" id="language2" placeholder="">
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Home Address — Where Care Will Be Provided <span style="color:var(--gold)">*</span></label>
+    <input type="text" id="address" placeholder="Full address">
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Primary Contact Name <span style="color:var(--gold)">*</span></label>
+      <input type="text" id="contactName" placeholder="Full name">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Relationship to Client</label>
+      <select id="contactRel">
+        <option value="" disabled selected>Select</option>
+        <option>Spouse / Partner</option><option>Adult Child</option>
+        <option>Sibling</option><option>Legal Guardian / POA</option>
+        <option>Other Family</option><option>Other</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Primary Contact Phone <span style="color:var(--gold)">*</span></label>
+      <input type="tel" id="contactPhone" placeholder="(727) 000-0000">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Primary Contact Email</label>
+      <input type="email" id="contactEmail" placeholder="email@address.com">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Secondary Contact Name</label>
+      <input type="text" id="contact2Name" placeholder="">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Secondary Contact Phone</label>
+      <input type="tel" id="contact2Phone" placeholder="">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Primary Physician</label>
+      <input type="text" id="physician" placeholder="Name and practice">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Physician Phone</label>
+      <input type="tel" id="physicianPhone" placeholder="">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Neurologist / Specialist</label>
+      <input type="text" id="specialist" placeholder="Name and specialty">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Specialist Phone</label>
+      <input type="tel" id="specialistPhone" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-nav">
+    <div></div>
+    <button class="btn-next" onclick="nextSec(0)">Continue →</button>
+  </div>
+</div>
+
+<!-- ── SECTION 2: DIAGNOSIS ── -->
+<div class="form-section" id="sec-1">
+  <div class="sec-header">
+    <div class="sec-num">Section 02 of 09</div>
+    <h2 class="sec-title">Diagnosis &amp; <em>Medical History</em>.</h2>
+    <p class="sec-desc">Clinical diagnosis, stage, secondary conditions, medications, and relevant medical context.</p>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Primary Diagnosis <span style="color:var(--gold)">*</span></label>
+    <div class="check-grid">
+      <label class="check-item"><input type="checkbox" name="dx" value="Alzheimer's Disease"> Alzheimer's Disease</label>
+      <label class="check-item"><input type="checkbox" name="dx" value="Vascular Dementia"> Vascular Dementia</label>
+      <label class="check-item"><input type="checkbox" name="dx" value="Lewy Body Dementia"> Lewy Body Dementia</label>
+      <label class="check-item"><input type="checkbox" name="dx" value="Frontotemporal Dementia"> Frontotemporal Dementia</label>
+      <label class="check-item"><input type="checkbox" name="dx" value="Mixed Dementia"> Mixed Dementia</label>
+      <label class="check-item"><input type="checkbox" name="dx" value="Mild Cognitive Impairment"> Mild Cognitive Impairment (MCI)</label>
+      <label class="check-item"><input type="checkbox" name="dx" value="Parkinson's with Dementia"> Parkinson's with Dementia</label>
+      <label class="check-item"><input type="checkbox" name="dx" value="Undiagnosed / Suspected"> Undiagnosed / Suspected</label>
+    </div>
+  </div>
+  <div class="field-group">
+    <label class="field-label">Other / Specify</label>
+    <input type="text" id="dxOther" placeholder="Additional diagnosis details">
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="field-group">
+    <label class="field-label">Stage <span style="color:var(--gold)">*</span></label>
+    <div class="check-grid-3">
+      <label class="check-item"><input type="radio" name="stage" value="Early / Mild"> Early / Mild</label>
+      <label class="check-item"><input type="radio" name="stage" value="Middle / Moderate"> Middle / Moderate</label>
+      <label class="check-item"><input type="radio" name="stage" value="Late / Severe"> Late / Severe</label>
+    </div>
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="field-group">
+    <label class="field-label">Secondary Medical Conditions</label>
+    <div class="check-grid">
+      <label class="check-item"><input type="checkbox" name="secondary" value="Diabetes"> Diabetes</label>
+      <label class="check-item"><input type="checkbox" name="secondary" value="Heart Disease / CHF"> Heart Disease / CHF</label>
+      <label class="check-item"><input type="checkbox" name="secondary" value="COPD / Respiratory"> COPD / Respiratory</label>
+      <label class="check-item"><input type="checkbox" name="secondary" value="Stroke History"> Stroke History</label>
+      <label class="check-item"><input type="checkbox" name="secondary" value="Parkinson's Disease"> Parkinson's Disease</label>
+      <label class="check-item"><input type="checkbox" name="secondary" value="Arthritis / Mobility Issues"> Arthritis / Mobility Issues</label>
+      <label class="check-item"><input type="checkbox" name="secondary" value="Incontinence"> Incontinence</label>
+      <label class="check-item"><input type="checkbox" name="secondary" value="Fall History"> Fall History</label>
+      <label class="check-item"><input type="checkbox" name="secondary" value="Depression / Anxiety"> Depression / Anxiety</label>
+      <label class="check-item"><input type="checkbox" name="secondary" value="Cancer (current/recent)"> Cancer (current or recent)</label>
+    </div>
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Current Medications</label>
+      <textarea id="medications" placeholder="List medications, dosages, and timing — or note 'see attached medication list'"></textarea>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Known Allergies</label>
+      <textarea id="allergies" placeholder="Medications, foods, environmental — anything a caregiver needs to know"></textarea>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Advance Directive / DNR on File?</label>
+      <select id="dnr">
+        <option value="" disabled selected>Select</option>
+        <option>Yes — on file</option><option>Yes — family has copy</option>
+        <option>No</option><option>Unknown</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Pharmacy Name & Phone</label>
+      <input type="text" id="pharmacy" placeholder="">
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Clinical Notes — Assessment Observations</label>
+    <textarea id="clinicalNotes" placeholder="Your clinical observations from the in-home assessment — cognitive presentation, functional status, home environment safety notes, anything relevant to care delivery." style="min-height:130px;"></textarea>
+  </div>
+
+  <div class="form-nav">
+    <button class="btn-prev" onclick="prevSec(1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <button class="btn-next" onclick="nextSec(1)">Continue →</button>
+  </div>
+</div>
+
+<!-- ── SECTION 3: WHO THEY ARE ── -->
+<div class="form-section" id="sec-2">
+  <div class="sec-header">
+    <div class="sec-num">Section 03 of 09</div>
+    <h2 class="sec-title">Who <em>They Are</em>.</h2>
+    <p class="sec-desc">The most important section. A caregiver who knows this person — their history, personality, and joys — provides meaningfully better care.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Complete this section thoroughly.</strong> These details directly shape caregiver matching and inform how your caregiver approaches every interaction. The emotional quality of care depends on it.
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Life History & Background</label>
+    <textarea id="lifeHistory" placeholder="Where they grew up, family background, significant life events, military service, immigration, anything that shaped who they are." style="min-height:120px;"></textarea>
+  </div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Occupation / Career (former or current)</label>
+      <input type="text" id="occupation" placeholder="What they did for work">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Education</label>
+      <input type="text" id="education" placeholder="Highest level, field of study if relevant">
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Personality — How would their family describe them?</label>
+    <textarea id="personality" placeholder="Funny, reserved, stubborn, warm, proud, independent, social — whatever is true. This helps us match the right caregiver temperament."></textarea>
+  </div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Faith / Religious Practice</label>
+      <input type="text" id="faith" placeholder="Religion, denomination, practices that matter to them">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Cultural Background / Traditions</label>
+      <input type="text" id="culture" placeholder="Cultural identity, traditions, customs to honor">
+    </div>
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="field-group">
+    <label class="field-label">What brings them joy, calm, or engagement?</label>
+    <div class="check-grid">
+      <label class="check-item"><input type="checkbox" name="joys" value="Music — listening"> Music — listening</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Music — singing / playing"> Music — singing / playing</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Television / Movies"> Television / Movies</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Reading / Being read to"> Reading / Being read to</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Conversation / Storytelling"> Conversation / Storytelling</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Religious / Spiritual practice"> Religious / Spiritual practice</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Gardening / Being outdoors"> Gardening / Being outdoors</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Cooking / Baking"> Cooking / Baking</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Crafts / Art / Puzzles"> Crafts / Art / Puzzles</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Looking at photos / Reminiscing"> Looking at photos / Reminiscing</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Animals / Pets"> Animals / Pets</label>
+      <label class="check-item"><input type="checkbox" name="joys" value="Gentle walks / Movement"> Gentle walks / Movement</label>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Favorite Music / Era / Artist</label>
+      <input type="text" id="music" placeholder="Specific songs, stations, or genres that consistently soothe">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Favorite TV Shows / Movies</label>
+      <input type="text" id="tv" placeholder="">
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">What a good day looks like for this person</label>
+    <textarea id="goodDay" placeholder="Describe a genuinely good day — mood, activities, interactions, what makes them feel like themselves."></textarea>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Topics, situations, or approaches that cause distress or agitation</label>
+    <textarea id="triggers" placeholder="Specific triggers — loud noises, being corrected, certain news topics, being rushed, strangers, talk of moving. Be specific."></textarea>
+  </div>
+
+  <div class="form-nav">
+    <button class="btn-prev" onclick="prevSec(2)"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <button class="btn-next" onclick="nextSec(2)">Continue →</button>
+  </div>
+</div>
+
+<!-- ── SECTION 4: DAILY ROUTINE ── -->
+<div class="form-section" id="sec-3">
+  <div class="sec-header">
+    <div class="sec-num">Section 04 of 09</div>
+    <h2 class="sec-title">Daily <em>Routine</em>.</h2>
+    <p class="sec-desc">Schedule, routines, and dietary needs. Consistency in routine is therapeutic — the more specific, the better.</p>
+  </div>
+
+  <div class="grid-3">
+    <div class="field-group">
+      <label class="field-label">Typical Wake Time</label>
+      <input type="text" id="wakeTime" placeholder="e.g. 7:00am">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Typical Bedtime</label>
+      <input type="text" id="bedTime" placeholder="e.g. 9:00pm">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Nap Habits</label>
+      <select id="naps">
+        <option value="" disabled selected>Select</option>
+        <option>No naps</option><option>Occasional nap</option>
+        <option>Daily nap — short</option><option>Daily nap — long</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Morning Routine — Step by Step</label>
+    <textarea id="morningRoutine" placeholder="Wake, bathroom, hygiene, breakfast, medications, activities — in the order that works for them. Be specific about preferences and sensitivities." style="min-height:130px;"></textarea>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Evening Routine — Step by Step</label>
+    <textarea id="eveningRoutine" placeholder="Dinner, evening activities, personal care, bedtime routine. Note any rituals that help them settle."></textarea>
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="field-group">
+    <label class="field-label">Dietary Preferences & Restrictions</label>
+    <div class="check-grid">
+      <label class="check-item"><input type="checkbox" name="diet" value="Diabetic diet"> Diabetic diet</label>
+      <label class="check-item"><input type="checkbox" name="diet" value="Low sodium"> Low sodium</label>
+      <label class="check-item"><input type="checkbox" name="diet" value="Soft foods only"> Soft foods only</label>
+      <label class="check-item"><input type="checkbox" name="diet" value="Puree / Texture modified"> Puree / Texture modified</label>
+      <label class="check-item"><input type="checkbox" name="diet" value="No restrictions"> No restrictions</label>
+      <label class="check-item"><input type="checkbox" name="diet" value="Vegetarian"> Vegetarian</label>
+      <label class="check-item"><input type="checkbox" name="diet" value="No pork"> No pork</label>
+      <label class="check-item"><input type="checkbox" name="diet" value="Kosher / Halal"> Kosher / Halal</label>
+      <label class="check-item"><input type="checkbox" name="diet" value="Swallowing difficulties (dysphagia)"> Swallowing difficulties (dysphagia)</label>
+      <label class="check-item"><input type="checkbox" name="diet" value="Thickened liquids required"> Thickened liquids required</label>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Favorite Foods</label>
+      <textarea id="favFoods" placeholder="Foods they reliably enjoy and that can be used as comfort or engagement tools"></textarea>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Foods to Avoid</label>
+      <textarea id="avoidFoods" placeholder="Dislikes, intolerances, or medically contraindicated foods"></textarea>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Typical Meal Times</label>
+    <input type="text" id="mealTimes" placeholder="e.g. Breakfast 8am, Lunch 12pm, Dinner 5:30pm — note if timing matters to them">
+  </div>
+
+  <div class="form-nav">
+    <button class="btn-prev" onclick="prevSec(3)"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <button class="btn-next" onclick="nextSec(3)">Continue →</button>
+  </div>
+</div>
+
+<!-- ── SECTION 5: MOBILITY & CARE NEEDS ── -->
+<div class="form-section" id="sec-4">
+  <div class="sec-header">
+    <div class="sec-num">Section 05 of 09</div>
+    <h2 class="sec-title">Mobility &amp; <em>Care Needs</em>.</h2>
+    <p class="sec-desc">Functional status, ADL assistance required, safety concerns, and equipment.</p>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Mobility Level <span style="color:var(--gold)">*</span></label>
+    <div class="check-grid">
+      <label class="check-item"><input type="radio" name="mobility" value="Fully independent / walks unassisted"> Fully independent / walks unassisted</label>
+      <label class="check-item"><input type="radio" name="mobility" value="Uses cane or walker"> Uses cane or walker</label>
+      <label class="check-item"><input type="radio" name="mobility" value="Needs steadying / standby assist"> Needs steadying / standby assist</label>
+      <label class="check-item"><input type="radio" name="mobility" value="Wheelchair — can transfer independently"> Wheelchair — can transfer independently</label>
+      <label class="check-item"><input type="radio" name="mobility" value="Wheelchair — requires full transfer assist"> Wheelchair — requires full transfer assist</label>
+      <label class="check-item"><input type="radio" name="mobility" value="Primarily bedbound"> Primarily bedbound</label>
+    </div>
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="field-group">
+    <label class="field-label">ADL Assistance Required — Caregiver Tasks</label>
+    <div class="check-grid">
+      <label class="check-item"><input type="checkbox" name="adl" value="Bathing / Showering"> Bathing / Showering</label>
+      <label class="check-item"><input type="checkbox" name="adl" value="Dressing / Grooming"> Dressing / Grooming</label>
+      <label class="check-item"><input type="checkbox" name="adl" value="Toileting assistance"> Toileting assistance</label>
+      <label class="check-item"><input type="checkbox" name="adl" value="Incontinence care"> Incontinence care</label>
+      <label class="check-item"><input type="checkbox" name="adl" value="Medication reminders"> Medication reminders</label>
+      <label class="check-item"><input type="checkbox" name="adl" value="Meal preparation"> Meal preparation</label>
+      <label class="check-item"><input type="checkbox" name="adl" value="Feeding assistance"> Feeding assistance</label>
+      <label class="check-item"><input type="checkbox" name="adl" value="Light housekeeping"> Light housekeeping</label>
+      <label class="check-item"><input type="checkbox" name="adl" value="Laundry"> Laundry</label>
+      <label class="check-item"><input type="checkbox" name="adl" value="Transportation / Errands"> Transportation / Errands</label>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Tasks Explicitly Outside Caregiver Scope</label>
+    <textarea id="outOfScope" placeholder="Anything the caregiver should specifically NOT do — wound care, injections, medical procedures, etc."></textarea>
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="field-group">
+    <label class="field-label">Fall Risk Notes / Safety Concerns</label>
+    <textarea id="fallRisk" placeholder="Fall history, fall risk level, known hazards in the home, any precautions the caregiver must observe."></textarea>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Equipment in the Home</label>
+    <div class="check-grid">
+      <label class="check-item"><input type="checkbox" name="equipment" value="Hospital bed"> Hospital bed</label>
+      <label class="check-item"><input type="checkbox" name="equipment" value="Hoyer lift"> Hoyer lift</label>
+      <label class="check-item"><input type="checkbox" name="equipment" value="Grab bars"> Grab bars</label>
+      <label class="check-item"><input type="checkbox" name="equipment" value="Shower chair / bench"> Shower chair / bench</label>
+      <label class="check-item"><input type="checkbox" name="equipment" value="Walker"> Walker</label>
+      <label class="check-item"><input type="checkbox" name="equipment" value="Wheelchair"> Wheelchair</label>
+      <label class="check-item"><input type="checkbox" name="equipment" value="Oxygen equipment"> Oxygen equipment</label>
+      <label class="check-item"><input type="checkbox" name="equipment" value="Medical alert device"> Medical alert device</label>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Additional Equipment Notes</label>
+    <input type="text" id="equipmentNotes" placeholder="Any equipment requiring instruction or special caregiver awareness">
+  </div>
+
+  <div class="form-nav">
+    <button class="btn-prev" onclick="prevSec(4)"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <button class="btn-next" onclick="nextSec(4)">Continue →</button>
+  </div>
+</div>
+
+<!-- ── SECTION 6: BEHAVIORAL PROFILE ── -->
+<div class="form-section" id="sec-5">
+  <div class="sec-header">
+    <div class="sec-num">Section 06 of 09</div>
+    <h2 class="sec-title">Behavioral &amp; <em>Cognitive Profile</em>.</h2>
+    <p class="sec-desc">Behavioral symptoms, triggers, de-escalation approaches, and communication capacity. This section directly informs how the caregiver will handle difficult moments.</p>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Behavioral Symptoms Present</label>
+    <div class="check-grid">
+      <label class="check-item"><input type="checkbox" name="behaviors" value="Sundowning"> Sundowning</label>
+      <label class="check-item"><input type="checkbox" name="behaviors" value="Nighttime waking / sleep disruption"> Nighttime waking / sleep disruption</label>
+      <label class="check-item"><input type="checkbox" name="behaviors" value="Wandering / Exit-seeking"> Wandering / Exit-seeking</label>
+      <label class="check-item"><input type="checkbox" name="behaviors" value="Repetitive questions / statements"> Repetitive questions / statements</label>
+      <label class="check-item"><input type="checkbox" name="behaviors" value="Verbal agitation"> Verbal agitation</label>
+      <label class="check-item"><input type="checkbox" name="behaviors" value="Physical agitation / resistance"> Physical agitation / resistance</label>
+      <label class="check-item"><input type="checkbox" name="behaviors" value="Hallucinations / Delusions"> Hallucinations / Delusions</label>
+      <label class="check-item"><input type="checkbox" name="behaviors" value="Paranoia / Suspicion"> Paranoia / Suspicion</label>
+      <label class="check-item"><input type="checkbox" name="behaviors" value="Depression / Withdrawal"> Depression / Withdrawal</label>
+      <label class="check-item"><input type="checkbox" name="behaviors" value="Refusal to accept care"> Refusal to accept care</label>
+    </div>
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="field-group">
+    <label class="field-label">What typically triggers difficult moments?</label>
+    <textarea id="behaviorTriggers" placeholder="Specific, observable triggers — time of day, particular words or phrases, specific activities, sensory inputs, transitions. Be precise." style="min-height:120px;"></textarea>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">What approaches, words, or actions have successfully de-escalated distress?</label>
+    <textarea id="deEscalation" placeholder="What actually works for this person — specific phrases, activities, environmental changes, touch, redirection techniques. The caregiver will rely on this." style="min-height:120px;"></textarea>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Sundowning Pattern (if applicable)</label>
+    <textarea id="sundowning" placeholder="Time of day it typically begins, how it presents for this person specifically, what has and hasn't helped."></textarea>
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="field-group">
+    <label class="field-label">Communication Capacity</label>
+    <div class="check-grid">
+      <label class="check-item"><input type="radio" name="communication" value="Communicates verbally and clearly"> Communicates verbally and clearly</label>
+      <label class="check-item"><input type="radio" name="communication" value="Verbal but may lose words or repeat"> Verbal but may lose words or repeat</label>
+      <label class="check-item"><input type="radio" name="communication" value="Limited verbal — uses gestures / expressions"> Limited verbal — uses gestures / expressions</label>
+      <label class="check-item"><input type="radio" name="communication" value="Primarily non-verbal"> Primarily non-verbal</label>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Communication Notes</label>
+    <textarea id="communicationNotes" placeholder="Specific communication approaches that work — preferred topics, words or phrases to use or avoid, how they express discomfort or needs."></textarea>
+  </div>
+
+  <div class="form-nav">
+    <button class="btn-prev" onclick="prevSec(5)"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <button class="btn-next" onclick="nextSec(5)">Continue →</button>
+  </div>
+</div>
+
+<!-- ── SECTION 7: EMERGENCY ── -->
+<div class="form-section" id="sec-6">
+  <div class="sec-header">
+    <div class="sec-num">Section 07 of 09</div>
+    <h2 class="sec-title">Emergency <em>Protocols</em>.</h2>
+    <p class="sec-desc">Emergency contacts, call order, and special instructions. In any emergency: 911 first, then family, then Avelis.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Standard protocol:</strong> In any medical emergency, the caregiver calls 911 first. Then the primary family contact. Then Avelis. Caregivers do not perform medical intervention. Note any exceptions or family preferences below.
+  </div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Emergency Contact 1 — Name <span style="color:var(--gold)">*</span></label>
+      <input type="text" id="ec1Name" placeholder="">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Emergency Contact 1 — Phone <span style="color:var(--gold)">*</span></label>
+      <input type="tel" id="ec1Phone" placeholder="">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Emergency Contact 2 — Name</label>
+      <input type="text" id="ec2Name" placeholder="">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Emergency Contact 2 — Phone</label>
+      <input type="tel" id="ec2Phone" placeholder="">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Nearest Hospital / Preferred Hospital</label>
+      <input type="text" id="hospital" placeholder="Name and address">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Hospital Phone</label>
+      <input type="tel" id="hospitalPhone" placeholder="">
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Special Emergency Instructions</label>
+    <textarea id="emergencyNotes" placeholder="Any family-specific instructions — e.g. 'call daughter before calling 911 unless life-threatening', specific hospital preference, known allergy to medications used in emergencies, etc." style="min-height:110px;"></textarea>
+  </div>
+
+  <div class="form-nav">
+    <button class="btn-prev" onclick="prevSec(6)"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <button class="btn-next" onclick="nextSec(6)">Continue →</button>
+  </div>
+</div>
+
+<!-- ── SECTION 8: CAREGIVER NOTES ── -->
+<div class="form-section" id="sec-7">
+  <div class="sec-header">
+    <div class="sec-num">Section 08 of 09</div>
+    <h2 class="sec-title">Caregiver-Specific <em>Instructions</em>.</h2>
+    <p class="sec-desc">Assignment details, visit-specific instructions, reporting expectations, and household notes for the assigned caregiver.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Caregiver Assigned <span style="color:var(--gold)">*</span></label>
+      <input type="text" id="caregiverName" placeholder="Full name">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Shift / Schedule</label>
+      <input type="text" id="schedule" placeholder="e.g. Tuesdays & Thursdays 9am–1pm">
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Specific Instructions for This Caregiver</label>
+    <textarea id="caregiverInstructions" placeholder="What this caregiver specifically needs to know — client preferences, approach, things that have worked or not worked in prior care, family dynamics, anything that will set them up for success." style="min-height:140px;"></textarea>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">What to Report to Avelis After Each Visit</label>
+    <textarea id="reportingInstructions" placeholder="What the caregiver should flag — mood changes, falls or near-falls, refusal of care, behavioral escalation, changes in condition, family interactions of note. Be specific about thresholds."></textarea>
+  </div>
+
+  <div class="field-divider"></div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Entry Instructions / Door Code</label>
+      <input type="text" id="entryInstructions" placeholder="How to access the home — key location, code, family greeting protocol">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Pets in the Home</label>
+      <input type="text" id="pets" placeholder="Species, name, temperament, any caregiver instructions">
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Additional Household Notes</label>
+    <textarea id="householdNotes" placeholder="Parking, neighbors, building entry, any other logistical notes the caregiver needs before their first visit."></textarea>
+  </div>
+
+  <div class="form-nav">
+    <button class="btn-prev" onclick="prevSec(7)"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <button class="btn-next" onclick="nextSec(7)">Continue →</button>
+  </div>
+</div>
+
+<!-- ── SECTION 9: AUTHORIZATION ── -->
+<div class="form-section" id="sec-8">
+  <div class="sec-header">
+    <div class="sec-num">Section 09 of 09</div>
+    <h2 class="sec-title">Assessment &amp; <em>Authorization</em>.</h2>
+    <p class="sec-desc">Clinician details, authorization, and version tracking.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="field-group">
+      <label class="field-label">Assessed & Written By <span style="color:var(--gold)">*</span></label>
+      <input type="text" id="assessedBy" placeholder="Your full name">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Credentials / Title</label>
+      <input type="text" id="credentials" placeholder="e.g. RN, LPN">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Date of Assessment <span style="color:var(--gold)">*</span></label>
+      <input type="date" id="assessmentDate">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Next Review Date</label>
+      <input type="date" id="reviewDate">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Care Plan Version</label>
+      <input type="text" id="planVersion" placeholder="e.g. 1.0 — increment on each update">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Authorized by Family (Name)</label>
+      <input type="text" id="familyAuth" placeholder="Family member who reviewed and approved this plan">
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Additional Notes / Anything Not Captured Above</label>
+    <textarea id="additionalNotes" placeholder="Anything else the caregiver or Avelis team should know that wasn't covered in the previous sections." style="min-height:110px;"></textarea>
+  </div>
+
+  <div class="field-divider"></div>
+
+  <!-- Acknowledgment -->
+  <div style="padding: 24px; background: var(--white); border: 1px solid var(--parchment); margin-bottom: 8px;">
+    <label style="display:flex; align-items:flex-start; gap:14px; cursor:pointer;">
+      <input type="checkbox" id="authAck" style="width:16px; height:16px; min-width:16px; margin-top:3px; accent-color:var(--gold); cursor:pointer;">
+      <span style="font-size:0.86rem; color:var(--warm-gray); line-height:1.75;">I confirm that this care plan was developed following a direct in-home assessment and family consultation, and that the information contained herein is accurate to the best of my clinical knowledge. I authorize this plan to be shared with the assigned Avelis caregiver.</span>
+    </label>
+  </div>
+  <p id="authError" style="display:none; font-size:0.72rem; color:#8B3A2E; margin-bottom:16px;">Please complete all required fields and check the authorization box.</p>
+
+  <div class="form-nav">
+    <button class="btn-prev" onclick="prevSec(8)"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <button class="btn-submit" onclick="submitCarePlan()">Submit Care Plan</button>
+  </div>
+</div>
+
+</div><!-- /formView -->
+
+<!-- SUCCESS -->
+<div id="successView">
+  <div class="success-ring"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <h2 class="success-heading">Care plan <em>submitted</em>.</h2>
+  <p class="success-body">This care plan has been saved securely and a notification sent to your inbox. Share it with the assigned caregiver before their first visit.</p>
+  <a href="index.html" class="btn-return">Return to Avelis Care</a>
+  <div style="margin-top:20px;">
+    <button onclick="resetForm()" style="font-family:var(--sans); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--taupe); background:none; border:none; cursor:pointer; border-bottom:1px solid var(--parchment); padding-bottom:2px;">Start a New Care Plan</button>
+  </div>
+</div>
+
+</div><!-- /form-body -->
+</div><!-- /form-content -->
+</div><!-- /page-layout -->
+
+<script>
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbwpRzRzMfbRNNExpXkS-5DYCLIAiGaQo8LqczqibLR9LG376vz0ySztfs-2FPtS2snbJQ/exec";
+  let current = 0;
+  const total = 9;
+
+  function getChecked(name) {
+    return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(el => el.value).join(', ');
+  }
+  function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+  function showSec(idx) {
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + idx).classList.add('active');
+    document.querySelectorAll('.nav-step').forEach((s, i) => {
+      s.classList.remove('active', 'done');
+      const dot = document.getElementById('dot-' + i);
+      if (i === idx) { s.classList.add('active'); dot.textContent = i + 1; }
+      else if (i < idx) { s.classList.add('done'); dot.textContent = '✓'; }
+      else dot.textContent = i + 1;
+    });
+    const pct = Math.round((idx / (total - 1)) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+    current = idx;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Make all progress tabs freely clickable
+  document.querySelectorAll('.progress-step').forEach((step, i) => {
+    step.addEventListener('click', () => showSec(i));
+  });
+
+  function nextSec(from) { showSec(from + 1); }
+  function prevSec(from) { showSec(from - 1); }
+
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('input', () => el.closest('.field-group')?.classList.remove('has-error'));
+  });
+
+  function validateAll() {
+    let ok = true;
+    const required = [
+      { id: 'clientName',     sec: 0 },
+      { id: 'dob',            sec: 0 },
+      { id: 'address',        sec: 0 },
+      { id: 'contactName',    sec: 0 },
+      { id: 'contactPhone',   sec: 0 },
+      { id: 'ec1Name',        sec: 6 },
+      { id: 'ec1Phone',       sec: 6 },
+      { id: 'caregiverName',  sec: 7 },
+      { id: 'assessedBy',     sec: 8 },
+      { id: 'assessmentDate', sec: 8 },
+    ];
+
+    let firstFailSec = null;
+    required.forEach(({ id, sec }) => {
+      const el = document.getElementById(id);
+      const grp = el?.closest('.field-group');
+      if (!el?.value.trim()) {
+        grp?.classList.add('has-error');
+        ok = false;
+        if (firstFailSec === null) firstFailSec = sec;
+      } else {
+        grp?.classList.remove('has-error');
+      }
+    });
+
+    // If there are errors, jump to the first section with a problem
+    if (!ok && firstFailSec !== null) showSec(firstFailSec);
+    return ok;
+  }
+
+  function submitCarePlan() {
+    if (!validateAll()) {
+      document.getElementById('authError').style.display = 'block';
+      return;
+    }
+    if (!document.getElementById('authAck').checked) {
+      document.getElementById('authError').style.display = 'block';
+      showSec(8);
+      return;
+    }
+    document.getElementById('authError').style.display = 'none';
+
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = 'Submitting…'; btn.disabled = true; btn.style.opacity = '0.7';
+
+    const payload = {
+      clientName:           val('clientName'),
+      preferredName:        val('preferredName'),
+      dob:                  val('dob'),
+      gender:               val('gender'),
+      language:             val('language'),
+      address:              val('address'),
+      contactName:          val('contactName'),
+      contactRel:           val('contactRel'),
+      contactPhone:         val('contactPhone'),
+      contactEmail:         val('contactEmail'),
+      contact2Name:         val('contact2Name'),
+      contact2Phone:        val('contact2Phone'),
+      physician:            val('physician'),
+      physicianPhone:       val('physicianPhone'),
+      specialist:           val('specialist'),
+      specialistPhone:      val('specialistPhone'),
+      diagnosis:            getChecked('dx'),
+      dxOther:              val('dxOther'),
+      stage:                getChecked('stage'),
+      secondaryConditions:  getChecked('secondary'),
+      medications:          val('medications'),
+      allergies:            val('allergies'),
+      dnr:                  val('dnr'),
+      pharmacy:             val('pharmacy'),
+      clinicalNotes:        val('clinicalNotes'),
+      lifeHistory:          val('lifeHistory'),
+      occupation:           val('occupation'),
+      personality:          val('personality'),
+      faith:                val('faith'),
+      culture:              val('culture'),
+      joys:                 getChecked('joys'),
+      music:                val('music'),
+      tv:                   val('tv'),
+      goodDay:              val('goodDay'),
+      triggers:             val('triggers'),
+      wakeTime:             val('wakeTime'),
+      bedTime:              val('bedTime'),
+      naps:                 val('naps'),
+      morningRoutine:       val('morningRoutine'),
+      eveningRoutine:       val('eveningRoutine'),
+      diet:                 getChecked('diet'),
+      favFoods:             val('favFoods'),
+      avoidFoods:           val('avoidFoods'),
+      mealTimes:            val('mealTimes'),
+      mobility:             getChecked('mobility'),
+      adl:                  getChecked('adl'),
+      outOfScope:           val('outOfScope'),
+      fallRisk:             val('fallRisk'),
+      equipment:            getChecked('equipment'),
+      equipmentNotes:       val('equipmentNotes'),
+      behaviors:            getChecked('behaviors'),
+      behaviorTriggers:     val('behaviorTriggers'),
+      deEscalation:         val('deEscalation'),
+      sundowning:           val('sundowning'),
+      communication:        getChecked('communication'),
+      communicationNotes:   val('communicationNotes'),
+      ec1Name:              val('ec1Name'),
+      ec1Phone:             val('ec1Phone'),
+      ec2Name:              val('ec2Name'),
+      ec2Phone:             val('ec2Phone'),
+      hospital:             val('hospital'),
+      emergencyNotes:       val('emergencyNotes'),
+      caregiverName:        val('caregiverName'),
+      schedule:             val('schedule'),
+      caregiverInstructions:val('caregiverInstructions'),
+      reportingInstructions:val('reportingInstructions'),
+      entryInstructions:    val('entryInstructions'),
+      pets:                 val('pets'),
+      householdNotes:       val('householdNotes'),
+      assessedBy:           val('assessedBy'),
+      credentials:          val('credentials'),
+      assessmentDate:       val('assessmentDate'),
+      reviewDate:           val('reviewDate'),
+      planVersion:          val('planVersion'),
+      familyAuth:           val('familyAuth'),
+      additionalNotes:      val('additionalNotes'),
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', ENDPOINT);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() { if (xhr.readyState === 4) showSuccess(); };
+    xhr.onerror = function() { showSuccess(); };
+    xhr.send(JSON.stringify(payload));
+  }
+
+  function showSuccess() {
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('successView').classList.add('show');
+    document.querySelectorAll('.nav-step').forEach((s, i) => {
+      s.classList.remove('active'); s.classList.add('done');
+      const dot = document.getElementById('dot-' + i);
+      if (dot) dot.textContent = '✓';
+    });
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressPct').textContent = '100%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function resetForm() {
+    document.getElementById('formView').style.display = 'block';
+    document.getElementById('successView').classList.remove('show');
+    document.querySelectorAll('input, textarea, select').forEach(el => {
+      if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+      else el.value = '';
+    });
+    showSec(0);
+  }
+</script>
+</body>
+</html>
