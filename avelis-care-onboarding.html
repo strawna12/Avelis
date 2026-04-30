@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caregiver Onboarding — Avelis Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F0EBE1;
+    --parchment: #DDD5C8;
+    --taupe: #A89880;
+    --warm-gray: #5C5248;
+    --charcoal: #1E1A16;
+    --deep: #0F0D0A;
+    --gold: #A07C3A;
+    --gold-light: #C49A52;
+    --white: #FAF7F2;
+    --success: #4A6741;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--deep);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  .layout { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+
+  .sidebar {
+    background: #0A0906;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 280px;
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+    z-index: 50;
+  }
+
+  .sidebar-logo {
+    padding: 32px 28px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .sidebar-logo-text {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    text-decoration: none;
+    display: block;
+  }
+  .sidebar-logo-text span { color: var(--gold); }
+  .sidebar-logo-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-top: 4px;
+  }
+
+  .sidebar-progress-wrap {
+    padding: 20px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .sidebar-progress-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 10px;
+    display: flex; justify-content: space-between;
+  }
+  .sidebar-progress-bar {
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .sidebar-progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 1px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+
+  .sidebar-nav { padding: 16px 0; flex: 1; }
+  .sidebar-section-label {
+    font-size: 0.56rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    padding: 12px 28px 6px;
+  }
+
+  .nav-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 11px 28px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-left: 2px solid transparent;
+    position: relative;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.04); }
+  .nav-item.active {
+    background: rgba(160,124,58,0.1);
+    border-left-color: var(--gold);
+  }
+  .nav-item.completed { opacity: 0.6; }
+  .nav-item.completed:hover { opacity: 1; }
+
+  .nav-dot {
+    width: 20px; height: 20px; min-width: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.55rem;
+    color: rgba(255,255,255,0.3);
+    transition: all 0.3s;
+  }
+  .nav-item.active .nav-dot {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--white);
+  }
+  .nav-item.completed .nav-dot {
+    background: rgba(74,103,65,0.4);
+    border-color: var(--success);
+    color: var(--white);
+  }
+
+  .nav-item-text {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.35;
+    transition: color 0.2s;
+  }
+  .nav-item.active .nav-item-text { color: var(--white); font-weight: 400; }
+  .nav-item.completed .nav-item-text { color: rgba(255,255,255,0.45); }
+
+  .sidebar-time {
+    padding: 20px 28px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.2);
+    line-height: 1.6;
+  }
+  .sidebar-time strong { color: var(--gold); display: block; margin-bottom: 2px; }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: 280px;
+    min-height: 100vh;
+  }
+
+  /* ── SCREENS ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* WELCOME SCREEN */
+  .welcome-hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    background: var(--deep);
+    position: relative; overflow: hidden;
+    padding: 80px 72px;
+  }
+  .welcome-ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(160,124,58,0.08);
+  }
+  .welcome-ring-1 { width: 700px; height: 700px; right: -200px; top: -200px; }
+  .welcome-ring-2 { width: 460px; height: 460px; right: -80px; top: -80px; border-color: rgba(160,124,58,0.05); }
+  .welcome-ring-3 { width: 900px; height: 900px; left: -400px; bottom: -400px; border-color: rgba(160,124,58,0.04); }
+
+  .welcome-content { position: relative; max-width: 760px; }
+  .welcome-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .welcome-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+  .welcome-heading {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.4rem);
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--white);
+    margin-bottom: 28px;
+    letter-spacing: -0.015em;
+  }
+  .welcome-heading em { font-style: italic; color: var(--gold); }
+  .welcome-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.85;
+    max-width: 580px;
+    margin-bottom: 48px;
+  }
+  .welcome-meta {
+    display: flex; gap: 40px; margin-bottom: 52px;
+    padding: 28px 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .welcome-meta-item { }
+  .welcome-meta-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .welcome-meta-value {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--white);
+  }
+  .btn-start {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--gold);
+    border: none;
+    padding: 18px 44px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-start:hover { background: var(--charcoal); }
+  .btn-start svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+
+  /* LESSON SCREEN */
+  .lesson-header {
+    background: #0A0906;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 40;
+  }
+  .lesson-breadcrumb {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+  .lesson-breadcrumb span { color: var(--gold); }
+  .lesson-nav-btns { display: flex; gap: 12px; }
+  .btn-lesson-nav {
+    font-family: var(--sans);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 9px 22px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: transparent;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-lesson-nav:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-lesson-nav.primary {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--white);
+  }
+  .btn-lesson-nav.primary:hover { background: var(--charcoal); border-color: var(--charcoal); }
+
+  .lesson-body { padding: 64px 72px 100px; max-width: 860px; }
+
+  .lesson-num {
+    font-family: var(--serif);
+    font-size: 0.68rem;
+    font-style: italic;
+    color: var(--taupe);
+    margin-bottom: 10px;
+  }
+  .lesson-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.18;
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .lesson-title em { font-style: italic; color: var(--gold); }
+  .lesson-subtitle {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 44px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .lesson-lead {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    padding-left: 20px;
+    border-left: 2px solid var(--gold);
+  }
+
+  .lesson-text {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.9;
+    margin-bottom: 24px;
+  }
+  .lesson-text strong { color: var(--white); font-weight: 500; }
+
+  /* PRINCIPLE BLOCKS */
+  .principle-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    margin: 36px 0;
+  }
+  .principle-block {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 28px 28px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .principle-block:hover {
+    background: rgba(160,124,58,0.06);
+    border-color: rgba(160,124,58,0.2);
+  }
+  .principle-num {
+    font-family: var(--serif);
+    font-size: 0.7rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .principle-title {
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .principle-body {
+    font-size: 0.86rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.75;
+  }
+
+  /* CALLOUT */
+  .lesson-callout {
+    margin: 32px 0;
+    padding: 28px 32px;
+    background: rgba(160,124,58,0.08);
+    border-left: 2px solid var(--gold);
+  }
+  .lesson-callout-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .lesson-callout-text {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.65;
+  }
+
+  /* STANDARD BLOCKS */
+  .standard-list { list-style: none; margin: 24px 0; }
+  .standard-list li {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+  .standard-list li:first-child { padding-top: 0; }
+  .standard-list li::before {
+    content: '—';
+    color: var(--gold);
+    font-family: var(--serif);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .standard-list li strong { color: var(--white); }
+
+  /* SCENARIO BLOCKS */
+  .scenario {
+    margin: 28px 0;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+  .scenario-header {
+    background: rgba(255,255,255,0.04);
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .scenario-tag {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(160,124,58,0.12);
+    padding: 4px 10px;
+  }
+  .scenario-title { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+  .scenario-body { padding: 20px 24px; }
+  .scenario-situation {
+    font-size: 0.86rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.75;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .scenario-response {
+    font-size: 0.86rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.75;
+  }
+  .scenario-response strong { color: var(--white); }
+
+  /* QUIZ */
+  .quiz-section {
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .quiz-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .quiz-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  .quiz-question {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.45;
+    margin-bottom: 20px;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .quiz-option {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+  }
+  .quiz-option:hover { border-color: rgba(160,124,58,0.3); background: rgba(160,124,58,0.05); color: var(--white); }
+  .quiz-option.selected { border-color: var(--gold); background: rgba(160,124,58,0.1); color: var(--white); }
+  .quiz-option.correct { border-color: var(--success); background: rgba(74,103,65,0.15); color: var(--white); }
+  .quiz-option.incorrect { border-color: #8B3A2E; background: rgba(139,58,46,0.1); color: rgba(255,255,255,0.5); }
+  .quiz-option-letter {
+    font-family: var(--serif);
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--taupe);
+    min-width: 18px;
+    margin-top: 1px;
+  }
+  .quiz-option.selected .quiz-option-letter,
+  .quiz-option.correct .quiz-option-letter { color: var(--gold); }
+  .quiz-feedback {
+    display: none;
+    padding: 16px 20px;
+    font-size: 0.86rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: rgba(74,103,65,0.15); border-left: 2px solid var(--success); color: rgba(255,255,255,0.65); }
+  .quiz-feedback.incorrect-fb { background: rgba(139,58,46,0.1); border-left: 2px solid #8B3A2E; color: rgba(255,255,255,0.55); }
+  .btn-check {
+    font-family: var(--sans);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 11px 28px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-check:hover { background: var(--gold); color: var(--white); }
+  .btn-check:disabled { opacity: 0.3; cursor: default; }
+
+  /* COMPLETION SCREEN */
+  .completion-screen {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 72px;
+    background: var(--deep);
+    position: relative; overflow: hidden;
+  }
+  .completion-ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(160,124,58,0.08);
+  }
+  .completion-ring-1 { width: 600px; height: 600px; right: -150px; bottom: -150px; }
+  .completion-ring-2 { width: 800px; height: 800px; left: -300px; top: -300px; border-color: rgba(160,124,58,0.04); }
+  .completion-content { position: relative; max-width: 640px; text-align: center; }
+  .completion-seal {
+    width: 90px; height: 90px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 32px;
+  }
+  .completion-seal svg { width: 36px; height: 36px; stroke: var(--gold); fill: none; stroke-width: 1.2; }
+  .completion-heading {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.18;
+    margin-bottom: 20px;
+  }
+  .completion-heading em { font-style: italic; color: var(--gold); }
+  .completion-body {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.85;
+    margin-bottom: 40px;
+  }
+  .completion-divider { width: 44px; height: 1px; background: var(--gold); margin: 32px auto; opacity: 0.6; }
+  .completion-note {
+    padding: 24px 28px;
+    background: rgba(160,124,58,0.08);
+    border: 1px solid rgba(160,124,58,0.2);
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+    text-align: left;
+    margin-bottom: 36px;
+  }
+  .completion-note strong { color: var(--gold); display: block; margin-bottom: 4px; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; }
+  .btn-complete {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--gold);
+    border: none;
+    padding: 18px 48px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+  }
+  .btn-complete:hover { background: var(--charcoal); }
+
+  /* MOBILE */
+  .mobile-menu-btn {
+    display: none;
+    position: fixed; top: 16px; right: 16px; z-index: 200;
+    background: var(--gold); border: none;
+    width: 44px; height: 44px;
+    cursor: pointer; flex-direction: column;
+    align-items: center; justify-content: center; gap: 5px;
+  }
+  .mobile-menu-btn span { width: 18px; height: 1px; background: var(--white); display: block; }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { transform: translateX(-100%); transition: transform 0.3s; width: 260px; }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; }
+    .mobile-menu-btn { display: flex; }
+    .welcome-hero, .lesson-body, .completion-screen { padding: 60px 28px 80px; }
+    .lesson-header { padding: 16px 28px; }
+    .principle-grid { grid-template-columns: 1fr; }
+    .welcome-meta { flex-wrap: wrap; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<button class="mobile-menu-btn" onclick="toggleMobile()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html" class="sidebar-logo-text">Avelis<span>.</span></a>
+      <div class="sidebar-logo-sub">Caregiver Onboarding</div>
+    </div>
+
+    <div class="sidebar-progress-wrap">
+      <div class="sidebar-progress-label">
+        <span>Your Progress</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="sidebar-progress-bar">
+        <div class="sidebar-progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Getting Started</div>
+      <div class="nav-item active" data-screen="welcome" onclick="goTo('welcome')">
+        <div class="nav-dot" id="dot-welcome">→</div>
+        <div class="nav-item-text">Welcome to Avelis</div>
+      </div>
+
+      <div class="sidebar-section-label" style="margin-top:8px;">Core Training</div>
+      <div class="nav-item" data-screen="l1" onclick="goTo('l1')">
+        <div class="nav-dot" id="dot-l1">1</div>
+        <div class="nav-item-text">The Avelis Standard</div>
+      </div>
+      <div class="nav-item" data-screen="l2" onclick="goTo('l2')">
+        <div class="nav-dot" id="dot-l2">2</div>
+        <div class="nav-item-text">Dementia-Informed Care</div>
+      </div>
+      <div class="nav-item" data-screen="l3" onclick="goTo('l3')">
+        <div class="nav-dot" id="dot-l3">3</div>
+        <div class="nav-item-text">Communication & Presence</div>
+      </div>
+      <div class="nav-item" data-screen="l4" onclick="goTo('l4')">
+        <div class="nav-dot" id="dot-l4">4</div>
+        <div class="nav-item-text">Difficult Moments</div>
+      </div>
+      <div class="nav-item" data-screen="l5" onclick="goTo('l5')">
+        <div class="nav-dot" id="dot-l5">5</div>
+        <div class="nav-item-text">Family Relationships</div>
+      </div>
+      <div class="nav-item" data-screen="l6" onclick="goTo('l6')">
+        <div class="nav-dot" id="dot-l6">6</div>
+        <div class="nav-item-text">Your Role & Responsibilities</div>
+      </div>
+
+      <div class="sidebar-section-label" style="margin-top:8px;">Completion</div>
+      <div class="nav-item" data-screen="done" onclick="goTo('done')">
+        <div class="nav-dot" id="dot-done">✦</div>
+        <div class="nav-item-text">Acknowledgment & Next Steps</div>
+      </div>
+    </nav>
+
+    <div class="sidebar-time">
+      <strong>~30 Minutes</strong>
+      Complete at your own pace. Your progress is saved as you go.
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ── WELCOME ── -->
+    <div class="screen active" id="screen-welcome">
+      <div class="welcome-hero">
+        <div class="welcome-ring welcome-ring-1"></div>
+        <div class="welcome-ring welcome-ring-2"></div>
+        <div class="welcome-ring welcome-ring-3"></div>
+        <div class="welcome-content">
+          <div class="welcome-eyebrow">Welcome · Caregiver Onboarding</div>
+          <h1 class="welcome-heading">
+            You are not just<br>a caregiver.<br>You are the <em>standard</em>.
+          </h1>
+          <p class="welcome-sub">
+            This onboarding is your foundation — not a formality. Every section has been written to prepare you not just for the tasks of this work, but for the spirit of it. Avelis operates at a different level. By the time you finish this, you'll understand exactly what that means.
+          </p>
+          <div class="welcome-meta">
+            <div class="welcome-meta-item">
+              <div class="welcome-meta-label">Estimated Time</div>
+              <div class="welcome-meta-value">25–35 minutes</div>
+            </div>
+            <div class="welcome-meta-item">
+              <div class="welcome-meta-label">Sections</div>
+              <div class="welcome-meta-value">6 Core Lessons</div>
+            </div>
+            <div class="welcome-meta-item">
+              <div class="welcome-meta-label">Training Pay</div>
+              <div class="welcome-meta-value">Included in your first check</div>
+            </div>
+            <div class="welcome-meta-item">
+              <div class="welcome-meta-label">Completion</div>
+              <div class="welcome-meta-value">Required before first shift</div>
+            </div>
+          </div>
+          <button class="btn-start" onclick="goTo('l1')">
+            Begin Onboarding
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LESSON 1: THE AVELIS STANDARD ── -->
+    <div class="screen" id="screen-l1">
+      <div class="lesson-header">
+        <div class="lesson-breadcrumb">Lesson <span>01</span> of 06</div>
+        <div class="lesson-nav-btns">
+          <button class="btn-lesson-nav" onclick="goTo('welcome')">← Back</button>
+          <button class="btn-lesson-nav primary" onclick="completeAndGoTo('l1','l2')">Continue →</button>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-num">Lesson One</div>
+        <h2 class="lesson-title">The Avelis <em>Standard</em>.</h2>
+        <div class="lesson-subtitle">What it means to work here — and why it matters.</div>
+
+        <div class="lesson-lead">
+          "Most home care agencies fill shifts. Avelis builds relationships. That distinction is not marketing — it is the operating philosophy that shapes every decision we make, including this one: choosing you."
+        </div>
+
+        <p class="lesson-text">
+          You have been selected to join Avelis because we believe you bring something that cannot be trained in a classroom — genuine patience, attentiveness, and the kind of human warmth that people living with dementia can sense immediately, even when words fail.
+        </p>
+        <p class="lesson-text">
+          But even the best caregivers need a framework. The Avelis Standard is ours. It is not a set of rules — it is a <strong>way of working</strong> that separates what we do from what most agencies provide.
+        </p>
+
+        <div class="lesson-callout">
+          <div class="lesson-callout-label">The Avelis Standard</div>
+          <div class="lesson-callout-text">Consistency over convenience. Presence over procedure. Showing up — reliably, calmly, without fail — every single time.</div>
+        </div>
+
+        <p class="lesson-text">
+          Here is what that looks like in practice:
+        </p>
+
+        <div class="principle-grid">
+          <div class="principle-block">
+            <div class="principle-num">i.</div>
+            <div class="principle-title">You Are Not Interchangeable</div>
+            <div class="principle-body">We match you to clients deliberately — because the relationship between caregiver and client is the care. You are not a body filling a shift. You are a trusted presence.</div>
+          </div>
+          <div class="principle-block">
+            <div class="principle-num">ii.</div>
+            <div class="principle-title">Consistency Is Therapeutic</div>
+            <div class="principle-body">For someone living with dementia, a familiar face is not a nicety — it is a clinical necessity. You showing up the same way, every time, is itself a form of care.</div>
+          </div>
+          <div class="principle-block">
+            <div class="principle-num">iii.</div>
+            <div class="principle-title">Dignity Is Non-Negotiable</div>
+            <div class="principle-body">Every person in your care is someone's entire world. They deserve to be treated as full human beings — with history, preferences, and inherent worth — on their worst days as much as their best.</div>
+          </div>
+          <div class="principle-block">
+            <div class="principle-num">iv.</div>
+            <div class="principle-title">You Represent Something Larger</div>
+            <div class="principle-body">Every interaction you have reflects on Avelis and on the families who trusted us. Excellence is not occasional — it is the baseline. We hold ourselves to it because families deserve nothing less.</div>
+          </div>
+        </div>
+
+        <p class="lesson-text">
+          Other agencies have caregivers. <strong>Avelis has standards.</strong> You are here because we believe you are capable of upholding them — and because we believe you want to.
+        </p>
+
+        <div class="quiz-section">
+          <div class="quiz-label">Knowledge Check</div>
+          <div class="quiz-question">Which of the following best describes the Avelis approach to caregiving?</div>
+          <div class="quiz-options" id="q1-opts">
+            <div class="quiz-option" onclick="selectOpt('q1',0)"><span class="quiz-option-letter">a.</span>Completing assigned tasks efficiently and on schedule</div>
+            <div class="quiz-option" onclick="selectOpt('q1',1)"><span class="quiz-option-letter">b.</span>Building a consistent, trusted presence that treats every person with full dignity</div>
+            <div class="quiz-option" onclick="selectOpt('q1',2)"><span class="quiz-option-letter">c.</span>Following the care plan provided by the family without deviation</div>
+            <div class="quiz-option" onclick="selectOpt('q1',3)"><span class="quiz-option-letter">d.</span>Providing coverage whenever a family needs a caregiver available</div>
+          </div>
+          <div class="quiz-feedback" id="q1-fb-correct correct-fb">Exactly right. The Avelis standard is about being a trusted, consistent presence — not just completing tasks. The relationship itself is the care.</div>
+          <div class="quiz-feedback" id="q1-fb-incorrect incorrect-fb">Not quite. While tasks and availability matter, the Avelis approach centers on being a trusted, consistent presence that honors the full dignity of the person in care. Review the principle blocks above and try again.</div>
+          <button class="btn-check" id="q1-btn" onclick="checkQ('q1',1)" disabled>Check Answer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LESSON 2: DEMENTIA-INFORMED CARE ── -->
+    <div class="screen" id="screen-l2">
+      <div class="lesson-header">
+        <div class="lesson-breadcrumb">Lesson <span>02</span> of 06</div>
+        <div class="lesson-nav-btns">
+          <button class="btn-lesson-nav" onclick="goTo('l1')">← Back</button>
+          <button class="btn-lesson-nav primary" onclick="completeAndGoTo('l2','l3')">Continue →</button>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-num">Lesson Two</div>
+        <h2 class="lesson-title">Dementia-Informed <em>Care</em>.</h2>
+        <div class="lesson-subtitle">Understanding the condition so you can meet the person.</div>
+
+        <div class="lesson-lead">
+          "Dementia is not one experience. It shifts, it surprises, and it asks more of a caregiver than any diagnosis summary can prepare you for. What it requires most is a willingness to enter someone else's world — without correction, without urgency, without distress."
+        </div>
+
+        <p class="lesson-text">
+          Before you can care for someone living with dementia, you need to understand what they are experiencing. Not clinically — but humanly. Their reality may not match yours. That is not confusion to be corrected. <strong>It is a world to be honored.</strong>
+        </p>
+
+        <p class="lesson-text">
+          Here is what Avelis caregivers understand that sets them apart:
+        </p>
+
+        <ul class="standard-list">
+          <li><strong>Memory loss is not the whole picture.</strong> Emotional memory often remains intact long after factual memory fades. A person may not remember your name but will remember how you made them feel. Show up with warmth every time — it registers, even when nothing else does.</li>
+          <li><strong>Their reality is valid.</strong> If someone believes it is 1962 and they need to pick their children up from school, do not argue. Enter their reality gently. Redirect without dismissing. The goal is calm — not accuracy.</li>
+          <li><strong>Behavior is communication.</strong> Agitation, repetition, and resistance are almost always expressions of an unmet need — fear, pain, confusion, or discomfort. Your first question should always be: what is this person trying to tell me?</li>
+          <li><strong>Routine is medicine.</strong> Familiar sequences reduce anxiety. The same greeting, the same sequence, the same calm presence creates a sense of safety that nothing else can replicate. This is why consistency is our highest value.</li>
+          <li><strong>Every day is different.</strong> Good days and difficult days follow no predictable pattern. Come prepared for both. Anchor yourself in patience rather than expectation.</li>
+        </ul>
+
+        <div class="lesson-callout">
+          <div class="lesson-callout-label">A Note on Dignity</div>
+          <div class="lesson-callout-text">"Never talk about a person in care as if they are not in the room. Never speak to them as you would a child. They are adults with full lives behind them — honor that, always."</div>
+        </div>
+
+        <p class="lesson-text">
+          You will encounter moments that are hard. Repetitive questions, moments of fear or anger, resistance to personal care. These are not failures — they are the nature of the condition. <strong>Your composure in those moments is the care.</strong> A regulated caregiver regulates the person they're with. That is not a metaphor. It is neuroscience.
+        </p>
+
+        <div class="quiz-section">
+          <div class="quiz-label">Knowledge Check</div>
+          <div class="quiz-question">A client you've been caring for insists that her late husband is coming home for dinner and begins to get distressed when you suggest otherwise. The best response is to:</div>
+          <div class="quiz-options" id="q2-opts">
+            <div class="quiz-option" onclick="selectOpt('q2',0)"><span class="quiz-option-letter">a.</span>Gently but firmly explain that her husband passed away, as honesty is always the best policy</div>
+            <div class="quiz-option" onclick="selectOpt('q2',1)"><span class="quiz-option-letter">b.</span>Acknowledge her feelings, enter her reality, and gently redirect toward a comforting activity</div>
+            <div class="quiz-option" onclick="selectOpt('q2',2)"><span class="quiz-option-letter">c.</span>Change the subject immediately to distract her from the thought</div>
+            <div class="quiz-option" onclick="selectOpt('q2',3)"><span class="quiz-option-letter">d.</span>Contact the family immediately to report the episode</div>
+          </div>
+          <div class="quiz-feedback" id="q2-fb-correct correct-fb">Correct. Meeting someone in their reality — acknowledging feelings first, then gently redirecting — is the dementia-informed approach. Correcting creates distress. Connection creates calm.</div>
+          <div class="quiz-feedback" id="q2-fb-incorrect incorrect-fb">In dementia care, correcting someone's reality almost always increases distress without benefit. The priority is always emotional comfort, not factual accuracy. Try again.</div>
+          <button class="btn-check" id="q2-btn" onclick="checkQ('q2',1)" disabled>Check Answer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LESSON 3: COMMUNICATION & PRESENCE ── -->
+    <div class="screen" id="screen-l3">
+      <div class="lesson-header">
+        <div class="lesson-breadcrumb">Lesson <span>03</span> of 06</div>
+        <div class="lesson-nav-btns">
+          <button class="btn-lesson-nav" onclick="goTo('l2')">← Back</button>
+          <button class="btn-lesson-nav primary" onclick="completeAndGoTo('l3','l4')">Continue →</button>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-num">Lesson Three</div>
+        <h2 class="lesson-title">Communication &amp; <em>Presence</em>.</h2>
+        <div class="lesson-subtitle">The art of being genuinely there.</div>
+
+        <div class="lesson-lead">
+          "Presence is not proximity. Being in the same room is not the same as being truly there. Avelis caregivers are trained to be attentive — not just available."
+        </div>
+
+        <p class="lesson-text">
+          How you communicate with the people in your care is as important as anything else you do. In dementia care especially, <strong>tone, pace, and body language carry more weight than words.</strong> Here is what excellent communication looks like in practice:
+        </p>
+
+        <div class="principle-grid">
+          <div class="principle-block">
+            <div class="principle-num">i.</div>
+            <div class="principle-title">Slow Down</div>
+            <div class="principle-body">Speak slowly, calmly, and in short sentences. Allow time for processing — more than feels natural. Rushing communicates anxiety, and anxiety is contagious.</div>
+          </div>
+          <div class="principle-block">
+            <div class="principle-num">ii.</div>
+            <div class="principle-title">Get at Eye Level</div>
+            <div class="principle-body">Approach from the front, not behind. Sit when possible. Eye contact that is warm and steady communicates safety in ways words cannot.</div>
+          </div>
+          <div class="principle-block">
+            <div class="principle-num">iii.</div>
+            <div class="principle-title">Use Names</div>
+            <div class="principle-body">Use their preferred name — ask the family what that is. Names orient. They communicate: I know who you are. I see you. You matter.</div>
+          </div>
+          <div class="principle-block">
+            <div class="principle-num">iv.</div>
+            <div class="principle-title">Ask One Thing at a Time</div>
+            <div class="principle-body">Multiple questions or choices create overwhelm. "Would you like to sit in the garden?" is better than "Would you like to go outside, or maybe watch TV, or we could take a walk?"</div>
+          </div>
+        </div>
+
+        <div class="lesson-callout">
+          <div class="lesson-callout-label">On Touch</div>
+          <div class="lesson-callout-text">"A gentle hand on the arm can communicate more safety than an entire conversation. Use touch deliberately, warmly, and always with awareness of the individual's comfort."</div>
+        </div>
+
+        <p class="lesson-text">
+          Companion care — one of our core services — is built entirely on the quality of your presence. It is not about filling silence. It is about <strong>unhurried attention</strong> — following the person's energy, being genuinely curious about their stories, and allowing conversation to go wherever it goes.
+        </p>
+        <p class="lesson-text">
+          Ask about their life. People living with dementia often retain vivid long-term memories. A question about where they grew up, what they did for work, or who they loved can open something extraordinary. <strong>You are not just passing time. You are honoring a life.</strong>
+        </p>
+
+        <div class="quiz-section">
+          <div class="quiz-label">Knowledge Check</div>
+          <div class="quiz-question">You arrive for a shift and your client seems withdrawn and won't make eye contact. The best approach is to:</div>
+          <div class="quiz-options" id="q3-opts">
+            <div class="quiz-option" onclick="selectOpt('q3',0)"><span class="quiz-option-letter">a.</span>Give them space and check in every 30 minutes until they seem more receptive</div>
+            <div class="quiz-option" onclick="selectOpt('q3',1)"><span class="quiz-option-letter">b.</span>Sit nearby, speak softly, and try a topic or activity you know they enjoy — without pressure</div>
+            <div class="quiz-option" onclick="selectOpt('q3',2)"><span class="quiz-option-letter">c.</span>Ask directly what's wrong so you can address the problem</div>
+            <div class="quiz-option" onclick="selectOpt('q3',3)"><span class="quiz-option-letter">d.</span>Proceed with the care plan regardless of their mood</div>
+          </div>
+          <div class="quiz-feedback" id="q3-fb-correct correct-fb">Well done. Calm, warm, low-pressure presence — meeting them where they are without forcing engagement — is the right approach. Patience is the tool.</div>
+          <div class="quiz-feedback" id="q3-fb-incorrect incorrect-fb">Withdrawal in dementia often responds best to gentle, non-pressuring presence. Giving too much space, asking direct questions about feelings, or proceeding without awareness can all increase distress. Try again.</div>
+          <button class="btn-check" id="q3-btn" onclick="checkQ('q3',1)" disabled>Check Answer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LESSON 4: DIFFICULT MOMENTS ── -->
+    <div class="screen" id="screen-l4">
+      <div class="lesson-header">
+        <div class="lesson-breadcrumb">Lesson <span>04</span> of 06</div>
+        <div class="lesson-nav-btns">
+          <button class="btn-lesson-nav" onclick="goTo('l3')">← Back</button>
+          <button class="btn-lesson-nav primary" onclick="completeAndGoTo('l4','l5')">Continue →</button>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-num">Lesson Four</div>
+        <h2 class="lesson-title">Navigating <em>Difficult Moments</em>.</h2>
+        <div class="lesson-subtitle">Composure is the care. Here is how to hold it.</div>
+
+        <div class="lesson-lead">
+          "The moments that are hardest are the ones that matter most. Your ability to remain grounded — calm, unhurried, and genuinely present — when a client is distressed is the highest expression of this work."
+        </div>
+
+        <p class="lesson-text">
+          Difficult moments are not exceptions in dementia care — they are part of the territory. Sundowning, agitation, repetitive questions, resistance to personal care, confusion about identity or time. These will happen. <strong>How you respond is the difference between escalation and ease.</strong>
+        </p>
+
+        <p class="lesson-text">Here are the most common challenging situations and how Avelis caregivers approach them:</p>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <div class="scenario-tag">Scenario</div>
+            <div class="scenario-title">Repetitive Questions</div>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-situation">"A client asks you what time her daughter is coming — for the fourteenth time in an hour."</div>
+            <div class="scenario-response"><strong>Avelis approach:</strong> Answer warmly every time, as if it is the first. The question is almost always expressing an underlying need — usually anxiety or a desire for reassurance. Respond to the feeling behind it: "She'll be here soon — and in the meantime, it's just you and me. You're in good hands." Then gently redirect to something engaging.</div>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <div class="scenario-tag">Scenario</div>
+            <div class="scenario-title">Resistance to Personal Care</div>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-situation">"A client refuses to shower and becomes verbally agitated when you approach the bathroom."</div>
+            <div class="scenario-response"><strong>Avelis approach:</strong> Do not force it. Safety first — yours and theirs. Step back, give space, and try again in 20–30 minutes when the agitation has passed. In the meantime, consider whether the approach itself can change — a different time of day, a preferred song playing, a more gradual introduction. Note the episode and discuss with the family. Never attempt personal care against clear resistance.</div>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <div class="scenario-tag">Scenario</div>
+            <div class="scenario-title">Sundowning</div>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-situation">"At 4pm, your client becomes increasingly confused, anxious, and wants to leave the house to 'go home.'"</div>
+            <div class="scenario-response"><strong>Avelis approach:</strong> Do not argue or block physically. Walk with them if possible — movement helps. Acknowledge the feeling: "I can hear you want to go home. Let's take a little walk together." Redirect gently toward a familiar, comforting activity afterward. Keep lighting warm and environment calm. Note patterns and share with the family — sundowning at the same time each day is important clinical information.</div>
+          </div>
+        </div>
+
+        <div class="lesson-callout">
+          <div class="lesson-callout-label">Always Remember</div>
+          <div class="lesson-callout-text">"If you ever feel unsafe, or if a situation escalates beyond what you can manage alone — contact Avelis immediately. You are never expected to handle a crisis without support."</div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-label">Knowledge Check</div>
+          <div class="quiz-question">A client becomes physically agitated and refuses personal care. The correct immediate response is to:</div>
+          <div class="quiz-options" id="q4-opts">
+            <div class="quiz-option" onclick="selectOpt('q4',0)"><span class="quiz-option-letter">a.</span>Proceed quickly to minimize the length of distress</div>
+            <div class="quiz-option" onclick="selectOpt('q4',1)"><span class="quiz-option-letter">b.</span>Step back, give space, ensure safety, and try again later with a different approach</div>
+            <div class="quiz-option" onclick="selectOpt('q4',2)"><span class="quiz-option-letter">c.</span>Call the family immediately and wait for instructions before doing anything</div>
+            <div class="quiz-option" onclick="selectOpt('q4',3)"><span class="quiz-option-letter">d.</span>Document the refusal and skip personal care for the day</div>
+          </div>
+          <div class="quiz-feedback" id="q4-fb-correct correct-fb">Correct. Safety first, always. Step back, allow the agitation to pass, then try again with a thoughtful, different approach. Force is never the answer.</div>
+          <div class="quiz-feedback" id="q4-fb-incorrect incorrect-fb">Proceeding against clear resistance is never appropriate, and skipping care entirely without an attempt is not the Avelis standard either. The right approach is to step back, ensure safety, and try again. Try again.</div>
+          <button class="btn-check" id="q4-btn" onclick="checkQ('q4',1)" disabled>Check Answer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LESSON 5: FAMILY RELATIONSHIPS ── -->
+    <div class="screen" id="screen-l5">
+      <div class="lesson-header">
+        <div class="lesson-breadcrumb">Lesson <span>05</span> of 06</div>
+        <div class="lesson-nav-btns">
+          <button class="btn-lesson-nav" onclick="goTo('l4')">← Back</button>
+          <button class="btn-lesson-nav primary" onclick="completeAndGoTo('l5','l6')">Continue →</button>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-num">Lesson Five</div>
+        <h2 class="lesson-title">Working With <em>Families</em>.</h2>
+        <div class="lesson-subtitle">The people behind the care — and how to serve them too.</div>
+
+        <div class="lesson-lead">
+          "When you walk through a client's door, you are not only caring for one person. You are giving an entire family permission to breathe. That is a profound responsibility — and a profound privilege."
+        </div>
+
+        <p class="lesson-text">
+          Family caregivers are often exhausted, grieving, and carrying more than they show. The person who hired Avelis may be a spouse who hasn't slept well in months, or an adult child managing this from another city while holding down a career and raising their own children. <strong>Your presence in their home is the relief they've been waiting for.</strong>
+        </p>
+
+        <p class="lesson-text">How Avelis caregivers work with families:</p>
+
+        <ul class="standard-list">
+          <li><strong>Honor their knowledge.</strong> The family knows this person better than anyone. Their instructions and preferences are not suggestions — they are essential information. Listen carefully. Ask thoughtful questions. Never dismiss what they tell you about their loved one.</li>
+          <li><strong>Communicate clearly and promptly.</strong> After each visit, give a brief, honest update. What went well. What was difficult. Anything worth noting. Families should never have to wonder how the visit went. This is how trust is built — and maintained.</li>
+          <li><strong>Stay in your lane.</strong> You are there to provide non-medical, companionship and respite care. You are not a nurse, a therapist, or a medical advisor. Never offer diagnoses, medical opinions, or advice that falls outside your role. If you observe something concerning, report it to Avelis and let us determine the appropriate response.</li>
+          <li><strong>Be a calm presence for the family too.</strong> Some family members will be emotional — occasionally directed at you. Do not take it personally. Lead with empathy. Understand that what you're witnessing is grief and love, not criticism of you.</li>
+          <li><strong>Maintain professional boundaries.</strong> Deep relationships with families are natural in this work. But Avelis caregivers do not accept gifts of significant value, do not borrow from clients or families, and do not engage in financial discussions with the people in their care.</li>
+        </ul>
+
+        <div class="lesson-callout">
+          <div class="lesson-callout-label">If Something Concerns You</div>
+          <div class="lesson-callout-text">"Never try to manage a serious concern about a client's wellbeing or safety alone. Contact Avelis directly — that is exactly what we are here for. You will never be penalized for raising a concern."</div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-label">Knowledge Check</div>
+          <div class="quiz-question">After a shift, a family member asks you whether you think their mother's dementia is getting worse and whether she should see a specialist. You should:</div>
+          <div class="quiz-options" id="q5-opts">
+            <div class="quiz-option" onclick="selectOpt('q5',0)"><span class="quiz-option-letter">a.</span>Share your honest observations and suggest they speak with her physician</div>
+            <div class="quiz-option" onclick="selectOpt('q5',1)"><span class="quiz-option-letter">b.</span>Reassure them that everything seems fine to avoid causing worry</div>
+            <div class="quiz-option" onclick="selectOpt('q5',2)"><span class="quiz-option-letter">c.</span>Acknowledge the question, share your observational notes, and encourage them to contact Avelis and the client's physician for guidance</div>
+            <div class="quiz-option" onclick="selectOpt('q5',3)"><span class="quiz-option-letter">d.</span>Decline to comment as it is outside your role entirely</div>
+          </div>
+          <div class="quiz-feedback" id="q5-fb-correct correct-fb">Exactly right. You can share what you've observed — that's valuable — but you direct medical questions to the appropriate professionals. Avelis is your partner in navigating these conversations.</div>
+          <div class="quiz-feedback" id="q5-fb-incorrect incorrect-fb">Offering a medical opinion (even well-intentioned) or dismissing the concern are both problematic. Share your observations, stay within your role, and connect the family with the right support. Try again.</div>
+          <button class="btn-check" id="q5-btn" onclick="checkQ('q5',2)" disabled>Check Answer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LESSON 6: YOUR ROLE & RESPONSIBILITIES ── -->
+    <div class="screen" id="screen-l6">
+      <div class="lesson-header">
+        <div class="lesson-breadcrumb">Lesson <span>06</span> of 06</div>
+        <div class="lesson-nav-btns">
+          <button class="btn-lesson-nav" onclick="goTo('l5')">← Back</button>
+          <button class="btn-lesson-nav primary" onclick="completeAndGoTo('l6','done')">Complete Training →</button>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-num">Lesson Six</div>
+        <h2 class="lesson-title">Your Role &amp; <em>Responsibilities</em>.</h2>
+        <div class="lesson-subtitle">What we expect — and what you can expect from us.</div>
+
+        <div class="lesson-lead">
+          "This is a two-way commitment. Avelis will support you, communicate with you, and place you with intention. In return, we ask that you hold the standard — in every visit, with every family, without exception."
+        </div>
+
+        <p class="lesson-text">
+          As a 1099 independent contractor, you set your own schedule within the assignments you accept. But every assignment you accept carries the full weight of the Avelis name and standard. Here is what that looks like day to day:
+        </p>
+
+        <div class="principle-grid">
+          <div class="principle-block">
+            <div class="principle-num">i.</div>
+            <div class="principle-title">Reliability Above All</div>
+            <div class="principle-body">If you accept a shift, you are there — on time, prepared, and present. Last-minute cancellations directly harm vulnerable people and fracture the trust families have placed in us. Contact Avelis immediately if an emergency arises.</div>
+          </div>
+          <div class="principle-block">
+            <div class="principle-num">ii.</div>
+            <div class="principle-title">Professional Appearance</div>
+            <div class="principle-body">Arrive clean, dressed appropriately, and without strong fragrances. Sensory sensitivity is common in dementia — strong smells can cause significant agitation. Your appearance communicates professionalism to families on their most stressed days.</div>
+          </div>
+          <div class="principle-block">
+            <div class="principle-num">iii.</div>
+            <div class="principle-title">Phone Use</div>
+            <div class="principle-body">Personal phone use during a shift is limited to urgent matters. Your full attention belongs to the person in your care. This is non-negotiable and reflects directly on Avelis in every home you enter.</div>
+          </div>
+          <div class="principle-block">
+            <div class="principle-num">iv.</div>
+            <div class="principle-title">Confidentiality</div>
+            <div class="principle-body">Everything you learn about a client and their family — their condition, their home, their dynamics — is strictly confidential. This includes social media. A single breach of privacy ends your relationship with Avelis immediately.</div>
+          </div>
+        </div>
+
+        <p class="lesson-text" style="margin-top:32px;">
+          <strong>Your compensation:</strong> Training pay for completing this onboarding is included in your first paycheck following your first completed shift. Your hourly rate was discussed during your placement — if you have questions about compensation, contact Avelis directly.
+        </p>
+
+        <ul class="standard-list" style="margin-top:16px;">
+          <li><strong>Training pay</strong> is included in your first check after your first completed shift assignment</li>
+          <li><strong>Communication</strong> — all updates, scheduling changes, and client notes go through Avelis directly</li>
+          <li><strong>Support</strong> — you can reach Avelis any time a situation feels beyond what you can manage alone. We mean this.</li>
+          <li><strong>Feedback</strong> — we will check in with you after your first several shifts. Your experience matters to how we operate</li>
+        </ul>
+
+        <div class="lesson-callout">
+          <div class="lesson-callout-label">A Final Word</div>
+          <div class="lesson-callout-text">"We hired you because we believe in you. The families who will welcome you into their homes are trusting us with something irreplaceable. Carry that with you — and know that we are carrying it alongside you."</div>
+        </div>
+
+        <div class="quiz-section">
+          <div class="quiz-label">Final Check</div>
+          <div class="quiz-question">Which of the following best reflects the Avelis expectation of a caregiver during a shift?</div>
+          <div class="quiz-options" id="q6-opts">
+            <div class="quiz-option" onclick="selectOpt('q6',0)"><span class="quiz-option-letter">a.</span>Complete all tasks on the care plan and document completion</div>
+            <div class="quiz-option" onclick="selectOpt('q6',1)"><span class="quiz-option-letter">b.</span>Be fully present, maintain the client's dignity, communicate clearly, and uphold the Avelis standard in every interaction</div>
+            <div class="quiz-option" onclick="selectOpt('q6',2)"><span class="quiz-option-letter">c.</span>Follow family instructions precisely and avoid making any independent decisions</div>
+            <div class="quiz-option" onclick="selectOpt('q6',3)"><span class="quiz-option-letter">d.</span>Ensure the client is safe and comfortable, then use remaining time productively</div>
+          </div>
+          <div class="quiz-feedback" id="q6-fb-correct correct-fb">That is exactly it. Full presence, dignity, clear communication, and the Avelis standard — in every visit, without exception. You are ready.</div>
+          <div class="quiz-feedback" id="q6-fb-incorrect incorrect-fb">Task completion and safety matter — but the Avelis standard asks for more. Full presence, dignity in every interaction, and upholding the standard that sets us apart. Try again.</div>
+          <button class="btn-check" id="q6-btn" onclick="checkQ('q6',1)" disabled>Check Answer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COMPLETION ── -->
+    <div class="screen" id="screen-done">
+      <div class="completion-screen">
+        <div class="completion-ring completion-ring-1"></div>
+        <div class="completion-ring completion-ring-2"></div>
+        <div class="completion-content">
+          <div class="completion-seal">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 class="completion-heading">
+            Onboarding <em>complete</em>.<br>Welcome to Avelis.
+          </h2>
+          <p class="completion-body">
+            You have completed the Avelis caregiver onboarding. You now carry the foundation of what it means to work at this standard — and we are honored to have you on this team.
+          </p>
+          <div class="completion-divider"></div>
+          <div class="completion-note">
+            <strong>Regarding Your Training Pay</strong>
+            Compensation for completing this onboarding will be included in your first paycheck following the completion of your first assigned shift. No additional action is required on your part — we have your record of completion.
+          </div>
+          <div class="completion-note">
+            <strong>Your Next Steps</strong>
+            Avelis will be in touch to discuss your first placement. In the meantime, if you have questions about your assignment, compensation, or anything else — reach out directly. You are not on your own here.
+          </div>
+          <a href="index.html" class="btn-complete">Return to Avelis Care</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // Track state
+  const completed = new Set();
+  const quizAnswers = {};
+  const LESSONS = ['welcome','l1','l2','l3','l4','l5','l6','done'];
+  let current = 'welcome';
+
+  function goTo(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const navEl = document.querySelector(`[data-screen="${id}"]`);
+    if (navEl) navEl.classList.add('active');
+    current = id;
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Close mobile sidebar
+    document.getElementById('sidebar').classList.remove('open');
+  }
+
+  function completeAndGoTo(from, to) {
+    completed.add(from);
+    const dot = document.getElementById('dot-' + from);
+    if (dot) dot.textContent = '✓';
+    const navEl = document.querySelector(`[data-screen="${from}"]`);
+    if (navEl) { navEl.classList.add('completed'); navEl.classList.remove('active'); }
+    updateProgress();
+    goTo(to);
+  }
+
+  function updateProgress() {
+    const total = 7; // welcome + 6 lessons (not counting done screen)
+    const done = completed.size;
+    const pct = Math.round((done / total) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+
+  // Quiz logic
+  function selectOpt(qId, idx) {
+    const opts = document.querySelectorAll(`#${qId}-opts .quiz-option`);
+    opts.forEach((o,i) => {
+      o.classList.remove('selected');
+      if (i === idx) o.classList.add('selected');
+    });
+    quizAnswers[qId] = idx;
+    document.getElementById(`${qId}-btn`).disabled = false;
+  }
+
+  function checkQ(qId, correct) {
+    const selected = quizAnswers[qId];
+    if (selected === undefined) return;
+    const opts = document.querySelectorAll(`#${qId}-opts .quiz-option`);
+    opts.forEach((o,i) => {
+      if (i === correct) o.classList.add('correct');
+      else if (i === selected && selected !== correct) o.classList.add('incorrect');
+    });
+
+    const correctFb = document.getElementById(`${qId}-fb-correct`);
+    const incorrectFb = document.getElementById(`${qId}-fb-incorrect`);
+
+    if (selected === correct) {
+      if (correctFb) { correctFb.classList.add('show','correct-fb'); }
+    } else {
+      if (incorrectFb) { incorrectFb.classList.add('show','incorrect-fb'); }
+    }
+
+    document.getElementById(`${qId}-btn`).disabled = true;
+    // Re-enable selection to retry if wrong
+    if (selected !== correct) {
+      setTimeout(() => {
+        opts.forEach(o => { o.classList.remove('selected','incorrect'); });
+        if (incorrectFb) incorrectFb.classList.remove('show');
+        quizAnswers[qId] = undefined;
+        document.getElementById(`${qId}-btn`).disabled = true;
+        document.getElementById(`${qId}-btn`).onclick = () => checkQ(qId, correct);
+      }, 3000);
+    }
+  }
+
+  // Mobile sidebar
+  function toggleMobile() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
