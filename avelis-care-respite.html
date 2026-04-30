@@ -140,6 +140,35 @@
     .service-nav-grid { grid-template-columns: 1fr 1fr; }
     .footer-inner { padding: 0 28px; }
   }
+
+  /* SERVICES LIST */
+  #services-list { background: var(--white); }
+  .services-list-intro { font-size: 0.95rem; color: var(--warm-gray); line-height: 1.85; max-width: 640px; margin-bottom: 48px; }
+  .services-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .service-item {
+    padding: 24px 28px;
+    background: var(--cream);
+    border-left: 2px solid transparent;
+    transition: border-color 0.25s, background 0.25s;
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .service-item:hover { border-left-color: var(--gold); background: var(--parchment); }
+  .service-item-icon {
+    width: 28px; height: 28px; min-width: 28px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .service-item-icon svg { width: 12px; height: 12px; stroke: var(--gold); fill: none; }
+  .service-item-text {
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+  .service-item-text strong { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 3px; }
+  @media (max-width: 900px) { .services-columns { grid-template-columns: 1fr; } }
+
 </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3VDCQR3X6W"></script>
@@ -173,7 +202,7 @@
       <div class="hero-tag">St. Petersburg, Florida</div>
     </div>
     <div class="hero-right-text fade-up d1">
-      "For the caregiver who needs to breathe — we arrive so you can step away without guilt, and return without worry."
+      "We arrive so you can exhale. Your loved one stays home, in calm and capable hands."
     </div>
   </div>
 </section>
@@ -184,7 +213,7 @@
     <div class="intro-grid">
       <div class="fade-up">
         <div class="section-label">The Service</div>
-        <p class="intro-lead">Caring for someone with dementia is <em>extraordinary</em> work. It also asks more than any one person should carry without relief.</p>
+        <p class="intro-lead">Caring for someone with dementia is <em>extraordinary</em> work. You shouldn't have to do it without relief.</p>
         <div class="divider"></div>
         <p class="body-text" style="margin-bottom:20px;">Private respite care exists so that you can step away — to rest, to attend to your own life, to simply exhale — without leaving your loved one in the care of a stranger. Avelis caregivers arrive prepared, calm, and already familiar with what matters to the person in your home.</p>
         <p class="body-text">This is not coverage. It is a considered handoff — from one trusted presence to another.</p>
@@ -210,22 +239,22 @@
       <div class="expect-item fade-up d1">
         <div class="expect-num">i.</div>
         <div class="expect-title">A Thorough Introduction</div>
-        <div class="expect-body">Your caregiver meets your loved one before the first solo visit. We never send someone unfamiliar without preparation and a proper handoff from you.</div>
+        <div class="expect-body">Your caregiver meets your loved one before the first solo visit. No cold starts.</div>
       </div>
       <div class="expect-item fade-up d2">
         <div class="expect-num">ii.</div>
         <div class="expect-title">Routine Held with Care</div>
-        <div class="expect-body">We follow the rhythms that already exist in your home — meals, rest, activity, preference. Disruption is the enemy of comfort in dementia care, and we treat it accordingly.</div>
+        <div class="expect-body">We follow the rhythms that already exist in your home — meals, rest, preferences. Disruption is the enemy of comfort.</div>
       </div>
       <div class="expect-item fade-up d1">
         <div class="expect-num">iii.</div>
         <div class="expect-title">Calm, Capable Presence</div>
-        <div class="expect-body">Our caregivers are selected for composure. If something shifts during your absence, they are trained to respond without alarm — and to keep you informed without unnecessary worry.</div>
+        <div class="expect-body">Composure is how we select caregivers. If something shifts, they are trained to respond without alarm.</div>
       </div>
       <div class="expect-item fade-up d2">
         <div class="expect-num">iv.</div>
         <div class="expect-title">A Clear Handback</div>
-        <div class="expect-body">When you return, your caregiver gives you a brief, honest account of how the visit went — what was good, what was difficult, and anything worth noting going forward.</div>
+        <div class="expect-body">When you return, your caregiver gives you a brief, honest account of the visit — what was good, what was hard.</div>
       </div>
     </div>
   </div>
@@ -239,7 +268,7 @@
         <div class="section-label">Who This Serves</div>
         <h2 class="section-heading">You don't have to<br>be at the <em>limit</em><br>to ask for help.</h2>
         <div class="divider"></div>
-        <p class="body-text">Respite care is for any family caregiver who carries consistent responsibility for someone living with dementia — regardless of whether you feel you've "earned" a break. You have.</p>
+        <p class="body-text">Respite care is for any family caregiver carrying consistent responsibility for someone with dementia — whether or not you feel you've earned a break. You have.</p>
       </div>
       <div class="fade-up d1">
         <ul class="who-list">
@@ -263,7 +292,7 @@
         <div class="section-label">Pricing</div>
         <h2 class="section-heading">Straightforward.<br><em>No surprises.</em></h2>
         <div class="divider"></div>
-        <p class="body-text">Respite care is priced by the hour, with a minimum shift length to ensure meaningful, unrushed time for your loved one. Rates reflect the experience level of your matched caregiver.</p>
+        <p class="body-text">Billed hourly with a minimum 3-hour shift.</p>
         <div class="pricing-block" style="margin-top:36px;">
           <div class="pricing-block-label">Estimated Rate Range</div>
           <div class="pricing-row">
@@ -298,6 +327,66 @@
 </section>
 
 <!-- SERVICE NAV -->
+<!-- WHAT WE PROVIDE -->
+<section id="services-list">
+  <div class="container">
+    <div class="section-label">What We Provide</div>
+    <h2 class="section-heading">Everything included<br>in this <em>service</em>.</h2>
+    <div class="divider"></div>
+    <p class="services-list-intro">As a non-medical private home care service, here is exactly what your caregiver provides on every visit.</p>
+    <div class="services-columns">
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Companion Presence</strong>A calm, attentive caregiver stays with your loved one so you can step away completely.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Engagement & Activity</strong>Conversation, music, familiar routines, and activities tailored to your loved one's interests.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Meal Preparation</strong>Preparing or assisting with breakfast, lunch, snacks, and light meals per dietary preferences.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Medication Reminders</strong>Prompting scheduled medications — not administration.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Light Housekeeping</strong>Tidying common areas, dishes, and light tasks to keep the home comfortable.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Personal Care Assistance</strong>Help with grooming, dressing, and hygiene as needed.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Toileting & Incontinence Care</strong>Dignified, respectful assistance when needed.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Mobility Assistance</strong>Steadying, guiding, and assisting with safe movement through the home.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Safety Supervision</strong>Continuous watchful presence to prevent falls and manage wandering.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Errand Support</strong>Light errands or accompanying your loved one on outings when appropriate.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Post-Visit Reporting</strong>A brief, honest update after every visit so you always know how the day went.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Caregiver Handoff</strong>A thoughtful transition when you return — notes on the visit, what went well, what to watch.</div>
+              </div>
+    </div>
+  </div>
+</section>
+
 <section id="service-nav">
   <div class="container">
     <div class="service-nav-label">Other Services</div>
@@ -328,7 +417,7 @@
     <div class="cta-inner fade-up">
       <div class="section-label" style="color:var(--gold);">Begin Here</div>
       <h2 class="cta-heading">Ready to talk<br>about what you <em>need</em>?</h2>
-      <p class="cta-body">A consultation costs nothing and commits you to nothing. Tell us your situation, and we'll listen — without pressure, without a sales pitch.</p>
+      <p class="cta-body">A consultation is free and commits you to nothing. Tell us your situation — we'll listen.</p>
       <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
         <a href="index.html#contact" class="btn-primary">Request a Private Consultation</a>
         <a href="index.html" class="btn-ghost">Return to Avelis Care</a>

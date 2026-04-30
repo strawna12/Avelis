@@ -119,6 +119,35 @@
     .service-nav-grid { grid-template-columns: 1fr 1fr; }
     .footer-inner { padding: 0 28px; }
   }
+
+  /* SERVICES LIST */
+  #services-list { background: var(--white); }
+  .services-list-intro { font-size: 0.95rem; color: var(--warm-gray); line-height: 1.85; max-width: 640px; margin-bottom: 48px; }
+  .services-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .service-item {
+    padding: 24px 28px;
+    background: var(--cream);
+    border-left: 2px solid transparent;
+    transition: border-color 0.25s, background 0.25s;
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .service-item:hover { border-left-color: var(--gold); background: var(--parchment); }
+  .service-item-icon {
+    width: 28px; height: 28px; min-width: 28px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .service-item-icon svg { width: 12px; height: 12px; stroke: var(--gold); fill: none; }
+  .service-item-text {
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+  .service-item-text strong { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 3px; }
+  @media (max-width: 900px) { .services-columns { grid-template-columns: 1fr; } }
+
 </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3VDCQR3X6W"></script>
@@ -151,7 +180,7 @@
       <div class="hero-tag">St. Petersburg, Florida</div>
     </div>
     <div class="hero-right-text fade-up d1">
-      "Night hours carry their own weight. We are there — steady when things shift, so both of you can rest."
+      "Our overnight caregivers are chosen for composure under pressure, so both of you can rest."
     </div>
   </div>
 </section>
@@ -161,7 +190,7 @@
     <div class="intro-grid">
       <div class="fade-up">
         <div class="section-label">The Service</div>
-        <p class="intro-lead">For many families, the nights are the <em>hardest part</em> — restlessness, confusion, waking, wandering. And the toll of broken sleep compounds everything else.</p>
+        <p class="intro-lead">For many families, the nights are the <em>hardest part</em>. Restlessness, wandering, waking, confusion — and the toll of broken sleep on everyone.</p>
         <div class="divider"></div>
         <p class="body-text" style="margin-bottom:20px;">Avelis overnight caregivers are not simply present — they are selected for this specific challenge. Nighttime dementia care asks for a different kind of composure: the ability to respond to disorientation without alarm, to redirect without escalating, and to hold a calm environment when the world feels uncertain to the person in their care.</p>
         <p class="body-text">We provide that. And we do it consistently, with the same caregiver wherever possible, so that a familiar voice and familiar manner are there in the dark hours when they matter most.</p>
@@ -191,17 +220,17 @@
       <div class="expect-item fade-up d2">
         <div class="expect-num">ii.</div>
         <div class="expect-title">Briefed on Your Loved One's Patterns</div>
-        <div class="expect-body">Before arrival, your caregiver is told what to expect: typical sleep patterns, common night behaviors, what soothes, what doesn't. They arrive informed, not guessing.</div>
+        <div class="expect-body">Before arrival, your caregiver is told what to expect: sleep patterns, common night behaviors, what soothes.</div>
       </div>
       <div class="expect-item fade-up d1">
         <div class="expect-num">iii.</div>
         <div class="expect-title">Safety and Comfort Maintained</div>
-        <div class="expect-body">Wandering, falls, and confusion are managed with quiet vigilance — not restraint, not alarm. The goal is always to restore ease, not to control.</div>
+        <div class="expect-body">Wandering, falls, and confusion managed with quiet vigilance — not restraint, not alarm.</div>
       </div>
       <div class="expect-item fade-up d2">
         <div class="expect-num">iv.</div>
         <div class="expect-title">Morning Handoff</div>
-        <div class="expect-body">You wake to a brief, honest summary of how the night went — and a caregiver who has kept watch so you could genuinely rest.</div>
+        <div class="expect-body">You wake to a brief summary of the night — and a caregiver who kept watch so you could genuinely rest.</div>
       </div>
     </div>
   </div>
@@ -214,7 +243,7 @@
         <div class="section-label">Who This Serves</div>
         <h2 class="section-heading">Sleep is not<br>a <em>luxury</em>.<br>It is a necessity.</h2>
         <div class="divider"></div>
-        <p class="body-text">If you are losing sleep to care for someone else — night after night — you are not sustainable. Overnight care is not an indulgence. It is what makes the rest of the caregiving possible.</p>
+        <p class="body-text">If you are losing sleep night after night to provide care, you are not sustainable. Overnight support is what makes the rest of caregiving possible.</p>
       </div>
       <div class="fade-up d1">
         <ul class="who-list">
@@ -238,7 +267,7 @@
         <div class="section-label">Pricing</div>
         <h2 class="section-heading">Straightforward.<br><em>No surprises.</em></h2>
         <div class="divider"></div>
-        <p class="body-text">Overnight care is priced as a flat shift rate, typically covering an 8–10 hour window. Rates reflect the specialized nature of nighttime dementia support and the experience of your matched caregiver.</p>
+        <p class="body-text">Priced as a flat overnight shift rate (8–10 hrs).</p>
         <div class="pricing-block" style="margin-top:36px;">
           <div class="pricing-block-label">Estimated Rate Range</div>
           <div class="pricing-row">
@@ -272,6 +301,66 @@
   </div>
 </section>
 
+<!-- WHAT WE PROVIDE -->
+<section id="services-list">
+  <div class="container">
+    <div class="section-label">What We Provide</div>
+    <h2 class="section-heading">Everything included<br>in this <em>service</em>.</h2>
+    <div class="divider"></div>
+    <p class="services-list-intro">As a non-medical private home care service, here is exactly what your caregiver provides on every visit.</p>
+    <div class="services-columns">
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Overnight Supervision</strong>A trained caregiver present through the night — awake and attentive.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Sundowning Support</strong>Calm redirection and reassurance during evening and nighttime confusion.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Wandering Prevention</strong>Continuous safety monitoring to prevent unsafe nighttime movement.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Nighttime Toileting</strong>Dignified assistance with bathroom needs during the night.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Sleep Routine Support</strong>Helping your loved one settle and return to rest after waking.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Medication Reminders</strong>Prompting any scheduled nighttime medications.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Safety Monitoring</strong>Fall prevention, environment checks, and immediate response to distress.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Behavioral De-escalation</strong>Calm, trained response to nighttime agitation or confusion.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Morning Handoff</strong>A clear summary of the night for the family caregiver when morning arrives.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Personal Care Assistance</strong>Help with toileting, hygiene, or comfort needs through the night.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Emergency Coordination</strong>Immediate escalation to family and emergency services if required.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Documentation</strong>Notes on nighttime behaviors to support ongoing care planning.</div>
+              </div>
+    </div>
+  </div>
+</section>
+
 <section id="service-nav">
   <div class="container">
     <div class="service-nav-label">Other Services</div>
@@ -301,7 +390,7 @@
     <div class="cta-inner fade-up">
       <div class="section-label" style="color:var(--gold);">Begin Here</div>
       <h2 class="cta-heading">Let's talk about<br>what the <em>nights</em> look like.</h2>
-      <p class="cta-body">We understand how much this matters. A private consultation is the first step — no pressure, no obligation. Just a conversation about what your family needs.</p>
+      <p class="cta-body">A private consultation is the first step — no pressure, no obligation.</p>
       <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
         <a href="index.html#contact" class="btn-primary">Request a Private Consultation</a>
         <a href="index.html" class="btn-ghost">Return to Avelis Care</a>

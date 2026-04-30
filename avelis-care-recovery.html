@@ -119,6 +119,35 @@
     .service-nav-grid { grid-template-columns: 1fr 1fr; }
     .footer-inner { padding: 0 28px; }
   }
+
+  /* SERVICES LIST */
+  #services-list { background: var(--white); }
+  .services-list-intro { font-size: 0.95rem; color: var(--warm-gray); line-height: 1.85; max-width: 640px; margin-bottom: 48px; }
+  .services-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .service-item {
+    padding: 24px 28px;
+    background: var(--cream);
+    border-left: 2px solid transparent;
+    transition: border-color 0.25s, background 0.25s;
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .service-item:hover { border-left-color: var(--gold); background: var(--parchment); }
+  .service-item-icon {
+    width: 28px; height: 28px; min-width: 28px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .service-item-icon svg { width: 12px; height: 12px; stroke: var(--gold); fill: none; }
+  .service-item-text {
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+  .service-item-text strong { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 3px; }
+  @media (max-width: 900px) { .services-columns { grid-template-columns: 1fr; } }
+
 </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3VDCQR3X6W"></script>
@@ -151,7 +180,7 @@
       <div class="hero-tag">St. Petersburg, Florida</div>
     </div>
     <div class="hero-right-text fade-up d1">
-      "Homecoming after hospitalization is disorienting for anyone. We bridge that gap with attentive support from day one."
+      "The days immediately after discharge are the highest-risk window. We are there from the first hour home."
     </div>
   </div>
 </section>
@@ -161,7 +190,7 @@
     <div class="intro-grid">
       <div class="fade-up">
         <div class="section-label">The Service</div>
-        <p class="intro-lead">The days immediately following a hospital discharge are among the <em>highest-risk</em> in any care journey.</p>
+        <p class="intro-lead">The period following a hospital discharge is among the <em>highest-risk</em> windows in any care journey.</p>
         <div class="divider"></div>
         <p class="body-text" style="margin-bottom:20px;">For someone living with dementia, this risk is compounded. The hospital environment — unfamiliar, stimulating, disorienting — often accelerates cognitive decline. Returning home can trigger confusion, anxiety, and behavioral changes that are distressing for everyone involved.</p>
         <p class="body-text">Avelis post-hospital support is designed specifically for this window. We step in early — often from the day of discharge — to provide steady, reassuring presence that helps your loved one re-establish their bearings and reduces the risk of readmission.</p>
@@ -186,22 +215,22 @@
       <div class="expect-item fade-up d1">
         <div class="expect-num">i.</div>
         <div class="expect-title">Rapid Deployment</div>
-        <div class="expect-body">We understand that discharge timelines are rarely predictable. We move quickly — often arranging support within 24 hours of a family's call, so your loved one is not coming home to an unprepared environment.</div>
+        <div class="expect-body">We understand discharge timelines are unpredictable. We often arrange support within 24 hours of a family's call.</div>
       </div>
       <div class="expect-item fade-up d2">
         <div class="expect-num">ii.</div>
         <div class="expect-title">Reorientation and Reassurance</div>
-        <div class="expect-body">The first hours home often involve confusion, questions, and anxiety. Our caregivers provide calm, patient reorientation — gently returning your loved one to the rhythms and familiarity of their own space.</div>
+        <div class="expect-body">The first hours home involve confusion and anxiety. Our caregivers provide calm, patient reorientation.</div>
       </div>
       <div class="expect-item fade-up d1">
         <div class="expect-num">iii.</div>
         <div class="expect-title">Coordination With Family</div>
-        <div class="expect-body">We keep you informed without overwhelming you. Any changes in condition, behavior, or comfort are communicated promptly — and we help you think through next steps when they arise.</div>
+        <div class="expect-body">Any changes in condition or behavior are communicated promptly. You are never left wondering.</div>
       </div>
       <div class="expect-item fade-up d2">
         <div class="expect-num">iv.</div>
         <div class="expect-title">Continuity Into Ongoing Care</div>
-        <div class="expect-body">Recovery support often transitions naturally into ongoing respite or companion care. If that's what your family needs, we make that transition seamless — with the same caregiver wherever possible.</div>
+        <div class="expect-body">Recovery support transitions naturally into respite or companion care — with the same caregiver wherever possible.</div>
       </div>
     </div>
   </div>
@@ -214,7 +243,7 @@
         <div class="section-label">Who This Serves</div>
         <h2 class="section-heading">For families facing<br>the hardest <em>transition</em>.</h2>
         <div class="divider"></div>
-        <p class="body-text">Post-hospital care is often most urgently needed and least planned for. If you are navigating this now, we are here — and we can move quickly.</p>
+        <p class="body-text">If you are facing a hospital discharge — now or soon — reach out today. We move quickly.</p>
       </div>
       <div class="fade-up d1">
         <ul class="who-list">
@@ -238,7 +267,7 @@
         <div class="section-label">Pricing</div>
         <h2 class="section-heading">Straightforward.<br><em>No surprises.</em></h2>
         <div class="divider"></div>
-        <p class="body-text">Post-hospital support is priced by the hour, with rates reflecting the higher level of attentiveness this transition period requires. We can often arrange coverage within 24 hours of discharge.</p>
+        <p class="body-text">Billed hourly with a minimum 4-hour shift. Intensive first-week support discussed individually.</p>
         <div class="pricing-block" style="margin-top:36px;">
           <div class="pricing-block-label">Estimated Rate Range</div>
           <div class="pricing-row">
@@ -272,6 +301,66 @@
   </div>
 </section>
 
+<!-- WHAT WE PROVIDE -->
+<section id="services-list">
+  <div class="container">
+    <div class="section-label">What We Provide</div>
+    <h2 class="section-heading">Everything included<br>in this <em>service</em>.</h2>
+    <div class="divider"></div>
+    <p class="services-list-intro">As a non-medical private home care service, here is exactly what your caregiver provides on every visit.</p>
+    <div class="services-columns">
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Discharge Day Support</strong>Present from the moment your loved one arrives home — no gap in care.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Reorientation & Reassurance</strong>Calm, patient support to help your loved one readjust to their home environment.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Medication Reminders</strong>Prompting all prescribed post-discharge medications on schedule.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Meal Preparation</strong>Nutritious meals prepared to any dietary or therapeutic guidelines.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Personal Care Assistance</strong>Help with bathing, dressing, grooming, and hygiene during recovery.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Mobility & Fall Prevention</strong>Close assistance with movement, transfers, and ambulation to prevent re-injury.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Safety Monitoring</strong>Continuous watchful presence during the highest-risk recovery window.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Wound Awareness</strong>Observing and reporting on wound site condition — not treatment.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Family Communication</strong>Regular updates so family members are never left wondering how recovery is progressing.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Appointment Accompaniment</strong>Accompanying your loved one to follow-up appointments when needed.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Light Housekeeping</strong>Maintaining a clean, safe home environment during recovery.</div>
+              </div>
+              <div class="service-item">
+                <div class="service-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="service-item-text"><strong>Transition to Ongoing Care</strong>Seamless continuation into companion or respite care when recovery support concludes.</div>
+              </div>
+    </div>
+  </div>
+</section>
+
 <section id="service-nav">
   <div class="container">
     <div class="service-nav-label">Other Services</div>
@@ -301,7 +390,7 @@
     <div class="cta-inner fade-up">
       <div class="section-label" style="color:var(--gold);">Begin Here</div>
       <h2 class="cta-heading">Discharge is coming.<br>We can be <em>ready</em>.</h2>
-      <p class="cta-body">If you're facing a hospital discharge — now or soon — reach out today. We respond promptly and can often arrange support within 24 hours of your call.</p>
+      <p class="cta-body">We respond promptly and can often arrange support within 24 hours of your call.</p>
       <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
         <a href="index.html#contact" class="btn-primary">Request a Private Consultation</a>
         <a href="index.html" class="btn-ghost">Return to Avelis Care</a>
