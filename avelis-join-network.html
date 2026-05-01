@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the Avelis Network — Caregivers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F0EBE1;
+    --parchment: #DDD5C8;
+    --taupe: #A89880;
+    --warm-gray: #5C5248;
+    --charcoal: #1E1A16;
+    --deep: #0F0D0A;
+    --gold: #A07C3A;
+    --gold-light: #C49A52;
+    --white: #FAF7F2;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--deep);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 26px 60px;
+    background: rgba(15,13,10,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: padding 0.3s;
+  }
+  nav.scrolled { padding: 18px 60px; }
+  .nav-logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; letter-spacing: 0.06em; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+  .nav-back { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(160,124,58,0.35); padding-bottom: 2px; transition: color 0.2s; }
+  .nav-back:hover { color: var(--white); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding-top: 90px;
+  }
+
+  /* Atmospheric background */
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(160,124,58,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(160,124,58,0.06) 0%, transparent 50%),
+      var(--deep);
+  }
+  .hero-grain {
+    position: absolute; inset: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 180px;
+  }
+
+  /* Decorative rings */
+  .hero-ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(160,124,58,0.12);
+    animation: slowRotate 60s linear infinite;
+  }
+  .hero-ring-1 { width: 700px; height: 700px; right: -180px; top: 50%; transform: translateY(-50%); }
+  .hero-ring-2 { width: 480px; height: 480px; right: -60px; top: 50%; transform: translateY(-50%); border-color: rgba(160,124,58,0.08); animation-direction: reverse; animation-duration: 40s; }
+  .hero-ring-3 { width: 280px; height: 280px; right: 80px; top: 50%; transform: translateY(-50%); border-color: rgba(160,124,58,0.06); }
+  @keyframes slowRotate { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(360deg); } }
+
+  .hero-inner {
+    position: relative;
+    max-width: 1200px; margin: 0 auto;
+    padding: 80px 60px 100px;
+    display: grid; grid-template-columns: 6fr 4fr; gap: 80px; align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 22px; display: flex; align-items: center; gap: 14px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 4.8rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--white); letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    opacity: 0; animation: fadeUp 0.9s ease 0.2s forwards;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  h1 .light { opacity: 0.45; }
+
+  .hero-sub {
+    font-size: 1rem; color: rgba(255,255,255,0.5); line-height: 1.85;
+    max-width: 500px; margin-bottom: 44px;
+    opacity: 0; animation: fadeUp 0.9s ease 0.3s forwards;
+  }
+
+  .hero-cta-row {
+    display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+    opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+  .btn-gold {
+    font-family: var(--sans); font-size: 0.7rem; font-weight: 400;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--deep); background: var(--gold);
+    text-decoration: none; padding: 17px 40px;
+    border: none; cursor: pointer; transition: background 0.3s;
+    display: inline-block;
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-ghost-white {
+    font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+    text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost-white:hover { color: var(--white); border-color: var(--white); }
+
+  /* Hero right panel */
+  .hero-panel {
+    display: flex; flex-direction: column; gap: 2px;
+    opacity: 0; animation: fadeUp 0.9s ease 0.35s forwards;
+  }
+  .hero-panel-item {
+    padding: 22px 26px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-left: 2px solid var(--gold);
+  }
+  .hero-panel-label {
+    font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 5px;
+  }
+  .hero-panel-value {
+    font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--white);
+  }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+  /* ── SHARED ── */
+  section { padding: 100px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  .section-label {
+    font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+  .section-heading {
+    font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 2.7rem);
+    font-weight: 300; line-height: 1.2; color: var(--white); letter-spacing: -0.01em;
+  }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .section-heading.dark { color: var(--deep); }
+  .section-heading.dark em { color: var(--gold); }
+  .divider { width: 40px; height: 1px; background: var(--gold); margin: 28px 0; opacity: 0.6; }
+  .body-text { font-size: 0.95rem; color: rgba(255,255,255,0.5); line-height: 1.85; }
+  .body-text.dark { color: var(--warm-gray); }
+
+  /* Fade animations on scroll */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+
+  /* ── PHILOSOPHY ── */
+  #philosophy {
+    background: var(--deep);
+    position: relative; overflow: hidden;
+  }
+  #philosophy::before {
+    content: '';
+    position: absolute; left: -200px; top: 50%; transform: translateY(-50%);
+    width: 600px; height: 600px; border-radius: 50%;
+    border: 1px solid rgba(160,124,58,0.06);
+    pointer-events: none;
+  }
+  .philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+  .philosophy-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 300; font-style: italic;
+    color: rgba(255,255,255,0.85); line-height: 1.35;
+    padding-left: 28px;
+    border-left: 2px solid var(--gold);
+  }
+  .philosophy-quote em { color: var(--gold); font-style: normal; }
+  .principle-items { display: flex; flex-direction: column; gap: 0; }
+  .principle-item {
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .principle-item:last-child { border-bottom: none; }
+  .principle-mark {
+    font-family: var(--serif); font-size: 0.78rem; font-style: italic;
+    color: var(--gold); min-width: 22px; padding-top: 3px;
+  }
+  .principle-title { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); margin-bottom: 5px; }
+  .principle-body { font-size: 0.88rem; color: rgba(255,255,255,0.45); line-height: 1.75; }
+
+  /* ── WHO WE'RE LOOKING FOR ── */
+  #who { background: #141210; }
+  .who-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 100px; align-items: start; }
+  .who-intro { position: sticky; top: 120px; }
+  .qualities-list { list-style: none; }
+  .quality-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.7;
+  }
+  .quality-item:first-child { padding-top: 0; }
+  .quality-item strong { display: block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); margin-bottom: 4px; font-weight: 400; }
+  .quality-check {
+    width: 20px; height: 20px; min-width: 20px;
+    border: 1px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 3px; flex-shrink: 0;
+  }
+  .quality-check svg { width: 9px; height: 9px; stroke: var(--gold); fill: none; }
+
+  /* ── DEMENTIA FOCUS ── */
+  #dementia {
+    background: var(--charcoal);
+    position: relative; overflow: hidden;
+  }
+  .dementia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .dementia-cards { display: flex; flex-direction: column; gap: 2px; }
+  .dementia-card {
+    padding: 28px 30px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .dementia-card:hover { background: rgba(160,124,58,0.06); border-color: rgba(160,124,58,0.2); }
+  .dementia-card-num { font-family: var(--serif); font-size: 0.68rem; font-style: italic; color: var(--gold); margin-bottom: 10px; }
+  .dementia-card-title { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); margin-bottom: 8px; }
+  .dementia-card-body { font-size: 0.88rem; color: rgba(255,255,255,0.42); line-height: 1.75; }
+  .dementia-callout {
+    margin-top: 32px; padding: 24px 28px;
+    background: rgba(160,124,58,0.08); border-left: 2px solid var(--gold);
+    font-family: var(--serif); font-size: 1.1rem; font-style: italic;
+    color: rgba(255,255,255,0.65); line-height: 1.6;
+  }
+
+  /* ── THE AVELIS DIFFERENCE ── */
+  #difference { background: var(--deep); }
+  .difference-intro { text-align: center; max-width: 560px; margin: 0 auto 64px; }
+  .difference-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .diff-tile {
+    padding: 36px 32px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .diff-tile-a { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
+  .diff-tile-b { background: rgba(160,124,58,0.07); border: 1px solid rgba(160,124,58,0.15); }
+  .diff-tile:hover { background: rgba(160,124,58,0.1); }
+  .diff-tile-num {
+    font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
+  }
+  .diff-tile-heading {
+    font-family: var(--serif); font-size: 1.25rem; font-weight: 300;
+    color: var(--white); line-height: 1.3; margin-bottom: 12px;
+  }
+  .diff-tile-heading em { font-style: italic; color: var(--gold); }
+  .diff-tile-body { font-size: 0.85rem; color: rgba(255,255,255,0.42); line-height: 1.75; }
+
+  /* ── FLEXIBLE WORK ── */
+  #flexible { background: #141210; }
+  .flexible-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+  .flex-items { display: flex; flex-direction: column; gap: 2px; }
+  .flex-item {
+    padding: 24px 28px; background: rgba(255,255,255,0.03);
+    border-left: 2px solid transparent; transition: border-color 0.25s, background 0.25s;
+  }
+  .flex-item:hover { border-left-color: var(--gold); background: rgba(160,124,58,0.05); }
+  .flex-item-title { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); margin-bottom: 7px; }
+  .flex-item-body { font-size: 0.88rem; color: rgba(255,255,255,0.42); line-height: 1.75; }
+  .comp-display {
+    margin-top: 36px; padding: 32px 36px;
+    background: rgba(160,124,58,0.08); border: 1px solid rgba(160,124,58,0.18);
+  }
+  .comp-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .comp-row { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .comp-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .comp-row-label { font-size: 0.85rem; color: rgba(255,255,255,0.45); }
+  .comp-row-value { font-family: var(--serif); font-size: 1.05rem; font-weight: 300; color: var(--white); }
+  .comp-row-value.hl { color: var(--gold-light); }
+
+  /* ── WHAT WE ASK ── */
+  #ask { background: var(--charcoal); }
+  .ask-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .ask-list { list-style: none; margin-top: 8px; }
+  .ask-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.7;
+  }
+  .ask-item:first-child { padding-top: 0; }
+  .ask-item::before { content: '—'; color: var(--gold); font-family: var(--serif); flex-shrink: 0; margin-top: 1px; }
+  .ask-note {
+    margin-top: 32px; padding: 22px 26px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.86rem; color: rgba(255,255,255,0.38); line-height: 1.78;
+  }
+  .ask-note strong { color: rgba(255,255,255,0.65); font-weight: 400; }
+
+  /* ── CTA ── */
+  #cta {
+    background: var(--deep);
+    position: relative; overflow: hidden;
+    padding: 120px 0;
+    text-align: center;
+  }
+  #cta::before {
+    content: '';
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 800px; height: 800px; border-radius: 50%;
+    border: 1px solid rgba(160,124,58,0.07);
+    pointer-events: none;
+  }
+  #cta::after {
+    content: '';
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 500px; height: 500px; border-radius: 50%;
+    border: 1px solid rgba(160,124,58,0.05);
+    pointer-events: none;
+  }
+  .cta-inner { position: relative; max-width: 640px; margin: 0 auto; padding: 0 60px; }
+  .cta-seal {
+    width: 72px; height: 72px;
+    border: 1px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+  }
+  .cta-seal svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 1.2; }
+  .cta-heading {
+    font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 300; color: var(--white); line-height: 1.18; margin-bottom: 16px;
+  }
+  .cta-heading em { font-style: italic; color: var(--gold); }
+  .cta-body { font-size: 0.95rem; color: rgba(255,255,255,0.45); line-height: 1.85; margin-bottom: 40px; }
+  .cta-divider { width: 40px; height: 1px; background: var(--gold); margin: 28px auto; opacity: 0.5; }
+  .cta-disclaimer { font-size: 0.76rem; color: rgba(255,255,255,0.2); line-height: 1.65; margin-top: 20px; }
+
+  /* ── FOOTER ── */
+  footer { background: #0A0906; padding: 48px 0 32px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .footer-brand { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; color: var(--white); letter-spacing: 0.04em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-links { display: flex; gap: 32px; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.15); margin-top: 12px; width: 100%; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+    .hero-inner, .philosophy-grid, .who-grid, .dementia-grid,
+    .flexible-grid, .ask-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-panel { display: none; }
+    .container, .footer-inner { padding: 0 28px; }
+    section { padding: 72px 0; }
+    .difference-grid { grid-template-columns: 1fr; }
+    .who-intro { position: static; }
+    .cta-inner { padding: 0 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">Avelis<span>.</span></a>
+  <div class="nav-label">Join the Network</div>
+  <a href="avelis-care-careers.html" class="nav-back">View & Apply →</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-ring hero-ring-1"></div>
+  <div class="hero-ring hero-ring-2"></div>
+  <div class="hero-ring hero-ring-3"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Independent Caregivers · St. Petersburg, FL</div>
+      <h1>
+        This work<br>deserves a <em>better</em><br>place to do it.
+      </h1>
+      <p class="hero-sub">
+        The Avelis network was built for caregivers who take their work seriously — and who are tired of environments that don't. Intentional matching. Consistent clients. Work that actually means something.
+      </p>
+      <div class="hero-cta-row">
+        <a href="avelis-care-careers.html" class="btn-gold">Join the Avelis Network</a>
+        <a href="#philosophy" class="btn-ghost-white">Our approach →</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hero-panel-item">
+        <div class="hero-panel-label">Compensation</div>
+        <div class="hero-panel-value">$20–$26 / hr</div>
+      </div>
+      <div class="hero-panel-item">
+        <div class="hero-panel-label">Work model</div>
+        <div class="hero-panel-value">Independent contractor · 1099</div>
+      </div>
+      <div class="hero-panel-item">
+        <div class="hero-panel-label">Assignment type</div>
+        <div class="hero-panel-value">Consistent, matched clients</div>
+      </div>
+      <div class="hero-panel-item">
+        <div class="hero-panel-label">Location</div>
+        <div class="hero-panel-value">St. Petersburg, Florida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHILOSOPHY ── -->
+<section id="philosophy">
+  <div class="container">
+    <div class="philosophy-grid">
+      <div class="fade-up">
+        <div class="philosophy-quote">
+          "Most agencies treat caregivers as <em>interchangeable</em>. We were built on the opposite belief."
+        </div>
+      </div>
+      <div class="fade-up d1">
+        <div class="section-label">Our Philosophy</div>
+        <h2 class="section-heading">The caregiver<br><em>is</em> the care.</h2>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:32px;">At Avelis, we believe the quality of care someone receives depends almost entirely on the person providing it. Not the agency. Not the schedule. The person.</p>
+        <div class="principle-items">
+          <div class="principle-item">
+            <div class="principle-mark">i.</div>
+            <div>
+              <div class="principle-title">You Are Introduced, Not Assigned</div>
+              <div class="principle-body">We match independent caregivers with families based on personality, experience, and fit — not who's available Thursday.</div>
+            </div>
+          </div>
+          <div class="principle-item">
+            <div class="principle-mark">ii.</div>
+            <div>
+              <div class="principle-title">Your Relationships Are Protected</div>
+              <div class="principle-body">We prioritize long-term caregiver continuity with the same families — because familiarity is the foundation of real care.</div>
+            </div>
+          </div>
+          <div class="principle-item">
+            <div class="principle-mark">iii.</div>
+            <div>
+              <div class="principle-title">Your Work Has a Name</div>
+              <div class="principle-body">You are not a roster entry. We know who you are, what you bring, and what kind of work you do best. That shapes every introduction we make.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO WE'RE LOOKING FOR ── -->
+<section id="who">
+  <div class="container">
+    <div class="who-grid">
+      <div class="who-intro fade-up">
+        <div class="section-label">Who We're Looking For</div>
+        <h2 class="section-heading">Not every<br>caregiver.<br>The <em>right</em> ones.</h2>
+        <div class="divider"></div>
+        <p class="body-text">We are selective — not to be exclusive, but because the families in our network are trusting us with something irreplaceable. We look for people who already carry this work with intention.</p>
+      </div>
+      <div class="fade-up d1">
+        <ul class="qualities-list">
+          <li class="quality-item">
+            <div class="quality-check"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Dementia or Alzheimer's experience</strong>You have worked with people living with cognitive change — and you understand that patience is not a technique. It's a disposition.</div>
+          </li>
+          <li class="quality-item">
+            <div class="quality-check"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Composure in difficult moments</strong>You can stay grounded when things shift — sundowning, resistance, confusion — without escalating, alarming, or withdrawing.</div>
+          </li>
+          <li class="quality-item">
+            <div class="quality-check"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Genuine warmth</strong>Not performed kindness. Real curiosity about the people in your care — their history, their preferences, who they are.</div>
+          </li>
+          <li class="quality-item">
+            <div class="quality-check"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Reliability</strong>If you accept an introduction and commit to a family, you show up. Consistently. On time. The same way every visit.</div>
+          </li>
+          <li class="quality-item">
+            <div class="quality-check"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>HHA or CNA preferred</strong>Substantial lived experience without formal certification will also be considered. What matters most is how you work.</div>
+          </li>
+          <li class="quality-item">
+            <div class="quality-check"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Reliable transportation</strong>Clients are located in and around the greater St. Petersburg area.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DEMENTIA FOCUS ── -->
+<section id="dementia">
+  <div class="container">
+    <div class="dementia-grid">
+      <div class="fade-up">
+        <div class="section-label">Dementia-Focused Work</div>
+        <h2 class="section-heading">This work is<br><em>specialized</em>.<br>We treat it that way.</h2>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:20px;">The caregivers in the Avelis network are introduced specifically to families navigating dementia. That focus is intentional — and it shapes everything about how we operate.</p>
+        <p class="body-text">If you have genuine dementia experience, you are compensated at the higher end of our range. Because that skill is rare. And rare things have value.</p>
+        <div class="dementia-callout">
+          "The families we serve are in one of the hardest chapters of their lives. The presence you bring is not a small thing."
+        </div>
+      </div>
+      <div class="fade-up d1">
+        <div class="dementia-cards">
+          <div class="dementia-card">
+            <div class="dementia-card-num">01</div>
+            <div class="dementia-card-title">Meeting People Where They Are</div>
+            <div class="dementia-card-body">Dementia care means entering someone's world — without correction, without urgency. You follow their lead. You honor their reality.</div>
+          </div>
+          <div class="dementia-card">
+            <div class="dementia-card-num">02</div>
+            <div class="dementia-card-title">Calm as a Practice</div>
+            <div class="dementia-card-body">A regulated caregiver regulates the person they're with. Your steadiness is not incidental to the care — it is the care.</div>
+          </div>
+          <div class="dementia-card">
+            <div class="dementia-card-num">03</div>
+            <div class="dementia-card-title">Familiarity as Medicine</div>
+            <div class="dementia-card-body">Routine, consistency, and a familiar face reduce anxiety for people with dementia more reliably than almost anything else. Your presence — showing up the same way, every time — is genuinely therapeutic.</div>
+          </div>
+          <div class="dementia-card">
+            <div class="dementia-card-num">04</div>
+            <div class="dementia-card-title">Emotional Memory</div>
+            <div class="dementia-card-body">A person may not remember your name. They will remember how you made them feel. Show up with warmth, every time — it lands, even when nothing else does.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE AVELIS DIFFERENCE ── -->
+<section id="difference">
+  <div class="container">
+    <div class="difference-intro fade-up">
+      <div class="section-label" style="justify-content:center;">Why Avelis</div>
+      <h2 class="section-heading">Built <em>differently</em>.<br>On purpose.</h2>
+      <div style="width:40px;height:1px;background:var(--gold);margin:24px auto;opacity:0.5;"></div>
+      <p class="body-text" style="text-align:center;">This is not a platform. It is not a staffing board. It is a small, deliberate network — and every caregiver introduced through it is known by name.</p>
+    </div>
+    <div class="difference-grid">
+      <div class="diff-tile diff-tile-a fade-up">
+        <div class="diff-tile-num">01</div>
+        <div class="diff-tile-heading">Introduced,<br>not <em>dispatched</em>.</div>
+        <div class="diff-tile-body">We learn who you are before introducing you to any family. The match is based on personality, experience, and fit — not a calendar.</div>
+      </div>
+      <div class="diff-tile diff-tile-a fade-up d1">
+        <div class="diff-tile-num">02</div>
+        <div class="diff-tile-heading">Same clients.<br><em>Whenever possible.</em></div>
+        <div class="diff-tile-body">We prioritize caregiver continuity with the same families. Long-term relationships protect the people in your care — and protect your sense of purpose in this work.</div>
+      </div>
+      <div class="diff-tile diff-tile-a fade-up d2">
+        <div class="diff-tile-num">03</div>
+        <div class="diff-tile-heading">Someone answers<br>when you <em>call</em>.</div>
+        <div class="diff-tile-body">No ticketing system. No inbox queue. When something comes up — a family dynamic, a shift in a client's condition — you reach a real person who knows your name.</div>
+      </div>
+      <div class="diff-tile diff-tile-b fade-up">
+        <div class="diff-tile-num">04</div>
+        <div class="diff-tile-heading">Pay that reflects<br>what you <em>bring</em>.</div>
+        <div class="diff-tile-body">$20–$26/hr based on experience. Dementia-specialized caregivers are paid at a premium — because that skill is rare and we know it.</div>
+      </div>
+      <div class="diff-tile diff-tile-b fade-up d1">
+        <div class="diff-tile-num">05</div>
+        <div class="diff-tile-heading">Flexible on<br>your <em>terms</em>.</div>
+        <div class="diff-tile-body">As an independent contractor, you work on your schedule. We introduce families whose needs fit your availability — not the other way around.</div>
+      </div>
+      <div class="diff-tile diff-tile-b fade-up d2">
+        <div class="diff-tile-num">06</div>
+        <div class="diff-tile-heading">Work that<br><em>means something</em>.</div>
+        <div class="diff-tile-body">The relief you bring to a family navigating dementia is measurable and real. We will remind you of that — because it matters, and caregivers rarely hear it enough.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FLEXIBLE WORK ── -->
+<section id="flexible">
+  <div class="container">
+    <div class="flexible-grid">
+      <div class="fade-up">
+        <div class="section-label">Flexible, Independent Work</div>
+        <h2 class="section-heading">Your schedule.<br>Your <em>choices</em>.</h2>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:28px;">Caregivers in the Avelis network are independent contractors — not employees. That means flexibility, autonomy, and work that fits around your life.</p>
+        <p class="body-text">We introduce you to families whose needs align with your availability. You accept the introductions that work for you. You set the pace.</p>
+        <div class="comp-display">
+          <div class="comp-label">Transparent Compensation</div>
+          <div class="comp-row">
+            <span class="comp-row-label">Entry-level / New to network</span>
+            <span class="comp-row-value">$20 / hr</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-row-label">Experienced (2+ years)</span>
+            <span class="comp-row-value">$22–$24 / hr</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-row-label">Dementia-experienced</span>
+            <span class="comp-row-value hl">Up to $26 / hr</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-row-label">Training pay</span>
+            <span class="comp-row-value">Included in first check</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-row-label">Work classification</span>
+            <span class="comp-row-value">Independent contractor · 1099</span>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up d1">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-heading" style="font-size:clamp(1.5rem,2.2vw,1.9rem);">Simple from<br>the start.</h2>
+        <div class="divider"></div>
+        <div class="flex-items">
+          <div class="flex-item">
+            <div class="flex-item-title">Apply & Be Introduced</div>
+            <div class="flex-item-body">Submit your application. We read it personally. If there's a fit, we reach out to learn more about you before making any introductions.</div>
+          </div>
+          <div class="flex-item">
+            <div class="flex-item-title">Complete Onboarding</div>
+            <div class="flex-item-body">A 30-minute self-guided orientation that covers the Avelis approach and what families in our network expect. Completed at your own pace online.</div>
+          </div>
+          <div class="flex-item">
+            <div class="flex-item-title">Meet the Family First</div>
+            <div class="flex-item-body">We introduce you to families whose needs align with how you work. You meet them before any care begins. You decide if the match is right.</div>
+          </div>
+          <div class="flex-item">
+            <div class="flex-item-title">Work on Your Schedule</div>
+            <div class="flex-item-body">Accept the introductions that fit your availability. Work as much or as little as makes sense for you. We are here when you need us.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT WE ASK ── -->
+<section id="ask">
+  <div class="container">
+    <div class="ask-grid">
+      <div class="fade-up">
+        <div class="section-label">What We Ask</div>
+        <h2 class="section-heading">Simple standards.<br><em>Genuinely held</em>.</h2>
+        <div class="divider"></div>
+        <p class="body-text">We are not heavy on rules. We are serious about a few things — because the families who trust us deserve that. Here is what being part of the Avelis network means in practice.</p>
+        <div class="ask-note" style="margin-top:28px;">
+          <strong>On independence:</strong> Caregivers in the Avelis network are independent contractors. You are not an employee. You set your schedule, accept the introductions you choose, and work with the autonomy that 1099 classification provides.
+        </div>
+      </div>
+      <div class="fade-up d1">
+        <ul class="ask-list">
+          <li class="ask-item">Show up when you commit. Families arrange their lives around these visits — reliability is the foundation of everything.</li>
+          <li class="ask-item">Bring genuine presence — not just physical attendance. The people in your care notice the difference.</li>
+          <li class="ask-item">Keep phone use limited during visits. Your full attention belongs to the person in your care.</li>
+          <li class="ask-item">Communicate promptly. If something shifts — your schedule, a client's condition — let us know quickly.</li>
+          <li class="ask-item">Maintain confidentiality. Everything you learn about a client and their family stays private — including social media.</li>
+          <li class="ask-item">Stay within non-medical scope. No clinical procedures. No medical advice. Observe and report — that is the line.</li>
+          <li class="ask-item">Approach each visit with the same warmth as the first. Familiarity should deepen care, not diminish it.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner fade-up">
+      <div class="cta-seal">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <h2 class="cta-heading">
+        If this resonates —<br>we'd be <em>honored</em> to hear from you.
+      </h2>
+      <div class="cta-divider"></div>
+      <p class="cta-body">We review every application personally. We are not looking to fill seats — we are looking for people who understand what this work actually asks of them.</p>
+      <a href="avelis-care-careers.html" class="btn-gold" style="font-family:var(--sans);border:none;cursor:pointer;">View the Application →</a>
+      <p class="cta-disclaimer">Caregivers introduced through Avelis are independent contractors. Families retain the right to accept or decline any introduction. All services are non-medical in nature.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Avelis<span>.</span></div>
+    <div class="footer-links">
+      <a href="index.html">Main Site</a>
+      <a href="avelis-care-careers.html">Apply Now</a>
+      <a href="index.html#contact">Family Inquiries</a>
+    </div>
+    <div class="footer-copy">© 2025 Avelis Care LLC · St. Petersburg, Florida · Consistency. Dignity. Presence.</div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // Google Analytics
+</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3VDCQR3X6W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3VDCQR3X6W');
+  </script>
+</body>
+</html>
