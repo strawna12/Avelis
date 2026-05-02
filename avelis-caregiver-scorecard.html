@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caregiver Evaluation Scorecard — Avelis Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F0EBE1; --parchment: #DDD5C8; --taupe: #A89880;
+    --warm-gray: #5C5248; --charcoal: #1E1A16; --deep: #0F0D0A;
+    --gold: #A07C3A; --gold-light: #C49A52; --white: #FAF7F2;
+    --green: #4A6741; --amber: #8B6B2E; --red: #7A3028;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--charcoal); font-family: var(--sans); font-weight: 400; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+  /* HEADER */
+  .page-header {
+    background: var(--deep);
+    padding: 32px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .header-logo { font-family: var(--serif); font-size: 1.4rem; color: var(--white); letter-spacing: 0.06em; }
+  .header-logo span { color: var(--gold); }
+  .header-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+  .header-badge {
+    font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(160,124,58,0.35);
+    padding: 6px 14px;
+  }
+
+  /* MAIN */
+  .page-body { max-width: 900px; margin: 0 auto; padding: 52px 60px 100px; }
+
+  /* APPLICANT BLOCK */
+  .applicant-block {
+    background: var(--white);
+    border: 1px solid var(--parchment);
+    padding: 36px 40px;
+    margin-bottom: 40px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px 32px;
+  }
+  .applicant-block-title {
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); grid-column: 1/-1; margin-bottom: 4px;
+  }
+  .field-group { }
+  .field-label { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm-gray); margin-bottom: 6px; display: block; }
+  input[type="text"], input[type="date"], select, textarea {
+    width: 100%; background: transparent; border: none;
+    border-bottom: 1px solid var(--taupe); padding: 10px 0;
+    font-family: var(--sans); font-size: 0.9rem; color: var(--charcoal);
+    outline: none; transition: border-color 0.2s; -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+  input::placeholder, textarea::placeholder { color: var(--taupe); font-style: italic; }
+  textarea { resize: vertical; min-height: 60px; }
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%235C5248' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 6px center; padding-right: 22px;
+  }
+
+  /* SECTION HEADER */
+  .score-section { margin-bottom: 32px; }
+  .score-section-header {
+    padding: 16px 20px;
+    background: var(--charcoal);
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 2px;
+  }
+  .score-section-title {
+    font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--white);
+  }
+  .score-section-title em { font-style: italic; color: var(--gold); }
+  .score-section-subtitle { font-size: 0.68rem; color: rgba(255,255,255,0.3); margin-top: 2px; }
+  .section-score-display {
+    font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--white);
+    min-width: 60px; text-align: right;
+  }
+  .section-score-display span { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+
+  /* SCORE ROWS */
+  .score-row {
+    background: var(--white);
+    border: 1px solid var(--parchment);
+    border-top: none;
+    padding: 18px 20px;
+    display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start;
+  }
+  .score-row:last-child { }
+  .score-row-left { }
+  .score-row-name {
+    font-size: 0.78rem; font-weight: 400; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--charcoal); margin-bottom: 3px;
+  }
+  .score-row-desc { font-size: 0.8rem; color: var(--taupe); line-height: 1.55; }
+  .score-row-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+
+  /* RATING BUTTONS */
+  .rating-group { display: flex; gap: 4px; }
+  .rating-btn {
+    width: 36px; height: 36px;
+    border: 1px solid var(--parchment);
+    background: transparent;
+    font-family: var(--sans); font-size: 0.78rem; font-weight: 400;
+    color: var(--warm-gray); cursor: pointer;
+    transition: all 0.18s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .rating-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .rating-btn.active-1 { background: #7A3028; border-color: #7A3028; color: var(--white); }
+  .rating-btn.active-2 { background: #8B4A28; border-color: #8B4A28; color: var(--white); }
+  .rating-btn.active-3 { background: var(--amber); border-color: var(--amber); color: var(--white); }
+  .rating-btn.active-4 { background: #6A8040; border-color: #6A8040; color: var(--white); }
+  .rating-btn.active-5 { background: var(--green); border-color: var(--green); color: var(--white); }
+  .rating-weight { font-size: 0.6rem; color: var(--taupe); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* PRIORITY BADGE */
+  .priority-badge {
+    font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 0;
+  }
+  .priority-critical { background: rgba(122,48,40,0.12); color: #7A3028; border: 1px solid rgba(122,48,40,0.2); }
+  .priority-high { background: rgba(139,107,46,0.12); color: var(--amber); border: 1px solid rgba(139,107,46,0.2); }
+  .priority-standard { background: rgba(92,82,72,0.1); color: var(--warm-gray); border: 1px solid var(--parchment); }
+
+  /* NOTES */
+  .score-notes {
+    background: var(--white); border: 1px solid var(--parchment); border-top: none;
+    padding: 14px 20px;
+  }
+  .notes-label { font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--taupe); margin-bottom: 6px; }
+  .notes-input {
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--parchment);
+    font-family: var(--sans); font-size: 0.84rem; color: var(--charcoal); padding: 8px 0;
+    outline: none; transition: border-color 0.2s; resize: none; min-height: 44px;
+  }
+  .notes-input:focus { border-color: var(--gold); }
+  .notes-input::placeholder { color: var(--taupe); font-style: italic; }
+
+  /* DIVIDER */
+  .score-divider { height: 1px; background: var(--parchment); margin: 36px 0; }
+
+  /* OVERALL SCORE */
+  .overall-block {
+    background: var(--deep);
+    padding: 40px 44px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    margin-bottom: 32px;
+  }
+  .overall-left { }
+  .overall-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .overall-score {
+    font-family: var(--serif); font-size: 5rem; font-weight: 300; color: var(--white);
+    line-height: 1; margin-bottom: 8px;
+  }
+  .overall-score span { font-size: 1.4rem; color: rgba(255,255,255,0.3); }
+  .overall-verdict {
+    font-family: var(--serif); font-size: 1.3rem; font-style: italic;
+    color: var(--gold-light); margin-top: 4px;
+  }
+  .overall-right { }
+  .score-bar-row { margin-bottom: 12px; }
+  .score-bar-label { font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 5px; display: flex; justify-content: space-between; }
+  .score-bar-label span { color: rgba(255,255,255,0.55); }
+  .score-bar-track { height: 3px; background: rgba(255,255,255,0.08); }
+  .score-bar-fill { height: 100%; background: var(--gold); transition: width 0.5s ease; }
+
+  /* RECOMMENDATION */
+  .recommendation-block {
+    padding: 28px 32px;
+    border: 1px solid var(--parchment);
+    background: var(--white);
+    display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start;
+    margin-bottom: 32px;
+  }
+  .rec-indicator {
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--white);
+    flex-shrink: 0;
+  }
+  .rec-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm-gray); margin-bottom: 4px; }
+  .rec-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; color: var(--deep); margin-bottom: 6px; }
+  .rec-body { font-size: 0.86rem; color: var(--warm-gray); line-height: 1.7; }
+
+  /* FINAL NOTES */
+  .final-block {
+    background: var(--white); border: 1px solid var(--parchment); padding: 32px 36px;
+    margin-bottom: 32px;
+  }
+  .final-block-title { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .final-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  /* ACTIONS */
+  .action-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
+  .btn-primary { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--charcoal); border: none; padding: 15px 36px; cursor: pointer; transition: background 0.3s; }
+  .btn-primary:hover { background: var(--gold); }
+  .btn-outline { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--warm-gray); background: transparent; border: 1px solid var(--parchment); padding: 14px 32px; cursor: pointer; transition: all 0.2s; }
+  .btn-outline:hover { border-color: var(--charcoal); color: var(--charcoal); }
+  .btn-danger { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: #7A3028; background: transparent; border: 1px solid rgba(122,48,40,0.25); padding: 14px 32px; cursor: pointer; transition: all 0.2s; }
+  .btn-danger:hover { background: rgba(122,48,40,0.06); }
+
+  /* PRINT */
+  @media print {
+    .page-header, .action-row { display: none !important; }
+    .rating-btn { border: 1px solid #ccc !important; }
+    .rating-btn.active-1, .rating-btn.active-2, .rating-btn.active-3,
+    .rating-btn.active-4, .rating-btn.active-5 { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    body { background: white; }
+    .overall-block { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+
+  @media (max-width: 700px) {
+    .page-header { padding: 20px 24px; }
+    .page-body { padding: 36px 24px 80px; }
+    .applicant-block { grid-template-columns: 1fr; }
+    .overall-block { grid-template-columns: 1fr; }
+    .final-grid { grid-template-columns: 1fr; }
+    .recommendation-block { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <div class="header-logo">Avelis<span>.</span></div>
+    <div class="header-label">Internal Use Only</div>
+  </div>
+  <div class="header-badge">Caregiver Evaluation Scorecard</div>
+</div>
+
+<div class="page-body">
+
+  <!-- APPLICANT INFO -->
+  <div class="applicant-block">
+    <div class="applicant-block-title">Applicant Information</div>
+    <div class="field-group">
+      <label class="field-label">Applicant Full Name</label>
+      <input type="text" id="appName" placeholder="Full name">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Date of Evaluation</label>
+      <input type="date" id="evalDate">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Evaluated By</label>
+      <input type="text" id="evaluator" placeholder="Your name">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Certification</label>
+      <select id="certification">
+        <option value="" disabled selected>Select</option>
+        <option>HHA</option><option>CNA</option>
+        <option>Both HHA & CNA</option><option>No formal certification</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Years of Experience</label>
+      <select id="experience">
+        <option value="" disabled selected>Select</option>
+        <option>Less than 1 year</option><option>1–2 years</option>
+        <option>3–5 years</option><option>6–10 years</option><option>10+ years</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Dementia Experience Level</label>
+      <select id="dementiaLevel">
+        <option value="" disabled selected>Select</option>
+        <option>Extensive — primary focus</option>
+        <option>Significant — multiple clients</option>
+        <option>Some experience</option><option>Limited or none</option>
+      </select>
+    </div>
+    <div class="field-group" style="grid-column:1/-1;">
+      <label class="field-label">First Impression / Initial Notes</label>
+      <textarea id="firstImpression" placeholder="Your immediate observations — presentation, communication style, energy, any early concerns or strong positives."></textarea>
+    </div>
+  </div>
+
+  <!-- ── SECTION 1: TEMPERAMENT & CHARACTER ── -->
+  <div class="score-section">
+    <div class="score-section-header">
+      <div>
+        <div class="score-section-title">Temperament &amp; <em>Character</em></div>
+        <div class="score-section-subtitle">The most important section. Skills can be learned. Character cannot.</div>
+      </div>
+      <div class="score-section-display" id="sec1-display">
+        <div class="section-score-display" id="sec1-score">— <span>/ 25</span></div>
+      </div>
+    </div>
+
+    <!-- Emotional Composure -->
+    <div class="score-row" id="row-composure">
+      <div class="score-row-left">
+        <div class="score-row-name">Emotional Composure <span class="priority-badge priority-critical">Critical</span></div>
+        <div class="score-row-desc">Can they stay regulated under stress? How do they respond to confusion, repetition, or behavioral difficulty without showing alarm, frustration, or impatience? This is the single most important trait for dementia care.</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec1" data-max="5" data-weight="2">
+          <button class="rating-btn" onclick="rate(this,'composure',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'composure',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'composure',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'composure',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'composure',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×2</div>
+      </div>
+    </div>
+    <div class="score-notes">
+      <div class="notes-label">Notes on Composure</div>
+      <textarea class="notes-input" placeholder="How did they describe handling a difficult moment? Did they show self-awareness? Any red flags (blame, frustration, avoidance)?"></textarea>
+    </div>
+
+    <!-- Warmth -->
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Genuine Warmth <span class="priority-badge priority-critical">Critical</span></div>
+        <div class="score-row-desc">Is their warmth authentic or performed? Do they show real curiosity about the people in their care — not just competence? People with dementia sense emotional authenticity even when they can't name it.</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec1" data-max="5" data-weight="2">
+          <button class="rating-btn" onclick="rate(this,'warmth',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'warmth',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'warmth',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'warmth',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'warmth',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×2</div>
+      </div>
+    </div>
+    <div class="score-notes">
+      <div class="notes-label">Notes on Warmth</div>
+      <textarea class="notes-input" placeholder="Did they speak about clients with affection and genuine care? Did they light up when describing good moments? Or did the language feel transactional?"></textarea>
+    </div>
+
+    <!-- Patience -->
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Patience <span class="priority-badge priority-critical">Critical</span></div>
+        <div class="score-row-desc">Not just tolerance — active patience. Can they answer the same question warmly for the fourteenth time? Do they have the disposition to be unhurried even when things are hard?</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec1" data-max="5" data-weight="2">
+          <button class="rating-btn" onclick="rate(this,'patience',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'patience',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'patience',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'patience',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'patience',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×2</div>
+      </div>
+    </div>
+
+    <!-- Emotional Maturity -->
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Emotional Maturity <span class="priority-badge priority-high">High</span></div>
+        <div class="score-row-desc">How do they handle feedback? Are they self-aware? Can they navigate complex family dynamics without taking things personally? Do they show good judgment about their own emotional limits?</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec1" data-max="5" data-weight="1">
+          <button class="rating-btn" onclick="rate(this,'maturity',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'maturity',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'maturity',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'maturity',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'maturity',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×1</div>
+      </div>
+    </div>
+    <div class="score-notes">
+      <div class="notes-label">Notes on Emotional Maturity</div>
+      <textarea class="notes-input" placeholder="How did they respond when asked about a difficult situation they've faced? Did they show growth and self-reflection, or blame and avoidance?"></textarea>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: DEMENTIA KNOWLEDGE & APPROACH ── -->
+  <div class="score-section">
+    <div class="score-section-header">
+      <div>
+        <div class="score-section-title">Dementia Knowledge &amp; <em>Approach</em></div>
+        <div class="score-section-subtitle">Experience matters less than understanding. We can teach techniques — we cannot teach empathy.</div>
+      </div>
+      <div class="section-score-display" id="sec2-score">— <span>/ 20</span></div>
+    </div>
+
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Dementia Experience <span class="priority-badge priority-critical">Critical</span></div>
+        <div class="score-row-desc">Direct experience with dementia or Alzheimer's clients — not just awareness. Have they worked with someone in the middle or late stages? Do they understand sundowning, wandering, behavioral shifts?</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec2" data-max="5" data-weight="2">
+          <button class="rating-btn" onclick="rate(this,'dementiaExp',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'dementiaExp',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'dementiaExp',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'dementiaExp',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'dementiaExp',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×2</div>
+      </div>
+    </div>
+    <div class="score-notes">
+      <div class="notes-label">Notes on Dementia Experience</div>
+      <textarea class="notes-input" placeholder="What specific situations have they navigated? Do they understand person-centered care? Can they describe how they responded to a behavioral challenge?"></textarea>
+    </div>
+
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Person-Centered Philosophy <span class="priority-badge priority-high">High</span></div>
+        <div class="score-row-desc">Do they talk about clients as full people with histories and preferences — or as cases and conditions? Do they follow the person's lead, or impose structure? This reveals how they actually think about the work.</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec2" data-max="5" data-weight="2">
+          <button class="rating-btn" onclick="rate(this,'personCentered',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'personCentered',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'personCentered',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'personCentered',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'personCentered',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×2</div>
+      </div>
+    </div>
+
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">De-escalation Instinct <span class="priority-badge priority-high">High</span></div>
+        <div class="score-row-desc">When a client becomes agitated or resistant — what do they do? Do they have a natural instinct to step back, give space, and redirect? Or do they push through?</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec2" data-max="5" data-weight="1">
+          <button class="rating-btn" onclick="rate(this,'deEscalation',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'deEscalation',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'deEscalation',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'deEscalation',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'deEscalation',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×1</div>
+      </div>
+    </div>
+    <div class="score-notes">
+      <div class="notes-label">Notes on De-escalation</div>
+      <textarea class="notes-input" placeholder="Ask: 'Tell me about a time a client became very upset. What did you do?' Their answer reveals instinct more than training."></textarea>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: COMMUNICATION ── -->
+  <div class="score-section">
+    <div class="score-section-header">
+      <div>
+        <div class="score-section-title">Communication &amp; <em>Professionalism</em></div>
+        <div class="score-section-subtitle">How they communicate with families is as important as how they care for clients.</div>
+      </div>
+      <div class="section-score-display" id="sec3-score">— <span>/ 20</span></div>
+    </div>
+
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Family Communication <span class="priority-badge priority-critical">Critical</span></div>
+        <div class="score-row-desc">Can they communicate clearly and sensitively with family members? Can they deliver difficult observations without causing alarm? Do they understand the emotional state families are in?</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec3" data-max="5" data-weight="2">
+          <button class="rating-btn" onclick="rate(this,'familyComm',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'familyComm',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'familyComm',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'familyComm',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'familyComm',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×2</div>
+      </div>
+    </div>
+    <div class="score-notes">
+      <div class="notes-label">Notes on Family Communication</div>
+      <textarea class="notes-input" placeholder="Ask: 'How do you typically communicate with a family after a shift?' Look for clarity, sensitivity, and appropriate boundaries."></textarea>
+    </div>
+
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Professionalism &amp; Presentation <span class="priority-badge priority-high">High</span></div>
+        <div class="score-row-desc">How they present themselves — appearance, punctuality, how they speak about previous employers or clients. Does their presentation match the premium environment they'd be entering?</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec3" data-max="5" data-weight="2">
+          <button class="rating-btn" onclick="rate(this,'professionalism',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'professionalism',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'professionalism',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'professionalism',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'professionalism',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×2</div>
+      </div>
+    </div>
+    <div class="score-notes">
+      <div class="notes-label">Notes on Professionalism</div>
+      <textarea class="notes-input" placeholder="Were they on time? How did they speak about past roles? Any complaints about previous clients or employers? Do they carry themselves appropriately?"></textarea>
+    </div>
+
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Boundary Awareness <span class="priority-badge priority-standard">Standard</span></div>
+        <div class="score-row-desc">Do they understand and respect professional limits — not offering medical opinions, not overstepping with families, not blurring personal and professional relationships?</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec3" data-max="5" data-weight="1">
+          <button class="rating-btn" onclick="rate(this,'boundaries',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'boundaries',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'boundaries',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'boundaries',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'boundaries',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×1</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: RELIABILITY & CONSISTENCY ── -->
+  <div class="score-section">
+    <div class="score-section-header">
+      <div>
+        <div class="score-section-title">Reliability &amp; <em>Consistency</em></div>
+        <div class="score-section-subtitle">Beautiful caregivers who don't show up are not beautiful caregivers. Reliability is non-negotiable.</div>
+      </div>
+      <div class="section-score-display" id="sec4-score">— <span>/ 15</span></div>
+    </div>
+
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Track Record <span class="priority-badge priority-critical">Critical</span></div>
+        <div class="score-row-desc">What does their employment history suggest about reliability? Consistent, long placements? Or frequent changes with vague explanations? References that speak to dependability?</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec4" data-max="5" data-weight="2">
+          <button class="rating-btn" onclick="rate(this,'trackRecord',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'trackRecord',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'trackRecord',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'trackRecord',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'trackRecord',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×2</div>
+      </div>
+    </div>
+    <div class="score-notes">
+      <div class="notes-label">Notes on Track Record</div>
+      <textarea class="notes-input" placeholder="Employment history notes. Any unexplained gaps or frequent turnover? What reasons did they give for leaving previous roles?"></textarea>
+    </div>
+
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Availability &amp; Flexibility <span class="priority-badge priority-high">High</span></div>
+        <div class="score-row-desc">Do their available hours match family needs in our network? Are they flexible? Do they have reliable transportation? Could they respond if circumstances changed?</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec4" data-max="5" data-weight="1">
+          <button class="rating-btn" onclick="rate(this,'availability',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'availability',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'availability',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'availability',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'availability',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×1</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 5: FIT ── -->
+  <div class="score-section">
+    <div class="score-section-header">
+      <div>
+        <div class="score-section-title">Avelis Network <em>Fit</em></div>
+        <div class="score-section-subtitle">Do they understand and align with what makes Avelis different from a typical placement agency?</div>
+      </div>
+      <div class="section-score-display" id="sec5-score">— <span>/ 10</span></div>
+    </div>
+
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Values Alignment <span class="priority-badge priority-high">High</span></div>
+        <div class="score-row-desc">Do they understand that Avelis is built around intentional matching and long-term relationships — not volume? Do they seem to want that? Or are they primarily motivated by hours and pay?</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec5" data-max="5" data-weight="1">
+          <button class="rating-btn" onclick="rate(this,'valuesAlign',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'valuesAlign',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'valuesAlign',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'valuesAlign',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'valuesAlign',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×1</div>
+      </div>
+    </div>
+    <div class="score-notes">
+      <div class="notes-label">Notes on Values Alignment</div>
+      <textarea class="notes-input" placeholder="How did they answer Q5 — 'Why Avelis?' Did their answer reflect understanding of our approach? Or was it generic?"></textarea>
+    </div>
+
+    <div class="score-row">
+      <div class="score-row-left">
+        <div class="score-row-name">Gut Read <span class="priority-badge priority-high">High</span></div>
+        <div class="score-row-desc">After everything — your instinct. Would you feel confident placing this person with a vulnerable family in a private home? Does something feel right about them, even if hard to articulate? Trust this.</div>
+      </div>
+      <div class="score-row-right">
+        <div class="rating-group" data-category="sec5" data-max="5" data-weight="1">
+          <button class="rating-btn" onclick="rate(this,'gutRead',1)">1</button>
+          <button class="rating-btn" onclick="rate(this,'gutRead',2)">2</button>
+          <button class="rating-btn" onclick="rate(this,'gutRead',3)">3</button>
+          <button class="rating-btn" onclick="rate(this,'gutRead',4)">4</button>
+          <button class="rating-btn" onclick="rate(this,'gutRead',5)">5</button>
+        </div>
+        <div class="rating-weight">Weight ×1</div>
+      </div>
+    </div>
+    <div class="score-notes">
+      <div class="notes-label">Overall Gut Notes</div>
+      <textarea class="notes-input" placeholder="What is your honest impression? What would you tell a family about this person? What lingers — positive or negative?"></textarea>
+    </div>
+  </div>
+
+  <div class="score-divider"></div>
+
+  <!-- OVERALL SCORE -->
+  <div class="overall-block" id="overallBlock">
+    <div class="overall-left">
+      <div class="overall-label">Overall Score</div>
+      <div class="overall-score" id="overallScore">—<span> / 90</span></div>
+      <div class="overall-verdict" id="overallVerdict">Complete all sections to calculate</div>
+    </div>
+    <div class="overall-right">
+      <div class="score-bar-row">
+        <div class="score-bar-label">Temperament & Character <span id="bar1-val">—</span></div>
+        <div class="score-bar-track"><div class="score-bar-fill" id="bar1" style="width:0%"></div></div>
+      </div>
+      <div class="score-bar-row">
+        <div class="score-bar-label">Dementia Knowledge <span id="bar2-val">—</span></div>
+        <div class="score-bar-track"><div class="score-bar-fill" id="bar2" style="width:0%"></div></div>
+      </div>
+      <div class="score-bar-row">
+        <div class="score-bar-label">Communication <span id="bar3-val">—</span></div>
+        <div class="score-bar-track"><div class="score-bar-fill" id="bar3" style="width:0%"></div></div>
+      </div>
+      <div class="score-bar-row">
+        <div class="score-bar-label">Reliability <span id="bar4-val">—</span></div>
+        <div class="score-bar-track"><div class="score-bar-fill" id="bar4" style="width:0%"></div></div>
+      </div>
+      <div class="score-bar-row">
+        <div class="score-bar-label">Network Fit <span id="bar5-val">—</span></div>
+        <div class="score-bar-track"><div class="score-bar-fill" id="bar5" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDATION -->
+  <div class="recommendation-block" id="recommendBlock">
+    <div class="rec-indicator" id="recIndicator" style="background:var(--taupe);">?</div>
+    <div>
+      <div class="rec-label">Recommendation</div>
+      <div class="rec-title" id="recTitle">Complete scoring to generate recommendation</div>
+      <div class="rec-body" id="recBody">Score all categories above to see your recommendation and suggested next steps.</div>
+    </div>
+  </div>
+
+  <!-- FINAL NOTES -->
+  <div class="final-block">
+    <div class="final-block-title">Final Evaluation Notes</div>
+    <div class="final-grid">
+      <div class="field-group">
+        <label class="field-label">Strengths</label>
+        <textarea placeholder="What stood out positively? What would make them excellent for the right family?" style="min-height:80px;"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Concerns</label>
+        <textarea placeholder="Any hesitations? What would need to be monitored or confirmed? What would disqualify them?" style="min-height:80px;"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Ideal Client Match</label>
+        <textarea placeholder="Based on their temperament and experience — what type of family or client profile would be the best fit?" style="min-height:70px;"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">References / Follow-Up Items</label>
+        <textarea placeholder="References to check, items to verify, questions to follow up on before any introduction is made." style="min-height:70px;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="action-row">
+    <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
+    <button class="btn-outline" onclick="resetForm()">Clear & Start Over</button>
+  </div>
+
+</div>
+
+<script>
+  const scores = {};
+  const maxScores = { sec1: 25, sec2: 20, sec3: 20, sec4: 15, sec5: 10 };
+  const sectionFields = {
+    sec1: [['composure',2],['warmth',2],['patience',2],['maturity',1]],
+    sec2: [['dementiaExp',2],['personCentered',2],['deEscalation',1]],
+    sec3: [['familyComm',2],['professionalism',2],['boundaries',1]],
+    sec4: [['trackRecord',2],['availability',1]],
+    sec5: [['valuesAlign',1],['gutRead',1]],
+  };
+
+  function rate(btn, field, val) {
+    scores[field] = val;
+    const group = btn.closest('.rating-group');
+    group.querySelectorAll('.rating-btn').forEach((b, i) => {
+      b.className = 'rating-btn';
+      if (i < val) b.classList.add('active-' + val);
+    });
+    recalculate();
+  }
+
+  function getSectionScore(secKey) {
+    const fields = sectionFields[secKey];
+    let total = 0, scored = 0;
+    for (const [field, weight] of fields) {
+      if (scores[field]) { total += scores[field] * weight; scored++; }
+    }
+    return scored > 0 ? total : null;
+  }
+
+  function recalculate() {
+    const secKeys = ['sec1','sec2','sec3','sec4','sec5'];
+    let grand = 0, grandMax = 0, allScored = true;
+
+    secKeys.forEach((key, i) => {
+      const val = getSectionScore(key);
+      const max = maxScores[key];
+      const barEl = document.getElementById('bar' + (i+1));
+      const barVal = document.getElementById('bar' + (i+1) + '-val');
+      if (val !== null) {
+        grand += val; grandMax += max;
+        const pct = Math.min(100, (val / max) * 100);
+        barEl.style.width = pct + '%';
+        barEl.style.background = pct >= 75 ? 'var(--green)' : pct >= 50 ? 'var(--gold)' : '#8B4A28';
+        barVal.textContent = val + '/' + max;
+      } else {
+        allScored = false;
+        barEl.style.width = '0%';
+        barVal.textContent = '—';
+      }
+    });
+
+    const totalMax = 90;
+    if (grandMax > 0) {
+      const pct = (grand / totalMax) * 100;
+      document.getElementById('overallScore').innerHTML = grand + '<span> / ' + totalMax + '</span>';
+
+      let verdict, recTitle, recBody, recColor;
+      if (pct >= 80) {
+        verdict = 'Strong — Introduce to network';
+        recColor = 'var(--green)';
+        recTitle = 'Proceed with Introduction';
+        recBody = 'This candidate demonstrates exceptional temperament, experience, and alignment with Avelis values. Proceed with background verification and reference checks, then introduce to an appropriate family.';
+        document.getElementById('recIndicator').textContent = '✓';
+      } else if (pct >= 65) {
+        verdict = 'Good — Review before introducing';
+        recColor = 'var(--gold)';
+        recTitle = 'Consider with Caution';
+        recBody = 'This candidate shows genuine promise in key areas, with some gaps worth addressing. Follow up on any concerns, check references thoroughly, and consider a trial introduction with a lower-complexity family first.';
+        document.getElementById('recIndicator').textContent = '~';
+      } else if (pct >= 50) {
+        verdict = 'Borderline — Further review needed';
+        recColor = var_amber();
+        recTitle = 'Hold — Further Assessment Needed';
+        recBody = 'Significant gaps exist in one or more critical areas. Do not introduce to families without addressing the concerns flagged above. A second evaluation or additional reference verification is strongly recommended.';
+        document.getElementById('recIndicator').textContent = '!';
+      } else {
+        verdict = 'Not a fit at this time';
+        recColor = '#7A3028';
+        recTitle = 'Do Not Introduce';
+        recBody = 'This candidate does not currently meet Avelis network standards for one or more critical dimensions. The families we serve deserve the best available match — hold for now and revisit if circumstances change.';
+        document.getElementById('recIndicator').textContent = '✕';
+      }
+
+      document.getElementById('overallVerdict').textContent = verdict;
+      document.getElementById('overallVerdict').style.color = recColor;
+      document.getElementById('recIndicator').style.background = recColor;
+      document.getElementById('recTitle').textContent = recTitle;
+      document.getElementById('recBody').textContent = recBody;
+    }
+  }
+
+  function var_amber() { return '#8B6B2E'; }
+
+  function resetForm() {
+    if (!confirm('Clear all scores and start over?')) return;
+    Object.keys(scores).forEach(k => delete scores[k]);
+    document.querySelectorAll('.rating-btn').forEach(b => b.className = 'rating-btn');
+    document.querySelectorAll('input[type="text"], input[type="date"], select, textarea').forEach(el => {
+      if (el.tagName === 'SELECT') el.selectedIndex = 0;
+      else el.value = '';
+    });
+    ['bar1','bar2','bar3','bar4','bar5'].forEach(id => {
+      document.getElementById(id).style.width = '0%';
+      document.getElementById(id + '-val').textContent = '—';
+    });
+    document.getElementById('overallScore').innerHTML = '—<span> / 90</span>';
+    document.getElementById('overallVerdict').textContent = 'Complete all sections to calculate';
+    document.getElementById('overallVerdict').style.color = '';
+    document.getElementById('recTitle').textContent = 'Complete scoring to generate recommendation';
+    document.getElementById('recBody').textContent = 'Score all categories above to see your recommendation.';
+    document.getElementById('recIndicator').textContent = '?';
+    document.getElementById('recIndicator').style.background = 'var(--taupe)';
+  }
+
+  // Set today's date
+  document.getElementById('evalDate').valueAsDate = new Date();
+</script>
+</body>
+</html>
