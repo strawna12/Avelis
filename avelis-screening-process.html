@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Avelis Screening Process — How We Select Caregivers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3VDCQR3X6W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3VDCQR3X6W');
+  </script>
+<style>
+  :root {
+    --cream: #F0EBE1; --parchment: #DDD5C8; --taupe: #A89880;
+    --warm-gray: #5C5248; --charcoal: #1E1A16; --deep: #0F0D0A;
+    --gold: #A07C3A; --gold-light: #C49A52; --white: #FAF7F2;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--charcoal); font-family: var(--sans); font-weight: 400; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 24px 60px; background: rgba(240,235,225,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--parchment); }
+  .nav-logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; letter-spacing: 0.06em; color: var(--charcoal); text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-back { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--warm-gray); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .nav-back:hover { color: var(--charcoal); }
+  .nav-back svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
+  .nav-cta { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .nav-cta:hover { color: var(--charcoal); border-color: var(--charcoal); }
+
+  /* HERO */
+  #hero { background: var(--deep); padding: 130px 60px 90px; position: relative; overflow: hidden; }
+  .hero-ring { position: absolute; border-radius: 50%; }
+  .hero-ring-1 { width: 500px; height: 500px; right: -100px; top: -100px; border: 1px solid rgba(160,124,58,0.08); }
+  .hero-ring-2 { width: 320px; height: 320px; right: 30px; top: 30px; border: 1px solid rgba(160,124,58,0.05); }
+  .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; display: grid; grid-template-columns: 6fr 4fr; gap: 80px; align-items: end; }
+  .hero-eyebrow { font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .hero-eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+  h1 { font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 300; line-height: 1.16; color: var(--white); letter-spacing: -0.01em; margin-bottom: 24px; }
+  h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-size: 0.97rem; color: rgba(255,255,255,0.5); line-height: 1.85; max-width: 520px; }
+  .hero-right-panel { display: flex; flex-direction: column; gap: 2px; padding-bottom: 4px; }
+  .hero-stat { padding: 20px 26px; background: rgba(255,255,255,0.04); border-left: 2px solid var(--gold); }
+  .hero-stat-label { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .hero-stat-value { font-family: var(--serif); font-size: 1.05rem; font-weight: 300; color: var(--white); }
+
+  /* SHARED */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  section { padding: 100px 0; }
+  .section-label { font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+  .section-label::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+  .section-heading { font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 300; line-height: 1.2; color: var(--deep); letter-spacing: -0.01em; }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .divider { width: 44px; height: 1px; background: var(--gold); margin: 28px 0; opacity: 0.6; }
+  .body-text { font-size: 0.97rem; font-weight: 400; line-height: 1.85; color: var(--warm-gray); }
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+
+  /* INTRO */
+  #intro { background: var(--white); }
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .intro-lead { font-family: var(--serif); font-size: 1.45rem; font-weight: 300; line-height: 1.5; color: var(--charcoal); margin-bottom: 24px; }
+  .intro-lead em { font-style: italic; color: var(--gold); }
+  .callout { padding: 22px 28px; background: var(--cream); border-left: 2px solid var(--gold); font-size: 0.9rem; color: var(--warm-gray); line-height: 1.78; margin-top: 28px; }
+  .callout strong { color: var(--charcoal); font-weight: 500; }
+
+  /* STEPS */
+  #steps { background: var(--cream); }
+  .steps-intro { max-width: 640px; margin-bottom: 72px; }
+  .steps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+  .step-card { background: var(--white); padding: 44px 40px; position: relative; overflow: hidden; transition: background 0.3s; }
+  .step-card:hover { background: var(--charcoal); }
+  .step-card-num { font-family: var(--serif); font-size: 3.8rem; font-weight: 300; color: var(--parchment); line-height: 1; margin-bottom: 18px; transition: color 0.3s; }
+  .step-card:hover .step-card-num { color: rgba(255,255,255,0.07); }
+  .step-card-title { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--deep); margin-bottom: 12px; line-height: 1.28; transition: color 0.3s; }
+  .step-card:hover .step-card-title { color: var(--white); }
+  .step-card-body { font-size: 0.88rem; color: var(--warm-gray); line-height: 1.82; transition: color 0.3s; }
+  .step-card:hover .step-card-body { color: rgba(255,255,255,0.5); }
+  .step-card-tag { display: inline-block; margin-top: 18px; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: color 0.3s, border-color 0.3s; }
+  .step-card:hover .step-card-tag { color: var(--gold-light); border-color: var(--gold-light); }
+
+  /* TEMPERAMENT */
+  #temperament { background: var(--deep); }
+  .temp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .temp-items { display: flex; flex-direction: column; gap: 0; margin-top: 8px; }
+  .temp-item { padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: grid; grid-template-columns: 28px 1fr; gap: 18px; align-items: flex-start; }
+  .temp-item:last-child { border-bottom: none; }
+  .temp-num { font-family: var(--serif); font-size: 0.8rem; font-style: italic; color: var(--gold); padding-top: 3px; }
+  .temp-title { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); margin-bottom: 5px; }
+  .temp-body { font-size: 0.86rem; color: rgba(255,255,255,0.42); line-height: 1.75; }
+  .temp-quote { padding: 28px 32px; background: rgba(160,124,58,0.08); border-left: 2px solid var(--gold); font-family: var(--serif); font-size: 1.1rem; font-style: italic; color: rgba(255,255,255,0.65); line-height: 1.65; margin-top: 36px; }
+
+  /* WHAT WE CHECK */
+  #checks { background: var(--white); }
+  .checks-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 100px; align-items: start; }
+  .check-list { list-style: none; margin-top: 8px; }
+  .check-item { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--parchment); }
+  .check-item:first-child { padding-top: 0; }
+  .check-icon { width: 24px; height: 24px; min-width: 24px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; flex-shrink: 0; }
+  .check-icon svg { width: 10px; height: 10px; stroke: var(--gold); fill: none; }
+  .check-content { }
+  .check-title { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 4px; }
+  .check-desc { font-size: 0.88rem; color: var(--warm-gray); line-height: 1.72; }
+
+  /* DISCLAIMER */
+  #disclaimer { background: var(--parchment); padding: 72px 0; }
+  .disclaimer-inner { max-width: 760px; margin: 0 auto; padding: 0 60px; }
+  .disclaimer-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .disclaimer-label::before { content: ''; width: 22px; height: 1px; background: var(--taupe); }
+  .disclaimer-text { font-family: var(--serif); font-size: 1.15rem; font-weight: 300; font-style: italic; color: var(--warm-gray); line-height: 1.65; margin-bottom: 16px; }
+  .disclaimer-sub { font-size: 0.84rem; color: var(--taupe); line-height: 1.78; }
+
+  /* CTA */
+  #cta { background: var(--white); padding: 100px 0; }
+  .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+  .cta-heading { font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 300; color: var(--deep); line-height: 1.22; margin-bottom: 14px; }
+  .cta-heading em { font-style: italic; color: var(--gold); }
+  .btn-primary { display: inline-block; font-family: var(--sans); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--charcoal); text-decoration: none; padding: 17px 40px; transition: background 0.3s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--gold); }
+  .btn-outline { display: inline-block; font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--warm-gray); text-decoration: none; border: 1px solid var(--parchment); padding: 16px 36px; transition: border-color 0.2s, color 0.2s; }
+  .btn-outline:hover { border-color: var(--charcoal); color: var(--charcoal); }
+
+  /* FOOTER */
+  footer { background: var(--deep); padding: 56px 0 36px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  .footer-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.07); flex-wrap: wrap; gap: 20px; }
+  .footer-brand { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--white); letter-spacing: 0.04em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-links { display: flex; gap: 32px; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.18); }
+  .footer-sig { font-family: var(--serif); font-style: italic; font-size: 0.8rem; color: rgba(255,255,255,0.18); }
+
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    #hero { padding: 110px 24px 72px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-right-panel { display: none; }
+    .container { padding: 0 28px; }
+    section { padding: 72px 0; }
+    .intro-grid, .temp-grid, .checks-grid, .cta-grid { grid-template-columns: 1fr; gap: 48px; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .disclaimer-inner { padding: 0 28px; }
+    .footer-inner { padding: 0 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Avelis<span>.</span></a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Site
+  </a>
+  <a href="index.html#contact" class="nav-cta">Request a Consultation</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-ring hero-ring-1"></div>
+  <div class="hero-ring hero-ring-2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">For Families · Our Standards</div>
+      <h1>The Avelis<br><em>Screening Process</em>.</h1>
+      <p class="hero-sub">How we review, evaluate, and select the independent caregivers we introduce to families — and why temperament matters as much as credentials.</p>
+    </div>
+    <div class="hero-right-panel">
+      <div class="hero-stat">
+        <div class="hero-stat-label">Background Check</div>
+        <div class="hero-stat-value">Required for all caregivers</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Reference Verification</div>
+        <div class="hero-stat-value">Prior caregiving references checked</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Temperament Review</div>
+        <div class="hero-stat-value">Character evaluated, not just credentials</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Dementia Review</div>
+        <div class="hero-stat-value">Experience and approach assessed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="fade-up">
+        <div class="section-label">Why This Matters</div>
+        <p class="intro-lead">The caregiver entering your home is the most important decision in this entire process. <em>We treat it that way.</em></p>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:20px;">Most agencies screen for availability. We screen for character. Because we believe the single greatest determinant of care quality is the temperament of the person providing it — not just their certification.</p>
+        <p class="body-text">What follows is an honest account of what we look for, what we verify, and what our process involves. We share this because families deserve to know — and because transparency is part of what makes Avelis different.</p>
+        <div class="callout">
+          <strong>A note on honesty:</strong> No screening process eliminates all risk. What we offer is careful, thoughtful review — not a guarantee. We are transparent about this because we respect your family's intelligence and the weight of this decision.
+        </div>
+      </div>
+      <div class="fade-up d1">
+        <div class="section-label">Our Standard</div>
+        <h2 class="section-heading">We are building<br>a curated network —<br>not a <em>large roster</em>.</h2>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:20px;">We introduce a small number of carefully reviewed caregivers to families — not a catalogue of hundreds. That means we can actually know the people in our network. We can speak to their character from direct experience, not just from a file.</p>
+        <p class="body-text">We would rather introduce fewer caregivers and know them well than build volume at the expense of confidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="steps">
+  <div class="container">
+    <div class="steps-intro fade-up">
+      <div class="section-label">The Review Process</div>
+      <h2 class="section-heading">Six steps before<br>any <em>introduction</em> is made.</h2>
+      <div class="divider"></div>
+      <p class="body-text">Every caregiver in the Avelis network has moved through this process before being introduced to any family. No exceptions.</p>
+    </div>
+    <div class="steps-grid">
+
+      <div class="step-card fade-up">
+        <div class="step-card-num">01</div>
+        <div class="step-card-title">Application & Written Review</div>
+        <p class="step-card-body">Every applicant completes a detailed written application including five open-ended questions about their caregiving philosophy, how they navigate difficult moments, and why they do this work. We read every response personally. The answers reveal far more than a resume.</p>
+        <div class="step-card-tag">Written Assessment</div>
+      </div>
+
+      <div class="step-card fade-up d1">
+        <div class="step-card-num">02</div>
+        <div class="step-card-title">Identity Verification</div>
+        <p class="step-card-body">We verify the identity of every applicant before proceeding. Government-issued identification is confirmed as part of the standard review process.</p>
+        <div class="step-card-tag">Identity Confirmed</div>
+      </div>
+
+      <div class="step-card fade-up d2">
+        <div class="step-card-num">03</div>
+        <div class="step-card-title">Background Screening</div>
+        <p class="step-card-body">A background check is required of every caregiver introduced through Avelis. This includes criminal history review. Caregivers with disqualifying histories are not introduced to families.</p>
+        <div class="step-card-tag">Background Checked</div>
+      </div>
+
+      <div class="step-card fade-up">
+        <div class="step-card-num">04</div>
+        <div class="step-card-title">Reference Verification</div>
+        <p class="step-card-body">Prior caregiving references are contacted and verified. We ask specifically about reliability, how the caregiver handled difficult moments, how they communicated with families, and whether the reference would work with them again.</p>
+        <div class="step-card-tag">References Verified</div>
+      </div>
+
+      <div class="step-card fade-up d1">
+        <div class="step-card-num">05</div>
+        <div class="step-card-title">Dementia Experience Review</div>
+        <p class="step-card-body">Because our network is focused exclusively on dementia care, we specifically review each applicant's experience with cognitive change — including familiarity with sundowning, wandering, behavioral shifts, and person-centered communication approaches.</p>
+        <div class="step-card-tag">Dementia Specific</div>
+      </div>
+
+      <div class="step-card fade-up d2">
+        <div class="step-card-num">06</div>
+        <div class="step-card-title">Temperament Evaluation</div>
+        <p class="step-card-body">This is the most important step and the hardest to quantify. Through direct conversation and a structured evaluation, we assess composure, patience, warmth, and emotional maturity. Caregivers who meet our credential standards but fall short on character are not introduced.</p>
+        <div class="step-card-tag">Character Assessed</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TEMPERAMENT -->
+<section id="temperament">
+  <div class="container">
+    <div class="temp-grid">
+      <div class="fade-up">
+        <div class="section-label" style="color:var(--gold);">Why Temperament Comes First</div>
+        <h2 class="section-heading" style="color:var(--white);">Skills can be learned.<br><em>Character cannot.</em></h2>
+        <div class="divider"></div>
+        <p class="body-text" style="color:rgba(255,255,255,0.5);margin-bottom:20px;">A certified caregiver who is impatient, distracted, or emotionally reactive is not the right person for dementia care — regardless of their credentials. We have seen this enough to make temperament our primary filter.</p>
+        <p class="body-text" style="color:rgba(255,255,255,0.5);">Here is what we are specifically assessing in every caregiver we review:</p>
+        <div class="temp-quote">"People with dementia may not remember a caregiver's name. They will remember how that person made them feel. Warmth and calm register even when nothing else does."</div>
+      </div>
+      <div class="fade-up d1">
+        <div class="temp-items">
+          <div class="temp-item">
+            <div class="temp-num">i.</div>
+            <div>
+              <div class="temp-title">Emotional Composure</div>
+              <div class="temp-body">The ability to remain regulated under pressure. A caregiver's steadiness directly affects the person in their care — especially for someone with dementia who absorbs the emotional state of those around them.</div>
+            </div>
+          </div>
+          <div class="temp-item">
+            <div class="temp-num">ii.</div>
+            <div>
+              <div class="temp-title">Genuine Patience</div>
+              <div class="temp-body">Not just the absence of frustration — active patience. The ability to answer the same question warmly for the fourteenth time. To be unhurried when the work asks for slowness.</div>
+            </div>
+          </div>
+          <div class="temp-item">
+            <div class="temp-num">iii.</div>
+            <div>
+              <div class="temp-title">Authentic Warmth</div>
+              <div class="temp-body">Real curiosity about the people in their care. Not performed kindness — genuine interest in who this person is, their history, their preferences, what makes them feel like themselves.</div>
+            </div>
+          </div>
+          <div class="temp-item">
+            <div class="temp-num">iv.</div>
+            <div>
+              <div class="temp-title">Emotional Maturity</div>
+              <div class="temp-body">Self-awareness, good judgment, and the ability to navigate complex family dynamics without taking things personally or overstepping professional boundaries.</div>
+            </div>
+          </div>
+          <div class="temp-item">
+            <div class="temp-num">v.</div>
+            <div>
+              <div class="temp-title">Reliability of Character</div>
+              <div class="temp-body">Not just a track record of showing up — but an understanding that commitment to a vulnerable person is not optional. Reliability is the foundation of trust, and trust is the foundation of care.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE CHECK -->
+<section id="checks">
+  <div class="container">
+    <div class="checks-grid">
+      <div class="fade-up">
+        <div class="section-label">Complete Checklist</div>
+        <h2 class="section-heading">What every caregiver<br>introduction <em>requires</em>.</h2>
+        <div class="divider"></div>
+        <p class="body-text">Before any caregiver is introduced to a family through Avelis, the following have been completed. This is not aspirational — it is the standard.</p>
+      </div>
+      <div class="fade-up d1">
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="check-icon"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="check-content">
+              <div class="check-title">Written Application Reviewed</div>
+              <div class="check-desc">Full application including five character-based questions, read personally by Avelis.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="check-content">
+              <div class="check-title">Identity Verified</div>
+              <div class="check-desc">Government-issued identification confirmed.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="check-content">
+              <div class="check-title">Background Check Completed</div>
+              <div class="check-desc">Criminal history reviewed. Disqualifying findings result in removal from consideration.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="check-content">
+              <div class="check-title">References Contacted</div>
+              <div class="check-desc">Prior caregiving references verified with specific questions about reliability, dementia experience, and family communication.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="check-content">
+              <div class="check-title">Dementia Experience Assessed</div>
+              <div class="check-desc">Direct experience with dementia or Alzheimer's reviewed, including familiarity with behavioral symptoms and person-centered approaches.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="check-content">
+              <div class="check-title">Temperament Evaluation Completed</div>
+              <div class="check-desc">Structured assessment of composure, warmth, patience, communication, and emotional maturity conducted by Avelis.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="check-content">
+              <div class="check-title">Network Onboarding Completed</div>
+              <div class="check-desc">Self-guided onboarding covering the Avelis standard, dementia-informed care principles, and non-medical scope requirements.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="check-content">
+              <div class="check-title">Family Introduction Made First</div>
+              <div class="check-desc">No caregiver begins with a family without a prior introduction. You meet them first. You decide.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section id="disclaimer">
+  <div class="container">
+    <div class="disclaimer-inner fade-up">
+      <div class="disclaimer-label">A Word of Honesty</div>
+      <p class="disclaimer-text">"No screening process — however thorough — can guarantee outcomes. What we offer is careful, structured review by people who take this responsibility seriously."</p>
+      <p class="disclaimer-sub">Caregivers introduced through Avelis are independent contractors, not employees. Families retain the right to accept or decline any introduction at any time, and to end a relationship if circumstances change. We are here to support families through that process — before, during, and after every introduction we make.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-grid">
+      <div class="fade-up">
+        <div class="section-label">Begin Here</div>
+        <h2 class="cta-heading">Ready to talk about<br>what your family <em>needs</em>?</h2>
+        <div class="divider"></div>
+        <p class="body-text">A private consultation is where everything begins. No paperwork, no obligation — just a conversation about your situation and whether Avelis might be the right fit.</p>
+      </div>
+      <div class="fade-up d1" style="display:flex;flex-direction:column;gap:16px;justify-content:center;">
+        <a href="index.html#contact" class="btn-primary">Request a Private Consultation</a>
+        <a href="index.html" class="btn-outline">Return to Avelis Care</a>
+        <p style="font-size:0.76rem;color:var(--taupe);line-height:1.65;margin-top:4px;">Your information is held in strict confidence. We respond within one business day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">Avelis<span>.</span></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#why">Why Avelis</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="avelis-care-careers.html">Careers</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Avelis Care LLC · St. Petersburg, Florida · Non-medical private home care referral service</div>
+      <div class="footer-sig">Consistency. Dignity. Presence.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  setTimeout(() => document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible')), 80);
+</script>
+</body>
+</html>
