@@ -211,11 +211,12 @@
   /* PRINT */
   @media print {
     .page-header, .action-row { display: none !important; }
-    .rating-btn { border: 1px solid #ccc !important; }
+    body { background: white !important; }
+    .overall-block, .score-section-header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .rating-btn { border: 1px solid #ccc !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
     .rating-btn.active-1, .rating-btn.active-2, .rating-btn.active-3,
     .rating-btn.active-4, .rating-btn.active-5 { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-    body { background: white; }
-    .overall-block { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .score-row, .score-notes, .applicant-block, .final-block, .recommendation-block { break-inside: avoid; }
   }
 
   @media (max-width: 700px) {
@@ -693,8 +694,8 @@
 
   <!-- ACTIONS -->
   <div class="action-row">
-    <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
-    <button class="btn-outline" onclick="resetForm()">Clear & Start Over</button>
+    <button class="btn-primary" id="printBtn">Print / Save as PDF</button>
+    <button class="btn-outline" onclick="resetForm()">Clear &amp; Start Over</button>
   </div>
 
 </div>
@@ -816,6 +817,13 @@
 
   // Set today's date
   document.getElementById('evalDate').valueAsDate = new Date();
+
+  // Print button — use setTimeout to ensure page is ready
+  document.getElementById('printBtn').addEventListener('click', function() {
+    setTimeout(function() {
+      window.print();
+    }, 100);
+  });
 </script>
 </body>
 </html>
