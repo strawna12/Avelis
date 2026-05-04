@@ -382,41 +382,6 @@
   .q-block textarea:focus { border-color: var(--gold); }
   .q-block textarea::placeholder { color: var(--taupe); font-style: italic; font-size: 0.85rem; }
 
-  /* Upload */
-  .upload-zone {
-    border: 1px dashed var(--taupe);
-    padding: 44px 32px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.25s, background 0.25s;
-    position: relative;
-    background: var(--cream);
-  }
-  .upload-zone:hover, .upload-zone.over { border-color: var(--gold); background: rgba(160,124,58,0.03); }
-  .upload-zone input[type="file"] {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    opacity: 0; cursor: pointer;
-    border: none; padding: 0;
-  }
-  .upload-icon {
-    width: 38px; height: 38px;
-    margin: 0 auto 14px;
-    border: 1px solid var(--taupe);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .upload-icon svg { width: 15px; height: 15px; stroke: var(--gold); fill: none; }
-  .upload-title {
-    font-size: 0.74rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--charcoal);
-    margin-bottom: 7px;
-  }
-  .upload-hint { font-size: 0.8rem; color: var(--warm-gray); line-height: 1.55; }
-  .upload-filename { margin-top: 12px; font-size: 0.8rem; color: var(--gold); display: none; }
-
   /* Submit */
   .btn-primary {
     display: inline-block;
@@ -807,17 +772,18 @@
       </div>
 
       <!-- Resume -->
-      <div class="form-section-title">Resume or Summary</div>
-      <div class="upload-zone" id="dropZone">
-        <input type="file" id="resumeFile" accept=".pdf,.doc,.docx" onchange="onFileSelect(event)">
-        <div class="upload-icon">
-          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <div class="form-section-title">Resume or Professional Profile</div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Resume Link <span style="font-size:0.7rem;color:var(--taupe);letter-spacing:0;text-transform:none;">(Google Drive, Dropbox, or LinkedIn)</span></label>
+          <input type="text" id="resumeLink" placeholder="Paste a shareable link to your resume or LinkedIn profile">
         </div>
-        <div class="upload-title">Attach Your Resume</div>
-        <div class="upload-hint">Drag and drop or click to browse · PDF, DOC, DOCX · Max 5MB</div>
-        <div class="upload-filename" id="fileName"></div>
+        <div class="form-group">
+          <label>Or briefly describe your experience</label>
+          <input type="text" id="resumeSummary" placeholder="e.g. 4 years HHA, 2 years dementia-specific care in private homes">
+        </div>
       </div>
-      <p style="margin-top:11px;font-size:0.76rem;color:var(--taupe);line-height:1.6;">No formal resume? A brief written summary of your experience is perfectly acceptable.</p>
+      <p style="margin-top:4px;font-size:0.76rem;color:var(--taupe);line-height:1.6;">To share a Google Drive link: open the file → Share → change access to "Anyone with the link" → copy the link.</p>
 
       <!-- Five Questions -->
       <div class="form-section-title">Five Questions</div>
@@ -910,29 +876,6 @@
 
   const CAREERS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzg1MMOWofPxbOWjnmXHaAggaq1tFG8t4sgc2SOGENsGMp_Ex93x4Gs8_KuldDY6eXk/exec";
 
-  // File upload
-  function onFileSelect(e) {
-    const f = e.target.files[0];
-    if (!f) return;
-    const el = document.getElementById('fileName');
-    el.textContent = '✓ ' + f.name;
-    el.style.display = 'block';
-    document.getElementById('dropZone').style.borderColor = 'var(--gold)';
-  }
-  const zone = document.getElementById('dropZone');
-  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
-  zone.addEventListener('dragleave', () => zone.classList.remove('over'));
-  zone.addEventListener('drop', e => {
-    e.preventDefault(); zone.classList.remove('over');
-    const f = e.dataTransfer.files[0];
-    if (f) {
-      const el = document.getElementById('fileName');
-      el.textContent = '✓ ' + f.name;
-      el.style.display = 'block';
-      zone.style.borderColor = 'var(--gold)';
-    }
-  });
-
   // Submit
   function onSubmit() {
     const btn = document.getElementById('submitBtn');
@@ -960,20 +903,22 @@
     btn.style.opacity = '0.7';
 
     const payload = {
-      firstName:    document.getElementById('firstName').value.trim(),
-      lastName:     document.getElementById('lastName').value.trim(),
-      phone:        document.getElementById('phone').value.trim(),
-      email:        document.getElementById('email').value.trim(),
-      city:         document.getElementById('city').value.trim(),
+      firstName:     document.getElementById('firstName').value.trim(),
+      lastName:      document.getElementById('lastName').value.trim(),
+      phone:         document.getElementById('phone').value.trim(),
+      email:         document.getElementById('email').value.trim(),
+      city:          document.getElementById('city').value.trim(),
       certification: document.getElementById('certification').value,
-      experience:   document.getElementById('experience').value,
-      dementiaExp:  document.getElementById('dementiaExp').value,
-      availability: document.getElementById('availability').value,
-      q1:           document.getElementById('q1').value.trim(),
-      q2:           document.getElementById('q2').value.trim(),
-      q3:           document.getElementById('q3').value.trim(),
-      q4:           document.getElementById('q4').value.trim(),
-      q5:           document.getElementById('q5').value.trim(),
+      experience:    document.getElementById('experience').value,
+      dementiaExp:   document.getElementById('dementiaExp').value,
+      availability:  document.getElementById('availability').value,
+      resumeLink:    document.getElementById('resumeLink').value.trim(),
+      resumeSummary: document.getElementById('resumeSummary').value.trim(),
+      q1:            document.getElementById('q1').value.trim(),
+      q2:            document.getElementById('q2').value.trim(),
+      q3:            document.getElementById('q3').value.trim(),
+      q4:            document.getElementById('q4').value.trim(),
+      q5:            document.getElementById('q5').value.trim(),
     };
 
     fetch(CAREERS_ENDPOINT, {
@@ -984,12 +929,10 @@
     })
     .then(() => {
       document.getElementById('appForm').style.display = 'none';
-      const s = document.getElementById('successMsg');
-      s.classList.add('show');
+      document.getElementById('successMsg').classList.add('show');
       window.scrollTo({ top: document.getElementById('apply').offsetTop - 100, behavior: 'smooth' });
     })
     .catch(() => {
-      // no-cors means we won't get error details — treat as success since Apps Script received it
       document.getElementById('appForm').style.display = 'none';
       document.getElementById('successMsg').classList.add('show');
       window.scrollTo({ top: document.getElementById('apply').offsetTop - 100, behavior: 'smooth' });
