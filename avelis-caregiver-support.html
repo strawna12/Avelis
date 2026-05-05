@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Caregiver Support — Avelis Private Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --cream: #f7f4ef;
+    --warm-white: #faf8f5;
+    --charcoal: #1e1e1e;
+    --deep: #111;
+    --muted: #7a7570;
+    --border: #e2ddd7;
+    --accent: #c6a882;
+    --accent-light: #e8ddd0;
+    --sage: #8a9b8a;
+    --rust: #b87a5a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(250, 248, 245, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--deep);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--charcoal); }
+
+  .nav-cta {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    border: 1px solid var(--charcoal);
+    padding: 0.55rem 1.4rem;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .nav-cta:hover {
+    background: var(--charcoal);
+    color: var(--warm-white);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 10rem 3rem 5rem;
+    position: relative;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 40%, var(--accent-light) 100%);
+    opacity: 0.5;
+  }
+
+  .hero-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: block;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-content { max-width: 680px; position: relative; z-index: 1; }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.08;
+    color: var(--deep);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-scroll {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-scroll span {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero-line {
+    width: 60px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .hero-number {
+    position: absolute;
+    right: 4rem;
+    bottom: 4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12rem;
+    font-weight: 300;
+    color: var(--border);
+    line-height: 1;
+    opacity: 0;
+    animation: fadeIn 1s 1s forwards;
+    user-select: none;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* SECTION BASE */
+  section { padding: 6rem 3rem; }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--deep);
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .section-sub {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.85;
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--accent);
+    margin: 2rem 0;
+  }
+
+  /* INTRO STRIP */
+  .intro-strip {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 4rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    border-bottom: 1px solid #333;
+  }
+
+  .strip-item {
+    padding-left: 1.5rem;
+    border-left: 1px solid #444;
+  }
+
+  .strip-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-bottom: 0.6rem;
+    color: var(--accent);
+  }
+
+  .strip-item p {
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.75;
+  }
+
+  /* TOPICS / QUICK LINKS */
+  .topics {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .topics-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .topics-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .topic-card {
+    background: var(--warm-white);
+    padding: 2.2rem 2rem;
+    cursor: pointer;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+  }
+
+  .topic-card::after {
+    content: '→';
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    font-size: 1rem;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.25s;
+  }
+
+  .topic-card:hover {
+    background: var(--cream);
+  }
+
+  .topic-card:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .topic-icon {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .topic-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .topic-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* RESOURCES */
+  .resources {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .resources-inner { max-width: 1100px; margin: 0 auto; }
+
+  .resources-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .resource-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    padding: 2.2rem;
+    position: relative;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+
+  .resource-card:hover {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+  }
+
+  .resource-tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .resource-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 0.7rem;
+    line-height: 1.3;
+  }
+
+  .resource-card p {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .resource-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .resource-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* BLOG */
+  .blog {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .blog-inner { max-width: 1100px; margin: 0 auto; }
+
+  .blog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    gap: 2rem;
+  }
+
+  .blog-header-left { max-width: 500px; }
+
+  .blog-see-all {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--charcoal);
+    padding-bottom: 2px;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .blog-see-all:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+  }
+
+  .blog-card {
+    background: var(--warm-white);
+    padding: 2.5rem 2.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-card:hover { background: var(--cream); }
+
+  .blog-card.featured { padding: 3rem; }
+
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .blog-cat {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .blog-date {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .blog-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--deep);
+    margin-bottom: 0.8rem;
+  }
+
+  .blog-card.featured h3 {
+    font-size: 2rem;
+  }
+
+  .blog-card p {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-read {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+  }
+
+  .blog-card:hover .blog-read { color: var(--charcoal); }
+
+  /* WEBINARS */
+  .webinars {
+    background: var(--charcoal);
+    color: var(--cream);
+  }
+
+  .webinars-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .webinars-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+
+  .webinars-header .section-title { color: var(--cream); }
+  .webinars-header .section-label { color: var(--accent); }
+  .webinars-header .section-sub { color: #aaa; }
+
+  .webinar-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #333;
+    margin-bottom: 3rem;
+  }
+
+  .webinar-item {
+    background: var(--charcoal);
+    padding: 2rem 2.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    transition: background 0.2s;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+    color: var(--cream);
+  }
+
+  .webinar-item:hover { background: #2a2a2a; }
+
+  .webinar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #444;
+    line-height: 1;
+    min-width: 2rem;
+    padding-top: 2px;
+  }
+
+  .webinar-info h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .webinar-info p {
+    font-size: 0.78rem;
+    color: #777;
+    line-height: 1.6;
+  }
+
+  .webinar-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .webinar-cta {
+    text-align: center;
+    padding-top: 1rem;
+  }
+
+  /* TOOLS */
+  .tools {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tools-inner { max-width: 1100px; margin: 0 auto; }
+
+  .tools-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .tool-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    padding: 2rem 1.6rem;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+
+  .tool-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(198,168,130,0.15);
+  }
+
+  .tool-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .tool-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .tool-card p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  .tool-badge {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent-light);
+    padding: 0.2rem 0.6rem;
+    display: inline-block;
+  }
+
+  /* CRISIS */
+  .crisis {
+    background: var(--warm-white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .crisis-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .crisis-numbers {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .crisis-num {
+    border-left: 3px solid var(--accent);
+    padding-left: 1.2rem;
+  }
+
+  .crisis-num h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 0.2rem;
+  }
+
+  .crisis-num a {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+  }
+
+  .crisis-num p {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: var(--deep);
+    padding: 6rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(198,168,130,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-banner .section-label { text-align: center; display: block; }
+
+  .cta-banner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 1.2rem;
+    line-height: 1.15;
+    position: relative;
+  }
+
+  .cta-banner h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .cta-banner p {
+    font-size: 0.95rem;
+    color: #888;
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.85;
+    position: relative;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--deep);
+    padding: 1rem 2.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .btn-primary:hover {
+    background: #d4b896;
+  }
+
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid var(--cream);
+    color: var(--cream);
+    padding: 1rem 2.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    margin-left: 1rem;
+    transition: all 0.25s;
+  }
+
+  .btn-outline:hover {
+    background: var(--cream);
+    color: var(--deep);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    color: #777;
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #333;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  footer p {
+    font-size: 0.72rem;
+    color: #555;
+    max-width: 400px;
+    line-height: 1.6;
+  }
+
+  footer a {
+    color: #777;
+    text-decoration: none;
+    font-size: 0.72rem;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--accent); }
+
+  /* MODALS / TABS */
+  .tab-container { margin-top: 2rem; }
+
+  .tab-buttons {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.8rem 2rem 0.8rem 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active {
+    color: var(--charcoal);
+    border-bottom-color: var(--accent);
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ACCORDION */
+  .faq-list { max-width: 720px; }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--deep);
+    text-align: left;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--accent); }
+
+  .faq-icon {
+    font-size: 1rem;
+    color: var(--accent);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .faq-answer-inner {
+    padding: 0 0 1.5rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.85;
+  }
+
+  /* NEWSLETTER */
+  .newsletter {
+    background: var(--accent-light);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 3rem;
+  }
+
+  .newsletter-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    border: 1px solid var(--border);
+    background: white;
+    padding: 0.9rem 1.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    color: var(--charcoal);
+    outline: none;
+  }
+
+  .newsletter-form input::placeholder { color: var(--muted); }
+
+  .newsletter-form button {
+    background: var(--charcoal);
+    color: var(--cream);
+    border: none;
+    padding: 0.9rem 1.8rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .newsletter-form button:hover { background: var(--deep); }
+
+  .newsletter-note {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.7rem;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .intro-strip { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .topics-header, .resources-header, .webinars-header, .tools-header, .crisis-inner, .newsletter-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .topics-grid { grid-template-columns: 1fr 1fr; }
+    .resources-grid { grid-template-columns: 1fr; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .webinar-list { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+    .newsletter-form { flex-direction: column; }
+    .hero { padding: 8rem 1.5rem 4rem; }
+    .hero-number { display: none; }
+    .blog-header { flex-direction: column; align-items: flex-start; }
+    footer { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.avelisprivatecare.com" class="nav-logo">Avelis.</a>
+  <ul class="nav-links">
+    <li><a href="https://www.avelisprivatecare.com/#about">Philosophy</a></li>
+    <li><a href="https://www.avelisprivatecare.com/#services">Services</a></li>
+    <li><a href="#">Caregiver Support</a></li>
+    <li><a href="https://www.avelisprivatecare.com/avelis-care-careers.html">Careers</a></li>
+  </ul>
+  <a href="https://www.avelisprivatecare.com/#contact" class="nav-cta">Begin a Conversation</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-label">Caregiver Support</span>
+    <h1>You are not<br />meant to carry<br />this <em>alone</em>.</h1>
+    <p>This space was created for the family members, spouses, and loved ones who are doing the most important work in the world — and receiving the least support in return.</p>
+    <div class="hero-scroll">
+      <div class="hero-line"></div>
+      <span>Resources, guidance, and a quiet place to begin</span>
+    </div>
+  </div>
+  <div class="hero-number">∞</div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="strip-item">
+    <h3>Education</h3>
+    <p>Understand what your loved one is experiencing — and how to respond with confidence rather than fear.</p>
+  </div>
+  <div class="strip-item">
+    <h3>Resources</h3>
+    <p>Trusted organizations, local services, and tools that make the caregiving journey more manageable.</p>
+  </div>
+  <div class="strip-item">
+    <h3>Community</h3>
+    <p>Webinars, guides, and conversations with others who understand what you are going through.</p>
+  </div>
+</div>
+
+<!-- TOPIC SECTIONS -->
+<section class="topics">
+  <div class="topics-inner">
+    <div class="topics-header reveal">
+      <div>
+        <span class="section-label">Explore by Topic</span>
+        <h2 class="section-title">Find what you<br /><em>need right now</em>.</h2>
+      </div>
+      <p class="section-sub">Whether you're newly navigating a diagnosis or deep into a caregiving journey that has changed your life — there is something here for you.</p>
+    </div>
+    <div class="topics-grid reveal">
+      <a class="topic-card" href="#dementia">
+        <span class="topic-icon">🧠</span>
+        <h3>Dementia & Memory</h3>
+        <p>Understanding stages, managing behaviors, and creating a safe, calm environment at home.</p>
+      </a>
+      <a class="topic-card" href="#burnout">
+        <span class="topic-icon">🌿</span>
+        <h3>Caregiver Burnout</h3>
+        <p>Recognizing the signs before they become a crisis — and finding your way back to yourself.</p>
+      </a>
+      <a class="topic-card" href="#respite">
+        <span class="topic-icon">☁️</span>
+        <h3>Respite Care</h3>
+        <p>What it is, why it matters, and why asking for help is not the same as giving up.</p>
+      </a>
+      <a class="topic-card" href="#legal">
+        <span class="topic-icon">⚖️</span>
+        <h3>Legal & Financial</h3>
+        <p>Powers of attorney, long-term care insurance, elder law, and planning ahead with clarity.</p>
+      </a>
+      <a class="topic-card" href="#aging">
+        <span class="topic-icon">🏡</span>
+        <h3>Aging in Place</h3>
+        <p>Home modifications, safety audits, and the real cost comparison between home care and facilities.</p>
+      </a>
+      <a class="topic-card" href="#communication">
+        <span class="topic-icon">💬</span>
+        <h3>Family Communication</h3>
+        <p>Navigating disagreement, having hard conversations, and sharing caregiving responsibilities.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section class="resources" id="dementia">
+  <div class="resources-inner">
+    <div class="resources-header reveal">
+      <div>
+        <span class="section-label">Trusted Resources</span>
+        <h2 class="section-title">Organizations that<br /><em>genuinely help</em>.</h2>
+        <div class="divider"></div>
+      </div>
+      <div>
+        <div class="tab-container">
+          <div class="tab-buttons">
+            <button class="tab-btn active" onclick="showTab('national', this)">National</button>
+            <button class="tab-btn" onclick="showTab('local', this)">Florida & Pinellas</button>
+            <button class="tab-btn" onclick="showTab('online', this)">Online Tools</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="national" class="tab-panel active">
+      <div class="resources-grid reveal">
+        <div class="resource-card">
+          <span class="resource-tag">Dementia</span>
+          <h3>Alzheimer's Association</h3>
+          <p>The leading national organization for Alzheimer's and dementia. 24/7 helpline, local chapters, caregiver support groups, and an extensive library of guides for every stage of the journey.</p>
+          <a href="https://www.alz.org" target="_blank" class="resource-link">Visit alz.org →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag">Caregiver Support</span>
+          <h3>Family Caregiver Alliance</h3>
+          <p>A national nonprofit with fact sheets, webinars, and tools specifically designed for family caregivers. Particularly strong on caregiver self-care and managing complex care at home.</p>
+          <a href="https://www.caregiver.org" target="_blank" class="resource-link">Visit caregiver.org →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag">Respite Care</span>
+          <h3>ARCH National Respite Network</h3>
+          <p>Helps caregivers find respite services in their area. The Respite Locator connects families with local programs and short-term care options across the country.</p>
+          <a href="https://archrespite.org" target="_blank" class="resource-link">Visit archrespite.org →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag">Elder Law</span>
+          <h3>National Academy of Elder Law Attorneys</h3>
+          <p>Find vetted elder law attorneys near you who specialize in long-term care planning, Medicaid, powers of attorney, and estate matters related to aging.</p>
+          <a href="https://www.naela.org" target="_blank" class="resource-link">Visit naela.org →</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="local" class="tab-panel">
+      <div class="resources-grid reveal">
+        <div class="resource-card">
+          <span class="resource-tag">Pinellas County</span>
+          <h3>Elder Affairs — Area Agency on Aging</h3>
+          <p>Florida's official resource connecting Pinellas County families to local senior services, case management, Meals on Wheels, and caregiver support programs.</p>
+          <a href="https://elderaffairs.org" target="_blank" class="resource-link">Visit elderaffairs.org →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag">St. Petersburg</span>
+          <h3>Alzheimer's Association — Tampa Bay Chapter</h3>
+          <p>Local support groups, education programs, and a 24/7 helpline for families in Pinellas, Hillsborough, and surrounding counties navigating memory loss.</p>
+          <a href="https://www.alz.org/fl" target="_blank" class="resource-link">Visit alz.org/fl →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag">Florida</span>
+          <h3>Florida Department of Elder Affairs</h3>
+          <p>State-level resources including the SHINE program for Medicare counseling, the Community Care for the Elderly program, and elder helpline services.</p>
+          <a href="https://elderaffairs.state.fl.us" target="_blank" class="resource-link">Visit elderaffairs.state.fl.us →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag">Pinellas County</span>
+          <h3>Suncoast Hospice & Palliative Care</h3>
+          <p>Serving Pinellas County for over 45 years, Suncoast provides palliative care, hospice services, and caregiver support long before end-of-life planning is needed.</p>
+          <a href="https://www.suncoasthospice.org" target="_blank" class="resource-link">Visit suncoasthospice.org →</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="online" class="tab-panel">
+      <div class="resources-grid reveal">
+        <div class="resource-card">
+          <span class="resource-tag">Locator</span>
+          <h3>Eldercare Locator</h3>
+          <p>A U.S. government service that connects older adults and caregivers with trustworthy local support resources. Enter any zip code to find services in that area.</p>
+          <a href="https://eldercare.acl.gov" target="_blank" class="resource-link">Visit eldercare.acl.gov →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag">Community</span>
+          <h3>AgingCare.com Forums</h3>
+          <p>A large online community of family caregivers sharing experiences, asking questions, and supporting one another through the caregiving journey — 24 hours a day.</p>
+          <a href="https://www.agingcare.com/caregiver-forum" target="_blank" class="resource-link">Visit agingcare.com →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag">Planning</span>
+          <h3>Caring.com Care Guide Library</h3>
+          <p>Hundreds of free guides covering dementia stages, hiring caregivers, navigating Medicare, and managing the emotional weight of caring for an aging parent.</p>
+          <a href="https://www.caring.com/caregivers/" target="_blank" class="resource-link">Visit caring.com →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag">Mental Health</span>
+          <h3>Caregiver Action Network</h3>
+          <p>Resources specifically focused on caregiver mental health, peer support, and the often-overlooked emotional toll of long-term family caregiving.</p>
+          <a href="https://caregiveraction.org" target="_blank" class="resource-link">Visit caregiveraction.org →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG POSTS -->
+<section class="blog">
+  <div class="blog-inner">
+    <div class="blog-header reveal">
+      <div class="blog-header-left">
+        <span class="section-label">From the Avelis Journal</span>
+        <h2 class="section-title">Guides, <em>insights</em>,<br />& honest writing.</h2>
+      </div>
+      <a href="#" class="blog-see-all">See all articles →</a>
+    </div>
+    <div class="blog-grid reveal">
+      <a class="blog-card featured" href="#">
+        <div class="blog-meta">
+          <span class="blog-cat">Dementia Care</span>
+          <span class="blog-date">May 2025</span>
+        </div>
+        <h3>The moment you realize your parent doesn't recognize you — and how to respond with grace.</h3>
+        <p>One of the most difficult moments in a dementia caregiving journey. What happens in the brain, what it means for your loved one, and how families find a way through it.</p>
+        <span class="blog-read">Read the guide →</span>
+      </a>
+      <a class="blog-card" href="#">
+        <div class="blog-meta">
+          <span class="blog-cat">Caregiver Wellbeing</span>
+          <span class="blog-date">Apr 2025</span>
+        </div>
+        <h3>Burnout doesn't arrive all at once. Here's how to notice it before it takes over.</h3>
+        <p>The quiet signs that caregiving has become unsustainable — and what to do next.</p>
+        <span class="blog-read">Read →</span>
+      </a>
+      <a class="blog-card" href="#">
+        <div class="blog-meta">
+          <span class="blog-cat">Respite Care</span>
+          <span class="blog-date">Mar 2025</span>
+        </div>
+        <h3>Asking for help is not giving up. It's how you keep showing up.</h3>
+        <p>Why guilt is the biggest barrier to respite care — and how to work through it honestly.</p>
+        <span class="blog-read">Read →</span>
+      </a>
+    </div>
+
+    <!-- FAQ ACCORDION -->
+    <div style="margin-top: 5rem;" class="reveal" id="burnout">
+      <span class="section-label">Common Questions</span>
+      <h2 class="section-title" style="margin-bottom: 2.5rem;">Questions we hear<br /><em>most often</em>.</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How do I know if I'm experiencing caregiver burnout?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Caregiver burnout often arrives quietly — as persistent exhaustion that doesn't resolve with sleep, emotional numbness, growing resentment, a sense of losing yourself, or physical symptoms without clear cause. If you find that you are caring for everyone else while neglecting your own health, relationships, and needs entirely, that is a signal worth taking seriously. Reaching out to your own doctor, a counselor, or a trusted person in your life is a meaningful first step.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What exactly is respite care, and how does it work?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Respite care is temporary, short-term care provided to your loved one so that you — the family caregiver — can take a break. It can be arranged in-home (a caregiver comes to your loved one's home while you step away), at an adult day program, or through a short-term stay at a care facility. It might last a few hours, a day, or a week. Avelis provides in-home respite care specifically for families navigating dementia in Pinellas County.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How do I talk to my parent about accepting help at home?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">This is one of the most common struggles families face. A few approaches that tend to work: frame the help as being for you, not them ("it would help me to worry less if someone was here with you"); involve them in choosing the caregiver rather than presenting it as a decision already made; start slowly with very short visits so the relationship can build naturally; and avoid having the conversation during a moment of conflict or crisis. Patience, repetition, and gentleness matter more than logic.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What documents should I have in place for a parent with dementia?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">The most important documents to have in place as early as possible are: a durable power of attorney (financial), a healthcare surrogate designation (or healthcare power of attorney), a living will or advance directive stating your loved one's wishes for medical treatment, and a HIPAA authorization allowing you to speak with their medical providers. In Florida, these documents are governed by state law — an elder law attorney can ensure everything is properly executed.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Is it safe for someone with dementia to remain at home?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">For many people, yes — especially in early to middle stages. The key factors are: whether the home environment can be made safe (removing fall hazards, securing stoves, installing locks on exterior doors), whether consistent and appropriate supervision can be provided, and whether the person's medical and personal care needs can be met at home. This changes over time, and there is no single answer. A geriatric care manager or your loved one's physician can help you assess this realistically as needs evolve.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How do I pay for home care without going through insurance?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Most luxury non-medical home care — including care through Avelis — is private pay, meaning families pay directly out of pocket. Some long-term care insurance policies cover private-duty home care, so it's worth reviewing your loved one's policy carefully. Veterans and their surviving spouses may qualify for Aid & Attendance benefits through the VA. In some cases, certain Medicaid waiver programs in Florida (like PACE or the Statewide Medicaid Managed Care program) may cover home care for those who qualify financially.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEBINARS -->
+<section class="webinars" id="respite">
+  <div class="webinars-inner">
+    <div class="webinars-header reveal">
+      <div>
+        <span class="section-label">Avelis Webinars</span>
+        <h2 class="section-title">Education for<br /><em>families</em> like yours.</h2>
+      </div>
+      <div>
+        <p class="section-sub">We host free educational webinars throughout the year on dementia, caregiver wellbeing, legal planning, and more. All are recorded and available on demand.</p>
+      </div>
+    </div>
+    <div class="webinar-list reveal">
+      <button class="webinar-item">
+        <span class="webinar-num">01</span>
+        <div class="webinar-info">
+          <span class="webinar-tag">Dementia</span>
+          <h4>The Stages of Dementia: What Families Need to Know</h4>
+          <p>Understanding the progression — and how to prepare at each stage.</p>
+        </div>
+      </button>
+      <button class="webinar-item">
+        <span class="webinar-num">02</span>
+        <div class="webinar-info">
+          <span class="webinar-tag">Caregiver Wellbeing</span>
+          <h4>Burnout, Guilt, and Getting Back to Yourself</h4>
+          <p>An honest conversation about the emotional weight of long-term caregiving.</p>
+        </div>
+      </button>
+      <button class="webinar-item">
+        <span class="webinar-num">03</span>
+        <div class="webinar-info">
+          <span class="webinar-tag">Respite Care</span>
+          <h4>Rest Is Not a Luxury — It's a Care Strategy</h4>
+          <p>Why respite care matters, and how to plan for it without guilt.</p>
+        </div>
+      </button>
+      <button class="webinar-item">
+        <span class="webinar-num">04</span>
+        <div class="webinar-info">
+          <span class="webinar-tag">Legal Planning</span>
+          <h4>Powers of Attorney, Healthcare Surrogates & Living Wills</h4>
+          <p>What every family needs in place — and how to get it done now.</p>
+        </div>
+      </button>
+      <button class="webinar-item">
+        <span class="webinar-num">05</span>
+        <div class="webinar-info">
+          <span class="webinar-tag">Home Safety</span>
+          <h4>Is Your Home Ready? Aging in Place Safety Audit</h4>
+          <p>A room-by-room guide to reducing falls and keeping your loved one safe.</p>
+        </div>
+      </button>
+      <button class="webinar-item">
+        <span class="webinar-num">06</span>
+        <div class="webinar-info">
+          <span class="webinar-tag">Family Dynamics</span>
+          <h4>When Families Disagree About Care</h4>
+          <p>Navigating conflict, distance, and differing opinions with grace.</p>
+        </div>
+      </button>
+    </div>
+    <div class="webinar-cta">
+      <a href="https://www.avelisprivatecare.com/#contact" class="btn-primary">Register for an Upcoming Webinar</a>
+      <a href="#" class="btn-outline">View Recorded Sessions</a>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS & DOWNLOADS -->
+<section class="tools" id="aging">
+  <div class="tools-inner">
+    <div class="tools-header reveal">
+      <div>
+        <span class="section-label">Free Guides & Downloads</span>
+        <h2 class="section-title">Resources you can<br /><em>use today</em>.</h2>
+      </div>
+      <p class="section-sub">Practical, thoughtfully written guides for the real situations families face — available to download at no cost.</p>
+    </div>
+    <div class="tools-grid reveal">
+      <div class="tool-card">
+        <span class="tool-icon">📋</span>
+        <h4>Caregiver Assessment Guide</h4>
+        <p>Evaluate your own wellbeing and caregiving situation honestly — with a guide designed to help you see clearly.</p>
+        <span class="tool-badge">PDF Download</span>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🏠</span>
+        <h4>Home Safety Checklist</h4>
+        <p>A room-by-room audit for families aging in place. Identifies risks and low-cost solutions for each area.</p>
+        <span class="tool-badge">PDF Download</span>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">💬</span>
+        <h4>Conversation Starter Cards</h4>
+        <p>Gentle prompts for talking with your loved one about care, preferences, and what matters most to them.</p>
+        <span class="tool-badge">Printable</span>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">📞</span>
+        <h4>Care Coordination Worksheet</h4>
+        <p>Keep track of doctors, medications, care contacts, and important information in one organized place.</p>
+        <span class="tool-badge">PDF Download</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRISIS LINE -->
+<section class="crisis" id="communication">
+  <div class="crisis-inner">
+    <div class="reveal">
+      <span class="section-label">If You Need Help Now</span>
+      <h2 class="section-title" style="font-size: 2.2rem;">Crisis &<br /><em>helpline</em><br />numbers.</h2>
+      <div class="divider"></div>
+      <p style="font-size:0.85rem; color: var(--muted); line-height: 1.8;">If you or someone you love is in a mental health crisis, or if you simply need someone to talk to, these resources are available to you — right now.</p>
+    </div>
+    <div class="crisis-numbers reveal">
+      <div class="crisis-num">
+        <h4>Alzheimer's Association Helpline</h4>
+        <a href="tel:18002723900">1-800-272-3900</a>
+        <p>24 hours a day, 7 days a week — for families, caregivers, and people living with dementia.</p>
+      </div>
+      <div class="crisis-num">
+        <h4>Caregiver Action Network</h4>
+        <a href="tel:18556272232">1-855-227-3640</a>
+        <p>Support and resources specifically for family caregivers in crisis or feeling overwhelmed.</p>
+      </div>
+      <div class="crisis-num">
+        <h4>Florida Elder Helpline</h4>
+        <a href="tel:18003963659">1-800-963-5337</a>
+        <p>Information and referrals for elder care services throughout the state of Florida.</p>
+      </div>
+      <div class="crisis-num">
+        <h4>988 Suicide & Crisis Lifeline</h4>
+        <a href="tel:988">Call or Text 988</a>
+        <p>For caregivers experiencing emotional crisis, depression, or thoughts of self-harm. Available 24/7.</p>
+      </div>
+      <div class="crisis-num">
+        <h4>Avelis Private Care</h4>
+        <a href="tel:19418403510">(941) 840-3510</a>
+        <p>When you need to talk about care options for your loved one — we answer, and we listen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="newsletter-inner">
+    <div class="reveal">
+      <span class="section-label">Stay Connected</span>
+      <h2 class="section-title" style="font-size: 2rem;">Guidance, delivered<br /><em>quietly</em> to your inbox.</h2>
+      <p style="font-size:0.85rem; color:var(--muted); margin-top:0.8rem; line-height:1.8;">Monthly — never more. Thoughtful resources, upcoming webinar announcements, and honest writing for families navigating dementia care.</p>
+    </div>
+    <div class="reveal">
+      <div class="newsletter-form">
+        <input type="email" placeholder="Your email address" />
+        <button type="button">Subscribe</button>
+      </div>
+      <p class="newsletter-note">No sales. No noise. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <span class="section-label">When You're Ready</span>
+  <h2>The first step is<br />simply <em>reaching out</em>.</h2>
+  <p>No forms to fill. No obligation. A real conversation with someone who understands — and who can help you think through what comes next.</p>
+  <a href="https://www.avelisprivatecare.com/#contact" class="btn-primary">Begin a Conversation</a>
+  <a href="tel:19418403510" class="btn-outline">Call Us Directly</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://www.avelisprivatecare.com" class="footer-logo">Avelis.</a>
+  <p>Private, non-medical in-home dementia care. St. Petersburg, Florida. Avelis Care is a non-medical caregiver matching and referral service. Caregivers introduced through Avelis are independent contractors, not employees of Avelis Care LLC.</p>
+  <div style="display:flex; flex-direction:column; gap:0.5rem; text-align:right;">
+    <a href="mailto:hello@avelisprivatecare.com">hello@avelisprivatecare.com</a>
+    <a href="tel:19418403510">(941) 840-3510</a>
+    <span style="font-size:0.7rem; color:#444;">© 2025 Avelis Care LLC.</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Tabs
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // FAQ Accordion
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+
+  // Newsletter
+  document.querySelector('.newsletter-form button').addEventListener('click', function() {
+    const input = this.previousElementSibling;
+    if (input.value && input.value.includes('@')) {
+      this.textContent = 'Subscribed ✓';
+      this.style.background = 'var(--sage)';
+      input.value = '';
+    }
+  });
+</script>
+</body>
+</html>
