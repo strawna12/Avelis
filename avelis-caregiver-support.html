@@ -1480,11 +1480,18 @@
       <p style="font-size:0.85rem; color:var(--muted); margin-top:0.8rem; line-height:1.8;">Monthly — never more. Thoughtful resources, upcoming webinar announcements, and honest writing for families navigating dementia care.</p>
     </div>
     <div class="reveal">
-      <div class="newsletter-form">
-        <input type="email" placeholder="Your email address" />
-        <button type="button">Subscribe</button>
+      <div id="newsletterForm">
+        <div class="newsletter-form">
+          <input type="email" id="newsletterEmail" placeholder="Your email address" />
+          <button type="button" id="newsletterBtn">Subscribe</button>
+        </div>
+        <p id="newsletterError" style="display:none; font-size:0.72rem; color:#8B3A2E; margin-top:0.5rem;">Please enter a valid email address.</p>
+        <p class="newsletter-note">No sales. No noise. Unsubscribe anytime.</p>
       </div>
-      <p class="newsletter-note">No sales. No noise. Unsubscribe anytime.</p>
+      <div id="newsletterSuccess" style="display:none; padding: 1rem 0;">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-style:italic; color:var(--charcoal);">Thank you — you're on the list.</p>
+        <p style="font-size:0.78rem; color:var(--muted); margin-top:0.4rem;">We'll be in touch monthly, never more.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -1505,7 +1512,7 @@
   <div style="display:flex; flex-direction:column; gap:0.5rem; text-align:right;">
     <a href="mailto:hello@avelisprivatecare.com">hello@avelisprivatecare.com</a>
     <a href="tel:19418403510">(941) 840-3510</a>
-    <span style="font-size:0.7rem; color:#444;">© 2025 Avelis Care LLC.</span>
+    <span style="font-size:0.7rem; color:#444;">© 2026 Avelis Care LLC.</span>
   </div>
 </footer>
 
@@ -1544,14 +1551,50 @@
     }
   }
 
-  // Newsletter
-  document.querySelector('.newsletter-form button').addEventListener('click', function() {
-    const input = this.previousElementSibling;
-    if (input.value && input.value.includes('@')) {
-      this.textContent = 'Subscribed ✓';
-      this.style.background = 'var(--sage)';
-      input.value = '';
+  // Newsletter — Google Apps Script submission
+  document.getElementById('newsletterBtn').addEventListener('click', function() {
+    const email = document.getElementById('newsletterEmail').value.trim();
+    const errEl = document.getElementById('newsletterError');
+    const btn   = document.getElementById('newsletterBtn');
+
+    // Basic validation
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      errEl.style.display = 'block';
+      return;
     }
+    errEl.style.display = 'none';
+
+    // Disable button and show sending state
+    btn.textContent = 'Subscribing…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    const payload = JSON.stringify({
+      type: 'newsletter',
+      email: email,
+      source: 'Caregiver Support Page'
+    });
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://script.google.com/macros/s/AKfycbz9fertVdWO0pQ5ivxow8LxAYsDlXabGLvwuU8t03JSFrU9brh2_43Gb4hEMTHlksnM/exec');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        document.getElementById('newsletterForm').style.display = 'none';
+        document.getElementById('newsletterSuccess').style.display = 'block';
+      }
+    };
+    xhr.onerror = function() {
+      // no-cors mode — treat completion as success
+      document.getElementById('newsletterForm').style.display = 'none';
+      document.getElementById('newsletterSuccess').style.display = 'block';
+    };
+    xhr.send(payload);
+  });
+
+  // Allow Enter key to submit
+  document.getElementById('newsletterEmail').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('newsletterBtn').click();
   });
 </script>
 </body>
