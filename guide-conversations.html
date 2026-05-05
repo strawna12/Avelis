@@ -6,178 +6,152 @@
 <title>Conversation Starter Cards — Avelis Private Care</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --cream: #F0EBE1;
-    --parchment: #DDD5C8;
-    --taupe: #A89880;
-    --warm-gray: #5C5248;
-    --charcoal: #1E1A16;
-    --deep: #0F0D0A;
-    --gold: #A07C3A;
-    --white: #FAF7F2;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'Jost', sans-serif;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--white); font-family: var(--sans); font-weight: 300; color: var(--charcoal); font-size: 10pt; line-height: 1.65; }
-  .page { max-width: 780px; margin: 0 auto; padding: 60px 60px 80px; }
-
-  .doc-header { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 28px; border-bottom: 1px solid var(--gold); margin-bottom: 44px; }
-  .logo { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--charcoal); letter-spacing: 0.04em; }
-  .logo span { color: var(--gold); }
-  .doc-type { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); }
-
-  .title-block { margin-bottom: 44px; }
-  .guide-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-  .guide-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
-  .guide-title { font-family: var(--serif); font-size: 2.8rem; font-weight: 300; line-height: 1.1; color: var(--deep); margin-bottom: 14px; }
-  .guide-title em { font-style: italic; color: var(--gold); }
-  .guide-intro { font-size: 0.92rem; color: var(--warm-gray); max-width: 580px; line-height: 1.8; border-left: 2px solid var(--parchment); padding-left: 18px; margin-top: 18px; }
-
-  /* HOW TO USE */
-  .how-to {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
-    margin-bottom: 44px;
-  }
-  .how-item { background: var(--cream); padding: 18px 16px; }
-  .how-num { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--gold); margin-bottom: 6px; }
-  .how-text { font-size: 0.78rem; color: var(--warm-gray); line-height: 1.65; }
-
-  /* CATEGORY HEADERS */
-  .cat-header {
-    display: flex; align-items: center; gap: 14px;
-    margin-bottom: 16px; margin-top: 36px;
-  }
-  .cat-header:first-of-type { margin-top: 0; }
-  .cat-label {
-    font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); white-space: nowrap;
-  }
-  .cat-line { flex: 1; height: 1px; background: var(--parchment); }
-  .cat-desc { font-size: 0.75rem; color: var(--taupe); font-style: italic; max-width: 300px; text-align: right; }
-
-  /* CARDS GRID */
-  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 4px; }
-
-  .conv-card {
-    background: var(--white);
-    border: 1px solid var(--parchment);
-    padding: 20px 20px 16px;
-    position: relative;
-  }
-  .conv-card.dark { background: var(--deep); border-color: var(--deep); }
-  .conv-card.warm { background: var(--cream); border-color: var(--parchment); }
-
-  .card-num {
-    font-family: var(--serif); font-size: 0.75rem; font-style: italic;
-    color: var(--taupe); margin-bottom: 10px; display: block;
-  }
-  .conv-card.dark .card-num { color: rgba(255,255,255,0.3); }
-
-  .card-question {
-    font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
-    line-height: 1.45; color: var(--deep); margin-bottom: 12px;
-  }
-  .conv-card.dark .card-question { color: var(--white); }
-
-  .card-why {
-    font-size: 0.72rem; color: var(--taupe); line-height: 1.6;
-    border-top: 1px solid var(--parchment); padding-top: 10px;
-    font-style: italic;
-  }
-  .conv-card.dark .card-why { color: rgba(255,255,255,0.4); border-top-color: rgba(255,255,255,0.1); }
-
-  /* NOTES LINE */
-  .space-line { border-bottom: 1px solid var(--parchment); height: 28px; margin-bottom: 2px; }
-
-  /* CALLOUT */
-  .callout { background: var(--deep); color: var(--white); padding: 22px 28px; margin: 36px 0; }
-  .callout-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-  .callout p { font-family: var(--serif); font-size: 1.05rem; font-style: italic; font-weight: 300; line-height: 1.65; color: rgba(255,255,255,0.85); }
-
-  /* TIPS BOX */
-  .tips-box { background: var(--cream); padding: 22px 24px; margin: 28px 0; }
-  .tips-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; color: var(--deep); margin-bottom: 14px; }
-  .tip-item { display: flex; gap: 12px; margin-bottom: 10px; font-size: 0.84rem; color: var(--warm-gray); line-height: 1.6; }
-  .tip-marker { color: var(--gold); font-family: var(--serif); font-size: 1rem; flex-shrink: 0; }
-
-  .doc-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--parchment); display: flex; justify-content: space-between; align-items: center; }
-  .doc-footer p { font-size: 0.68rem; color: var(--taupe); }
-  .doc-footer a { color: var(--gold); text-decoration: none; }
-
-  @media print {
-    body { background: white; }
-    .page { padding: 40px 50px; max-width: 100%; }
-    .callout, .how-item, .tips-box, .conv-card.dark, .conv-card.warm { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  :root{--cream:#F0EBE1;--parchment:#DDD5C8;--taupe:#A89880;--warm-gray:#5C5248;--charcoal:#1E1A16;--deep:#0F0D0A;--gold:#A07C3A;--white:#FAF7F2;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--white);font-family:var(--sans);font-weight:300;color:var(--charcoal);font-size:10pt;line-height:1.65;}
+  .toolbar{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--charcoal);padding:12px 40px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .toolbar-brand{font-family:var(--serif);font-size:1.1rem;color:var(--white);letter-spacing:0.06em;}
+  .toolbar-brand span{color:var(--gold);}
+  .toolbar-sub{font-family:var(--sans);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-left:16px;}
+  .toolbar-actions{display:flex;gap:10px;align-items:center;}
+  .btn-tool{font-family:var(--sans);font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;border:none;cursor:pointer;padding:8px 18px;transition:all 0.2s;text-decoration:none;display:inline-block;}
+  .btn-print{background:var(--gold);color:var(--deep);}
+  .btn-print:hover{background:#b89040;}
+  .btn-word{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.3);}
+  .btn-word:hover{border-color:var(--white);}
+  .btn-clear{background:transparent;color:rgba(255,255,255,0.4);border:none;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;}
+  .btn-clear:hover{color:var(--white);}
+  .page{max-width:780px;margin:0 auto;padding:96px 60px 80px;}
+  .doc-header{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:28px;border-bottom:1px solid var(--gold);margin-bottom:44px;}
+  .logo{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--charcoal);letter-spacing:0.04em;}
+  .logo span{color:var(--gold);}
+  .doc-type{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--taupe);}
+  .guide-label{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .guide-label::before{content:'';width:24px;height:1px;background:var(--gold);}
+  .guide-title{font-family:var(--serif);font-size:2.8rem;font-weight:300;line-height:1.1;color:var(--deep);margin-bottom:14px;}
+  .guide-title em{font-style:italic;color:var(--gold);}
+  .guide-intro{font-size:0.92rem;color:var(--warm-gray);max-width:580px;line-height:1.8;border-left:2px solid var(--parchment);padding-left:18px;margin-top:18px;margin-bottom:36px;}
+  .how-to{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:44px;}
+  .how-item{background:var(--cream);padding:18px 16px;}
+  .how-num{font-family:var(--serif);font-size:1.6rem;font-weight:300;color:var(--gold);margin-bottom:6px;}
+  .how-text{font-size:0.78rem;color:var(--warm-gray);line-height:1.65;}
+  .cat-header{display:flex;align-items:center;gap:14px;margin:36px 0 16px;}
+  .cat-header:first-of-type{margin-top:0;}
+  .cat-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+  .cat-line{flex:1;height:1px;background:var(--parchment);}
+  .cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px;}
+  .conv-card{border:1px solid var(--parchment);padding:18px 18px 14px;position:relative;background:var(--white);}
+  .conv-card.dark{background:var(--deep);border-color:var(--deep);}
+  .conv-card.warm{background:var(--cream);border-color:var(--parchment);}
+  .card-num{font-family:var(--serif);font-size:0.75rem;font-style:italic;color:var(--taupe);margin-bottom:8px;display:block;}
+  .conv-card.dark .card-num{color:rgba(255,255,255,0.3);}
+  .card-question{font-family:var(--serif);font-size:1.05rem;font-weight:400;line-height:1.45;color:var(--deep);margin-bottom:10px;}
+  .conv-card.dark .card-question{color:var(--white);}
+  .card-why{font-size:0.7rem;color:var(--taupe);line-height:1.6;border-top:1px solid var(--parchment);padding-top:8px;font-style:italic;margin-bottom:10px;}
+  .conv-card.dark .card-why{color:rgba(255,255,255,0.4);border-top-color:rgba(255,255,255,0.1);}
+  .card-notes{width:100%;border:none;border-bottom:1px solid var(--parchment);background:transparent;font-family:var(--sans);font-size:0.78rem;color:var(--charcoal);padding:4px 0;outline:none;resize:none;min-height:40px;}
+  .conv-card.dark .card-notes{border-bottom-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);}
+  .conv-card.dark .card-notes::placeholder{color:rgba(255,255,255,0.2);}
+  .card-notes:focus{border-bottom-color:var(--gold);}
+  .card-notes::placeholder{color:var(--parchment);}
+  .notes-label{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--taupe);margin-bottom:4px;display:block;}
+  .conv-card.dark .notes-label{color:rgba(255,255,255,0.3);}
+  .tips-box{background:var(--cream);padding:22px 24px;margin:28px 0;}
+  .tips-title{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--deep);margin-bottom:14px;}
+  .tip-item{display:flex;gap:12px;margin-bottom:10px;font-size:0.84rem;color:var(--warm-gray);line-height:1.6;}
+  .tip-marker{color:var(--gold);font-family:var(--serif);font-size:1rem;flex-shrink:0;}
+  .callout{background:var(--deep);color:var(--white);padding:22px 28px;margin:28px 0;}
+  .callout-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .callout p{font-family:var(--serif);font-size:1.05rem;font-style:italic;font-weight:300;line-height:1.65;color:rgba(255,255,255,0.85);}
+  .doc-footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--parchment);display:flex;justify-content:space-between;align-items:center;}
+  .doc-footer p{font-size:0.68rem;color:var(--taupe);}
+  .doc-footer a{color:var(--gold);text-decoration:none;}
+  @media print{
+    .toolbar{display:none!important;}
+    body{background:white;}
+    .page{padding:40px 50px 60px;max-width:100%;}
+    .how-item,.tips-box,.conv-card.dark,.conv-card.warm,.callout{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .card-notes{border-bottom:1px solid #ccc!important;}
   }
 </style>
 </head>
 <body>
-<div class="page">
 
+<div class="toolbar">
+  <div style="display:flex;align-items:center;">
+    <div class="toolbar-brand">Avelis<span>.</span></div>
+    <span class="toolbar-sub">Conversation Starter Cards</span>
+  </div>
+  <div class="toolbar-actions">
+    <button class="btn-clear" onclick="clearAll()">Clear All Notes</button>
+    <a href="/guide-conversations.docx" download class="btn-tool btn-word">⬇ Download Word</a>
+    <button class="btn-tool btn-print" onclick="window.print()">🖨 Print / Save PDF</button>
+  </div>
+</div>
+
+<div class="page">
   <div class="doc-header">
     <div class="logo">Avelis<span>.</span></div>
     <div class="doc-type">Free Guide · Conversation</div>
   </div>
 
-  <div class="title-block">
-    <div class="guide-label">Conversation Starter Cards</div>
-    <h1 class="guide-title">Gentle prompts for<br><em>meaningful conversations</em>.</h1>
-    <p class="guide-intro">For families navigating dementia, conversation can feel uncertain — you may not know what to say, or worry about saying the wrong thing. These prompts are designed to open doors gently, without pressure, and to meet your loved one exactly where they are.</p>
-  </div>
+  <div class="guide-label">Conversation Starter Cards</div>
+  <h1 class="guide-title">Gentle prompts for<br><em>meaningful conversations</em>.</h1>
+  <p class="guide-intro">For families navigating dementia, conversation can feel uncertain. These prompts are designed to open doors gently, without pressure, and to meet your loved one exactly where they are. Use the notes field on each card to capture what you discover.</p>
 
-  <!-- HOW TO USE -->
   <div class="how-to">
-    <div class="how-item">
-      <div class="how-num">01</div>
-      <div class="how-text">Choose a question that feels natural for this moment — not every prompt fits every day.</div>
-    </div>
-    <div class="how-item">
-      <div class="how-num">02</div>
-      <div class="how-text">Listen more than you talk. The goal is connection, not information-gathering.</div>
-    </div>
-    <div class="how-item">
-      <div class="how-num">03</div>
-      <div class="how-text">If they don't engage, simply sit together. Presence is its own form of conversation.</div>
-    </div>
+    <div class="how-item"><div class="how-num">01</div><div class="how-text">Choose a question that feels natural for this moment — not every prompt fits every day.</div></div>
+    <div class="how-item"><div class="how-num">02</div><div class="how-text">Listen more than you talk. The goal is connection, not information-gathering.</div></div>
+    <div class="how-item"><div class="how-num">03</div><div class="how-text">If they don't engage, simply sit together. Presence is its own form of conversation.</div></div>
   </div>
 
-  <!-- MEMORIES & THE PAST -->
+  <!-- MEMORIES -->
   <div class="cat-header">
     <span class="cat-label">Memories &amp; the Past</span>
     <div class="cat-line"></div>
-    <span class="cat-desc">Long-term memory often remains vivid longer than recent memory</span>
   </div>
   <div class="cards-grid">
     <div class="conv-card warm">
       <span class="card-num">01</span>
       <div class="card-question">"Tell me about a place you loved as a child. What do you remember about it?"</div>
       <div class="card-why">Childhood memories are often deeply preserved. This opens the door without pressure.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card">
       <span class="card-num">02</span>
       <div class="card-question">"What was your favorite meal growing up? Who made it?"</div>
       <div class="card-why">Food and scent are powerful memory triggers. This often brings warm, detailed stories.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card">
       <span class="card-num">03</span>
       <div class="card-question">"When you were young, what did you want to be when you grew up?"</div>
       <div class="card-why">Opens reflection on identity and dreams — a dignifying, affirming conversation.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card warm">
       <span class="card-num">04</span>
       <div class="card-question">"What was the music you loved most? Do you remember any of the words?"</div>
       <div class="card-why">Music engages a different part of the brain — even advanced dementia patients often recall songs.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card warm">
       <span class="card-num">05</span>
-      <div class="card-question">"Tell me about how you met [spouse/partner]. What was your first impression?"</div>
+      <div class="card-question">"Tell me about how you met your partner. What was your first impression?"</div>
       <div class="card-why">Deeply personal memories from young adulthood are often among the last to fade.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card">
       <span class="card-num">06</span>
       <div class="card-question">"What is something you were really proud of in your life?"</div>
       <div class="card-why">Affirms identity and dignity. Reminds both of you of who this person truly is.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
   </div>
 
@@ -185,90 +159,110 @@
   <div class="cat-header">
     <span class="cat-label">The Present Moment</span>
     <div class="cat-line"></div>
-    <span class="cat-desc">Simple observations about right now can spark genuine connection</span>
   </div>
   <div class="cards-grid">
     <div class="conv-card dark">
       <span class="card-num">07</span>
       <div class="card-question">"What's something that made you smile today, even something small?"</div>
       <div class="card-why">Grounds the conversation in today without requiring orientation to date or time.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card">
       <span class="card-num">08</span>
       <div class="card-question">"The light looks so beautiful right now. What does it remind you of?"</div>
       <div class="card-why">Sensory-based conversation requires no memory — just what they see and feel right now.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card">
       <span class="card-num">09</span>
-      <div class="card-question">"Is there anything you'd like to do today, even something simple like a short walk or sitting outside?"</div>
+      <div class="card-question">"Is there anything you'd like to do today, even something simple like a short walk?"</div>
       <div class="card-why">Gives them agency and choice — both of which matter deeply at every stage.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card dark">
       <span class="card-num">10</span>
-      <div class="card-question">"You seem [peaceful / tired / thoughtful] today. How are you feeling in your body?"</div>
+      <div class="card-question">"You seem peaceful today. How are you feeling in your body?"</div>
       <div class="card-why">Acknowledges their inner state without pressing. Opens physical and emotional check-ins gently.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
   </div>
 
-  <!-- VALUES & WISHES -->
+  <!-- VALUES -->
   <div class="cat-header">
     <span class="cat-label">Values, Wishes &amp; Preferences</span>
     <div class="cat-line"></div>
-    <span class="cat-desc">For conversations about care preferences and what matters most</span>
   </div>
   <div class="cards-grid">
     <div class="conv-card">
       <span class="card-num">11</span>
       <div class="card-question">"What makes you feel most comfortable and at home?"</div>
       <div class="card-why">Practical and affirming — helps care be shaped by their preferences, not assumptions.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card warm">
       <span class="card-num">12</span>
-      <div class="card-question">"Is there anyone you've been thinking about lately that you'd like to reach out to or see?"</div>
+      <div class="card-question">"Is there anyone you've been thinking about lately that you'd like to reach out to?"</div>
       <div class="card-why">Honors their relationships and social connections, which remain meaningful throughout.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card warm">
       <span class="card-num">13</span>
       <div class="card-question">"What is something you'd like people to know about you that they might not know?"</div>
       <div class="card-why">A powerful dignity question. The answers often surprise and move caregivers deeply.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
     <div class="conv-card">
       <span class="card-num">14</span>
       <div class="card-question">"If we could do anything together this week, what would you choose?"</div>
       <div class="card-why">Invites agency and imagination. The answer guides meaningful activity planning.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What did they share?"></textarea>
     </div>
   </div>
 
-  <!-- FAMILY CAREGIVERS -->
+  <!-- FAMILY -->
   <div class="cat-header">
     <span class="cat-label">For Family Caregivers — Talking With Each Other</span>
     <div class="cat-line"></div>
-    <span class="cat-desc">Conversations within the family that need to happen</span>
   </div>
   <div class="cards-grid">
     <div class="conv-card dark">
       <span class="card-num">15</span>
       <div class="card-question">"What part of this is hardest for you right now, honestly?"</div>
       <div class="card-why">Opens the door to honest family conversation rather than just logistics.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What came up?"></textarea>
     </div>
     <div class="conv-card">
       <span class="card-num">16</span>
-      <div class="card-question">"How can I support you this week — not [loved one], but you?"</div>
+      <div class="card-question">"How can I support you this week — not your loved one, but you?"</div>
       <div class="card-why">Names the caregiver's needs explicitly, which rarely happens on its own.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What came up?"></textarea>
     </div>
     <div class="conv-card">
       <span class="card-num">17</span>
-      <div class="card-question">"Are there any decisions coming that we need to talk through together before they become urgent?"</div>
+      <div class="card-question">"Are there any decisions coming that we need to talk through before they become urgent?"</div>
       <div class="card-why">Proactive planning conversation — easier before a crisis than during one.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What came up?"></textarea>
     </div>
     <div class="conv-card dark">
       <span class="card-num">18</span>
-      <div class="card-question">"What do you think [loved one] would want if they could tell us right now?"</div>
-      <div class="card-why">Recenters the family on the person receiving care — especially helpful during disagreements.</div>
+      <div class="card-question">"What do you think your loved one would want if they could tell us right now?"</div>
+      <div class="card-why">Recenters the family on the person receiving care — helpful during disagreements.</div>
+      <span class="notes-label">Notes from this conversation</span>
+      <textarea class="card-notes" placeholder="What came up?"></textarea>
     </div>
   </div>
 
-  <!-- TIPS -->
   <div class="tips-box">
     <div class="tips-title">A Few Gentle Reminders</div>
     <div class="tip-item"><span class="tip-marker">—</span>Never correct or contradict. If they say something that isn't accurate, meet them where they are. The emotional truth of a moment matters more than the factual one.</div>
@@ -287,12 +281,15 @@
       <p>Avelis Private Care · St. Petersburg, Florida</p>
       <p>(941) 840-3510 · <a href="mailto:hello@avelisprivatecare.com">hello@avelisprivatecare.com</a> · <a href="https://www.avelisprivatecare.com">avelisprivatecare.com</a></p>
     </div>
-    <div style="text-align:right;">
-      <p>© 2026 Avelis Care LLC</p>
-      <p>Non-medical caregiver resource</p>
-    </div>
+    <div style="text-align:right;"><p>© 2026 Avelis Care LLC</p><p>Non-medical caregiver resource</p></div>
   </div>
-
 </div>
+
+<script>
+  function clearAll() {
+    if (!confirm('Clear all notes from the cards?')) return;
+    document.querySelectorAll('.card-notes').forEach(f => { f.value = ''; });
+  }
+</script>
 </body>
 </html>
