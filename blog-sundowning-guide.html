@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sundowning: what it is,why it happens, andwhat actually helps. — Avelis Private Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{--cream:#f7f4ef;--warm-white:#faf8f5;--charcoal:#1e1e1e;--deep:#111;--muted:#7a7570;--border:#e2ddd7;--accent:#c6a882;--accent-light:#e8ddd0;--serif:'Cormorant Garamond',serif;--sans:'Jost',sans-serif;}
+  *{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--warm-white);color:var(--charcoal);font-weight:300;line-height:1.75;overflow-x:hidden;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(250,248,245,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .nav-logo{font-family:var(--serif);font-size:1.3rem;font-weight:400;letter-spacing:0.08em;color:var(--deep);text-decoration:none;}
+  .nav-links{display:flex;gap:2.5rem;list-style:none;}.nav-links a{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}.nav-links a:hover{color:var(--charcoal);}
+  .nav-cta{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--charcoal);border:1px solid var(--charcoal);padding:0.55rem 1.4rem;text-decoration:none;transition:all 0.25s;}.nav-cta:hover{background:var(--charcoal);color:var(--warm-white);}
+  .breadcrumb{padding:6rem 3rem 0;display:flex;align-items:center;gap:0.5rem;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);flex-wrap:wrap;}.breadcrumb a{color:var(--muted);text-decoration:none;}.breadcrumb a:hover{color:var(--charcoal);}.breadcrumb span{color:var(--accent);}
+  .page-hero{padding:2rem 3rem 4rem;background:var(--cream);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}.page-hero::before{content:'';position:absolute;top:0;right:0;width:40%;height:100%;background:linear-gradient(135deg,transparent 40%,var(--accent-light) 100%);opacity:0.4;}
+  .hero-eyebrow{font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:1rem;}
+  .hero-title{font-family:var(--serif);font-size:clamp(2.4rem,4.5vw,4rem);font-weight:300;line-height:1.1;color:var(--deep);margin-bottom:1.2rem;max-width:680px;}.hero-title em{font-style:italic;color:var(--accent);}
+  .hero-deck{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.85;}
+  .hero-meta{display:flex;gap:2rem;margin-top:1.8rem;flex-wrap:wrap;}.hero-meta-item{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:0.5rem;}.hero-meta-item::before{content:'';width:20px;height:1px;background:var(--accent);}
+  .content-wrap{max-width:1100px;margin:0 auto;padding:4rem 3rem;display:grid;grid-template-columns:1fr 300px;gap:5rem;align-items:start;}
+  .sidebar{position:sticky;top:7rem;}
+  .article p{font-size:0.95rem;color:var(--muted);line-height:1.9;margin-bottom:1.4rem;}
+  .article h2{font-family:var(--serif);font-size:1.9rem;font-weight:300;color:var(--deep);margin:3rem 0 1rem;line-height:1.2;}.article h2 em{font-style:italic;color:var(--accent);}
+  .article h3{font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--deep);margin:2rem 0 0.6rem;}
+  .article ul,.article ol{padding-left:1.4rem;margin-bottom:1.2rem;}.article li{font-size:0.92rem;color:var(--muted);line-height:1.8;margin-bottom:0.4rem;}
+  .article blockquote{border-left:3px solid var(--accent);padding:1rem 1.4rem;margin:2rem 0;background:var(--cream);font-family:var(--serif);font-size:1.05rem;font-style:italic;color:var(--deep);line-height:1.65;}
+  .article .callout{background:var(--deep);color:white;padding:1.8rem 2.2rem;margin:2.5rem 0;}.article .callout-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;}.article .callout p{font-family:var(--serif);font-size:1rem;font-style:italic;line-height:1.65;color:rgba(255,255,255,0.85);margin-bottom:0;}
+  .article .info-box{background:var(--cream);border-left:3px solid var(--accent);padding:1.2rem 1.6rem;margin:1.8rem 0;}.article .info-box p{font-size:0.88rem;color:var(--muted);line-height:1.8;margin-bottom:0;}
+  .article a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-light);transition:border-color 0.2s;}.article a:hover{border-color:var(--accent);}
+  .article hr{border:none;border-top:1px solid var(--border);margin:3rem 0;}
+  .sidebar-card{background:var(--cream);border:1px solid var(--border);padding:1.6rem;margin-bottom:1.5rem;}.sidebar-title{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--deep);margin-bottom:1rem;}.sidebar-link{display:block;font-size:0.78rem;color:var(--muted);text-decoration:none;padding:0.5rem 0;border-bottom:1px solid var(--border);transition:color 0.2s;}.sidebar-link:last-child{border-bottom:none;}.sidebar-link:hover{color:var(--charcoal);}.sidebar-link span{color:var(--accent);margin-right:6px;}
+  .sidebar-cta{background:var(--charcoal);padding:1.6rem;text-align:center;}.sidebar-cta p{font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:1rem;}.sidebar-cta a{display:block;background:var(--accent);color:var(--deep);text-align:center;padding:0.8rem;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;}.sidebar-cta a:hover{background:#d4b896;}
+  .related-posts{margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border);}.related-posts h3{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--deep);margin-bottom:2rem;}
+  .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .related-card{border:1px solid var(--border);padding:1.4rem;text-decoration:none;color:inherit;display:block;transition:background 0.2s;}.related-card:hover{background:var(--cream);border-color:var(--accent);}
+  .related-cat{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;display:block;}
+  .related-card h4{font-family:var(--serif);font-size:1rem;font-weight:400;color:var(--deep);line-height:1.4;margin-bottom:0.3rem;}
+  .related-card p{font-size:0.78rem;color:var(--muted);}
+  .cta-section{background:var(--deep);padding:5rem 3rem;text-align:center;}.cta-section .eyebrow{font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:1rem;}.cta-section h2{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.5rem);font-weight:300;color:white;margin-bottom:1rem;line-height:1.15;}.cta-section h2 em{font-style:italic;color:var(--accent);}.cta-section p{font-size:0.95rem;color:rgba(255,255,255,0.5);max-width:460px;margin:0 auto 2rem;line-height:1.85;}
+  .cta-btn{display:inline-block;background:var(--accent);color:var(--deep);padding:1rem 2.5rem;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:all 0.25s;border:none;}.cta-btn:hover{background:#d4b896;}
+  .cta-btn-outline{display:inline-block;border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);padding:1rem 2.5rem;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;margin-left:1rem;transition:all 0.25s;}.cta-btn-outline:hover{border-color:white;color:white;}
+  footer{background:var(--charcoal);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}footer p{font-size:0.72rem;color:rgba(255,255,255,0.3);}footer a{color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}footer a:hover{color:var(--accent);}.footer-logo{font-family:var(--serif);font-size:1.1rem;color:white;text-decoration:none;}.footer-logo span{color:var(--accent);}
+  @media(max-width:900px){nav{padding:1.2rem 1.5rem;}.nav-links{display:none;}.breadcrumb,.page-hero,.cta-section{padding-left:1.5rem;padding-right:1.5rem;}.content-wrap{grid-template-columns:1fr;padding:3rem 1.5rem;gap:3rem;}.sidebar{position:static;}.related-grid{grid-template-columns:1fr;}footer{flex-direction:column;text-align:center;}}
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s,transform 0.7s;}.reveal.visible{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="https://www.avelisprivatecare.com" class="nav-logo">Avelis<span style="color:var(--accent)">.</span></a>
+  <ul class="nav-links"><li><a href="https://www.avelisprivatecare.com/#about">Philosophy</a></li><li><a href="https://www.avelisprivatecare.com/#services">Services</a></li><li><a href="https://www.avelisprivatecare.com/avelis-caregiver-support.html">Caregiver Support</a></li><li><a href="avelis-care-careers.html">Careers</a></li></ul>
+  <a href="https://www.avelisprivatecare.com/#contact" class="nav-cta">Begin a Conversation</a>
+</nav>
+<div class="breadcrumb">
+  <a href="https://www.avelisprivatecare.com/avelis-caregiver-support.html">Caregiver Support</a>
+  <span>›</span><a href="blog.html">Journal</a><span>›</span><span>Dementia Care</span>
+</div>
+<div class="page-hero">
+  <span class="hero-eyebrow">🧠 Dementia Care · July 2025</span>
+  <h1 class="hero-title">Sundowning: what it is,<br>why it happens, and<br>what actually <em>helps</em>.</h1>
+  <p class="hero-deck">Late-afternoon confusion, agitation, and behavioral changes are among the most exhausting aspects of dementia caregiving. Understanding the cause changes the response.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">Dementia Care</div>
+    <div class="hero-meta-item">8 min read</div>
+    <div class="hero-meta-item">July 2025</div>
+  </div>
+</div>
+<div class="content-wrap">
+  <div class="article reveal">
+    <p>If you care for someone with dementia, you may have started to dread the afternoons. Around 3 or 4 o'clock, something shifts in your loved one. They become more confused, more agitated, harder to reach. They may ask repeatedly where they are, insist they need to go somewhere, become frightened by things that aren't there, or turn their distress outward in ways that are difficult to manage. By evening you are exhausted. By morning it starts again.</p>
+
+<p>This phenomenon is called sundowning, and it affects an estimated 20% of people with Alzheimer's disease — and a considerably higher percentage in moderate to later stages. It is one of the most common reasons families reach out for additional support. Understanding what is actually happening and why makes it possible to respond more effectively — and to stop blaming yourself when nothing seems to work.</p>
+
+<h2>What causes it</h2>
+
+<p>The precise mechanism is not fully understood, but the leading explanation involves disruption of the body's circadian rhythm — the internal 24-hour clock that governs sleep-wake cycles, hormone release, body temperature, and mood. In dementia, the brain regions that maintain this clock are progressively damaged, causing the natural day-night rhythm to deteriorate. As afternoon shifts to evening, people with dementia increasingly lose their internal orientation to time, leading to the confusion and anxiety that characterize sundowning.</p>
+
+<p>Several factors can trigger or worsen an episode: low or rapidly changing light levels as afternoon becomes dusk, fatigue accumulated over the course of a long day, disruption to the normal daily routine, overstimulation or too many visitors earlier in the day, unrecognized physical discomfort or pain, hunger or dehydration, and certain medications — particularly those that affect sedation or cognitive function.</p>
+
+<h2>Environmental interventions that actually help</h2>
+
+<p>Light management is one of the most effective tools available. Bright light exposure during the morning hours — ideally natural sunlight, or a 10,000-lux light therapy lamp used for 30 minutes after waking — helps reinforce the circadian rhythm and has been shown in studies to reduce the severity of sundowning over time. Throughout the afternoon, maintain consistent and adequate indoor lighting. The transition from bright to dim that happens naturally as afternoon becomes evening is itself a trigger — try to keep light levels steady until the person is ready for sleep.</p>
+
+<p>Keep the environment calm and consistent in the late afternoon. This is not the time for unexpected visitors, stimulating television, complex activities, or important conversations. Reduce noise, minimize transitions, and introduce familiar, calming elements: soft music from the person's past, a warm drink, a comfortable chair, a simple and unhurried activity like sorting objects or looking at photographs.</p>
+
+<h2>Activity and physical fatigue</h2>
+
+<p>A purposeful walk or light outdoor activity in the mid-afternoon — while the person still has energy — can significantly reduce evening agitation. Physical movement during daylight hours serves two functions: it reinforces the circadian signal that it is daytime, and it expends the restless energy that might otherwise fuel evening agitation. Avoid long afternoon naps, which can further blur the distinction between day and night for a brain already struggling to maintain it.</p>
+
+<p>Ensure the person has eaten a light snack in the late afternoon and is well hydrated. Hunger and dehydration are among the most common unrecognized triggers of behavioral change in dementia — they are physical stressors that the person often cannot articulate.</p>
+
+<h2>How to respond when it's happening</h2>
+
+<p>When sundowning is in full force, the instinct to reorient — "It's four o'clock, you're at home, everything is fine" — almost always backfires. Reorientation highlights the person's confusion rather than soothing it, and delivered with any frustration in the voice, it escalates rather than de-escalates. The goal is not to correct their reality but to meet them in it and offer safety.</p>
+
+<ul>
+<li>Stay calm. Your nervous system is contagious — agitation transmits, and so does calm.</li>
+<li>Speak slowly, warmly, and in short sentences. Get to their eye level if possible.</li>
+<li>Acknowledge the feeling without reinforcing the confusion: "I can see you're feeling unsettled. I'm right here with you. You're safe."</li>
+<li>Try a gentle redirect — a familiar activity, a cup of tea, a walk to another room, a piece of music they love.</li>
+<li>If one approach isn't working, stop. Change the setting entirely — moving to a different room sometimes breaks an episode more effectively than any amount of reassurance in the same space.</li>
+<li>If they are convinced they need to go somewhere, consider going with them briefly rather than blocking them — a short walk outside followed by a return home is sometimes the most efficient resolution.</li>
+</ul>
+
+<div class="callout">
+  <div class="callout-label">A critical thing to check</div>
+  <p>"A sudden, dramatic worsening of sundowning — especially if accompanied by fever, unusual confusion, or any new behavioral change — may not be disease progression. It may be a urinary tract infection. UTIs in older adults, particularly those with dementia, frequently present as behavioral change, agitation, and confusion rather than the classic urinary symptoms. Always contact the physician before assuming a behavioral change represents dementia progression."</p>
+</div>
+
+<h2>Managing your own response</h2>
+
+<p>Sundowning is exhausting precisely because it arrives every day at the same time and there is no day off. The predictability that makes it manageable in one sense makes it relentless in another. It is one of the primary reasons families of people with moderate dementia reach out for in-home support — having another person absorb the late afternoon and evening hours even a few days per week can transform what is sustainable over months and years.</p>
+
+<p>Our <a href="topic-dementia.html">Dementia & Memory guide</a> covers sundowning as part of a broader overview of behavioral changes and how to understand them as communication rather than problems. Our <a href="guide-conversations.html">Conversation Starter Cards</a> include prompts specifically designed for the quieter moments of connection that can help ground the end of a difficult day. And if the evenings have become consistently unmanageable, <a href="https://www.avelisprivatecare.com/#contact">a conversation with Avelis</a> about what in-home support might look like is a reasonable next step.</p>
+    
+    <div class="related-posts">
+      <h3>Continue reading</h3>
+      <div class="related-grid"><a href="blog-parent-doesnt-recognize-you.html" class="related-card"><span class="related-cat">Dementia Care</span><h4>When your parent doesn't recognize you.</h4><p>How to respond with grace.</p></a>
+<a href="blog-home-environment-dementia.html" class="related-card"><span class="related-cat">Aging in Place</span><h4>The home environment as a care tool.</h4><p>Small changes that make a measurable difference.</p></a>
+<a href="blog-burnout-doesnt-arrive-all-at-once.html" class="related-card"><span class="related-cat">Caregiver Wellbeing</span><h4>Burnout doesn't arrive all at once.</h4><p>The quiet signs caregiving has become unsustainable.</p></a>
+</div>
+    </div>
+  </div>
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">Related Topic</div>
+      <a href="topic-dementia.html" class="sidebar-link"><span>→</span> Dementia & Memory Guide</a>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-title">Free Guides</div>
+      <a href="guide-assessment.html" class="sidebar-link"><span>📋</span> Caregiver Assessment</a>
+      <a href="guide-safety.html" class="sidebar-link"><span>🏠</span> Home Safety Checklist</a>
+      <a href="guide-conversations.html" class="sidebar-link"><span>💬</span> Conversation Cards</a>
+      <a href="guide-coordination.html" class="sidebar-link"><span>📞</span> Care Coordination</a>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-title">All Topics</div>
+      <a href="topic-dementia.html" class="sidebar-link"><span>🧠</span> Dementia &amp; Memory</a>
+      <a href="topic-burnout.html" class="sidebar-link"><span>🌿</span> Caregiver Burnout</a>
+      <a href="topic-respite.html" class="sidebar-link"><span>☁️</span> Respite Care</a>
+      <a href="topic-legal.html" class="sidebar-link"><span>⚖️</span> Legal &amp; Financial</a>
+      <a href="topic-aging.html" class="sidebar-link"><span>🏡</span> Aging in Place</a>
+      <a href="topic-communication.html" class="sidebar-link"><span>💬</span> Family Communication</a>
+    </div>
+    <div class="sidebar-cta">
+      <p>Have a question about care for your loved one?</p>
+      <a href="https://www.avelisprivatecare.com/#contact">Begin a Conversation</a>
+    </div>
+  </aside>
+</div>
+<div class="cta-section">
+  <span class="eyebrow">When You're Ready</span>
+  <h2>Care that meets you<br>exactly <em>where you are</em>.</h2>
+  <p>No forms, no pressure. A real conversation with someone who understands what your family is navigating.</p>
+  <a href="https://www.avelisprivatecare.com/#contact" class="cta-btn">Begin a Conversation</a>
+  <a href="blog.html" class="cta-btn-outline">Back to Journal</a>
+</div>
+<footer>
+  <a href="https://www.avelisprivatecare.com" class="footer-logo">Avelis<span>.</span></a>
+  <p>© 2026 Avelis Care LLC · Non-medical caregiver resource · St. Petersburg, FL</p>
+  <a href="mailto:hello@avelisprivatecare.com">hello@avelisprivatecare.com</a>
+</footer>
+<script>
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

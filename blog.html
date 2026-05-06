@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Avelis Journal — Guides & Insights for Family Caregivers</title>
+<meta name="description" content="Honest, research-grounded writing for family caregivers navigating dementia at home. Published monthly by Avelis Private Care in St. Petersburg, FL."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{--cream:#f7f4ef;--warm-white:#faf8f5;--charcoal:#1e1e1e;--deep:#111;--muted:#7a7570;--border:#e2ddd7;--accent:#c6a882;--accent-light:#e8ddd0;--serif:'Cormorant Garamond',serif;--sans:'Jost',sans-serif;}
+  *{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--warm-white);color:var(--charcoal);font-weight:300;line-height:1.75;overflow-x:hidden;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(250,248,245,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .nav-logo{font-family:var(--serif);font-size:1.3rem;font-weight:400;letter-spacing:0.08em;color:var(--deep);text-decoration:none;}
+  .nav-links{display:flex;gap:2.5rem;list-style:none;}.nav-links a{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}.nav-links a:hover{color:var(--charcoal);}
+  .nav-cta{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--charcoal);border:1px solid var(--charcoal);padding:0.55rem 1.4rem;text-decoration:none;transition:all 0.25s;}.nav-cta:hover{background:var(--charcoal);color:var(--warm-white);}
+  .breadcrumb{padding:6rem 3rem 0;display:flex;align-items:center;gap:0.5rem;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}.breadcrumb a{color:var(--muted);text-decoration:none;}.breadcrumb a:hover{color:var(--charcoal);}.breadcrumb span{color:var(--accent);}
+
+  /* HERO */
+  .hero{padding:3rem 3rem 5rem;background:var(--cream);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:0;right:0;width:40%;height:100%;background:linear-gradient(135deg,transparent 40%,var(--accent-light) 100%);opacity:0.5;}
+  .hero-eyebrow{font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:1rem;}
+  .hero-title{font-family:var(--serif);font-size:clamp(3rem,6vw,5rem);font-weight:300;line-height:1.06;color:var(--deep);margin-bottom:1.4rem;position:relative;}
+  .hero-title em{font-style:italic;color:var(--accent);}
+  .hero-deck{font-size:1rem;color:var(--muted);max-width:520px;line-height:1.85;position:relative;}
+
+  /* FILTER BAR */
+  .filter-bar{background:var(--charcoal);padding:1rem 3rem;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .filter-btn{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.4);padding:0.6rem 1.4rem;white-space:nowrap;transition:all 0.2s;border-bottom:2px solid transparent;}
+  .filter-btn:hover{color:rgba(255,255,255,0.8);}
+  .filter-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+  /* FEATURED */
+  .featured-wrap{max-width:1100px;margin:0 auto;padding:4rem 3rem 0;}
+  .featured-card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--cream);border:1px solid var(--border);margin-bottom:3rem;}
+  .featured-image{background:var(--deep);position:relative;min-height:300px;display:flex;align-items:flex-end;padding:2rem;}
+  .featured-emoji{font-size:5rem;opacity:0.15;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+  .featured-badge{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);background:rgba(198,168,130,0.15);padding:0.3rem 0.8rem;border:1px solid rgba(198,168,130,0.3);position:relative;}
+  .featured-body{padding:3rem;}
+  .featured-meta{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+  .featured-cat{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);}
+  .featured-date{font-size:0.72rem;color:var(--muted);}
+  .featured-body h2{font-family:var(--serif);font-size:2rem;font-weight:300;line-height:1.2;color:var(--deep);margin-bottom:1rem;}
+  .featured-body h2 em{font-style:italic;color:var(--accent);}
+  .featured-body p{font-size:0.9rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem;}
+  .read-link{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--charcoal);text-decoration:none;border-bottom:1px solid var(--charcoal);padding-bottom:2px;transition:all 0.2s;display:inline-block;}
+  .read-link:hover{color:var(--accent);border-color:var(--accent);}
+
+  /* GRID */
+  .grid-wrap{max-width:1100px;margin:0 auto;padding:0 3rem 5rem;}
+  .grid-label{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem;padding-top:1rem;display:flex;align-items:center;gap:12px;}
+  .grid-label::after{content:'';flex:1;height:1px;background:var(--border);}
+  .posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);}
+  .post-card{background:var(--warm-white);padding:2rem 1.8rem;text-decoration:none;color:inherit;display:block;transition:background 0.2s;}
+  .post-card:hover{background:var(--cream);}
+  .post-card.hidden{display:none;}
+  .post-meta{display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;}
+  .post-cat{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);}
+  .post-date{font-size:0.7rem;color:var(--muted);}
+  .post-card h3{font-family:var(--serif);font-size:1.3rem;font-weight:400;line-height:1.25;color:var(--deep);margin-bottom:0.6rem;}
+  .post-card h3 em{font-style:italic;color:var(--accent);}
+  .post-card p{font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;}
+  .post-read{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+  .post-card:hover .post-read{color:var(--charcoal);}
+
+  /* CTA */
+  .cta-section{background:var(--deep);padding:5rem 3rem;text-align:center;}.cta-section .eyebrow{font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:1rem;}.cta-section h2{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.5rem);font-weight:300;color:white;margin-bottom:1rem;line-height:1.15;}.cta-section h2 em{font-style:italic;color:var(--accent);}.cta-section p{font-size:0.95rem;color:rgba(255,255,255,0.5);max-width:460px;margin:0 auto 2rem;line-height:1.85;}
+  .cta-btn{display:inline-block;background:var(--accent);color:var(--deep);padding:1rem 2.5rem;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:all 0.25s;}.cta-btn:hover{background:#d4b896;}
+  .cta-btn-outline{display:inline-block;border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);padding:1rem 2.5rem;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;margin-left:1rem;transition:all 0.25s;}.cta-btn-outline:hover{border-color:white;color:white;}
+  footer{background:var(--charcoal);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}footer p{font-size:0.72rem;color:rgba(255,255,255,0.3);}footer a{color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}footer a:hover{color:var(--accent);}.footer-logo{font-family:var(--serif);font-size:1.1rem;color:white;text-decoration:none;}.footer-logo span{color:var(--accent);}
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s,transform 0.7s;}.reveal.visible{opacity:1;transform:none;}
+  @media(max-width:900px){nav{padding:1.2rem 1.5rem;}.nav-links{display:none;}.hero,.featured-wrap,.grid-wrap,.cta-section{padding-left:1.5rem;padding-right:1.5rem;}.featured-card{grid-template-columns:1fr;}.posts-grid{grid-template-columns:1fr 1fr;}.filter-bar{padding-left:1.5rem;}footer{flex-direction:column;text-align:center;}}
+  @media(max-width:600px){.posts-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://www.avelisprivatecare.com" class="nav-logo">Avelis<span style="color:var(--accent)">.</span></a>
+  <ul class="nav-links">
+    <li><a href="https://www.avelisprivatecare.com/#about">Philosophy</a></li>
+    <li><a href="https://www.avelisprivatecare.com/#services">Services</a></li>
+    <li><a href="https://www.avelisprivatecare.com/avelis-caregiver-support.html">Caregiver Support</a></li>
+    <li><a href="avelis-care-careers.html">Careers</a></li>
+  </ul>
+  <a href="https://www.avelisprivatecare.com/#contact" class="nav-cta">Begin a Conversation</a>
+</nav>
+
+<div class="breadcrumb">
+  <a href="https://www.avelisprivatecare.com/avelis-caregiver-support.html">Caregiver Support</a>
+  <span>›</span><span>Journal</span>
+</div>
+
+<div class="hero">
+  <span class="hero-eyebrow">From the Avelis Journal</span>
+  <h1 class="hero-title">Guides, <em>insights</em>,<br>and honest writing<br>for caregivers.</h1>
+  <p class="hero-deck">Published monthly. Research-grounded, emotionally honest, and written for the real situations families face when caring for a loved one with dementia at home.</p>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filter('all',this)">All Articles</button>
+  <button class="filter-btn" onclick="filter('Dementia Care',this)">Dementia Care</button>
+  <button class="filter-btn" onclick="filter('Caregiver Wellbeing',this)">Caregiver Wellbeing</button>
+  <button class="filter-btn" onclick="filter('Respite Care',this)">Respite Care</button>
+  <button class="filter-btn" onclick="filter('Legal & Financial',this)">Legal &amp; Financial</button>
+  <button class="filter-btn" onclick="filter('Aging in Place',this)">Aging in Place</button>
+  <button class="filter-btn" onclick="filter('Family Communication',this)">Family Communication</button>
+</div>
+
+<!-- FEATURED POST -->
+<div class="featured-wrap">
+  <a href="blog-technology-aging-in-place.html" class="featured-card reveal" style="text-decoration:none;color:inherit;display:grid;">
+    <div class="featured-image">
+      <span class="featured-emoji">🏡</span>
+      <span class="featured-badge">Latest Article · May 2026</span>
+    </div>
+    <div class="featured-body">
+      <div class="featured-meta">
+        <span class="featured-cat">Aging in Place</span>
+        <span class="featured-date">May 2026</span>
+      </div>
+      <h2>Six technologies that genuinely<br>help with aging in place — not <em>gimmicks</em>.</h2>
+      <p>The tools families in Pinellas County are using right now to make home safer, more connected, and more sustainable for loved ones aging in place.</p>
+      <span class="read-link">Read the article →</span>
+    </div>
+  </a>
+</div>
+
+<!-- ALL POSTS GRID -->
+<div class="grid-wrap">
+  <div class="grid-label reveal">All Articles — 17 posts</div>
+  <div class="posts-grid reveal" id="posts-grid">
+
+    <a href="blog-financial-exploitation.html" class="post-card" data-cat="Legal & Financial">
+      <div class="post-meta"><span class="post-cat">Legal &amp; Financial</span><span class="post-date">April 2026</span></div>
+      <h3>Protecting your loved one from financial exploitation — <em>warning signs and next steps</em>.</h3>
+      <p>Financial exploitation is the most common form of elder abuse. People with dementia are among the most vulnerable.</p>
+      <span class="post-read">7 min read →</span>
+    </a>
+
+    <a href="blog-cost-of-home-care.html" class="post-card" data-cat="Aging in Place">
+      <div class="post-meta"><span class="post-cat">Aging in Place</span><span class="post-date">March 2026</span></div>
+      <h3>The real cost of home care vs. assisted living — the numbers most families <em>don't know</em>.</h3>
+      <p>The assumption that residential care is less expensive than in-home care is often wrong — especially in Florida.</p>
+      <span class="post-read">8 min read →</span>
+    </a>
+
+    <a href="blog-long-distance-caregiving.html" class="post-card" data-cat="Family Communication">
+      <div class="post-meta"><span class="post-cat">Family Communication</span><span class="post-date">February 2026</span></div>
+      <h3>Long-distance caregiving — what actually helps when you <em>can't be there</em>.</h3>
+      <p>More than five million Americans care for an aging parent from a distance. The challenges are significant and specific.</p>
+      <span class="post-read">7 min read →</span>
+    </a>
+
+    <a href="blog-caregiver-grief.html" class="post-card" data-cat="Caregiver Wellbeing">
+      <div class="post-meta"><span class="post-cat">Caregiver Wellbeing</span><span class="post-date">January 2026</span></div>
+      <h3>The grief that has no name — loss in <em>dementia caregiving</em>.</h3>
+      <p>Anticipatory grief. Ambiguous loss. The mourning that happens while the person is still alive.</p>
+      <span class="post-read">8 min read →</span>
+    </a>
+
+    <a href="blog-communicating-late-stage.html" class="post-card" data-cat="Dementia Care">
+      <div class="post-meta"><span class="post-cat">Dementia Care</span><span class="post-date">December 2025</span></div>
+      <h3>Communicating in late-stage dementia — when words are gone, <em>connection remains</em>.</h3>
+      <p>The capacity for presence, comfort, and human connection persists into the latest stages of dementia.</p>
+      <span class="post-read">7 min read →</span>
+    </a>
+
+    <a href="blog-medicaid-myths.html" class="post-card" data-cat="Legal & Financial">
+      <div class="post-meta"><span class="post-cat">Legal &amp; Financial</span><span class="post-date">November 2025</span></div>
+      <h3>The Medicare myth every family believes — and what <em>actually</em> pays for care.</h3>
+      <p>Medicare does not cover long-term custodial care. Many families discover this only when they need it most.</p>
+      <span class="post-read">9 min read →</span>
+    </a>
+
+    <a href="blog-family-meeting.html" class="post-card" data-cat="Family Communication">
+      <div class="post-meta"><span class="post-cat">Family Communication</span><span class="post-date">October 2025</span></div>
+      <h3>How to run a family meeting about care — before it becomes a <em>crisis</em>.</h3>
+      <p>Structured family conversations are almost always easier before an emergency forces them.</p>
+      <span class="post-read">8 min read →</span>
+    </a>
+
+    <a href="blog-home-environment-dementia.html" class="post-card" data-cat="Aging in Place">
+      <div class="post-meta"><span class="post-cat">Aging in Place</span><span class="post-date">September 2025</span></div>
+      <h3>The home environment as a care tool — small changes that make a <em>measurable difference</em>.</h3>
+      <p>How thoughtful environmental design reduces confusion, agitation, and falls for people with dementia.</p>
+      <span class="post-read">8 min read →</span>
+    </a>
+
+    <a href="blog-self-care-that-actually-works.html" class="post-card" data-cat="Caregiver Wellbeing">
+      <div class="post-meta"><span class="post-cat">Caregiver Wellbeing</span><span class="post-date">August 2025</span></div>
+      <h3>Self-care strategies for caregivers that <em>actually work</em>.</h3>
+      <p>Not bubble baths. The structural changes that make the difference between sustainable and collapsing.</p>
+      <span class="post-read">7 min read →</span>
+    </a>
+
+    <a href="blog-overnight-respite.html" class="post-card" data-cat="Respite Care">
+      <div class="post-meta"><span class="post-cat">Respite Care</span><span class="post-date">August 2025</span></div>
+      <h3>The case for overnight respite care — why sleep is the <em>first thing to protect</em>.</h3>
+      <p>Nighttime care disruption is one of the leading drivers of caregiver burnout. Overnight respite changes the math.</p>
+      <span class="post-read">6 min read →</span>
+    </a>
+
+    <a href="blog-sundowning-guide.html" class="post-card" data-cat="Dementia Care">
+      <div class="post-meta"><span class="post-cat">Dementia Care</span><span class="post-date">July 2025</span></div>
+      <h3>Sundowning: what it is, why it happens, and what actually <em>helps</em>.</h3>
+      <p>Late-afternoon confusion and agitation are among the most exhausting aspects of dementia caregiving.</p>
+      <span class="post-read">8 min read →</span>
+    </a>
+
+    <a href="blog-what-respite-actually-looks-like.html" class="post-card" data-cat="Respite Care">
+      <div class="post-meta"><span class="post-cat">Respite Care</span><span class="post-date">June 2025</span></div>
+      <h3>What respite actually looks like — building rest into caregiving <em>on purpose</em>.</h3>
+      <p>A practical look at what regular respite involves, what it costs, and what caregivers report on the other side.</p>
+      <span class="post-read">7 min read →</span>
+    </a>
+
+    <a href="blog-power-of-attorney-timing.html" class="post-card" data-cat="Legal & Financial">
+      <div class="post-meta"><span class="post-cat">Legal &amp; Financial</span><span class="post-date">June 2025</span></div>
+      <h3>The legal documents every family needs — and why <em>timing is everything</em>.</h3>
+      <p>Powers of attorney, healthcare surrogates, advance directives. The window is shorter than most families realize.</p>
+      <span class="post-read">9 min read →</span>
+    </a>
+
+    <a href="blog-parent-doesnt-recognize-you.html" class="post-card" data-cat="Dementia Care">
+      <div class="post-meta"><span class="post-cat">Dementia Care</span><span class="post-date">May 2025</span></div>
+      <h3>The moment your parent doesn't recognize you — and how to respond with <em>grace</em>.</h3>
+      <p>One of the most devastating moments in a dementia caregiving journey. What happens and how families find their way through it.</p>
+      <span class="post-read">8 min read →</span>
+    </a>
+
+    <a href="blog-burnout-doesnt-arrive-all-at-once.html" class="post-card" data-cat="Caregiver Wellbeing">
+      <div class="post-meta"><span class="post-cat">Caregiver Wellbeing</span><span class="post-date">April 2025</span></div>
+      <h3>Burnout doesn't arrive all at once. Here's how to notice it <em>before it takes over</em>.</h3>
+      <p>The quiet signs that caregiving has become unsustainable — and what to do before you reach the wall.</p>
+      <span class="post-read">7 min read →</span>
+    </a>
+
+    <a href="blog-asking-for-help.html" class="post-card" data-cat="Respite Care">
+      <div class="post-meta"><span class="post-cat">Respite Care</span><span class="post-date">March 2025</span></div>
+      <h3>Asking for help is not giving up. It's how you <em>keep showing up</em>.</h3>
+      <p>Why guilt is the single biggest barrier to respite care — and what's actually on the other side of it.</p>
+      <span class="post-read">6 min read →</span>
+    </a>
+
+  </div>
+</div>
+
+<div class="cta-section">
+  <span class="eyebrow">When You're Ready</span>
+  <h2>Care that meets you<br>exactly <em>where you are</em>.</h2>
+  <p>No forms, no pressure. A real conversation with someone who understands what your family is navigating.</p>
+  <a href="https://www.avelisprivatecare.com/#contact" class="cta-btn">Begin a Conversation</a>
+  <a href="https://www.avelisprivatecare.com/avelis-caregiver-support.html" class="cta-btn-outline">Back to Support Center</a>
+</div>
+
+<footer>
+  <a href="https://www.avelisprivatecare.com" class="footer-logo">Avelis<span>.</span></a>
+  <p>© 2026 Avelis Care LLC · Non-medical caregiver resource · St. Petersburg, FL</p>
+  <a href="mailto:hello@avelisprivatecare.com">hello@avelisprivatecare.com</a>
+</footer>
+
+<script>
+  function filter(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.post-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    const visible = document.querySelectorAll('.post-card:not(.hidden)').length;
+    document.querySelector('.grid-label').textContent = cat === 'all'
+      ? `All Articles — ${visible} posts`
+      : `${cat} — ${visible} post${visible !== 1 ? 's' : ''}`;
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.05});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
