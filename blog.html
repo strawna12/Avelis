@@ -32,10 +32,10 @@
 
   /* FEATURED */
   .featured-wrap{max-width:1100px;margin:0 auto;padding:4rem 3rem 0;}
-  .featured-card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--cream);border:1px solid var(--border);margin-bottom:3rem;}
-  .featured-image{background:var(--deep);position:relative;min-height:300px;display:flex;align-items:flex-end;padding:2rem;}
-  .featured-emoji{font-size:5rem;opacity:0.15;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
-  .featured-badge{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);background:rgba(198,168,130,0.15);padding:0.3rem 0.8rem;border:1px solid rgba(198,168,130,0.3);position:relative;}
+  .featured-card{display:block;background:var(--cream);border:1px solid var(--border);margin-bottom:3rem;}
+  .featured-image{display:none;}
+  .featured-emoji{display:none;}
+  .featured-badge{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);background:rgba(198,168,130,0.12);padding:0.3rem 0.8rem;border:1px solid var(--accent-light);position:relative;}
   .featured-body{padding:3rem;}
   .featured-meta{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
   .featured-cat{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);}
@@ -129,8 +129,8 @@
 
 <!-- ALL POSTS GRID -->
 <div class="grid-wrap">
-  <div class="grid-label reveal">All Articles — 17 posts</div>
-  <div class="posts-grid reveal" id="posts-grid">
+  <div class="grid-label">All Articles — 17 posts</div>
+  <div class="posts-grid" id="posts-grid">
 
     <a href="blog-financial-exploitation.html" class="post-card" data-cat="Legal & Financial">
       <div class="post-meta"><span class="post-cat">Legal &amp; Financial</span><span class="post-date">April 2026</span></div>
