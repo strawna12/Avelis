@@ -366,11 +366,22 @@
     padding: 52px 46px;
     position: relative; overflow: hidden;
     transition: background 0.3s;
-    cursor: default;
+    cursor: pointer;
     text-decoration: none;
     display: block;
   }
+  a.service-card { cursor: pointer; }
   .service-card:hover { background: var(--charcoal); }
+  .service-card-arrow {
+    display: block;
+    margin-top: 18px;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    transition: color 0.3s, transform 0.3s;
+  }
+  .service-card:hover .service-card-arrow { color: rgba(255,255,255,0.35); transform: translateX(5px); }
   .service-num {
     font-family: var(--serif);
     font-size: 3.6rem;
@@ -838,36 +849,42 @@
         <div class="service-name">Care Coordination</div>
         <p class="service-desc">One person who holds the full picture. We organize providers, records, appointments, and communications — so nothing critical slips through the cracks across your loved one's care team.</p>
         <div class="service-tag">Coordination · Navigation</div>
+        <span class="service-card-arrow">Learn more →</span>
       </a>
       <a href="avelis/chronic-care-support.html" class="service-card fade-up d1" style="text-decoration:none;display:block;">
         <div class="service-num">02</div>
         <div class="service-name">Chronic Care Support</div>
         <p class="service-desc">Consistent, membership-based support for families managing long-term conditions — heart disease, diabetes, COPD, dementia, cancer, and others. We coordinate around the clinical team, not instead of them.</p>
         <div class="service-tag">Ongoing · Membership</div>
+        <span class="service-card-arrow">Learn more →</span>
       </a>
       <a href="avelis/aging-in-place.html" class="service-card fade-up d2" style="text-decoration:none;display:block;">
         <div class="service-num">03</div>
         <div class="service-name">Aging-in-Place Support</div>
         <p class="service-desc">Thoughtful guidance to help older adults thrive safely at home — on their own terms. Home safety assessment, community resource navigation, wellness check-ins, and proactive family communication.</p>
         <div class="service-tag">Independence · Wellness</div>
+        <span class="service-card-arrow">Learn more →</span>
       </a>
       <a href="avelis/post-hospital-recovery.html" class="service-card fade-up d3" style="text-decoration:none;display:block;">
         <div class="service-num">04</div>
         <div class="service-name">Post-Hospital Recovery Support</div>
         <p class="service-desc">The first 30 days home are the most critical. We bridge the gap between discharge and stable home life — with organized support, medication coordination, and consistent family updates throughout recovery.</p>
         <div class="service-tag">Recovery · Transition</div>
+        <span class="service-card-arrow">Learn more →</span>
       </a>
       <a href="avelis/healthcare-advocacy.html" class="service-card fade-up" style="text-decoration:none;display:block;">
         <div class="service-num">05</div>
         <div class="service-name">Healthcare Advocacy</div>
         <p class="service-desc">Someone who knows the system — and isn't afraid to ask the hard questions. We accompany clients to appointments, help families understand options, and ensure every voice is heard and respected.</p>
         <div class="service-tag">Advocacy · Navigation</div>
+        <span class="service-card-arrow">Learn more →</span>
       </a>
       <a href="avelis/wellness-checkins.html" class="service-card fade-up d1" style="text-decoration:none;display:block;">
         <div class="service-num">06</div>
         <div class="service-name">Wellness Check-Ins &amp; Oversight</div>
         <p class="service-desc">Regular, purposeful touchpoints — in person or virtual — that catch changes in health, cognition, or environment before they escalate. For distant families: reliable reassurance. For clients: consistent connection.</p>
         <div class="service-tag">Monitoring · Communication</div>
+        <span class="service-card-arrow">Learn more →</span>
       </a>
     </div>
   </div>
