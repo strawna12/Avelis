@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wellness Check-Ins | Avelis Private Care — St. Petersburg, FL</title>
+<meta name="description" content="Regular wellness check-ins for older adults and chronically ill clients in St. Petersburg, Tampa Bay, and Pinellas County. In-home and virtual visits with written family reports.">
+<meta name="keywords" content="wellness check-ins seniors St. Petersburg FL, in-home wellness visits Tampa Bay, senior monitoring Pinellas County, regular check-ins aging parents Florida, wellness oversight St. Petersburg">
+<link rel="canonical" href="https://www.avelisprivatecare.com/wellness-checkins.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F0EBE1;--parchment:#DDD5C8;--taupe:#A89880;--warm-gray:#5C5248;--charcoal:#1E1A16;--deep:#0F0D0A;--gold:#A07C3A;--gold-light:#C49A52;--white:#FAF7F2;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--charcoal);font-family:var(--sans);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:28px 60px;transition:background 0.4s,padding 0.4s,border-color 0.4s;border-bottom:1px solid transparent}
+  nav.scrolled{background:rgba(240,235,225,0.96);backdrop-filter:blur(16px);padding:18px 60px;border-bottom-color:var(--parchment)}
+  .nav-logo{font-family:var(--serif);font-size:1.4rem;font-weight:400;letter-spacing:0.06em;color:var(--charcoal);text-decoration:none}
+  .nav-logo span{color:var(--gold)}
+  .nav-links{display:flex;gap:44px;list-style:none}
+  .nav-links a{font-size:0.7rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--warm-gray);text-decoration:none;transition:color 0.2s}
+  .nav-links a:hover{color:var(--charcoal)}
+  .nav-cta{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:color 0.2s,border-color 0.2s}
+  .nav-cta:hover{color:var(--charcoal);border-color:var(--charcoal)}
+  .page-hero{min-height:72vh;display:flex;align-items:flex-end;position:relative;overflow:hidden;background:var(--deep);padding-bottom:80px}
+  .page-hero-bg{position:absolute;inset:0;background:linear-gradient(155deg,var(--deep) 0%,#1a1612 60%,#221c14 100%)}
+  .hero-accent{position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:520px;height:520px;border-radius:50%;border:1px solid rgba(160,124,58,0.12)}
+  .hero-accent-2{position:absolute;right:40px;top:50%;transform:translateY(-50%);width:340px;height:340px;border-radius:50%;border:1px solid rgba(160,124,58,0.07)}
+  .container{max-width:1200px;margin:0 auto;padding:0 60px}
+  .page-hero-inner{position:relative;max-width:1200px;margin:0 auto;padding:0 60px}
+  .breadcrumb{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:32px;display:flex;gap:10px;align-items:center}
+  .breadcrumb a{color:rgba(255,255,255,0.3);text-decoration:none}
+  .breadcrumb a:hover{color:var(--gold)}
+  .breadcrumb span{color:var(--gold)}
+  .page-label{font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:14px}
+  .page-label::before{content:'';width:28px;height:1px;background:var(--gold)}
+  .page-headline{font-family:var(--serif);font-size:clamp(2.8rem,5vw,5rem);font-weight:300;line-height:1.1;color:var(--white);letter-spacing:-0.015em;margin-bottom:28px}
+  .page-headline em{font-style:italic;color:var(--gold)}
+  .page-intro{font-size:1rem;color:rgba(255,255,255,0.55);line-height:1.85;max-width:600px}
+  section{padding:100px 0}
+  .section-label{font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:14px}
+  .section-label::before{content:'';width:28px;height:1px;background:var(--gold)}
+  .section-heading{font-family:var(--serif);font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:300;line-height:1.2;color:var(--deep);letter-spacing:-0.01em}
+  .section-heading em{font-style:italic;color:var(--gold)}
+  .section-body{font-size:0.97rem;font-weight:400;line-height:1.85;color:var(--warm-gray)}
+  .divider{width:44px;height:1px;background:var(--gold);margin:32px 0}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+  .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+  .detail-card{background:var(--white);padding:44px 38px}
+  .detail-card-num{font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--parchment);line-height:1;margin-bottom:16px}
+  .detail-card-title{font-family:var(--serif);font-size:1.28rem;font-weight:400;color:var(--deep);margin-bottom:12px;line-height:1.3}
+  .detail-card-body{font-size:0.88rem;color:var(--warm-gray);line-height:1.82}
+  .include-list{list-style:none;display:flex;flex-direction:column;gap:0}
+  .include-list li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--parchment);font-size:0.92rem;color:var(--warm-gray);line-height:1.7}
+  .include-list li::before{content:'—';color:var(--gold);font-family:var(--serif);flex-shrink:0;margin-top:2px}
+  .include-list li:last-child{border-bottom:none}
+  .cta-band{background:var(--deep);padding:80px 0}
+  .cta-band-inner{max-width:1200px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center}
+  .cta-band-headline{font-family:var(--serif);font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:300;color:var(--white);line-height:1.25;margin-bottom:12px}
+  .cta-band-headline em{font-style:italic;color:var(--gold)}
+  .cta-band-sub{font-size:0.9rem;color:rgba(255,255,255,0.45);line-height:1.75}
+  .btn-primary{display:inline-block;font-size:0.7rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--white);background:var(--charcoal);text-decoration:none;padding:18px 40px;transition:background 0.3s;border:none;cursor:pointer;white-space:nowrap}
+  .btn-primary:hover{background:var(--gold)}
+  .btn-outline{display:inline-block;font-size:0.7rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--white);text-decoration:none;padding:17px 36px;border:1px solid rgba(255,255,255,0.25);transition:border-color 0.3s}
+  .btn-outline:hover{border-color:var(--gold)}
+  .faq-item{padding:28px 0;border-bottom:1px solid var(--parchment)}
+  .faq-q{font-family:var(--serif);font-size:1.12rem;font-weight:400;color:var(--deep);margin-bottom:10px;line-height:1.4}
+  .faq-a{font-size:0.91rem;color:var(--warm-gray);line-height:1.82}
+  .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px}
+  .related-card{background:var(--white);padding:36px 32px;text-decoration:none;display:block;transition:background 0.3s}
+  .related-card:hover{background:var(--charcoal)}
+  .related-label{font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;transition:color 0.3s}
+  .related-card:hover .related-label{color:var(--gold-light)}
+  .related-title{font-family:var(--serif);font-size:1.18rem;font-weight:400;color:var(--deep);margin-bottom:8px;line-height:1.3;transition:color 0.3s}
+  .related-card:hover .related-title{color:var(--white)}
+  .related-body{font-size:0.84rem;color:var(--warm-gray);line-height:1.7;transition:color 0.3s}
+  .related-card:hover .related-body{color:rgba(255,255,255,0.45)}
+  footer{background:var(--deep);padding:60px 0 36px}
+  .footer-inner{max-width:1200px;margin:0 auto;padding:0 60px}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.07)}
+  .footer-copy{font-size:0.72rem;color:rgba(255,255,255,0.18)}
+  .footer-sig{font-family:var(--serif);font-style:italic;font-size:0.82rem;color:rgba(255,255,255,0.18)}
+  .fade-up{opacity:0;transform:translateY(26px);transition:opacity 0.75s ease,transform 0.75s ease}
+  .fade-up.visible{opacity:1;transform:none}
+  .d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}
+  @media(max-width:900px){nav{padding:22px 28px}.nav-links{display:none}.container,.page-hero-inner,.cta-band-inner,.footer-inner{padding:0 28px}section{padding:70px 0}.two-col,.three-col,.related-grid,.cta-band-inner{grid-template-columns:1fr;gap:40px}.page-hero{min-height:60vh}}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3VDCQR3X6W"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-3VDCQR3X6W');</script>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">Avelis<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">Philosophy</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="../avelis-caregiver-support.html">Caregiver Support</a></li>
+    <li><a href="avelis-care-careers.html">Careers</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Begin a Conversation</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-accent-2"></div>
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / <a href="index.html#services">Services</a> / <span>Wellness Check-Ins</span></div>
+    <div class="page-label">Service</div>
+    <h1 class="page-headline">Proactive visibility.<br><em>Consistent</em> connection.</h1>
+    <p class="page-intro">Regular wellness check-ins — purposeful, structured touchpoints — help catch changes before they escalate. For distant families, they provide reassurance. For clients, they provide consistent connection and a trusted presence.</p>
+  </div>
+</div>
+
+<section style="background:var(--white)">
+  <div class="container">
+    <div class="two-col">
+      <div class="fade-up">
+        <div class="section-label">Why Regular Check-Ins Matter</div>
+        <h2 class="section-heading">The changes that matter<br>most happen <em>gradually</em>.</h2>
+        <div class="divider"></div>
+        <p class="section-body" style="margin-bottom:20px">A decline in appetite. Increasing confusion in the evenings. A subtle shift in mobility. Withdrawal from activities a person used to enjoy. These changes rarely announce themselves dramatically — they accumulate quietly, week by week, until something finally breaks.</p>
+        <p class="section-body" style="margin-bottom:20px">Regular wellness check-ins create the consistent baseline that makes early recognition possible. When someone sees your loved one regularly and knows what "normal" looks like for them, they notice when something has shifted — often long before a crisis.</p>
+        <p class="section-body">For families managing care from a distance, check-ins provide the reliable, eyes-on presence that replaces worry with information.</p>
+      </div>
+      <div class="fade-up d1" style="display:flex;flex-direction:column;gap:2px;padding-top:12px">
+        <div style="background:var(--cream);padding:32px 36px;border-left:2px solid var(--gold)">
+          <div style="font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">For distant families</div>
+          <div style="font-family:var(--serif);font-size:1.05rem;font-style:italic;color:var(--charcoal);line-height:1.65">Reliable reassurance. You'll know — with confidence — how your loved one is actually doing, not just how they say they're doing.</div>
+        </div>
+        <div style="background:var(--cream);padding:32px 36px;border-left:2px solid var(--parchment)">
+          <div style="font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">For clients</div>
+          <div style="font-family:var(--serif);font-size:1.05rem;font-style:italic;color:var(--charcoal);line-height:1.65">Consistent connection with a trusted face. A regular check-in with someone who genuinely cares is itself a form of support.</div>
+        </div>
+        <div style="background:var(--cream);padding:32px 36px;border-left:2px solid var(--parchment)">
+          <div style="font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">For the care team</div>
+          <div style="font-family:var(--serif);font-size:1.05rem;font-style:italic;color:var(--charcoal);line-height:1.65">Ongoing documentation of how a client is functioning between clinical appointments — giving providers a fuller picture when it matters.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--cream)">
+  <div class="container">
+    <div class="fade-up" style="margin-bottom:56px">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-heading">Structured, purposeful,<br><em>documented</em>.</h2>
+    </div>
+    <div class="three-col">
+      <div class="detail-card fade-up">
+        <div class="detail-card-num">01</div>
+        <div class="detail-card-title">In-Home Wellness Visits</div>
+        <div class="detail-card-body">Scheduled visits to your loved one's home — structured around wellness observation, conversation, and a clear checklist of what we're looking for. These visits provide the most complete picture of how someone is really doing in their own environment.</div>
+      </div>
+      <div class="detail-card fade-up d1">
+        <div class="detail-card-num">02</div>
+        <div class="detail-card-title">Virtual Check-Ins</div>
+        <div class="detail-card-body">For clients with mobility limitations, those who prefer virtual contact, or as a supplement between in-home visits — video or phone check-ins that maintain consistent connection and provide meaningful wellness observation without requiring travel.</div>
+      </div>
+      <div class="detail-card fade-up d2">
+        <div class="detail-card-num">03</div>
+        <div class="detail-card-title">Written Family Reports</div>
+        <div class="detail-card-body">After each check-in, a clear written summary is shared with family members — covering what was observed, any changes noted, and recommended next steps. Consistent documentation builds a picture over time that's invaluable for the care team.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--white)">
+  <div class="container">
+    <div class="two-col">
+      <div class="fade-up">
+        <div class="section-label">What We Observe</div>
+        <h2 class="section-heading">A comprehensive look at<br>the <em>whole person</em>.</h2>
+        <div class="divider"></div>
+        <p class="section-body">Each wellness check-in is structured around a consistent framework — so changes over time are tracked meaningfully, not anecdotally.</p>
+      </div>
+      <div class="fade-up d1">
+        <ul class="include-list">
+          <li>Physical presentation and mobility</li>
+          <li>Cognitive functioning and orientation</li>
+          <li>Mood, affect, and emotional wellbeing</li>
+          <li>Nutrition, hydration, and appetite</li>
+          <li>Medication adherence and organization</li>
+          <li>Home environment safety and cleanliness</li>
+          <li>Social engagement and activity levels</li>
+          <li>Sleep quality and patterns</li>
+          <li>Any new symptoms or changes since last visit</li>
+          <li>Expressed concerns or needs from the client</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="cta-band-inner">
+    <div>
+      <div class="cta-band-headline">Stop wondering.<br>Start <em>knowing</em>.</div>
+      <div class="cta-band-sub">Wellness check-ins are available as part of any membership plan or as a standalone service.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+      <a href="index.html#contact" class="btn-primary">Book a Discovery Call</a>
+      <a href="membership.html" class="btn-outline">View Membership Plans</a>
+    </div>
+  </div>
+</div>
+
+<section style="background:var(--cream)">
+  <div class="container">
+    <div class="section-label fade-up">Related Services</div>
+    <h2 class="section-heading fade-up" style="margin-bottom:0">Other ways Avelis<br>supports your <em>family</em>.</h2>
+    <div class="related-grid">
+      <a href="aging-in-place.html" class="related-card fade-up">
+        <div class="related-label">Service</div>
+        <div class="related-title">Aging-in-Place Support</div>
+        <div class="related-body">Wellness check-ins are a cornerstone of our aging-in-place support — giving seniors the oversight they need to stay home safely.</div>
+      </a>
+      <a href="chronic-care-support.html" class="related-card fade-up d1">
+        <div class="related-label">Service</div>
+        <div class="related-title">Chronic Care Support</div>
+        <div class="related-body">Regular check-ins are essential for monitoring chronic conditions between medical appointments.</div>
+      </a>
+      <a href="care-coordination.html" class="related-card fade-up d2">
+        <div class="related-label">Service</div>
+        <div class="related-title">Care Coordination</div>
+        <div class="related-body">Check-in findings feed directly into care coordination — ensuring any concerns are followed up with the right providers.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Avelis Private Care LLC. All rights reserved. · <a href="index.html" style="color:rgba(255,255,255,0.3);text-decoration:none;">Back to Home</a></div>
+      <div class="footer-sig">Clarity. Coordination. Concierge-level care.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('mainNav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+  setTimeout(()=>document.querySelectorAll('.page-hero .fade-up,.page-hero-inner *').forEach(el=>el.classList.add('visible')),80);
+</script>
+</body>
+</html>
