@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Safety Assessment | Avelis Private Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F0EBE1;--parchment:#DDD5C8;--taupe:#A89880;--warm-gray:#5C5248;--charcoal:#1E1A16;--deep:#0F0D0A;--gold:#A07C3A;--white:#FAF7F2;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--charcoal);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased;padding:0 0 60px}
+.fw{max-width:780px;margin:0 auto;padding:48px 40px 60px}
+.fh{border-bottom:2px solid var(--gold);padding-bottom:28px;margin-bottom:40px}
+.fl{font-family:var(--serif);font-size:1.3rem;letter-spacing:0.06em;margin-bottom:16px}.fl span{color:var(--gold)}
+.ft{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:10px}.ft::before{content:'';width:20px;height:1px;background:var(--gold)}
+h1{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--deep);line-height:1.2;margin-bottom:8px}h1 em{font-style:italic;color:var(--gold)}
+.fd{font-size:0.88rem;color:var(--warm-gray);line-height:1.75;max-width:560px}
+.fs{margin-bottom:36px}
+.fst{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--parchment);display:flex;align-items:center;gap:10px}.fst::before{content:'';width:16px;height:1px;background:var(--gold)}
+.fg{margin-bottom:22px}.fg label{display:block;font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:7px}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--white);border:1px solid var(--parchment);border-radius:4px;padding:11px 14px;font-family:var(--sans);font-size:0.9rem;color:var(--charcoal);outline:none;transition:border-color 0.2s}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--gold)}.fg textarea{resize:vertical;min-height:80px}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--taupe)}
+.fg select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A89880' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.fn{font-size:0.75rem;color:var(--taupe);margin-top:5px;font-style:italic}
+.sr{margin-top:40px;padding-top:28px;border-top:1px solid var(--parchment);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.bs{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--white);background:var(--charcoal);border:none;padding:16px 36px;cursor:pointer;transition:background 0.3s;font-family:var(--sans)}.bs:hover{background:var(--gold)}
+.bp{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--charcoal);background:transparent;border:1px solid var(--taupe);padding:15px 28px;cursor:pointer;font-family:var(--sans)}.bp:hover{border-color:var(--charcoal)}
+.fn2{font-size:0.72rem;color:var(--taupe);line-height:1.6}
+.sm{display:none;padding:40px;text-align:center;background:var(--white);border:1px solid var(--parchment);border-radius:4px;margin-top:24px}
+.sm h3{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--deep);margin-bottom:8px}.sm p{font-size:0.88rem;color:var(--warm-gray)}
+hr.dv{border:none;border-top:1px solid var(--parchment);margin:20px 0}
+/* checklist rows */
+.cl-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:10px 14px;background:var(--white);border:1px solid var(--parchment);border-radius:4px;margin-bottom:6px}
+.cl-item{font-size:0.88rem;color:var(--charcoal)}
+.cl-status{display:flex;gap:6px}
+.cl-status label{display:flex;align-items:center;gap:4px;font-size:0.75rem;color:var(--warm-gray);cursor:pointer;text-transform:none;letter-spacing:0}
+.cl-status input{width:auto}
+.cl-concern{font-size:0.78rem;color:#e65100;padding:2px 8px;border-radius:3px;background:#fff3e0;border:none;font-family:var(--sans);cursor:pointer;display:none}
+.cl-concern.show{display:inline-block}
+@media(max-width:640px){.fw{padding:28px 20px 48px}.r2,.r3{grid-template-columns:1fr}.cl-row{grid-template-columns:1fr;gap:8px}}
+@media print{body{background:white;padding:0}.fw{padding:20px;max-width:100%}.bs,.bp{display:none!important}.fg input,.fg textarea,.fg select{border:1px solid #ccc;background:white}.sr{display:none}.fs{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="fw">
+  <div class="fh">
+    <div class="fl">Avelis<span>.</span></div>
+    <div class="ft">Internal · Form 03 of 13</div>
+    <h1>Home Safety <em>Assessment</em></h1>
+    <p class="fd">Completed during the initial in-home visit. Document findings room by room, flag concerns, and record recommended modifications. This assessment feeds directly into the client's support plan.</p>
+  </div>
+  <form id="theForm">
+
+    <div class="fs">
+      <div class="fst">Assessment details</div>
+      <div class="r2">
+        <div class="fg"><label>Client full name *</label><input type="text" name="client_name" required placeholder="Full name"></div>
+        <div class="fg"><label>Assessment date *</label><input type="date" name="assess_date" required></div>
+      </div>
+      <div class="r2">
+        <div class="fg"><label>Coordinator conducting assessment</label><input type="text" name="coordinator" placeholder="Name"></div>
+        <div class="fg"><label>Client present during assessment?</label><select name="client_present"><option>Yes</option><option>No — family present</option><option>No — coordinator only</option></select></div>
+      </div>
+      <div class="fg"><label>Home type</label>
+        <select name="home_type"><option value="">Select</option><option>Single-family home</option><option>Apartment / condo</option><option>Mobile home</option><option>Assisted living unit</option><option>Other</option></select>
+      </div>
+    </div>
+
+    <div class="fs">
+      <div class="fst">General / entryways</div>
+      <div class="cl-row"><span class="cl-item">Adequate exterior lighting at entry</span><div class="cl-status"><label><input type="radio" name="g1" value="OK"> OK</label><label><input type="radio" name="g1" value="Concern"> Concern</label></div></div>
+      <div class="cl-row"><span class="cl-item">Steps / ramp in good condition</span><div class="cl-status"><label><input type="radio" name="g2" value="OK"> OK</label><label><input type="radio" name="g2" value="Concern"> Concern</label><label><input type="radio" name="g2" value="N/A"> N/A</label></div></div>
+      <div class="cl-row"><span class="cl-item">Handrails present and secure on all steps</span><div class="cl-status"><label><input type="radio" name="g3" value="OK"> OK</label><label><input type="radio" name="g3" value="Concern"> Concern</label><label><input type="radio" name="g3" value="N/A"> N/A</label></div></div>
+      <div class="cl-row"><span class="cl-item">Door thresholds not a trip hazard</span><div class="cl-status"><label><input type="radio" name="g4" value="OK"> OK</label><label><input type="radio" name="g4" value="Concern"> Concern</label></div></div>
+      <div class="fg" style="margin-top:12px"><label>Entry / general notes</label><textarea name="notes_entry" placeholder="Any specific concerns or observations at entry"></textarea></div>
+    </div>
+
+    <div class="fs">
+      <div class="fst">Living areas</div>
+      <div class="cl-row"><span class="cl-item">Clear pathways — no clutter or obstacles</span><div class="cl-status"><label><input type="radio" name="l1" value="OK"> OK</label><label><input type="radio" name="l1" value="Concern"> Concern</label></div></div>
+      <div class="cl-row"><span class="cl-item">Rugs secured / non-slip backing</span><div class="cl-status"><label><input type="radio" name="l2" value="OK"> OK</label><label><input type="radio" name="l2" value="Concern"> Concern</label><label><input type="radio" name="l2" value="N/A"> N/A</label></div></div>
+      <div class="cl-row"><span class="cl-item">Adequate lighting throughout</span><div class="cl-status"><label><input type="radio" name="l3" value="OK"> OK</label><label><input type="radio" name="l3" value="Concern"> Concern</label></div></div>
+      <div class="cl-row"><span class="cl-item">Electrical cords not a trip hazard</span><div class="cl-status"><label><input type="radio" name="l4" value="OK"> OK</label><label><input type="radio" name="l4" value="Concern"> Concern</label></div></div>
+      <div class="cl-row"><span class="cl-item">Frequently used items within easy reach</span><div class="cl-status"><label><input type="radio" name="l5" value="OK"> OK</label><label><input type="radio" name="l5" value="Concern"> Concern</label></div></div>
+      <div class="cl-row"><span class="cl-item">Seating appropriate height and stable</span><div class="cl-status"><label><input type="radio" name="l6" value="OK"> OK</label><label><input type="radio" name="l6" value="Concern"> Concern</label></div></div>
+      <div class="fg" style="margin-top:12px"><label>Living area notes</label><textarea name="notes_living" placeholder="Specific concerns or observations"></textarea></div>
+    </div>
+
+    <div class="fs">
+      <div class="fst">Bathroom</div>
+      <div class="cl-row"><span class="cl-item">Grab bars present at toilet</span><div class="cl-status"><label><input type="radio" name="b1" value="Yes"> Yes</label><label><input type="radio" name="b1" value="No — recommended"> No</label></div></div>
+      <div class="cl-row"><span class="cl-item">Grab bars present in shower / tub</span><div class="cl-status"><label><input type="radio" name="b2" value="Yes"> Yes</label><label><input type="radio" name="b2" value="No — recommended"> No</label></div></div>
+      <div class="cl-row"><span class="cl-item">Non-slip mat in shower / tub</span><div class="cl-status"><label><input type="radio" name="b3" value="Yes"> Yes</label><label><input type="radio" name="b3" value="No — recommended"> No</label></div></div>
+      <div class="cl-row"><span class="cl-item">Non-slip mat on bathroom floor</span><div class="cl-status"><label><input type="radio" name="b4" value="Yes"> Yes</label><label><input type="radio" name="b4" value="No — recommended"> No</label></div></div>
+      <div class="cl-row"><span class="cl-item">Shower seat or bench available</span><div class="cl-status"><label><input type="radio" name="b5" value="Yes"> Yes</label><label><input type="radio" name="b5" value="No — recommended"> No</label></div></div>
+      <div class="cl-row"><span class="cl-item">Water heater temp ≤120°F (scald prevention)</span><div class="cl-status"><label><input type="radio" name="b6" value="OK"> OK</label><label><input type="radio" name="b6" value="Unknown"> Unknown</label></div></div>
+      <div class="fg" style="margin-top:12px"><label>Bathroom notes</label><textarea name="notes_bathroom" placeholder="Specific concerns or modifications needed"></textarea></div>
+    </div>
+
+    <div class="fs">
+      <div class="fst">Bedroom</div>
+      <div class="cl-row"><span class="cl-item">Bed height appropriate for safe transfer</span><div class="cl-status"><label><input type="radio" name="br1" value="OK"> OK</label><label><input type="radio" name="br1" value="Concern"> Concern</label></div></div>
+      <div class="cl-row"><span class="cl-item">Path from bed to bathroom clear and lit</span><div class="cl-status"><label><input type="radio" name="br2" value="OK"> OK</label><label><input type="radio" name="br2" value="Concern"> Concern</label></div></div>
+      <div class="cl-row"><span class="cl-item">Night light present</span><div class="cl-status"><label><input type="radio" name="br3" value="Yes"> Yes</label><label><input type="radio" name="br3" value="No — recommended"> No</label></div></div>
+      <div class="cl-row"><span class="cl-item">Phone or call device within reach of bed</span><div class="cl-status"><label><input type="radio" name="br4" value="Yes"> Yes</label><label><input type="radio" name="br4" value="No — recommended"> No</label></div></div>
+      <div class="fg" style="margin-top:12px"><label>Bedroom notes</label><textarea name="notes_bedroom"></textarea></div>
+    </div>
+
+    <div class="fs">
+      <div class="fst">Kitchen</div>
+      <div class="cl-row"><span class="cl-item">Stove / oven — safe use observed or confirmed</span><div class="cl-status"><label><input type="radio" name="k1" value="OK"> OK</label><label><input type="radio" name="k1" value="Concern"> Concern</label></div></div>
+      <div class="cl-row"><span class="cl-item">Frequently used items accessible without climbing</span><div class="cl-status"><label><input type="radio" name="k2" value="OK"> OK</label><label><input type="radio" name="k2" value="Concern"> Concern</label></div></div>
+      <div class="cl-row"><span class="cl-item">Non-slip mat in front of sink</span><div class="cl-status"><label><input type="radio" name="k3" value="Yes"> Yes</label><label><input type="radio" name="k3" value="No"> No</label></div></div>
+      <div class="fg" style="margin-top:12px"><label>Kitchen notes</label><textarea name="notes_kitchen"></textarea></div>
+    </div>
+
+    <div class="fs">
+      <div class="fst">Emergency preparedness</div>
+      <div class="cl-row"><span class="cl-item">Smoke detectors present and functional</span><div class="cl-status"><label><input type="radio" name="e1" value="Yes"> Yes</label><label><input type="radio" name="e1" value="No"> No</label></div></div>
+      <div class="cl-row"><span class="cl-item">Carbon monoxide detector present</span><div class="cl-status"><label><input type="radio" name="e2" value="Yes"> Yes</label><label><input type="radio" name="e2" value="No"> No</label></div></div>
+      <div class="cl-row"><span class="cl-item">Medical alert device (e.g. Life Alert)</span><div class="cl-status"><label><input type="radio" name="e3" value="Yes"> Yes</label><label><input type="radio" name="e3" value="No"> No</label></div></div>
+      <div class="cl-row"><span class="cl-item">Emergency contact list visible / accessible</span><div class="cl-status"><label><input type="radio" name="e4" value="Yes"> Yes</label><label><input type="radio" name="e4" value="No"> No</label></div></div>
+    </div>
+
+    <div class="fs">
+      <div class="fst">Recommendations & action items</div>
+      <div class="fg"><label>High-priority modifications needed</label><textarea name="high_priority" placeholder="Items requiring immediate attention — safety risks that need addressing before next visit"></textarea></div>
+      <div class="fg"><label>Recommended modifications (non-urgent)</label><textarea name="recommended_mods" placeholder="Grab bars, night lights, rug removal, furniture rearrangement, stair lifts, etc."></textarea></div>
+      <div class="fg"><label>Community resources or referrals identified</label><textarea name="resources" placeholder="Home modification programs, equipment suppliers, OT referral, etc."></textarea></div>
+      <div class="fg"><label>Overall home safety impression</label>
+        <select name="overall_impression"><option value="">Select</option><option>Safe with current setup</option><option>Safe with minor modifications</option><option>Significant concerns — modifications needed</option><option>Unsafe — immediate action required</option></select>
+      </div>
+      <div class="fg"><label>Coordinator notes</label><textarea name="coord_notes" placeholder="Any additional observations or context not captured above"></textarea></div>
+    </div>
+
+    <div class="sr">
+      <button type="button" class="bs" id="submitBtn">Save Assessment</button>
+      <button type="button" class="bp" onclick="window.print()">Print / Save PDF</button>
+      <p class="fn2">Internal document — Avelis Private Care</p>
+    </div>
+  </form>
+  <div class="sm" id="successMsg"><h3><em style="font-style:italic;color:var(--gold)">Assessment saved</em>.</h3><p>Home safety assessment logged successfully.</p></div>
+</div>
+<script>
+const EP='https://script.google.com/macros/s/AKfycbz9fertVdWO0pQ5ivxow8LxAYsDlXabGLvwuU8t03JSFrU9brh2_43Gb4hEMTHlksnM/exec';
+document.getElementById('submitBtn').addEventListener('click',function(){
+  const f=document.getElementById('theForm');
+  if(!f.client_name.value.trim()){alert('Please enter the client name.');return;}
+  this.textContent='Saving…';this.disabled=true;
+  const d={form_type:'03_home_safety',submitted:new Date().toISOString()};
+  new FormData(f).forEach((v,k)=>d[k]=v);
+  const x=new XMLHttpRequest();x.open('POST',EP);x.setRequestHeader('Content-Type','application/json');
+  x.onreadystatechange=function(){if(x.readyState===4){f.style.display='none';document.getElementById('successMsg').style.display='block';}};
+  x.onerror=function(){f.style.display='none';document.getElementById('successMsg').style.display='block';};
+  x.send(JSON.stringify(d));
+});
+</script>
+</body>
+</html>

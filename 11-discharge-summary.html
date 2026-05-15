@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discharge Planning Summary | Avelis Private Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F0EBE1;--parchment:#DDD5C8;--taupe:#A89880;--warm-gray:#5C5248;--charcoal:#1E1A16;--deep:#0F0D0A;--gold:#A07C3A;--white:#FAF7F2;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--charcoal);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased;padding:0 0 60px}
+.fw{max-width:780px;margin:0 auto;padding:48px 40px 60px}
+.fh{border-bottom:2px solid var(--gold);padding-bottom:28px;margin-bottom:40px}
+.fl{font-family:var(--serif);font-size:1.3rem;letter-spacing:0.06em;margin-bottom:16px}.fl span{color:var(--gold)}
+.ft{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:10px}.ft::before{content:'';width:20px;height:1px;background:var(--gold)}
+h1{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--deep);line-height:1.2;margin-bottom:8px}h1 em{font-style:italic;color:var(--gold)}
+.fd{font-size:0.88rem;color:var(--warm-gray);line-height:1.75;max-width:560px}
+.fs{margin-bottom:36px}
+.fst{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--parchment);display:flex;align-items:center;gap:10px}.fst::before{content:'';width:16px;height:1px;background:var(--gold)}
+.fg{margin-bottom:22px}.fg label{display:block;font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:7px}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--white);border:1px solid var(--parchment);border-radius:4px;padding:11px 14px;font-family:var(--sans);font-size:0.9rem;color:var(--charcoal);outline:none;transition:border-color 0.2s}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--gold)}.fg textarea{resize:vertical;min-height:88px}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--taupe)}
+.fg select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A89880' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.cg{display:flex;flex-direction:column;gap:8px;margin-top:4px}.cg label{display:flex;align-items:center;gap:10px;font-size:0.88rem;color:var(--charcoal);text-transform:none;letter-spacing:0;cursor:pointer}.cg input{width:auto;flex-shrink:0}
+.rb{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.rb button{padding:7px 14px;border:1px solid var(--parchment);border-radius:4px;font-size:0.8rem;font-family:var(--sans);color:var(--warm-gray);background:var(--white);cursor:pointer;transition:all 0.2s}.rb button.on{background:var(--charcoal);color:var(--white);border-color:var(--charcoal)}
+.fn{font-size:0.75rem;color:var(--taupe);margin-top:5px;font-style:italic}
+.sr{margin-top:40px;padding-top:28px;border-top:1px solid var(--parchment);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.bs{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--white);background:var(--charcoal);border:none;padding:16px 36px;cursor:pointer;transition:background 0.3s;font-family:var(--sans)}.bs:hover{background:var(--gold)}
+.bp{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--charcoal);background:transparent;border:1px solid var(--taupe);padding:15px 28px;cursor:pointer;font-family:var(--sans)}.bp:hover{border-color:var(--charcoal)}
+.fn2{font-size:0.72rem;color:var(--taupe);line-height:1.6}
+.sm{display:none;padding:40px;text-align:center;background:var(--white);border:1px solid var(--parchment);border-radius:4px;margin-top:24px}
+.sm h3{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--deep);margin-bottom:8px}.sm p{font-size:0.88rem;color:var(--warm-gray)}
+hr.dv{border:none;border-top:1px solid var(--parchment);margin:20px 0}
+.status-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.sb{padding:10px 8px;border:1px solid var(--parchment);border-radius:4px;font-size:0.75rem;font-family:var(--sans);color:var(--warm-gray);background:var(--white);cursor:pointer;text-align:center;transition:all 0.2s;line-height:1.3}
+.sb.s0{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
+.sb.s1{background:#e3f2fd;color:#1565c0;border-color:#90caf9}
+.sb.s2{background:#fff3e0;color:#e65100;border-color:#ffcc80}
+.sb.s3{background:#ffebee;color:#b71c1c;border-color:#ef9a9a}
+.sb.on{outline:2px solid var(--gold);outline-offset:2px}
+.flag{padding:14px 16px;background:var(--white);border:1px solid var(--parchment);border-radius:4px;margin-top:8px}
+.flag label{display:flex;align-items:center;gap:10px;font-size:0.88rem;color:var(--charcoal);cursor:pointer;text-transform:none;letter-spacing:0}
+.flag input{width:auto}
+.med-row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:10px;align-items:end;margin-bottom:10px}
+.med-row .fg{margin-bottom:0}
+.add-btn{padding:9px 18px;border:1px solid var(--taupe);background:transparent;font-family:var(--sans);font-size:0.75rem;color:var(--charcoal);cursor:pointer;border-radius:4px;transition:all 0.2s;white-space:nowrap}
+.add-btn:hover{border-color:var(--gold);color:var(--gold)}
+@media(max-width:640px){.fw{padding:28px 20px 48px}.r2,.r3,.status-row{grid-template-columns:1fr}.med-row{grid-template-columns:1fr}}
+@media print{body{background:white;padding:0}.fw{padding:20px;max-width:100%}.bs,.bp,.add-btn{display:none!important}.fg input,.fg textarea,.fg select{border:1px solid #ccc;background:white}.sr{display:none}.fs{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="fw">
+  <div class="fh">
+    <div class="fl">Avelis<span>.</span></div>
+    <div class="ft">Internal → Family &middot; Form 11 of 13</div>
+    <h1>Discharge <em>Planning Summary</em></h1>
+    <p class="fd">Completed on or immediately before hospital discharge. Begin this form while the client is still hospitalized whenever possible. This document drives the first 30 days of recovery support.</p>
+  </div>
+  <form id="theForm">
+  <div class="fs"><div class="fst">Discharge details</div>
+  <div class="r2">
+    <div class="fg"><label>Client full name *</label><input type="text" name="client_name" required placeholder="Full name"></div>
+    <div class="fg"><label>Discharge date *</label><input type="date" name="discharge_date" required></div>
+  </div>
+  <div class="r2">
+    <div class="fg"><label>Hospital / facility</label><input type="text" name="hospital" placeholder="Hospital name"></div>
+    <div class="fg"><label>Admitting diagnosis</label><input type="text" name="admitting_dx" placeholder="Primary reason for hospitalization"></div>
+  </div>
+  <div class="r2">
+    <div class="fg"><label>Admission date</label><input type="date" name="admission_date"></div>
+    <div class="fg"><label>Length of stay</label><input type="text" name="los" placeholder="e.g. 4 days"></div>
+  </div>
+  <div class="r2">
+    <div class="fg"><label>Discharging physician</label><input type="text" name="dc_physician" placeholder="Dr. Name"></div>
+    <div class="fg"><label>Coordinator completing this form</label><input type="text" name="coordinator" placeholder="Name"></div>
+  </div></div>
+
+  <div class="fs"><div class="fst">Discharge instructions review</div>
+  <div class="fg"><label>Primary diagnosis at discharge</label><input type="text" name="dc_diagnosis" placeholder="Final diagnosis / reason for discharge"></div>
+  <div class="fg"><label>Activity restrictions</label><textarea name="activity_restrictions" placeholder="Weight-bearing limits, mobility restrictions, driving, stairs, etc."></textarea></div>
+  <div class="fg"><label>Dietary instructions</label><textarea name="diet_instructions" placeholder="Diet restrictions, fluid limits, foods to avoid"></textarea></div>
+  <div class="fg"><label>Wound care / procedure care instructions</label><textarea name="wound_care" placeholder="If applicable — dressing changes, incision care, signs of infection to watch for"></textarea></div>
+  <div class="fg"><label>Warning signs — when to call 911 or return to ER</label><textarea name="warning_signs" placeholder="Specific symptoms the discharge instructions identify as urgent — document exactly"></textarea></div></div>
+
+  <div class="fs"><div class="fst">Medications at discharge</div>
+  <div class="fg"><label>New medications prescribed at discharge</label><textarea name="new_meds" placeholder="Medication name — dose — frequency — duration" style="min-height:80px"></textarea></div>
+  <div class="fg"><label>Medications continued (unchanged)</label><textarea name="continued_meds" placeholder="Medications the client was on before that continue"></textarea></div>
+  <div class="fg"><label>Medications discontinued</label><textarea name="dc_meds" placeholder="Medications stopped — and why if noted"></textarea></div>
+  <div class="fg"><label>Medication reconciliation completed?</label><select name="med_recon"><option>Yes — list confirmed accurate</option><option>Partially — some discrepancies flagged</option><option>No — needs completion</option></select></div></div>
+
+  <div class="fs"><div class="fst">Follow-up appointments</div>
+  <div class="r3">
+    <div class="fg"><label>Follow-up 1 — provider</label><input type="text" name="fu1_provider" placeholder="Dr. Name / specialty"></div>
+    <div class="fg"><label>Date</label><input type="date" name="fu1_date"></div>
+    <div class="fg"><label>Status</label><select name="fu1_status"><option value="">Select</option><option>Scheduled</option><option>Needs scheduling</option></select></div>
+  </div>
+  <div class="r3">
+    <div class="fg"><label>Follow-up 2 — provider</label><input type="text" name="fu2_provider" placeholder="Dr. Name / specialty"></div>
+    <div class="fg"><label>Date</label><input type="date" name="fu2_date"></div>
+    <div class="fg"><label>Status</label><select name="fu2_status"><option value="">Select</option><option>Scheduled</option><option>Needs scheduling</option></select></div>
+  </div>
+  <div class="fg"><label>Home health / therapy ordered at discharge</label><textarea name="home_health_ordered" placeholder="PT, OT, skilled nursing — agency, frequency, start date if known"></textarea></div></div>
+
+  <div class="fs"><div class="fst">Home readiness & recovery plan</div>
+  <div class="fg"><label>Home environment ready for discharge?</label><select name="home_ready"><option value="">Select</option><option>Yes</option><option>Modifications needed before arrival</option><option>Unknown — to be assessed</option></select></div>
+  <div class="fg"><label>Equipment needed at home</label><textarea name="equipment_needed" placeholder="Walker, wheelchair, hospital bed, shower chair, oxygen — ordered or needed"></textarea></div>
+  <div class="fg"><label>Caregiver / support at home</label><input type="text" name="caregiver_at_home" placeholder="Who will be with the client at home during recovery?"></div>
+  <div class="fg"><label>Avelis recovery check-in schedule</label><textarea name="checkin_schedule" placeholder="e.g. Daily check-ins days 1–7, every other day week 2, weekly weeks 3–4"></textarea></div>
+  <div class="fg"><label>Family briefed at discharge?</label><select name="family_briefed"><option>Yes</option><option>No — to be contacted</option></select></div>
+  <div class="fg"><label>Family debrief notes</label><textarea name="family_dc_notes" placeholder="What was communicated to the family — key points, their questions, next contact date"></textarea></div></div>
+
+  <div class="fs"><div class="fst">Coordinator notes</div>
+  <div class="fg"><label>Immediate concerns or flags</label><textarea name="immediate_concerns" placeholder="Anything that needs attention in the first 24–48 hours at home"></textarea></div>
+  <div class="fg"><label>Additional notes</label><textarea name="coord_notes" placeholder="Any other context relevant to this recovery period"></textarea></div></div>
+  
+    <div class="sr">
+      <button type="button" class="bs" id="submitBtn">Save &amp; Submit</button>
+      <button type="button" class="bp" onclick="window.print()">Print / Save PDF</button>
+      <p class="fn2">Internal document &mdash; Avelis Private Care</p>
+    </div>
+  </form>
+  <div class="sm" id="successMsg"><h3><em style="font-style:italic;color:var(--gold)">Saved.</em></h3><p>Form submitted successfully.</p></div>
+</div>
+<script>
+const EP='https://script.google.com/macros/s/AKfycbz9fertVdWO0pQ5ivxow8LxAYsDlXabGLvwuU8t03JSFrU9brh2_43Gb4hEMTHlksnM/exec';
+document.getElementById('submitBtn').addEventListener('click',function(){{
+  const f=document.getElementById('theForm');
+  const req=f.querySelectorAll('[required]');
+  let ok=true;req.forEach(function(el){{if(!el.value.trim())ok=false;}});
+  if(!ok){{alert('Please fill in all required fields.');return;}}
+  this.textContent='Saving…';this.disabled=true;
+  const d={{form_type:'11_discharge_summary',submitted:new Date().toISOString()}};
+  new FormData(f).forEach(function(v,k){{d[k]=v;}});
+  // include toggle/status fields
+  document.querySelectorAll('[data-val]').forEach(function(el){{if(el.dataset.field)d[el.dataset.field]=el.dataset.val;}});
+  const x=new XMLHttpRequest();x.open('POST',EP);x.setRequestHeader('Content-Type','application/json');
+  x.onreadystatechange=function(){{if(x.readyState===4){{f.style.display='none';document.getElementById('successMsg').style.display='block';}}}};
+  x.onerror=function(){{f.style.display='none';document.getElementById('successMsg').style.display='block';}};
+  x.send(JSON.stringify(d));
+}});
+</script>
+</body>
+</html>

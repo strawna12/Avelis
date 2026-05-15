@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Intake Profile | Avelis Private Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F0EBE1;--parchment:#DDD5C8;--taupe:#A89880;--warm-gray:#5C5248;--charcoal:#1E1A16;--deep:#0F0D0A;--gold:#A07C3A;--gold-light:#C49A52;--white:#FAF7F2;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--charcoal);font-family:var(--sans);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;padding:0 0 60px}
+.form-wrap{max-width:780px;margin:0 auto;padding:48px 40px 60px}
+.form-header{border-bottom:2px solid var(--gold);padding-bottom:28px;margin-bottom:40px}
+.form-logo{font-family:var(--serif);font-size:1.3rem;color:var(--charcoal);letter-spacing:0.06em;margin-bottom:16px}
+.form-logo span{color:var(--gold)}
+.form-type{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.form-type::before{content:'';width:20px;height:1px;background:var(--gold)}
+.form-title{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--deep);line-height:1.2;margin-bottom:8px}
+.form-title em{font-style:italic;color:var(--gold)}
+.form-desc{font-size:0.88rem;color:var(--warm-gray);line-height:1.75;max-width:560px}
+.form-section{margin-bottom:36px}
+.form-section-title{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--parchment);display:flex;align-items:center;gap:10px}
+.form-section-title::before{content:'';width:16px;height:1px;background:var(--gold)}
+.field-group{margin-bottom:22px}
+.field-group label{display:block;font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:7px}
+.field-group input,.field-group textarea,.field-group select{width:100%;background:var(--white);border:1px solid var(--parchment);border-radius:4px;padding:11px 14px;font-family:var(--sans);font-size:0.9rem;color:var(--charcoal);outline:none;transition:border-color 0.2s}
+.field-group input:focus,.field-group textarea:focus,.field-group select:focus{border-color:var(--gold)}
+.field-group textarea{resize:vertical;min-height:90px}
+.field-group input::placeholder,.field-group textarea::placeholder{color:var(--taupe)}
+.field-group select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A89880' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.checkbox-group{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.checkbox-group label{display:flex;align-items:center;gap:10px;font-size:0.88rem;color:var(--charcoal);text-transform:none;letter-spacing:0;cursor:pointer}
+.checkbox-group input{width:auto;flex-shrink:0}
+.field-note{font-size:0.75rem;color:var(--taupe);margin-top:5px;font-style:italic}
+.submit-row{margin-top:40px;padding-top:28px;border-top:1px solid var(--parchment);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.btn-submit{font-size:0.7rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--white);background:var(--charcoal);border:none;padding:16px 36px;cursor:pointer;transition:background 0.3s;font-family:var(--sans)}
+.btn-submit:hover{background:var(--gold)}
+.btn-print{font-size:0.7rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--charcoal);background:transparent;border:1px solid var(--taupe);padding:15px 28px;cursor:pointer;font-family:var(--sans);transition:all 0.2s}
+.btn-print:hover{border-color:var(--charcoal)}
+.form-note{font-size:0.72rem;color:var(--taupe);line-height:1.6}
+.success-msg{display:none;padding:40px;text-align:center;background:var(--white);border:1px solid var(--parchment);border-radius:4px;margin-top:24px}
+.success-msg h3{font-family:var(--serif);font-size:1.6rem;font-weight:300;color:var(--deep);margin-bottom:8px}
+.success-msg p{font-size:0.88rem;color:var(--warm-gray)}
+hr.divider{border:none;border-top:1px solid var(--parchment);margin:28px 0}
+@media(max-width:640px){.form-wrap{padding:28px 20px 48px}.field-row,.field-row-3{grid-template-columns:1fr}}
+@media print{body{background:white;padding:0}.form-wrap{padding:20px;max-width:100%}.btn-submit,.btn-print{display:none!important}.field-group input,.field-group textarea,.field-group select{border:1px solid #ccc;background:white}.submit-row{display:none}.form-section{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="form-wrap">
+  <div class="form-header">
+    <div class="form-logo">Avelis<span>.</span></div>
+    <div class="form-type">Client Intake · Form 01 of 13</div>
+    <h1 class="form-title">Client Intake <em>Profile</em></h1>
+    <p class="form-desc">Please complete this form as thoroughly as possible. All information is held in strict confidence and used solely to build your loved one's personalized support plan. There are no right or wrong answers — just come as you are.</p>
+  </div>
+
+  <form id="intakeForm">
+
+    <div class="form-section">
+      <div class="form-section-title">About the client</div>
+      <div class="field-row">
+        <div class="field-group"><label>Client first name *</label><input type="text" name="client_first" placeholder="First name" required></div>
+        <div class="field-group"><label>Client last name *</label><input type="text" name="client_last" placeholder="Last name" required></div>
+      </div>
+      <div class="field-row-3">
+        <div class="field-group"><label>Date of birth</label><input type="date" name="dob"></div>
+        <div class="field-group"><label>Age</label><input type="number" name="age" placeholder="e.g. 74"></div>
+        <div class="field-group"><label>Biological sex</label>
+          <select name="sex"><option value="">Select</option><option>Male</option><option>Female</option><option>Prefer not to say</option></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label>Home address</label><input type="text" name="address" placeholder="Street address"></div>
+        <div class="field-group"><label>City / ZIP</label><input type="text" name="city_zip" placeholder="St. Petersburg, FL 33701"></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label>Client phone (if applicable)</label><input type="tel" name="client_phone" placeholder="(941) 000-0000"></div>
+        <div class="field-group"><label>Client email (if applicable)</label><input type="email" name="client_email" placeholder="email@example.com"></div>
+      </div>
+      <div class="field-group"><label>Living situation</label>
+        <select name="living_situation">
+          <option value="">Select</option>
+          <option>Lives alone</option>
+          <option>Lives with spouse / partner</option>
+          <option>Lives with adult child</option>
+          <option>Lives with other family member</option>
+          <option>Assisted living facility</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field-group"><label>Primary language</label><input type="text" name="language" placeholder="e.g. English, Spanish"></div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Primary contact / family</div>
+      <div class="field-row">
+        <div class="field-group"><label>Contact full name *</label><input type="text" name="contact_name" placeholder="Full name" required></div>
+        <div class="field-group"><label>Relationship to client</label><input type="text" name="relationship" placeholder="e.g. Daughter, Son, Spouse"></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label>Contact phone *</label><input type="tel" name="contact_phone" placeholder="(941) 000-0000" required></div>
+        <div class="field-group"><label>Contact email *</label><input type="email" name="contact_email" placeholder="email@example.com" required></div>
+      </div>
+      <div class="field-group"><label>Contact location</label><input type="text" name="contact_location" placeholder="City, State — especially if out of area"></div>
+      <div class="field-group"><label>Preferred contact method</label>
+        <select name="contact_pref"><option value="">Select</option><option>Phone call</option><option>Text message</option><option>Email</option><option>Any</option></select>
+      </div>
+      <hr class="divider">
+      <div class="field-group"><label>Secondary contact name</label><input type="text" name="contact2_name" placeholder="Optional — additional family member"></div>
+      <div class="field-row">
+        <div class="field-group"><label>Secondary contact phone</label><input type="tel" name="contact2_phone" placeholder="(941) 000-0000"></div>
+        <div class="field-group"><label>Secondary contact relationship</label><input type="text" name="contact2_rel" placeholder="e.g. Son, Sibling"></div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Health overview</div>
+      <div class="field-group"><label>Primary diagnosis / main health condition</label><input type="text" name="primary_dx" placeholder="e.g. Parkinson's disease, Type 2 diabetes, CHF"></div>
+      <div class="field-group"><label>Additional diagnoses or chronic conditions</label><textarea name="other_dx" placeholder="List any other conditions being managed"></textarea></div>
+      <div class="field-group"><label>Recent hospitalizations or surgeries (past 12 months)</label><textarea name="hospitalizations" placeholder="Include dates and reason if known"></textarea></div>
+      <div class="field-group"><label>Current mobility status</label>
+        <select name="mobility">
+          <option value="">Select</option>
+          <option>Fully independent</option>
+          <option>Independent with assistive device (cane, walker)</option>
+          <option>Needs some assistance</option>
+          <option>Needs significant assistance</option>
+          <option>Non-ambulatory / wheelchair</option>
+        </select>
+      </div>
+      <div class="field-group"><label>Cognitive status</label>
+        <select name="cognition">
+          <option value="">Select</option>
+          <option>No known cognitive impairment</option>
+          <option>Mild memory concerns / MCI</option>
+          <option>Diagnosed dementia — early stage</option>
+          <option>Diagnosed dementia — moderate stage</option>
+          <option>Diagnosed dementia — advanced stage</option>
+        </select>
+      </div>
+      <div class="field-group"><label>Known allergies</label><input type="text" name="allergies" placeholder="Medications, foods, environmental"></div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Current medications</div>
+      <p class="field-note" style="margin-bottom:14px">List current medications as best you can. We will complete a full medication record separately — this gives us a starting point.</p>
+      <div class="field-group"><label>Current medications</label><textarea name="medications" placeholder="Medication name — dose — frequency (e.g. Metformin 500mg twice daily)" style="min-height:120px"></textarea></div>
+      <div class="field-group"><label>Pharmacy name & phone</label><input type="text" name="pharmacy" placeholder="e.g. Walgreens — (727) 000-0000"></div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Current providers</div>
+      <div class="field-group"><label>Primary care physician (name & practice)</label><input type="text" name="pcp" placeholder="Dr. Name — Practice name — Phone"></div>
+      <div class="field-group"><label>Specialists (list all)</label><textarea name="specialists" placeholder="e.g. Cardiologist: Dr. Smith — Tampa Heart Clinic — (813) 000-0000"></textarea></div>
+      <div class="field-group"><label>Current home health agency (if any)</label><input type="text" name="home_health" placeholder="Agency name — services provided"></div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Goals & priorities</div>
+      <div class="field-group"><label>What is the primary reason for reaching out to Avelis?</label><textarea name="reason" placeholder="In your own words — what brought you here and what you're hoping we can help with"></textarea></div>
+      <div class="field-group"><label>What matters most to your loved one day to day?</label><textarea name="priorities" placeholder="Activities, independence, comfort, connection — anything that shapes what a good day looks like for them"></textarea></div>
+      <div class="field-group"><label>What are you most concerned about right now?</label><textarea name="concerns" placeholder="Safety, isolation, medication management, falls, coordination — whatever is keeping you up at night"></textarea></div>
+      <div class="field-group"><label>Has your loved one expressed preferences about their care?</label><textarea name="client_prefs" placeholder="Any known wishes, preferences, or things they've specifically asked for or refused"></textarea></div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Insurance & membership</div>
+      <div class="field-row">
+        <div class="field-group"><label>Primary insurance</label><input type="text" name="insurance" placeholder="e.g. Medicare, Blue Cross, United"></div>
+        <div class="field-group"><label>Long-term care insurance</label><input type="text" name="ltc_insurance" placeholder="Provider name if applicable"></div>
+      </div>
+      <div class="field-group"><label>Membership plan</label>
+        <select name="membership_tier">
+          <option value="">Select</option>
+          <option>Foundation — Essentials ($249/mo)</option>
+          <option>Comprehensive ($549/mo)</option>
+          <option>Private Concierge ($1,100/mo)</option>
+          <option>À la carte / not yet decided</option>
+        </select>
+      </div>
+      <div class="field-group"><label>Anything else we should know before we begin?</label><textarea name="other_notes" placeholder="Anything not covered above that would help us understand your loved one or your family's situation"></textarea></div>
+    </div>
+
+    <div class="submit-row">
+      <button type="button" class="btn-submit" id="submitBtn">Submit Intake Form</button>
+      <button type="button" class="btn-print" onclick="window.print()">Print / Save PDF</button>
+      <p class="form-note">Your information is held in strict confidence.<br>We will be in touch within one business day.</p>
+    </div>
+    <p id="formError" style="display:none;color:#8B3A2E;font-size:0.78rem;margin-top:10px">Please fill in all required fields before submitting.</p>
+  </form>
+
+  <div class="success-msg" id="successMsg">
+    <div style="width:48px;height:48px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+      <svg width="18" height="18" viewBox="0 0 24 24" stroke="var(--gold)" stroke-width="1.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h3>Thank you for <em style="font-style:italic;color:var(--gold)">reaching out</em>.</h3>
+    <p>We've received your intake form and will be in touch within one business day to schedule your onboarding conversation.</p>
+  </div>
+</div>
+
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbz9fertVdWO0pQ5ivxow8LxAYsDlXabGLvwuU8t03JSFrU9brh2_43Gb4hEMTHlksnM/exec';
+document.getElementById('submitBtn').addEventListener('click',function(){
+  const form=document.getElementById('intakeForm');
+  const req=['client_first','client_last','contact_name','contact_phone','contact_email'];
+  const missing=req.filter(n=>!form[n].value.trim());
+  if(missing.length){document.getElementById('formError').style.display='block';return;}
+  document.getElementById('formError').style.display='none';
+  this.textContent='Submitting…';this.disabled=true;this.style.opacity='0.7';
+  const data={form_type:'01_client_intake',submitted:new Date().toISOString()};
+  new FormData(form).forEach((v,k)=>data[k]=v);
+  const xhr=new XMLHttpRequest();
+  xhr.open('POST',ENDPOINT);xhr.setRequestHeader('Content-Type','application/json');
+  xhr.onreadystatechange=function(){if(xhr.readyState===4){form.style.display='none';document.getElementById('successMsg').style.display='block';}};
+  xhr.onerror=function(){form.style.display='none';document.getElementById('successMsg').style.display='block';};
+  xhr.send(JSON.stringify(data));
+});
+</script>
+</body>
+</html>
