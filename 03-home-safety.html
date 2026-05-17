@@ -49,7 +49,7 @@ hr.dv{border:none;border-top:1px solid var(--parchment);margin:20px 0}
     <div class="fl">Avelis<span>.</span></div>
     <div class="ft">Internal · Form 03 of 13</div>
     <h1>Home Safety <em>Assessment</em></h1>
-    <p class="fd">Completed during the initial in-home visit. Document findings room by room, flag concerns, and record recommended modifications. This assessment feeds directly into the client's support plan.</p>
+    <p class="fd">Completed during the initial assessment — conducted virtually via video call (FaceTime, Zoom, or Google Meet) or in person when applicable. During a virtual assessment, the client or a trusted person of their choosing walks through the home on camera while the coordinator observes, asks questions, and documents findings in real time. This assessment feeds directly into the client's support plan.</p>
   </div>
   <form id="theForm">
 
@@ -63,18 +63,18 @@ hr.dv{border:none;border-top:1px solid var(--parchment);margin:20px 0}
         <div class="fg"><label>Coordinator conducting assessment</label><input type="text" name="coordinator" placeholder="Name"></div>
         <div class="fg"><label>Client present during assessment?</label><select name="client_present"><option>Yes</option><option>No — family present</option><option>No — coordinator only</option></select></div>
       </div>
-      <div class="fg"><label>Home type</label>
-        <select name="home_type"><option value="">Select</option><option>Single-family home</option><option>Apartment / condo</option><option>Mobile home</option><option>Assisted living unit</option><option>Other</option></select>
+      <div class="fg"><label>Client state / location</label>
+        <input type="text" name="client_location" placeholder="e.g. Phoenix, AZ or St. Petersburg, FL">
       </div>
     </div>
 
     <div class="fs">
       <div class="fst">General / entryways</div>
-      <div class="cl-row"><span class="cl-item">Adequate exterior lighting at entry</span><div class="cl-status"><label><input type="radio" name="g1" value="OK"> OK</label><label><input type="radio" name="g1" value="Concern"> Concern</label></div></div>
+      <div class="cl-row"><span class="cl-item">Adequate exterior lighting at entry (observed on video or reported)</span><div class="cl-status"><label><input type="radio" name="g1" value="OK"> OK</label><label><input type="radio" name="g1" value="Concern"> Concern</label></div></div>
       <div class="cl-row"><span class="cl-item">Steps / ramp in good condition</span><div class="cl-status"><label><input type="radio" name="g2" value="OK"> OK</label><label><input type="radio" name="g2" value="Concern"> Concern</label><label><input type="radio" name="g2" value="N/A"> N/A</label></div></div>
       <div class="cl-row"><span class="cl-item">Handrails present and secure on all steps</span><div class="cl-status"><label><input type="radio" name="g3" value="OK"> OK</label><label><input type="radio" name="g3" value="Concern"> Concern</label><label><input type="radio" name="g3" value="N/A"> N/A</label></div></div>
       <div class="cl-row"><span class="cl-item">Door thresholds not a trip hazard</span><div class="cl-status"><label><input type="radio" name="g4" value="OK"> OK</label><label><input type="radio" name="g4" value="Concern"> Concern</label></div></div>
-      <div class="fg" style="margin-top:12px"><label>Entry / general notes</label><textarea name="notes_entry" placeholder="Any specific concerns or observations at entry"></textarea></div>
+      <div class="fg" style="margin-top:12px"><label>Entry / general notes — include any limitations of virtual observation</label><textarea name="notes_entry" placeholder="Any specific concerns or observations at entry"></textarea></div>
     </div>
 
     <div class="fs">
@@ -85,7 +85,7 @@ hr.dv{border:none;border-top:1px solid var(--parchment);margin:20px 0}
       <div class="cl-row"><span class="cl-item">Electrical cords not a trip hazard</span><div class="cl-status"><label><input type="radio" name="l4" value="OK"> OK</label><label><input type="radio" name="l4" value="Concern"> Concern</label></div></div>
       <div class="cl-row"><span class="cl-item">Frequently used items within easy reach</span><div class="cl-status"><label><input type="radio" name="l5" value="OK"> OK</label><label><input type="radio" name="l5" value="Concern"> Concern</label></div></div>
       <div class="cl-row"><span class="cl-item">Seating appropriate height and stable</span><div class="cl-status"><label><input type="radio" name="l6" value="OK"> OK</label><label><input type="radio" name="l6" value="Concern"> Concern</label></div></div>
-      <div class="fg" style="margin-top:12px"><label>Living area notes</label><textarea name="notes_living" placeholder="Specific concerns or observations"></textarea></div>
+      <div class="fg" style="margin-top:12px"><label>Living area notes — note anything that was difficult to observe virtually</label><textarea name="notes_living" placeholder="Specific concerns or observations"></textarea></div>
     </div>
 
     <div class="fs">
@@ -96,7 +96,7 @@ hr.dv{border:none;border-top:1px solid var(--parchment);margin:20px 0}
       <div class="cl-row"><span class="cl-item">Non-slip mat on bathroom floor</span><div class="cl-status"><label><input type="radio" name="b4" value="Yes"> Yes</label><label><input type="radio" name="b4" value="No — recommended"> No</label></div></div>
       <div class="cl-row"><span class="cl-item">Shower seat or bench available</span><div class="cl-status"><label><input type="radio" name="b5" value="Yes"> Yes</label><label><input type="radio" name="b5" value="No — recommended"> No</label></div></div>
       <div class="cl-row"><span class="cl-item">Water heater temp ≤120°F (scald prevention)</span><div class="cl-status"><label><input type="radio" name="b6" value="OK"> OK</label><label><input type="radio" name="b6" value="Unknown"> Unknown</label></div></div>
-      <div class="fg" style="margin-top:12px"><label>Bathroom notes</label><textarea name="notes_bathroom" placeholder="Specific concerns or modifications needed"></textarea></div>
+      <div class="fg" style="margin-top:12px"><label>Bathroom notes — note if walkthrough person assisted with camera angles</label><textarea name="notes_bathroom" placeholder="Specific concerns or modifications needed"></textarea></div>
     </div>
 
     <div class="fs">
@@ -151,10 +151,18 @@ document.getElementById('submitBtn').addEventListener('click',function(){
   this.textContent='Saving…';this.disabled=true;
   const d={form_type:'03_home_safety',submitted:new Date().toISOString()};
   new FormData(f).forEach((v,k)=>d[k]=v);
-  const x=new XMLHttpRequest();x.open('POST',EP);x.setRequestHeader('Content-Type','application/json');
-  x.onreadystatechange=function(){if(x.readyState===4){f.style.display='none';document.getElementById('successMsg').style.display='block';}};
-  x.onerror=function(){f.style.display='none';document.getElementById('successMsg').style.display='block';};
-  x.send(JSON.stringify(d));
+  fetch('https://script.google.com/macros/s/AKfycbwG40XE3eX2QLnbqp8R_Dy8XzSsZ7UXseS_iKvukWPvlPfzm7QgDHMDBJRlm4YoSbOi/exec',{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(d)
+  }).then(function(){
+    f.style.display='none';
+    document.getElementById('successMsg').style.display='block';
+  }).catch(function(){
+    f.style.display='none';
+    document.getElementById('successMsg').style.display='block';
+  });
 });
 </script>
 </body>

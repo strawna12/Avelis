@@ -72,7 +72,7 @@ hr.dv{border:none;border-top:1px solid var(--parchment);margin:20px 0}
   </div>
   <div class="r2">
     <div class="fg"><label>Location / practice</label><input type="text" name="location" placeholder="Practice name and address"></div>
-    <div class="fg"><label>Avelis attending?</label><select name="avelis_attending"><option>Yes — coordinator accompanying</option><option>No — remote coordination only</option></select></div>
+    <div class="fg"><label>Avelis attending?</label><select name="avelis_attending"><option>Yes — telephonic (conferenced in by phone)</option><option>Yes — virtual video (Zoom/FaceTime/Meet)</option><option>Yes — in person</option><option>No — remote coordination only</option></select></div>
   </div>
   <div class="fg"><label>Coordinator</label><input type="text" name="coordinator" placeholder="Name"></div></div>
 
@@ -118,10 +118,18 @@ document.getElementById('submitBtn').addEventListener('click',function(){{
   new FormData(f).forEach(function(v,k){{d[k]=v;}});
   // include toggle/status fields
   document.querySelectorAll('[data-val]').forEach(function(el){{if(el.dataset.field)d[el.dataset.field]=el.dataset.val;}});
-  const x=new XMLHttpRequest();x.open('POST',EP);x.setRequestHeader('Content-Type','application/json');
-  x.onreadystatechange=function(){{if(x.readyState===4){{f.style.display='none';document.getElementById('successMsg').style.display='block';}}}};
-  x.onerror=function(){{f.style.display='none';document.getElementById('successMsg').style.display='block';}};
-  x.send(JSON.stringify(d));
+  fetch('https://script.google.com/macros/s/AKfycbwG40XE3eX2QLnbqp8R_Dy8XzSsZ7UXseS_iKvukWPvlPfzm7QgDHMDBJRlm4YoSbOi/exec',{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(d)
+  }).then(function(){
+    f.style.display='none';
+    document.getElementById('successMsg').style.display='block';
+  }).catch(function(){
+    f.style.display='none';
+    document.getElementById('successMsg').style.display='block';
+  });
 }});
 </script>
 </body>

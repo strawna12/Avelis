@@ -66,11 +66,12 @@ hr.dv{border:none;border-top:1px solid var(--parchment);margin:20px 0}
     <div class="fg"><label>Visit date *</label><input type="date" name="visit_date" required></div>
   </div>
   <div class="r3">
-    <div class="fg"><label>Visit type</label><select name="visit_type"><option>In-home</option><option>Virtual — video</option><option>Virtual — phone</option></select></div>
+    <div class="fg"><label>Visit type</label><select name="visit_type"><option>Virtual — video (FaceTime)</option><option>Virtual — video (Zoom)</option><option>Virtual — video (Google Meet)</option><option>Virtual — phone call</option><option>In-person</option></select></div>
     <div class="fg"><label>Duration</label><input type="text" name="duration" placeholder="e.g. 45 minutes"></div>
     <div class="fg"><label>Coordinator</label><input type="text" name="coordinator" placeholder="Name"></div>
   </div>
-  <div class="fg"><label>Others present</label><input type="text" name="others_present" placeholder="e.g. Daughter (Mary), Home health aide"></div></div>
+  <div class="fg"><label>Others present on the call</label><input type="text" name="others_present" placeholder="e.g. Daughter (Mary) on video, Home health aide"></div>
+  <div class="fg"><label>Did anyone assist with camera / observation during the visit?</label><input type="text" name="camera_assist" placeholder="e.g. Client self-directed, Daughter assisted with showing home environment, Caregiver present"></div></div>
 
   <div class="fs"><div class="fst">Overall status</div>
   <div class="fg"><label>Overall status this visit</label>
@@ -168,10 +169,18 @@ document.getElementById('submitBtn').addEventListener('click',function(){{
   new FormData(f).forEach(function(v,k){{d[k]=v;}});
   // include toggle/status fields
   document.querySelectorAll('[data-val]').forEach(function(el){{if(el.dataset.field)d[el.dataset.field]=el.dataset.val;}});
-  const x=new XMLHttpRequest();x.open('POST',EP);x.setRequestHeader('Content-Type','application/json');
-  x.onreadystatechange=function(){{if(x.readyState===4){{f.style.display='none';document.getElementById('successMsg').style.display='block';}}}};
-  x.onerror=function(){{f.style.display='none';document.getElementById('successMsg').style.display='block';}};
-  x.send(JSON.stringify(d));
+  fetch('https://script.google.com/macros/s/AKfycbwG40XE3eX2QLnbqp8R_Dy8XzSsZ7UXseS_iKvukWPvlPfzm7QgDHMDBJRlm4YoSbOi/exec',{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(d)
+  }).then(function(){
+    f.style.display='none';
+    document.getElementById('successMsg').style.display='block';
+  }).catch(function(){
+    f.style.display='none';
+    document.getElementById('successMsg').style.display='block';
+  });
 }});
 
 function setStatus(btn,val){

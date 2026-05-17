@@ -67,9 +67,10 @@ hr.dv{border:none;border-top:1px solid var(--parchment);margin:20px 0}
   </div>
   <div class="r3">
     <div class="fg"><label>Recovery day #</label><input type="number" name="recovery_day" placeholder="e.g. 3"></div>
-    <div class="fg"><label>Check-in type</label><select name="checkin_type"><option>In-home visit</option><option>Virtual — video</option><option>Virtual — phone</option></select></div>
+    <div class="fg"><label>Check-in type</label><select name="checkin_type"><option>Virtual — video (FaceTime)</option><option>Virtual — video (Zoom)</option><option>Virtual — video (Google Meet)</option><option>Virtual — phone call</option><option>In-person</option></select></div>
     <div class="fg"><label>Coordinator</label><input type="text" name="coordinator" placeholder="Name"></div>
   </div>
+  <div class="fg"><label>Did anyone assist with camera observation during this check-in?</label><input type="text" name="camera_assist" placeholder="e.g. Client self-directed, daughter assisted, caregiver on site"></div>
   <div class="fg"><label>Original discharge diagnosis / procedure</label><input type="text" name="dc_reason" placeholder="e.g. Hip replacement, CHF exacerbation, pneumonia"></div></div>
 
   <div class="fs"><div class="fst">Recovery status</div>
@@ -132,10 +133,18 @@ document.getElementById('submitBtn').addEventListener('click',function(){{
   new FormData(f).forEach(function(v,k){{d[k]=v;}});
   // include toggle/status fields
   document.querySelectorAll('[data-val]').forEach(function(el){{if(el.dataset.field)d[el.dataset.field]=el.dataset.val;}});
-  const x=new XMLHttpRequest();x.open('POST',EP);x.setRequestHeader('Content-Type','application/json');
-  x.onreadystatechange=function(){{if(x.readyState===4){{f.style.display='none';document.getElementById('successMsg').style.display='block';}}}};
-  x.onerror=function(){{f.style.display='none';document.getElementById('successMsg').style.display='block';}};
-  x.send(JSON.stringify(d));
+  fetch('https://script.google.com/macros/s/AKfycbwG40XE3eX2QLnbqp8R_Dy8XzSsZ7UXseS_iKvukWPvlPfzm7QgDHMDBJRlm4YoSbOi/exec',{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(d)
+  }).then(function(){
+    f.style.display='none';
+    document.getElementById('successMsg').style.display='block';
+  }).catch(function(){
+    f.style.display='none';
+    document.getElementById('successMsg').style.display='block';
+  });
 }});
 function setR(btn,val){document.querySelectorAll('.status-row .sb').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');document.getElementById('r_val').value=val;}</script>
 </body>
